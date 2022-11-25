@@ -1,0 +1,20 @@
+.section.sidebar { 
+  top: 61px;
+  border-bottom: 10px solid #063971;
+  border-left: 10px solid gray;
+  background-color: gray;
+}
+
+.navbar {
+background-color: #ffffff;
+border-color:#ffffff;
+}
+
+.sidebar{ 
+  background-color: #8acfe6;
+}
+
+body {
+    font-family: 'Barlow SemiCondensed', sans-serif;
+    font-size: 19px;
+}
