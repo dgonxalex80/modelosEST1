@@ -1,0 +1,19 @@
+---
+title: <span style="color:#034a94"> **Indicadores de forma**</span>
+author: "Nivelatorio de Estadística"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+
+```
+

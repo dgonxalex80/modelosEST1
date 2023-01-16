@@ -1,12 +1,17 @@
 name: " "
 output_dir: "docs"
 navbar:
-  title: "My Website"
+  title: "Modelos de Regresión"
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
+    - text: "Conceptos"
+      href: recurso201.html
+    - text: "Correlación"
+      href: recurso202.html
+    - text: "Estimación"
+      href: recurso203.html
+    - text: "Inferencia"
+      href: recurso204.html
+      
 output:
   html_document:
     css: style.css
