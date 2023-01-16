@@ -1,6 +1,6 @@
 ---
-title: <span style="color:#034a94"> **Introducción**</span>
-author: "Nivelatorio de Estadística"
+title: <span style="color:#034a94"> **Conceptos básicos**</span>
+author: "Modelos Estadisticos para la toma de decisiones"
 output: html_document
 css: style.css
 ---

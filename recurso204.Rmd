@@ -1,6 +1,6 @@
 ---
-title: <span style="color:#034a94"> **Indicadores de variabilidad o dispersión**</span>
-author: "Nivelatorio de Estadística"
+title: <span style="color:#034a94"> **Inferencia de parámetros**</span>
+author: "Modelos Estadisticos para la toma de decisiones"
 output: html_document
 css: style.css
 ---

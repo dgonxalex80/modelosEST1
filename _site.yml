@@ -11,7 +11,8 @@ navbar:
       href: recurso203.html
     - text: "Inferencia"
       href: recurso204.html
-      
+    - text: "Software R"
+      href: recurso205.html      
 output:
   html_document:
     css: style.css

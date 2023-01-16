@@ -1,6 +1,6 @@
 ---
-title: <span style="color:#034a94"> **Indicadores de Posición**</span>
-author: "Nivelatorio de Estadística "
+title: <span style="color:#034a94"> **Análisis de correlación**</span>
+author: "Modelos Estadisticos para la toma de decisiones"
 output: html_document
 css: style.css
 ---
