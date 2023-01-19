@@ -17,14 +17,16 @@ c4="#686868"
 ```
 
 </br></br>
+
  Video 5 inferencia
- 
-```{r, echo=FALSE}
-embed_youtube("Ilv5KHYOx9E",width = NULL,
-height = 600,
-ratio = c("16by9"))
-```
- 
+
+<iframe width="100%" height="500"  src="https://www.youtube.com/embed/Ilv5KHYOx9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+
+
+
+</br></br>
 
 <span style="color:#FF7F00">**Ejemplo**</span>
 
@@ -36,26 +38,8 @@ ratio = c("16by9"))
 
  Viedeo 6 . Supuestos
  
-
-```{r, echo=FALSE}
-embed_youtube("gbco5SD9WJE",width = NULL,
-height = 400,
-ratio = c("16by9"))
-```
+<iframe width="100%" height="500"  src="https://www.youtube.com/embed/gbco5SD9WJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 
-
-
-
-<div>
-<p style = 'text-align:center;'>
-<iframe width="600" height = "420"
-src="https://www.youtube.com/embed/tgbNymZ7vqY">
-</iframe>
-</div>
-
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gbco5SD9WJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
