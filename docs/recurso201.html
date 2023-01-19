@@ -288,7 +288,9 @@ class="math inline">\(X\)</span> y de la cual se desea a partir de una
 muestra de <span class="math inline">\(n\)</span> pares de
 observaciones, calcular un indicador que mida la relación.</p>
 <p></br></br></p>
+<center>
 <p><img src="img/correlacion1.png" width="100%" style="display: block; margin: auto;" /></p>
+</center>
 <p></br></br></p>
 <p><span style="color:#FF7F00"> <strong>Ejemplos</strong></span></p>
 <ul>
@@ -360,7 +362,9 @@ trabajadas en una empresa.</li>
 <li><span class="math inline">\(Y\)</span> : Cantidad de unidades
 producidas en la empresa.</li>
 </ul>
+<center>
 <p><img src="recurso201_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</center>
 <p>Figura 2: Diagrama de dispersión entre las horas trabajadas y las
 unidades producidas en una empresa.</p>
 <p></br></br></p>
@@ -379,7 +383,9 @@ una conferencia (en minutos).</li>
 atención en la conferencia (1: Poca,…, 10: Mucha).</li>
 </ul>
 <p></br></br></p>
+<center>
 <p><img src="recurso201_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</center>
 <p>Figura 3: Diagrama de dispersión entre el tiempo de duración de una
 conferencia y el índice de capacidad de atención en la misma.</p>
 <p></br></br></p>
@@ -391,11 +397,11 @@ cual el indice decae.</p>
 <div id="coeficiente-de-correlación" class="section level2">
 <h2><span style="color:#034a94"> <strong>Coeficiente de
 correlación</strong></span></h2>
-<p>Es una medida de la magnitud de la *asociación lineal** entre dos
-variables. Indica si los puntos tienen una tendencia a disponerse
-alineadamente y es útil para determinar si hay relación lineal entre las
-variables. El coeficiente de correlación presenta las siguientes
-características:</p>
+<p>Es una medida de la magnitud de la <strong>asociación lineal</strong>
+entre dos variables. Indica si los puntos tienen una tendencia a
+disponerse alineadamente y es útil para determinar si hay relación
+lineal entre las variables. El coeficiente de correlación presenta las
+siguientes características:</p>
 <ul>
 <li>Sólo toma valores entre <span class="math inline">\(-1\)</span> y
 <span class="math inline">\(1\)</span>.</li>
@@ -504,7 +510,7 @@ sum(x*y)    # 1161
 cor(x,y)    # [1] -0.8351746
 </pre>
 <p></br></br></p>
-<p><span class="math display">\[\widehat{\rho_{_{x,y}}}=r=\dfrac{6
+<p><span class="math display">\[\widehat{\rho}_{_{x,y}}=r=\dfrac{6
 (1161)-(113)(70)}{\sqrt{6(2301)-(113)^2}\sqrt{6(1022)-(70)^2}} =
 -0.80352\]</span></p>
 <p></br></br></p>
@@ -578,7 +584,99 @@ class="math inline">\(R_{i}(y)\)</span></p>
 \Big]}{\sqrt{\Bigg[ \sum_{i=1}^{n} \Big(R_{i}(x) -
 \overline{R}(x)\Big)^{2} \Bigg] \Bigg[ \sum_{i=1}^{n} \Big(R_{i}(y) -
 \overline{R}(y)\Big)^{2} \Bigg]}}\]</span></p>
+<p></br></br></br></p>
+</div>
+<div id="matriz-de-varianzas-covarianzas-y-matriz-de-correlaciones"
+class="section level2">
+<h2><span style="color:#034a94"> <strong>Matriz de varianzas covarianzas
+y matriz de correlaciones</strong></span></h2>
+<p></br></p>
+<p>En el caso de tener más de dos variables incluidas en un modelo es de
+interés estimar como se relacionan las variables de dos en dos. Este
+proceso se resumen en forma matricial :</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{pmatrix}
+Var(x_{1}) &amp; Cov(x_{1},x_v{2}) &amp; Cov(x_{1},x_v{3})\\
+Cov(x_{2},x_v{1}) &amp; Var(x_{2}) &amp; Cov(x_{2},x_v{3})\\
+Cov(x_{3},x_v{1}) &amp; Cov(x_{3},x_v{2}) &amp; Var(x_{3})
+\end{pmatrix}
+=
+\begin{pmatrix}
+\sigma^{2}_{1} &amp; \sigma_{12} &amp; \sigma_{13}\\
+\sigma_{21} &amp; \sigma^{2}_{2} &amp; \sigma_{23}\\
+\sigma_{31} &amp; \sigma_{32} &amp; \sigma^{2}_{3}
+\end{pmatrix}
+\end{equation}
+\]</span> </br></p>
+<p>Donde <span class="math inline">\(Var(x_{i},x_{i}) =
+Var(x_{i})\)</span> y <span class="math inline">\(Cov(x_{i},x_{j}=
+Cov(x_{j},x_{i})\)</span> . Enterminos de correlación :</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{pmatrix}
+Cor(x_{1},x_{1})     &amp; Cor(x_{1},x_{2}) &amp; Cor(x_{1},x_{3})\\
+Cor(x_{2},x_{1}) &amp; Cor(x_{2},x_{2}) &amp; Cor(x_{2},x_{3})\\
+Cor(x_{3},x_{1}) &amp; Cor(x_{3},x_{2}) &amp; Cor(x_{3},x_{3})
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; \rho_{_{12}} &amp; \rho_{_{13}}\\
+\rho_{_{21}} &amp; 1 &amp; \rho_{_{23}}\\
+\rho_{_{31}} &amp; \rho_{_{32}} &amp; 1
+\end{pmatrix}
+\end{equation}
+\]</span></p>
 <p></br></br></p>
+<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<p>Para la data biomasa almacenada en paqueteMOD (puede ser cargada con
+la función paquete::data(biomasa)), se pueden examinar los valores
+calculados en la matriz de varianzas-covarianzas y en la matriz de
+correlaciones que se representa tambien utilizando una gama de colores
+que indican el valor de la corelación y su aproximación a -1 (roja) o 1
+(azul)</p>
+<p></br></br></p>
+<div id="matriz-de-varianzas-covarianzas" class="section level3">
+<h3><strong>Matriz de varianzas-covarianzas</strong></h3>
+<p></br></p>
+<pre><code>            bio_aerea bio_sub bio_total area_foliar diametro altura
+bio_aerea      69.433  -1.497    67.936      84.435   11.058 12.913
+bio_sub        -1.497   0.102    -1.394      -2.213   -0.303 -0.317
+bio_total      67.936  -1.394    66.542      82.222   10.755 12.597
+area_foliar    84.435  -2.213    82.222     137.272   12.526 12.049
+diametro       11.058  -0.303    10.755      12.526    2.108  2.444
+altura         12.913  -0.317    12.597      12.049    2.444  3.238</code></pre>
+<p></br></br></p>
+</div>
+<div id="matriz-de-correlaciones" class="section level3">
+<h3><strong>Matriz de correlaciones</strong></h3>
+<p></br></p>
+<pre><code>            bio_aerea bio_sub bio_total area_foliar diametro altura
+bio_aerea       1.000  -0.561     0.999       0.865    0.914  0.861
+bio_sub        -0.561   1.000    -0.534      -0.590   -0.652 -0.550
+bio_total       0.999  -0.534     1.000       0.860    0.908  0.858
+area_foliar     0.865  -0.590     0.860       1.000    0.736  0.572
+diametro        0.914  -0.652     0.908       0.736    1.000  0.936
+altura          0.861  -0.550     0.858       0.572    0.936  1.000</code></pre>
+<p></br></p>
+<p>En este caso la diagonal está conformada por unos, dado que <span
+class="math inline">\(Cor(x_{i},x_{i})=1\)</span>. En el gráfico se
+utiliza la diagonal para ubicar el nombre de la variable y como <span
+class="math inline">\(\rho_{_{i,j}} = \rho_{_{j,i}}\)</span> se utiliza
+la parte superior de la matriz para representar los valores circulos de
+colores que cambian en tamaño e intensidad de acuerdo al valor obtenido
+y la parte inferior para ubicar los valores correspondientes.</p>
+<p></br></p>
+<p><img src="recurso201_files/figure-html/b3-1.png" width="672" /></p>
+<p></br></p>
+<p>Se puede observar que las variables más relacionadas (con mayor
+correlación) so:</p>
+<ul>
+<li><span class="math inline">\(Cor(altura, diametro) = 0.94\)</span>,
+lo cual indicaria que árboles altos tienen diámetro de tronco más anchos
+</br></br></li>
+</ul>
 <p><span style="color:#FF7F00"> <strong>Nota</strong></span></p>
 <p>Para el caso de variables cualitativas existen varios indicadores
 para medir el grado de asociación entre ellas como son:</p>
@@ -620,19 +718,7 @@ contrario se asume que hay una relación entre ellas (dependencia).</p>
 <p>En nuestro caso nos centraremos en el <strong>coeficiente de
 correlacion de Pearson</strong> (<span
 class="math inline">\(\rho_{_{XY}}\)</span>)</p>
-<p><span class="math display">\[r = \dfrac{n
-\Bigg(\displaystyle\sum_{i=1}^{n} x_{i}y_{i} \Bigg)
-\Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)
-\Bigg(\displaystyle\sum_{i=1}^{n} y_{i}\Bigg)}{
-{\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}^{2} \Bigg) -
-\Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)^{2}} } {\sqrt{n
-\Bigg(\displaystyle\sum_{i=1}^{n} y_{i}^{2} \Bigg) -
-\Bigg(\displaystyle\sum_{i=1}^{n} y_{i} \Bigg)^{2}}}} =
-\dfrac{cov(x,y)}{\sqrt{var(x)var(y)}}\]</span></p>
-<p>Donde (<span class="math inline">\(x_{i}\)</span> y <span
-class="math inline">\(y_{i}\)</span>) con <span class="math inline">\(i
-= 1,2,3,....n\)</span> representa una muestra de parejas de valores</p>
-<p><img src="recurso201_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
 </div>
 
 

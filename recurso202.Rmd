@@ -45,6 +45,9 @@ Theme2= theme(
 
 </br></br>
 
+
+
+
 Una de las aplicaciones de más uso ciencia de datos es el **modelo de regresión lineal**. Esta técnica permite medir la relación que pueda existir entre una variable llamada **variable respuesta** y un conjunto de **variables independientes**. 
 
 Casos como la estimación :
@@ -99,6 +102,7 @@ Supongamos la siguiente muestra de valores simulados de dos variables $X$ y $Y$
 
 Lo que indicaría que la muestra está conformado por parejas : $(11.2, 20.8)$, $(11.3, 20.4)$ ..., $(x_{i}, y_{i})$,... $(10.5, 20.7)$
 
+<center>
 
 ```{r, echo=FALSE}
 muestra1= data.frame(x=c(11.2, 11.3,  8.7, 11.6, 10.4,  9.5,  9.4, 10.9,  9.5,  9.9, 10.6, 10.7,  8.6, 9.3,  9.3,  8.9,  8.5, 10.4, 11.1,  9.6,  9.0, 10.0, 11.2,  9.8, 11.9, 10.5, 9.3, 10.4,9.4, 10.9,  9.2, 10.9, 10.2,  9.0,  8.6, 10.8,  9.3, 11.4, 10.7, 10.3,  8.9, 10.8, 10.4,  8.4,  8.9, 10.1, 12.0, 10.4, 11.0, 10.5),
@@ -110,6 +114,8 @@ p1=ggplot(muestra1, aes(x, y)) +
 # + annotate("text", x=-3.3, y=3,size=4, label= " ")
 p1
 ```
+
+</center>
 
 <center>Figura 2 : Diagrama de puntos variables $X$,$Y$</center>
 
@@ -126,6 +132,7 @@ $$Y= \beta_{0} + \beta_{1} X + \varepsilon$$
 
 Se tienen datos de un proceso de generación de papel apartir de madera y se desea establecer la relación entre la biomasa de un arbol ($Y$, en toneladas) y la altura del arbol ($X$, en metros).  Veamos una gráfica de dispersión de los datos:
 
+<center>
 ```{r, echo = F, message = F, fig.align = 'center', out.width = '100%'}
 data(biomasa) 
 ggplot(biomasa, aes(x=altura , y=bio_total))+
@@ -133,7 +140,7 @@ ggplot(biomasa, aes(x=altura , y=bio_total))+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
   
 ```
-
+</center>
 
 La gráfica indica una clara relación lineal positiva entre las dos variables, lo cual indica que a mayor altura del árbol, mayor será la masa de biomasa contenida en el árbol. El modelo que se pueda originar de estos datos puede servir para estimar la biomasa dependiendo le la altura del árbol, sin necesidad de derrobarlo y ralizar la medición en efectos destructivos.
 
@@ -143,6 +150,7 @@ La gráfica indica una clara relación lineal positiva entre las dos variables, 
   
 1. Podemos verla a partir de la distribución conjunta de las variables ${X}$ e ${Y}$, a partir de la  definición  la distribución condicional de ${Y\vert X}$, esto es ${f(Y\vert X)}$, y determinar ${E(Y\vert X)}$.  En este caso la regresión pretende ajustar la curva correspondiente a ${E(Y\vert X)}$.
 
+<center>
 ```{r fig21, echo = F, fig.align = 'center', out.width = '100%'}
 c1="#FF7F00"
 ## Editor edit: use `dat` not `data`
@@ -200,9 +208,11 @@ text(x=10.7,y=20.85,label="y = a + b x", col=c1)
 grid()
 ```
 
+</center>
 
 2. Dado un conjunto de pares de datos ${(X,Y)}$, puede asumirse una forma funcional para la curva de regresión y tratar de ajustarla minimizando el error de ajuste.
 
+<center>
 ```{r, echo = F, message = F, fig.align = 'center', out.width = '80%'}
 ggplot(biomasa,aes(x=altura,y=bio_total))+
   geom_point()+
@@ -211,14 +221,15 @@ ggplot(biomasa,aes(x=altura,y=bio_total))+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
 ```
 
+</center>
 
 </br></br>
 
 <span style="color:#FF7F00">**Ejemplo**</span>
 
 </br></br>
-
-```{r}
+<center>
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 data(biomasa) 
 ggplot(data = biomasa, aes(x = altura, y = bio_total)) + 
   geom_point(color='blue') +
@@ -226,4 +237,5 @@ ggplot(data = biomasa, aes(x = altura, y = bio_total)) +
   theme_bw()+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
 ```
+</center>
 

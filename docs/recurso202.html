@@ -356,7 +356,9 @@ class="math inline">\((11.2, 20.8)\)</span>, <span
 class="math inline">\((11.3, 20.4)\)</span> …, <span
 class="math inline">\((x_{i}, y_{i})\)</span>,… <span
 class="math inline">\((10.5, 20.7)\)</span></p>
+<center>
 <p><img src="recurso202_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</center>
 <center>
 Figura 2 : Diagrama de puntos variables <span
 class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>
@@ -380,7 +382,9 @@ madera y se desea establecer la relación entre la biomasa de un arbol
 (<span class="math inline">\(Y\)</span>, en toneladas) y la altura del
 arbol (<span class="math inline">\(X\)</span>, en metros). Veamos una
 gráfica de dispersión de los datos:</p>
-<p><img src="recurso202_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="recurso202_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+</center>
 <p>La gráfica indica una clara relación lineal positiva entre las dos
 variables, lo cual indica que a mayor altura del árbol, mayor será la
 masa de biomasa contenida en el árbol. El modelo que se pueda originar
@@ -400,25 +404,24 @@ y determinar <span class="math inline">\({E(Y\vert X)}\)</span>. En este
 caso la regresión pretende ajustar la curva correspondiente a <span
 class="math inline">\({E(Y\vert X)}\)</span>.</li>
 </ol>
+<center>
 <p><img src="recurso202_files/figure-html/fig21-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</center>
 <ol start="2" style="list-style-type: decimal">
 <li>Dado un conjunto de pares de datos <span
 class="math inline">\({(X,Y)}\)</span>, puede asumirse una forma
 funcional para la curva de regresión y tratar de ajustarla minimizando
 el error de ajuste.</li>
 </ol>
+<center>
 <p><img src="recurso202_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</center>
 <p></br></br></p>
 <p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
-<p></br></br></p>
-<pre class="r"><code>data(biomasa) 
-ggplot(data = biomasa, aes(x = altura, y = bio_total)) + 
-  geom_point(color=&#39;blue&#39;) +
-  geom_smooth(method = &quot;lm&quot;, se = FALSE)+
-  theme_bw()+
-  labs(title = &quot;&quot;, y= &quot;biomasa total (tn) &quot;, x= &quot;altura (m) &quot;) </code></pre>
-<pre><code>`geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="recurso202_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</br></br>
+<center>
+<img src="recurso202_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+</center>
 </div>
 
 

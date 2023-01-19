@@ -17,17 +17,21 @@ c4="#686868"
 ```
 
 </br></br>
-
-
-</br>
-
-<span style="color:#FF7F00">**Ejemplo**</span>
-
-</br>
+ Video 5 inferencia
+ 
+<iframe width="100%" height="500"  src="https://www.youtube.com/embed/Ilv5KHYOx9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 <span style="color:#FF7F00">**Ejemplo**</span>
 
 </br>
 
+
+
 <span style="color:#FF7F00">**Ejemplo**</span>
+
+ Viedeo 6 . Supuestos
+ 
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/gbco5SD9WJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+ 
+ 
 

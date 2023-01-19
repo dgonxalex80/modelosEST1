@@ -7,7 +7,9 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
-
+library(tidyverse)
+# install.packages("PerformanceAnalytics")
+library(PerformanceAnalytics)
 
 c1="#FF7F00"
 c2="#=EB0C6"
@@ -37,6 +39,9 @@ Theme2= theme(
         axis.title.x = element_text(size = 11),
         axis.title.y = element_text(size = 11))
 
+biomasa=paqueteMOD::biomasa
+biomasa38=biomasa[,3:8]
+
 ```
 
 
@@ -50,10 +55,14 @@ Theme2= theme(
 El **análisis de correlación** es una técnica estadística que se emplea para describir el grado de relación lineal existente entre un par de variables cuantitativas. Para este análisis se dispone de una variable $Y$, que puede estar o no relacionada estadísticamente con otra variable $X$ y de la cual se desea  a partir de una muestra de $n$ pares de observaciones, calcular un indicador que mida la relación.
   
 </br></br>
-  
+
+<center>  
+
 ```{r, echo=FALSE, out.width="100%", fig.align = "center"}
 knitr::include_graphics("img/correlacion1.png")
 ```
+
+</center>  
 
 </br></br>
 
@@ -164,6 +173,8 @@ Identificar la posible relación lineal observada entre las variables:
 *  $X$ : Cantidad de horas trabajadas en una empresa.
 *  $Y$ : Cantidad de unidades producidas en la empresa.
 
+<center>  
+
 ```{r, echo=FALSE}
 data7=data.frame(x = c( 72, 75, 77, 78 ,79, 80, 80, 82, 83, 84 ,85),
                  y = c(310,305,320,300,302,300,310,300,315,320,307))
@@ -174,6 +185,8 @@ ggplot(data7, aes(x, y)) +
                y= "Cantidad de unidades producidas", 
                x= "Cantidad de horas trabajadas")
 ```
+
+</center>  
 
 Figura 2: Diagrama de dispersión entre las horas trabajadas y las unidades producidas en una empresa.
 
@@ -192,6 +205,8 @@ Identificar la posible relación lineal observada entre las variables:
 
 </br></br>
 
+<center>  
+
 ```{r, echo=FALSE}
 data6=data.frame(x=c(30,30,40,60,70,70,80,80,90,90,90,100,110,120,130,140),
                  y=c( 1, 3, 5, 6, 6, 7, 8, 9, 8, 9,10,  7,  5,  3,  2, 1))
@@ -203,6 +218,8 @@ ggplot(data6, aes(x, y)) +
                x= "Tiempo de duración de conferencia (min)")
 ```
 
+</center>  
+
 Figura 3: Diagrama de dispersión entre el tiempo de duración de una conferencia y el índice de capacidad de atención en la misma.
 
 </br></br>
@@ -213,7 +230,7 @@ En este caso la gráfica 3 muestra una relación cuadrática, marcando clarament
   
 ## <span style="color:#034a94"> **Coeficiente de correlación**</span>
   
-Es una medida de la magnitud de la *asociación lineal** entre dos variables. Indica si los puntos tienen una tendencia a disponerse alineadamente y es útil para determinar si hay relación lineal entre las variables. El coeficiente de correlación presenta las siguientes características:
+Es una medida de la magnitud de la **asociación lineal** entre dos variables. Indica si los puntos tienen una tendencia a disponerse alineadamente y es útil para determinar si hay relación lineal entre las variables. El coeficiente de correlación presenta las siguientes características:
   
   
 * Sólo toma valores entre $-1$ y $1$.
@@ -289,7 +306,7 @@ cor(x,y)    # [1] -0.8351746
   
 </br></br>  
   
-$$\widehat{\rho_{_{x,y}}}=r=\dfrac{6 (1161)-(113)(70)}{\sqrt{6(2301)-(113)^2}\sqrt{6(1022)-(70)^2}} = -0.80352$$
+$$\widehat{\rho}_{_{x,y}}=r=\dfrac{6 (1161)-(113)(70)}{\sqrt{6(2301)-(113)^2}\sqrt{6(1022)-(70)^2}} = -0.80352$$
   
 </br></br>
 
@@ -354,6 +371,95 @@ Se considera como un coeficiente no paramétrico ( no requiere verificación de 
 
 $$\gamma_{s} = \dfrac{ \sum_{i=1}^{n}\Big[\big(  R_{i}(x) - \overline{R}(x)\big) \Big]}{\sqrt{\Bigg[ \sum_{i=1}^{n} \Big(R_{i}(x) - \overline{R}(x)\Big)^{2} \Bigg] \Bigg[ \sum_{i=1}^{n} \Big(R_{i}(y) - \overline{R}(y)\Big)^{2} \Bigg]}}$$
 
+</br></br></br>
+
+## <span style="color:#034a94"> **Matriz de varianzas covarianzas y matriz de correlaciones**</span>
+
+</br>
+
+En el caso de tener más de dos variables incluidas en un modelo es de interés estimar como se relacionan las variables de dos en dos. Este proceso se resumen en forma matricial :
+
+$$
+\begin{equation}
+\begin{pmatrix}
+Var(x_{1}) & Cov(x_{1},x_v{2}) & Cov(x_{1},x_v{3})\\
+Cov(x_{2},x_v{1}) & Var(x_{2}) & Cov(x_{2},x_v{3})\\
+Cov(x_{3},x_v{1}) & Cov(x_{3},x_v{2}) & Var(x_{3})
+\end{pmatrix}
+=
+\begin{pmatrix}
+\sigma^{2}_{1} & \sigma_{12} & \sigma_{13}\\
+\sigma_{21} & \sigma^{2}_{2} & \sigma_{23}\\
+\sigma_{31} & \sigma_{32} & \sigma^{2}_{3}
+\end{pmatrix}
+\end{equation}
+$$
+</br>
+
+Donde $Var(x_{i},x_{i}) = Var(x_{i})$ y $Cov(x_{i},x_{j}= Cov(x_{j},x_{i})$ . Enterminos de correlación :
+
+</br>
+
+$$
+\begin{equation}
+\begin{pmatrix}
+Cor(x_{1},x_{1})     & Cor(x_{1},x_{2}) & Cor(x_{1},x_{3})\\
+Cor(x_{2},x_{1}) & Cor(x_{2},x_{2}) & Cor(x_{2},x_{3})\\
+Cor(x_{3},x_{1}) & Cor(x_{3},x_{2}) & Cor(x_{3},x_{3})
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & \rho_{_{12}} & \rho_{_{13}}\\
+\rho_{_{21}} & 1 & \rho_{_{23}}\\
+\rho_{_{31}} & \rho_{_{32}} & 1
+\end{pmatrix}
+\end{equation}
+$$
+
+</br></br>
+
+<span style="color:#FF7F00"> **Ejemplo**</span>
+
+Para la data biomasa almacenada en paqueteMOD  (puede ser cargada con la función paquete::data(biomasa)), se pueden examinar los valores calculados en la matriz de varianzas-covarianzas y en la matriz de correlaciones que se representa tambien utilizando una gama de colores que indican el valor de la corelación y su aproximación a -1 (roja) o 1 (azul)
+
+</br></br>
+
+### **Matriz de varianzas-covarianzas**
+
+</br>
+
+```{r, echo=FALSE, message=FALSE,warning=FALSE}
+data("biomasa")
+cov38=cov(biomasa38)
+round(cov38,3)
+```
+</br></br>
+
+### **Matriz de correlaciones**
+
+</br>
+
+```{r, echo=FALSE, message=FALSE,warning=FALSE}
+cor38=round(cor(biomasa38),3)
+cor38
+```
+
+</br>
+
+En este caso la diagonal está conformada por unos, dado que $Cor(x_{i},x_{i})=1$.  En el gráfico se utiliza la diagonal para ubicar el nombre de la variable y como $\rho_{_{i,j}} = \rho_{_{j,i}}$ se utiliza la parte superior de la matriz para representar los valores circulos de colores que cambian en tamaño e intensidad de acuerdo al valor obtenido y la parte inferior para ubicar los valores correspondientes.
+
+</br>
+
+```{r b3, echo=FALSE, warning=FALSE, message=FALSE}
+library(corrplot)
+corrplot::corrplot.mixed(cor38)
+```
+
+</br>
+
+Se puede observar que las variables más relacionadas (con mayor correlación) so:
+
+* $Cor(altura, diametro) = 0.94$, lo cual indicaria que árboles altos tienen diámetro de tronco más anchos
 </br></br>
 
 <span style="color:#FF7F00"> **Nota**</span>
@@ -388,33 +494,4 @@ Para el caso de variables cualitativas existen varios indicadores para medir el 
 </br></br>
 
 En nuestro caso nos centraremos en el **coeficiente de correlacion de Pearson** ($\rho_{_{XY}}$)
-
-
-$$r = \dfrac{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}y_{i} \Bigg) \Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg) \Bigg(\displaystyle\sum_{i=1}^{n} y_{i}\Bigg)}{
-{\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}^{2} \Bigg) - \Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)^{2}} } {\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} y_{i}^{2} \Bigg) - \Bigg(\displaystyle\sum_{i=1}^{n} y_{i} \Bigg)^{2}}}} = \dfrac{cov(x,y)}{\sqrt{var(x)var(y)}}$$
-
-Donde ($x_{i}$ y $y_{i}$) con $i = 1,2,3,....n$ representa una muestra de parejas de valores 
-
-
-```{r, echo=FALSE}
-muestra<-gen.corr.data(.8,50)
-muestra<-as.data.frame(muestra)
-
-
-library(ggplot2)
-ggplot(muestra, aes(x, y)) + 
-  geom_point() + 
-  theme(
-  axis.text.x = element_blank(),
-  axis.text.y = element_blank(),
-  axis.ticks = element_blank())+
-  labs(title = "",
-       y= "y",
-       x= "x")
-```
-
-
-
-
-
 
