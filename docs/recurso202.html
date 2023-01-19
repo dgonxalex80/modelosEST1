@@ -314,11 +314,12 @@ constantes</li>
 Figura 1 : Recta <span class="math inline">\(y = 13.7 + 0.64 x\)</span>
 </center>
 <p></br></p>
-<p>Cuando la relación no se ajusta de manera perfecta a una linea recta,
-el problema se centra en la <strong>estimación</strong> de los
-coeficientes de la linea recta que mejor se ajuste a datos procedentes
-de una muestra de las variables <span class="math inline">\(X\)</span> y
-<span class="math inline">\(Y\)</span> en <span
+<p>Cuando la relación no se ajusta de manera perfecta a una linea recta
+(<span class="math inline">\(\rho \neq 0\)</span>), el problema se
+centra en la <strong>estimación</strong> de los coeficientes de la linea
+recta que mejor se ajuste a datos procedentes de una muestra de las
+variables <span class="math inline">\(X\)</span> y <span
+class="math inline">\(Y\)</span> en <span
 class="math inline">\(n\)</span> parejas <span
 class="math inline">\((x,y)\)</span></p>
 <p></br></br></p>
@@ -350,7 +351,7 @@ class="math inline">\(Y\)</span></p>
 </tr>
 </tbody>
 </table>
-<p>Lo que indicaria que la muestra esta conformado por parejas : <span
+<p>Lo que indicaría que la muestra está conformado por parejas : <span
 class="math inline">\((11.2, 20.8)\)</span>, <span
 class="math inline">\((11.3, 20.4)\)</span> …, <span
 class="math inline">\((x_{i}, y_{i})\)</span>,… <span
@@ -363,10 +364,10 @@ class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>
 <p>El diagrama permite visualizar una tendencia de la relación no
 perfecta entre las dos variables. En este caso una fuerte correlación
 que garantice un buen nivel de relación entre las variables.</p>
-<p>El objetivo de la modelación es encontrar la ecuación de la recta que
-mejor se ajuste a los datos de la muestra, para ello al <strong>modelo
-matemático</strong> (<span class="math inline">\(Y= a + b X\)</span>) se
-le agrega una variable aleatoria <span
+<p>El objetivo de la modelación se centra en encontrar la ecuación de la
+recta que mejor se ajuste a los datos de la muestra, para ello al
+<strong>modelo matemático</strong> (<span class="math inline">\(Y= a + b
+X\)</span>) se le agrega una variable aleatoria <span
 class="math inline">\(\varepsilon\)</span> sobre la cual se hacen
 supuestos estadísticos y de esta manera se conforma el <strong>modelo
 estadístico</strong> :</p>
@@ -410,6 +411,14 @@ el error de ajuste.</li>
 <p></br></br></p>
 <p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
 <p></br></br></p>
+<pre class="r"><code>data(biomasa) 
+ggplot(data = biomasa, aes(x = altura, y = bio_total)) + 
+  geom_point(color=&#39;blue&#39;) +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)+
+  theme_bw()+
+  labs(title = &quot;&quot;, y= &quot;biomasa total (tn) &quot;, x= &quot;altura (m) &quot;) </code></pre>
+<pre><code>`geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="recurso202_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 
 

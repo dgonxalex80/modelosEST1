@@ -84,7 +84,7 @@ ggplot(data, aes(x = x1, y = y1)) +
 
 </br>
 
-Cuando la relación no se ajusta de manera perfecta a una linea recta, el problema se centra en la **estimación** de los coeficientes de la linea recta que mejor se ajuste a datos procedentes de una muestra de las variables $X$ y $Y$ en $n$ parejas $(x,y)$
+Cuando la relación no se ajusta de manera perfecta a una linea recta ($\rho \neq 0$), el problema se centra en la **estimación** de los coeficientes de la linea recta que mejor se ajuste a datos procedentes de una muestra de las variables $X$ y $Y$ en $n$ parejas $(x,y)$
 
 </br></br>
 
@@ -97,7 +97,7 @@ Supongamos la siguiente muestra de valores simulados de dos variables $X$ y $Y$
 | $x$ | 11.2, 11.3,  8.7, 11.6, 10.4,  9.5,  9.4, 10.9,  9.5,  9.9, 10.6, 10.7,  8.6, 9.3,  9.3,  8.9,  8.5, 10.4, 11.1,  9.6,  9.0, 10.0, 11.2,  9.8, 11.9, 10.5, 9.3, 10.4,9.4, 10.9,  9.2, 10.9, 10.2,  9.0,  8.6, 10.8,  9.3, 11.4, 10.7, 10.3,  8.9, 10.8, 10.4,  8.4,  8.9, 10.1, 12.0, 10.4, 11.0, 10.5 |
 | $y$ | 20.8, 20.4, 19.0, 20.9, 20.0, 19.4, 20.1, 20.0, 18.5, 19.3, 20.6, 20.8, 19.2, 19.3, 19.2, 20.4, 19.7, 20.1, 20.5, 19.6, 19.5, 21.1, 21.0, 19.6, 21.1, 20.9, 19.7, 20.9, 20.7, 20.6, 20.1, 21.0, 20.4, 20.4, 19.2, 21.7, 19.2, 21.4, 20.5, 20.2, 19.3, 20.8, 20.1, 18.9, 18.9, 19.1, 21.7, 20.7, 21.1, 20.7 |
 
-Lo que indicaria que la muestra esta conformado por parejas : $(11.2, 20.8)$, $(11.3, 20.4)$ ..., $(x_{i}, y_{i})$,... $(10.5, 20.7)$
+Lo que indicaría que la muestra está conformado por parejas : $(11.2, 20.8)$, $(11.3, 20.4)$ ..., $(x_{i}, y_{i})$,... $(10.5, 20.7)$
 
 
 ```{r, echo=FALSE}
@@ -115,7 +115,7 @@ p1
 
 El diagrama permite visualizar una tendencia de la relación no perfecta entre las dos variables. En este caso una fuerte correlación que garantice un buen nivel de relación entre las variables.  
 
-El objetivo de la modelación es encontrar la ecuación de la recta que mejor se ajuste a los datos de la muestra, para ello al **modelo matemático**  ($Y= a + b X$) se le agrega una variable aleatoria $\varepsilon$ sobre la cual se hacen supuestos estadísticos  y de esta manera se conforma el **modelo estadístico** :
+El objetivo de la modelación se centra en encontrar la ecuación de la recta que mejor se ajuste a los datos de la muestra, para ello al **modelo matemático**  ($Y= a + b X$) se le agrega una variable aleatoria $\varepsilon$ sobre la cual se hacen supuestos estadísticos  y de esta manera se conforma el **modelo estadístico** :
 
 $$Y= \beta_{0} + \beta_{1} X + \varepsilon$$
 
@@ -131,6 +131,7 @@ data(biomasa)
 ggplot(biomasa, aes(x=altura , y=bio_total))+
   geom_point(size=2, colour=c3)+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
+  
 ```
 
 
@@ -217,4 +218,12 @@ ggplot(biomasa,aes(x=altura,y=bio_total))+
 
 </br></br>
 
+```{r}
+data(biomasa) 
+ggplot(data = biomasa, aes(x = altura, y = bio_total)) + 
+  geom_point(color='blue') +
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_bw()+
+  labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
+```
 
