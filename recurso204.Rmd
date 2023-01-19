@@ -7,7 +7,7 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
-
+library(vembedr)
 
 c1="#FF7F00"
 c2="#=EB0C6"
@@ -19,11 +19,16 @@ c4="#686868"
 </br></br>
  Video 5 inferencia
  
-<iframe width="100%" height="500"  src="https://www.youtube.com/embed/Ilv5KHYOx9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+```{r, echo=FALSE}
+embed_youtube("Ilv5KHYOx9E",width = NULL,
+height = 600,
+ratio = c("16by9"))
+```
+ 
 
 <span style="color:#FF7F00">**Ejemplo**</span>
 
-</br>
+</br></br></br></br>
 
 
 
@@ -31,7 +36,9 @@ c4="#686868"
 
  Viedeo 6 . Supuestos
  
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/gbco5SD9WJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
- 
- 
 
+```{r, echo=FALSE}
+embed_youtube("gbco5SD9WJE",width = NULL,
+height = 400,
+ratio = c("16by9"))
+```
