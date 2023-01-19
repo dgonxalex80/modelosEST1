@@ -45,9 +45,6 @@ Theme2= theme(
 
 </br></br>
 
-
-
-
 Una de las aplicaciones de más uso ciencia de datos es el **modelo de regresión lineal**. Esta técnica permite medir la relación que pueda existir entre una variable llamada **variable respuesta** y un conjunto de **variables independientes**. 
 
 Casos como la estimación :
