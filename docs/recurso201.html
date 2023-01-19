@@ -12,7 +12,7 @@
 <meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
 
 
-<title> Conceptos básicos</title>
+<title> Análisis de correlación</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -245,10 +245,10 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="recurso201.html">Conceptos</a>
+  <a href="recurso201.html">Correlación</a>
 </li>
 <li>
-  <a href="recurso202.html">Correlación</a>
+  <a href="recurso202.html">Modelo</a>
 </li>
 <li>
   <a href="recurso203.html">Estimación</a>
@@ -272,13 +272,368 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Conceptos básicos</strong></span></h1>
+<strong>Análisis de correlación</strong></span></h1>
 <h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
 
 </div>
 
 
 <p></br></br></br></p>
+<p>El <strong>análisis de correlación</strong> es una técnica
+estadística que se emplea para describir el grado de relación lineal
+existente entre un par de variables cuantitativas. Para este análisis se
+dispone de una variable <span class="math inline">\(Y\)</span>, que
+puede estar o no relacionada estadísticamente con otra variable <span
+class="math inline">\(X\)</span> y de la cual se desea a partir de una
+muestra de <span class="math inline">\(n\)</span> pares de
+observaciones, calcular un indicador que mida la relación.</p>
+<p></br></br></p>
+<p><img src="img/correlacion1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p></br></br></p>
+<p><span style="color:#FF7F00"> <strong>Ejemplos</strong></span></p>
+<ul>
+<li><p>¿Existe relación entre la inversión en publicidad de una empresa
+y sus ventas mensuales?</p></li>
+<li><p>¿El número de metros cuadrados en una casa está relacionado con
+su costo de venta?</p></li>
+<li><p>¿Existe relación entre los kilómetros por galón consumidos y el
+peso del auto?</p></li>
+<li><p>¿Hay relación entre el número de horas que estudian los alumnos
+para un examen y la calificación que obtienen?</p></li>
+<li><p>¿Qué relación existe entre el peso y la estatura de los
+estudiantes?</p></li>
+<li><p>¿Existe relación entre la tasa de desempleo y la tasa de
+homicidios?</p></li>
+<li><p>¿Hay relación entre la cantidad de medidas preventivas de
+tránsito y el número de accidentes de tránsito?</p></li>
+<li><p>¿Son fuertes o débiles estas asociaciones? ¿Son directas o
+indirectas?</p></li>
+</ul>
+<p></br></br></p>
+<p><strong>Entre las principales herramientas del análisis de
+correlación se encuentran:</strong></p>
+<p></br></p>
+<ul>
+<li><strong>Gráficos de dispersión</strong>: “Representación gráfica
+simultanea del par de variables estudiadas”.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><strong>Coeficiente de correlación</strong>: “Indicador que mide la
+fuerza de la relación lineal entre un par de variables”.</li>
+</ul>
+<p></br></br></p>
+<div id="gráfico-de-dispersión" class="section level2">
+<h2><span style="color:#034a94"><strong>Gráfico de
+dispersión</strong></span></h2>
+<p>Es un gráfico en el cual se representan las parejas (<span
+class="math inline">\(X,Y\)</span>) de las variables observadas. La
+forma que toman los puntos, ilustra acerca de la posible asociación
+existe entre las variables.</p>
+<p></br></br></p>
+<center>
+<p><img src="recurso201_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Figura 1: Gráfico de dispersión y relaciones entre variables.</p>
+</center>
+<p></br></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Relación lineal positiva (directa o creciente)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Relación lineal negativa (indirecta o decreciente)</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>No relación lineal</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Relación no lineal</li>
+</ol></li>
+</ul>
+<p></br></br></p>
+<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<p>Identificar la posible relación lineal observada entre las
+variables:</p>
+<ul>
+<li><span class="math inline">\(X\)</span> : Cantidad de horas
+trabajadas en una empresa.</li>
+<li><span class="math inline">\(Y\)</span> : Cantidad de unidades
+producidas en la empresa.</li>
+</ul>
+<p><img src="recurso201_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Figura 2: Diagrama de dispersión entre las horas trabajadas y las
+unidades producidas en una empresa.</p>
+<p></br></br></p>
+<p>De acuerdo con el gráfico de dispersión de la figura 2, se observa
+una falta de relación lineal entre las variables cantidad de horas
+trabajadas en una empresa y la cantidad de unidades producidas en la
+empresa.</p>
+<p></br></br></p>
+<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<p>Identificar la posible relación lineal observada entre las
+variables:</p>
+<ul>
+<li><span class="math inline">\(X\)</span> : Tiempo de la duración de
+una conferencia (en minutos).</li>
+<li><span class="math inline">\(Y\)</span> : Índice de la capacidad de
+atención en la conferencia (1: Poca,…, 10: Mucha).</li>
+</ul>
+<p></br></br></p>
+<p><img src="recurso201_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Figura 3: Diagrama de dispersión entre el tiempo de duración de una
+conferencia y el índice de capacidad de atención en la misma.</p>
+<p></br></br></p>
+<p>En este caso la gráfica 3 muestra una relación cuadrática, marcando
+claramente un valor máximo del indice de atención (80 min), despues del
+cual el indice decae.</p>
+<p></br></br></p>
+</div>
+<div id="coeficiente-de-correlación" class="section level2">
+<h2><span style="color:#034a94"> <strong>Coeficiente de
+correlación</strong></span></h2>
+<p>Es una medida de la magnitud de la *asociación lineal** entre dos
+variables. Indica si los puntos tienen una tendencia a disponerse
+alineadamente y es útil para determinar si hay relación lineal entre las
+variables. El coeficiente de correlación presenta las siguientes
+características:</p>
+<ul>
+<li>Sólo toma valores entre <span class="math inline">\(-1\)</span> y
+<span class="math inline">\(1\)</span>.</li>
+<li>Cuanto más cerca esté de <span class="math inline">\(1\)</span> o
+<span class="math inline">\(-1\)</span> mejor será el grado de relación
+lineal. Siempre y cuando no existan observaciones anómalas.</li>
+</ul>
+<p></br></p>
+<p><img src="img/correlacion2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p></br></p>
+<p>Un valor cercano a 1 indica asociación directa o positiva y un valor
+cercano a -1 indica asociación inversa o negativa. Si el valor es
+cercano a 0 indica una asociación débil.</p>
+<ul>
+<li>Se denota con la letra <span class="math inline">\(r\)</span> y su
+fórmula de cálculo es la siguiente:</li>
+</ul>
+<p></br></br></p>
+<p><span class="math display">\[r = \dfrac{n
+\Bigg(\displaystyle\sum_{i=1}^{n} x_{i}y_{i} \Bigg)
+\Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)
+\Bigg(\displaystyle\sum_{i=1}^{n} y_{i}\Bigg)}{
+    {\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}^{2} \Bigg) -
+\Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)^{2}} } {\sqrt{n
+\Bigg(\displaystyle\sum_{i=1}^{n} y_{i}^{2} \Bigg) -
+\Bigg(\displaystyle\sum_{i=1}^{n} y_{i} \Bigg)^{2}}}}\]</span></p>
+<p></br></br></p>
+<p><span class="math display">\[r =
+\dfrac{cov(x,y)}{\sqrt{s_{x}^{2}\hspace{0.1cm} s_{y}^{2}}}\]</span></p>
+<p></br></br></p>
+<p>Este indicador fué propuesto por Karl Pearson por lo que se conoce
+como <strong>coeficiente de correlación de Pearson</strong> y exige que
+las variables <span class="math inline">\(X\)</span> y <span
+class="math inline">\(Y\)</span> sean variables cuantitavas en escala de
+intervalo o de razón y normalidad de las variables.</p>
+<p></br></br></p>
+<p>Los valores obtenidos del coeficiente de correlación permiten
+clasificar la relación lineal entre las variables de la siguiente
+forma:</p>
+<p></br></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Coeficiente de corelación</th>
+<th align="center">Relación lineal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(0.8 \leq r &lt;
+1.0\)</span></td>
+<td align="center">Positiva fuerte</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(0.3 \leq r &lt;
+0.8\)</span></td>
+<td align="center">Positiva debil</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(-0.3 &lt; r &lt;
+3\)</span></td>
+<td align="center">No existe</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(-0.8 &lt; r \leq
+-0.3\)</span></td>
+<td align="center">Negativa debil</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(-1.0 \leq r \leq
+-0.8\)</span></td>
+<td align="center">Negativa fuerte</td>
+</tr>
+</tbody>
+</table>
+<p>Tabla 1: Clasificación de la relación lineal entre variables por
+medio del coeficiente de correlación.</p>
+<p></br></br></p>
+<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<p>Se cuenta con la información de una muestra aleatoria de 6 pueblos
+del departamento, donde se observaron las variables número de policías y
+número de delitos registrados durante el mes pasado, la información
+obtenida se presenta a continuación:</p>
+<p>Mediante el coeficiente de correlación identificar el tipo de
+relación que pueda existir entre estas dos variables.</p>
+<p>Sea <span class="math inline">\(X\)</span> la variable que representa
+el número de policías y sea <span class="math inline">\(Y\)</span> la
+variable que representa el número de delitos. Para construir el
+coeficiente se requieren las sumatorias de <span
+class="math inline">\(x_{i}\)</span>, <span
+class="math inline">\(y_{i}\)</span>, <span
+class="math inline">\(x_{i}^{2}\)</span>, <span
+class="math inline">\(y_{i}^{2}\)</span> y de <span
+class="math inline">\(x_{i}y_{i}\)</span></p>
+<pre>
+x=c(15,   17,   25,   27,   17,   12)
+y=c(17,   13,    5,    7,    7,   21)
+
+n           #    6
+sum(x)      #  113 
+sum(y)      #   70
+sum(x^2)    # 2301
+sum(y^2)    # 1022
+sum(x*y)    # 1161
+
+cor(x,y)    # [1] -0.8351746
+</pre>
+<p></br></br></p>
+<p><span class="math display">\[\widehat{\rho_{_{x,y}}}=r=\dfrac{6
+(1161)-(113)(70)}{\sqrt{6(2301)-(113)^2}\sqrt{6(1022)-(70)^2}} =
+-0.80352\]</span></p>
+<p></br></br></p>
+<p>Por lo tanto, el resultado obtenido del coeficiente de correlación
+<span class="math inline">\(r = −0.8352\)</span>, se busca en la tabla
+1, y se observa que existe una <strong>asociación lineal negativa y
+fuerte</strong> entre el número de policías y el número de delitos, es
+decir que entre más policías en un pueblo menor será el número de
+delitos en los pueblos.</p>
+<p></br></br></p>
+</div>
+<div id="pruebas-de-hipótesis-sobre-rho" class="section level2">
+<h2><span style="color:#034a94"> <strong>Pruebas de hipótesis sobre
+<span class="math inline">\(\rho\)</span></strong></span></h2>
+<p>Es importante verificar si de <span
+class="math inline">\(\rho\)</span> es igual a cero o se puede
+considerar diferente de cero, a partir de la muestra de estudio. Para
+ello se utiliza un estadístico de prueba con distribución t-Studen con
+<span class="math inline">\(v=n-2\)</span> grados de libertad</p>
+<p><span class="math inline">\(Ho: \rho =0\)</span> <span
+class="math inline">\(Ha: \rho \neq 0\)</span></p>
+<p>Estadístico de prueba</p>
+<p></br></br></p>
+<span class="math display">\[U = \dfrac{r \sqrt{n-2}}{\sqrt{1-r^{2}}}
+\sim t_{v:n-2}\]</span>
+<pre>
+x=c(15,   17,   25,   27,   17,   12)
+y=c(17,   13,    5,    7,    7,   21)
+
+r=cor(x,y)
+r*sqrt(6-2)/sqrt(1-r^2)              # [1] -3.037082
+
+cor.test(x,y, method = "pearson")
+
+Pearson's product-moment correlation
+
+data:  x and y
+t = -3.0371, df = 4, p-value = 0.03851
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.98148791 -0.07328662
+sample estimates:
+       cor 
+-0.8351746 
+</pre>
+<p></br></br></p>
+<p>Suponiendo que el valor p obtenido es pequeño, se concluye que <span
+class="math inline">\(\rho \neq 0\)</span></p>
+<p></br></p>
+<p>En caso de variables no normales, con presencia de datos atípicos o
+procedentes de variables cualitativas que son cuantificadas a través de
+escalas de intervalos, se recomienda el uso del <strong>coeficiente de
+correlación de Spearman</strong></p>
+<p></br></br></p>
+</div>
+<div id="otros-indicadores-de-correlación" class="section level2">
+<h2><span style="color:#034a94"> <strong>Otros indicadores de
+correlación</strong></span></h2>
+<p></br></p>
+<p><strong>Coeficiente de correlación de Spearman</strong></p>
+<p>Se considera como un coeficiente no paramétrico ( no requiere
+verificación de supuestos), propuesto por Charles Spearman y se basa en
+los rangos obtenidos para las variables X y Y. Los rangos se optienen al
+ordenar los datos y asignarles a cada valor el número del orden
+correspondiente (<span class="math inline">\(1,2,3,4,5...n\)</span>)
+<span class="math inline">\(R_{i}(x)\)</span> y <span
+class="math inline">\(R_{i}(y)\)</span></p>
+<p></br></br></p>
+<p><span class="math display">\[\gamma_{s} = \dfrac{
+\sum_{i=1}^{n}\Big[\big(  R_{i}(x) - \overline{R}(x)\big)
+\Big]}{\sqrt{\Bigg[ \sum_{i=1}^{n} \Big(R_{i}(x) -
+\overline{R}(x)\Big)^{2} \Bigg] \Bigg[ \sum_{i=1}^{n} \Big(R_{i}(y) -
+\overline{R}(y)\Big)^{2} \Bigg]}}\]</span></p>
+<p></br></br></p>
+<p><span style="color:#FF7F00"> <strong>Nota</strong></span></p>
+<p>Para el caso de variables cualitativas existen varios indicadores
+para medir el grado de asociación entre ellas como son:</p>
+<!-- **Asociación lineal de Mantel-Haenszel** : Coeficiente empleado en variables de intervalo, mide el grado de asociación lineal entre dos variables y se define como el cuadrado del coeficiente de correlación de Pearson multiplicado por (n-1).  -->
+<p></br></br></p>
+<p><strong>Eta</strong> : Utilizada en el caso de analizar los valores
+de una variable en escala de intervalo o de razón en diferentes grupos
+establecidos por otra variable en escala nominal. Toma valores entre
+(0,1). Valores cercanos a cero indicará que el comportamiento de la
+variable agrupada es independiente de los grupos conformados por la
+variable nominal.</p>
+<p></br></br></p>
+<p><strong>Tau b</strong> y <strong>Tau c de Kendall</strong> : :
+Empleados para tablas de contingencia r x c con variables ordinales.
+Presenta valores extremos en tablas con asociación total. Se diferencian
+en que el primero se utiliza para tablas con r = c, mientras que el Tau
+c cuando r <span class="math inline">\(\neq\)</span> c. </p>
+<p></br></br></p>
+<p><strong>Kappa</strong> : Utilizado para variables ordinames en tablas
+de r x c. Bajo el supuesto que las dos variables tiene valores iguales,
+toma valores entre (-1,1), indicando mínimo o máximo grado de acuerdo
+entre los valores de las dos variables.</p>
+<p></br></br></p>
+<p><strong>Lambda</strong> : Este coeficiente se emplea para variables
+nominales en tablas r x c, tomando valores positivos. Si su valor está
+cercano a 1, indicará independencia entre las variables.</p>
+<p></br></br> <strong>Phi</strong> : Este coeficiente es utilizado en
+tablas 2 x 2 con variable nominales y está basado en el estadistico
+chi-cuadrado, tomando valores en el rango (0,1), indicando mínimo y
+máximo nivel de asociación.</p>
+<p></br></br></p>
+<p><strong>Prueba chi-cuadrado de Pearson</strong> : Determina si las
+diferencias entre las frecuencias observadas en una tabla de
+contingencia y las frecuencias esperadas, suponiendo que las variables
+son independientes, son estadísticamente significativas. En caso de
+rechazarse Ho, se concluye que las variables son independientes, en caso
+contrario se asume que hay una relación entre ellas (dependencia).</p>
+<p></br></br></p>
+<p>En nuestro caso nos centraremos en el <strong>coeficiente de
+correlacion de Pearson</strong> (<span
+class="math inline">\(\rho_{_{XY}}\)</span>)</p>
+<p><span class="math display">\[r = \dfrac{n
+\Bigg(\displaystyle\sum_{i=1}^{n} x_{i}y_{i} \Bigg)
+\Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)
+\Bigg(\displaystyle\sum_{i=1}^{n} y_{i}\Bigg)}{
+{\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}^{2} \Bigg) -
+\Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)^{2}} } {\sqrt{n
+\Bigg(\displaystyle\sum_{i=1}^{n} y_{i}^{2} \Bigg) -
+\Bigg(\displaystyle\sum_{i=1}^{n} y_{i} \Bigg)^{2}}}} =
+\dfrac{cov(x,y)}{\sqrt{var(x)var(y)}}\]</span></p>
+<p>Donde (<span class="math inline">\(x_{i}\)</span> y <span
+class="math inline">\(y_{i}\)</span>) con <span class="math inline">\(i
+= 1,2,3,....n\)</span> representa una muestra de parejas de valores</p>
+<p><img src="recurso201_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
 
 
 

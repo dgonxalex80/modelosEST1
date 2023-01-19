@@ -245,10 +245,10 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="recurso201.html">Conceptos</a>
+  <a href="recurso201.html">Correlación</a>
 </li>
 <li>
-  <a href="recurso202.html">Correlación</a>
+  <a href="recurso202.html">Modelo</a>
 </li>
 <li>
   <a href="recurso203.html">Estimación</a>
@@ -279,6 +279,25 @@ $(document).ready(function () {
 
 
 <p><br/> <br/></p>
+<p>Gauss publica en 1805 un trabajo donde se plantea el método de
+mínimos cuadrados como solución a un problema relacionada con variables
+antoprométricas, donde la estatura de los hijos en función de la de sus
+padres. Solución que da origen al modelo de regresión lineal simple que
+plantea una parte matemática y otra estadística.</p>
+<pre class="r"><code>muestra1&lt;-gen.corr.data(0.8,200)
+muestra1&lt;-as.data.frame(muestra1)
+
+
+p1=ggplot(muestra1, aes(x, y)) + 
+         geom_point() + Theme1+
+         labs(title = &quot;&quot;, y= &quot;y&quot;, x= &quot; &quot;) +
+         annotate(&quot;text&quot;, x=-3.3, y=3,size=4, label= &quot;(a)&quot;)</code></pre>
+<p></br></p>
+<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<p></br></p>
+<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<p></br></p>
+<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
 
 
 

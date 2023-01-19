@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94"> **Análisis de correlación**</span>
+title: <span style="color:#034a94"> **Modelo de Regresión Lineal**</span>
 author: "Modelos Estadisticos para la toma de decisiones"
 output: html_document
 css: style.css
@@ -7,11 +7,214 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
+#-------------------------------------------------------------------------
+#devtools::install_github("dgonxalex80/paqueteMOD")
+library(paqueteMOD)
 
-
+#-------------------------------------------------------------------------
 c1="#FF7F00"
 c2="#=EB0C6"
 c3="#034A94"
 c4="#686868"
+#-------------------------------------------------------------------------
+gen.corr.data<- function(rho,n){
+x <- rnorm(n)
+z <- rnorm(n)
+y<- rho*x + sqrt(1-rho^2)*z
+result <-cbind(y,x)
+return(result)
+}
+#-------------------------------------------------------------------------
+library(ggplot2)
+library(patchwork)
+Theme1= theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12))
+#------------------------------------------------------------------------
+Theme2= theme(
+        #axis.text.x = element_blank(),
+        #axis.text.y = element_blank(),
+        #axis.ticks = element_blank(),
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_text(size = 11))
 
 ```
+
+
+</br></br>
+
+Una de las aplicaciones de más uso ciencia de datos es el **modelo de regresión lineal**. Esta técnica permite medir la relación que pueda existir entre una variable llamada **variable respuesta** y un conjunto de **variables independientes**. 
+
+Casos como la estimación :
+
+* Estimación de las ventas a partir de los gastos en publicidad. Si en una empresa gasta 10 millones de pesos en publicidad ¿cuanto prorán ser sus ingresos? 
+* Consumo de un producto a partir de su precio.  Si se presupuesta vender 500 unidades de un producto, ¿que valor deberia tener el producto?
+* Precio de una casa a partir de sus características. ¿Que valor comercial tiene una casa en particular de acuerdo con sus caracteristicas?
+* Relación entre el peso de un bebe y su edad. ¿Que peso esperado debe tener un bebe con un mes de edad?  
+
+</br>
+
+El modelo se basa en una relación lineal entre las variables  (linea recta)
+
+$$Y= a + b X$$
+Donde :
+
+* $Y$ variable dependiente, 
+* $X$ variable independiente y dos constantes 
+* $a$ intercepto 
+* $b$ pendiente de la recta 
+
+
+```{r, echo=FALSE}
+fx=function(x){  
+ 13.72636+0.63936*x}
+x1=seq(12, 25, 0.005)
+y1=fx(x1)
+data=data.frame(x1, y1)
+
+ggplot(data, aes(x = x1, y = y1)) +
+      geom_point(size=1, colour=c3) + Theme2+
+       labs(title = "", y= "y", x= "x") +Theme2
+    
+```
+
+<center>Figura 1 : Recta $y = 13.7 + 0.64 x$</center>
+
+</br>
+
+Cuando la relación no se ajusta de manera perfecta a una linea recta, el problema se centra en la **estimación** de los coeficientes de la linea recta que mejor se ajuste a datos procedentes de una muestra de las variables $X$ y $Y$ en $n$ parejas $(x,y)$
+
+</br></br>
+
+<span style="color:#FF7F00">**Ejemplo**</span>
+
+Supongamos la siguiente muestra de valores simulados de dos variables $X$ y $Y$
+
+|     |                                                                                |
+|:----|:-------------------------------------------------------------------------------|
+| $x$ | 11.2, 11.3,  8.7, 11.6, 10.4,  9.5,  9.4, 10.9,  9.5,  9.9, 10.6, 10.7,  8.6, 9.3,  9.3,  8.9,  8.5, 10.4, 11.1,  9.6,  9.0, 10.0, 11.2,  9.8, 11.9, 10.5, 9.3, 10.4,9.4, 10.9,  9.2, 10.9, 10.2,  9.0,  8.6, 10.8,  9.3, 11.4, 10.7, 10.3,  8.9, 10.8, 10.4,  8.4,  8.9, 10.1, 12.0, 10.4, 11.0, 10.5 |
+| $y$ | 20.8, 20.4, 19.0, 20.9, 20.0, 19.4, 20.1, 20.0, 18.5, 19.3, 20.6, 20.8, 19.2, 19.3, 19.2, 20.4, 19.7, 20.1, 20.5, 19.6, 19.5, 21.1, 21.0, 19.6, 21.1, 20.9, 19.7, 20.9, 20.7, 20.6, 20.1, 21.0, 20.4, 20.4, 19.2, 21.7, 19.2, 21.4, 20.5, 20.2, 19.3, 20.8, 20.1, 18.9, 18.9, 19.1, 21.7, 20.7, 21.1, 20.7 |
+
+Lo que indicaria que la muestra esta conformado por parejas : $(11.2, 20.8)$, $(11.3, 20.4)$ ..., $(x_{i}, y_{i})$,... $(10.5, 20.7)$
+
+
+```{r, echo=FALSE}
+muestra1= data.frame(x=c(11.2, 11.3,  8.7, 11.6, 10.4,  9.5,  9.4, 10.9,  9.5,  9.9, 10.6, 10.7,  8.6, 9.3,  9.3,  8.9,  8.5, 10.4, 11.1,  9.6,  9.0, 10.0, 11.2,  9.8, 11.9, 10.5, 9.3, 10.4,9.4, 10.9,  9.2, 10.9, 10.2,  9.0,  8.6, 10.8,  9.3, 11.4, 10.7, 10.3,  8.9, 10.8, 10.4,  8.4,  8.9, 10.1, 12.0, 10.4, 11.0, 10.5),
+                     y=c(20.8, 20.4, 19.0, 20.9, 20.0, 19.4, 20.1, 20.0, 18.5, 19.3, 20.6, 20.8, 19.2, 19.3, 19.2, 20.4, 19.7, 20.1, 20.5, 19.6, 19.5, 21.1, 21.0, 19.6, 21.1, 20.9, 19.7, 20.9, 20.7, 20.6, 20.1, 21.0, 20.4, 20.4, 19.2, 21.7, 19.2, 21.4, 20.5, 20.2, 19.3, 20.8, 20.1, 18.9, 18.9, 19.1, 21.7, 20.7, 21.1, 20.7))
+
+p1=ggplot(muestra1, aes(x, y)) + 
+  geom_point(size=2, colour=c3) + Theme2+
+  labs(title = "", y= "y", x= "x") 
+# + annotate("text", x=-3.3, y=3,size=4, label= " ")
+p1
+```
+
+<center>Figura 2 : Diagrama de puntos variables $X$,$Y$</center>
+
+El diagrama permite visualizar una tendencia de la relación no perfecta entre las dos variables. En este caso una fuerte correlación que garantice un buen nivel de relación entre las variables.  
+
+El objetivo de la modelación es encontrar la ecuación de la recta que mejor se ajuste a los datos de la muestra, para ello al **modelo matemático**  ($Y= a + b X$) se le agrega una variable aleatoria $\varepsilon$ sobre la cual se hacen supuestos estadísticos  y de esta manera se conforma el **modelo estadístico** :
+
+$$Y= \beta_{0} + \beta_{1} X + \varepsilon$$
+
+
+</br></br>
+
+<span style="color:#FF7F00">**Ejemplo**</span>
+
+Se tienen datos de un proceso de generación de papel apartir de madera y se desea establecer la relación entre la biomasa de un arbol ($Y$, en toneladas) y la altura del arbol ($X$, en metros).  Veamos una gráfica de dispersión de los datos:
+
+```{r, echo = F, message = F, fig.align = 'center', out.width = '100%'}
+data(biomasa) 
+ggplot(biomasa, aes(x=altura , y=bio_total))+
+  geom_point(size=2, colour=c3)+
+  labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
+```
+
+
+La gráfica indica una clara relación lineal positiva entre las dos variables, lo cual indica que a mayor altura del árbol, mayor será la masa de biomasa contenida en el árbol. El modelo que se pueda originar de estos datos puede servir para estimar la biomasa dependiendo le la altura del árbol, sin necesidad de derrobarlo y ralizar la medición en efectos destructivos.
+
+</br>
+
+### **Significado de la regresión**
+  
+1. Podemos verla a partir de la distribución conjunta de las variables ${X}$ e ${Y}$, a partir de la  definición  la distribución condicional de ${Y\vert X}$, esto es ${f(Y\vert X)}$, y determinar ${E(Y\vert X)}$.  En este caso la regresión pretende ajustar la curva correspondiente a ${E(Y\vert X)}$.
+
+```{r fig21, echo = F, fig.align = 'center', out.width = '100%'}
+c1="#FF7F00"
+## Editor edit: use `dat` not `data`
+dat= data.frame(X=c(11.2, 11.3,  8.7, 11.6, 10.4,  9.5,  9.4, 10.9,  9.5,  9.9, 10.6, 10.7,  8.6, 9.3,  9.3,  8.9,  8.5, 10.4, 11.1,  9.6,  9.0, 10.0, 11.2,  9.8, 11.9, 10.5, 9.3, 10.4,9.4, 10.9,  9.2, 10.9, 10.2,  9.0,  8.6, 10.8,  9.3, 11.4, 10.7, 10.3,  8.9, 10.8, 10.4,  8.4,  8.9, 10.1, 12.0, 10.4, 11.0, 10.5),
+                Y=c(20.8, 20.4, 19.0, 20.9, 20.0, 19.4, 20.1, 20.0, 18.5, 19.3, 20.6, 20.8, 19.2, 19.3, 19.2, 20.4, 19.7, 20.1, 20.5, 19.6, 19.5, 21.1, 21.0, 19.6, 21.1, 20.9, 19.7, 20.9, 20.7, 20.6, 20.1, 21.0, 20.4, 20.4, 19.2, 21.7, 19.2, 21.4, 20.5, 20.2, 19.3, 20.8, 20.1, 18.9, 18.9, 19.1, 21.7, 20.7, 21.1, 20.7))
+## use proper formula rather than `$` or `[,]`;
+## otherwise you get trouble in prediction with `predict.lm`
+fit <- lm(Y ~ X, dat)
+
+## prediction point, as given in your question
+xp <- quantile(dat$X, probs = c(0.1, 0.2, 0.3, 0.4, 0.59), names = FALSE)
+
+## make prediction and only keep `$fit` and `$se.fit`
+pred <- predict.lm(fit, newdata = data.frame(X = xp), se.fit = TRUE)[1:2]
+
+## a function to make 101 sample points from conditional density
+f <- function (mu, sig) {
+  x <- seq(mu - 3.2 * sig, mu + 3.2 * sig, length = 101)
+  dx <- dnorm(x, mu, sig)
+  cbind(x, dx)
+}
+
+## apply `f` to all `xp`
+lst <- mapply(f, pred[[1]], pred[[2]], SIMPLIFY = FALSE)
+
+## To plot rotated density curve, we basically want to plot `(dx, x)`
+## but scaling `(alpha * dx, x)` is needed for good scaling with regression line
+## Also to plot rotated density along the regression line,
+## a shift is needed: `(alpha * dx + xp, x)`
+## The following function adds rotated, scaled density to a regression line
+## a "for-loop" is used for readability, with no loss of efficiency.
+## (make sure there is an existing plot; otherwise you get `plot.new` error!!)
+addrsd <- function (xp, lst, alpha = 1) {
+  for (i in 1:length(xp)) {
+    x0 <- xp[i]; mat <- lst[[i]]
+    dx. <- alpha * mat[, 2] + x0  ## rescale and shift
+    x. <- mat[, 1]
+    lines(dx., x., col = "gray")  ## rotate and plot
+    segments(x0, x.[1], x0, x.[101], col = "gray")  ## a local axis
+  }
+}
+
+## This is one simple way to draw the regression line
+## A better way is to generate and grid and predict on the grid
+## In later example I will show this
+plot(dat$X, fit$fitted, type = "l", las=1, col =c3, lwd=4,
+     ylab="y = biomasa total (tn)", xlab="x = altura (m)")#, ylim = c(-0.6, 1))
+
+## we try `alpha = 0.01`;
+## you can also try `alpha = 1` in raw scale to see what it looks like
+addrsd(xp, lst, 0.05)
+text(x=10.2,y=19.4,label= "Distribución de probabilidad E[Y|X]")
+text(x=10.7,y=21,label= "Línea de regresión", col=c1)
+text(x=10.7,y=20.85,label="y = a + b x", col=c1)
+grid()
+```
+
+
+2. Dado un conjunto de pares de datos ${(X,Y)}$, puede asumirse una forma funcional para la curva de regresión y tratar de ajustarla minimizando el error de ajuste.
+
+```{r, echo = F, message = F, fig.align = 'center', out.width = '80%'}
+ggplot(biomasa,aes(x=altura,y=bio_total))+
+  geom_point()+
+  geom_smooth(method = "loess",se = F)+
+  theme_bw()+
+  labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
+```
+
+
+</br></br>
+
+<span style="color:#FF7F00">**Ejemplo**</span>
+
+</br></br>
+
+

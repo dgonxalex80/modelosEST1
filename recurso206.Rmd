@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94"> **Representación gráfica de datos**</span>
+title: <span style="color:#034a94"> **Modelación**</span>
 author: "Nivelatorio de Estadística"
 output: html_document
 css: style.css

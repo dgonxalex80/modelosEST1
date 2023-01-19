@@ -3,10 +3,10 @@ output_dir: "docs"
 navbar:
   title: "Modelos de Regresión"
   left:
-    - text: "Conceptos"
-      href: recurso201.html
     - text: "Correlación"
-      href: recurso202.html
+      href: recurso201.html
+    - text: "Modelo"
+      href: recurso202.html      
     - text: "Estimación"
       href: recurso203.html
     - text: "Inferencia"
