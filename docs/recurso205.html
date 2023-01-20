@@ -330,48 +330,49 @@ class="math inline">\(Y_o\)</span></strong></span></h1>
 </div>
 
 
-<div
-id="inferencias-respecto-a-la-respuesta-media-boldsymboleyvert-x_0-y-valores-futuro-boldsymbolyvert-x_0-y_0"
-class="section level2">
-<h2>Inferencias respecto a la respuesta media <span
-class="math inline">\(\boldsymbol{E[Y\vert x_0]}\)</span> y valores
-futuro <span class="math inline">\(\boldsymbol{Y\vert x_0 =
-y_0}\)</span></h2>
-<p>Interesa realizar inferencias sobre la respuesta, para un valor
-apropiado <span class="math inline">\(X = x_0\)</span>, así:</p>
+<p></br></br></p>
+<div id="inferencias-respecto-a-y" class="section level2">
+<h2><strong>Inferencias respecto a Y</strong></h2>
+<p>En ocaciones interesa realizar inferencias sobre la respuesta, para
+un valor apropiado <span class="math inline">\(X = x_0\)</span>,
+así:</p>
 <ul>
 <li><p>Estimación puntual y por intervalo de la respuesta media <span
-class="math inline">\(E[Y\vert x_0]\)</span>.</p></li>
+class="math inline">\(E[Y|x_0]\)</span>.</p></li>
 <li><p>Predicción de valores futuros <span class="math inline">\(y_0 =
 \beta_0 + \beta_1 x_0 + \varepsilon_0 = E[Y\vert x_0] +
 \varepsilon_0\)</span>.</p></li>
 </ul>
 <p>En ambos casos el único medio para producir tales inferencias es la
 ecuación de regresión ajustada.</p>
-<hr />
-<p>Recuerde que la ecuación de regresión ajustada, en un valor dado
-<span class="math inline">\({X = x_0}\)</span>, es: <span
-class="math display">\[\widehat{Y}_0 = \widehat\beta_0 +
-\widehat\beta_1x_0\]</span></p>
+<p></br></p>
+<p>Conociendo que la ecuación de regresión ajustada, en un valor dado
+<span class="math inline">\({X = x_0}\)</span>, es:</p>
+<p><span class="math display">\[\widehat{Y}_0 = \widehat\beta_0 +
+\widehat\beta_1x_0\]</span> </br></p>
 <p>Note que <span class="math inline">\({\widehat{Y}_0}\)</span> también
 es una combinación lineal de las variables aleatorias <span
-class="math inline">\({Y_1,\ldots ,Y_n}\)</span>. En efecto, <span
-class="math display">\[
+class="math inline">\({Y_1,\ldots ,Y_n}\)</span>. En efecto,</p>
+<p><span class="math display">\[
 \widehat{Y}_0 = \widehat\beta_0 + \widehat\beta_1x_0 =
 \left(\sum^n_{i=1} m_iY_i\right) + \left(\sum^n_{i=1} c_iY_i\right)x_0 =
 \sum^n_{i=1} (m_i + x_0\, c_i) Y_i,
-\]</span> con las constantes <span class="math inline">\(m_i =
-\frac{1}{n} - \bar{x}\, c_i\)</span> y <span class="math inline">\(c_i =
-\frac{x_i - \bar{x}}{S_{xx}}\)</span> como fueron especificadas
-previamente. Por lo tanto, bajo los supuestos del modelo <span
+\]</span></p>
+<p></br></p>
+<p>con las constantes <span class="math inline">\(m_i = \frac{1}{n} -
+\bar{x}\, c_i\)</span> y <span class="math inline">\(c_i = \frac{x_i -
+\bar{x}}{S_{xx}}\)</span> como fueron especificadas previamente. Por lo
+tanto, bajo los supuestos del modelo <span
 class="math inline">\({\widehat{Y}_0}\)</span> es una variable aleatoria
 normal.</p>
-<hr />
-<p>con esperanza: <span class="math display">\[
+<p>con esperanza:</p>
+<p><span class="math display">\[
 E\left[\widehat{Y}_0\right] = E\left[\widehat\beta_0 +
 \widehat\beta_1x_0\right] = E\left[\widehat\beta_0\right] +
 E\left[\widehat\beta_1\right]x_0 = \beta_0 + \beta_1x_0 = E[Y\vert x_0]
-\]</span> y varianza: <span class="math display">\[
+\]</span> </br></p>
+<p>y su varianza:</p>
+<p><span class="math display">\[
 \begin{aligned}
 {V\left[\widehat{Y}_0\right]} &amp;= {V\left[\sum^n_{i=1} (m_i + x_0\,
 c_i) Y_i\right]} = {\sum^n_{i=1} (m_i + x_0\, c_i)^2\ V(Y_i)}\nonumber\\
@@ -382,7 +383,7 @@ c_i) Y_i\right]} = {\sum^n_{i=1} (m_i + x_0\, c_i)^2\ V(Y_i)}\nonumber\\
 \frac{(x_0-\bar{x})^2}{S_{xx}}\right]}
 \end{aligned}
 \]</span></p>
-<hr />
+<p></br></br></p>
 <p>En resumen, <span class="math display">\[
 \widehat{Y}_0 \sim N\left(E[Y\vert x_0], \ \sigma^2\left[\frac{1}{n} +
 \frac{(x_0 - \bar{x})^2}{S_{xx}}\right]\right)
@@ -395,7 +396,6 @@ class="math inline">\(y_0\)</span>, pero en este caso es un estimador
 sesgado. De ahí que la cantidad <span class="math inline">\(y_0 -
 \widehat{Y}_0\)</span> represente al error de predicción, el cual se
 sabe tiene media cero.</p>
-<hr />
 <p>Tanto las estimaciones de valores de la respuesta media como las
 predicciones de valores futuro deben cumplir una condición sobre el
 valor fijo <span class="math inline">\({X = x_0}\)</span> para que tal

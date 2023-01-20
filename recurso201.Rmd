@@ -391,9 +391,9 @@ En el caso de tener más de dos variables incluidas en un modelo es de interés 
 $$
 \begin{equation}
 \begin{pmatrix}
-Var(x_{1}) & Cov(x_{1},x_v{2}) & Cov(x_{1},x_v{3})\\
-Cov(x_{2},x_v{1}) & Var(x_{2}) & Cov(x_{2},x_v{3})\\
-Cov(x_{3},x_v{1}) & Cov(x_{3},x_v{2}) & Var(x_{3})
+Var(x_{1}) & Cov(x_{1},x_{2}) & Cov(x_{1},x_{3})\\
+Cov(x_{2},x_{1}) & Var(x_{2}) & Cov(x_{2},x_{3})\\
+Cov(x_{3},x_{1}) & Cov(x_{3},x_v{2}) & Var(x_{3})
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -468,7 +468,8 @@ corrplot::corrplot.mixed(cor38)
 
 Se puede observar que las variables más relacionadas (con mayor correlación) so:
 
-* $Cor(altura, diametro) = 0.94$, lo cual indicaria que árboles altos tienen diámetro de tronco más anchos
+* `cor(altura, diametro) = 0.94`, lo cual indicaria que existe una alta relacion entre el diámetro y la altura de un àrbol. es decur que árboles áltos tendrán diámetros de tronco más anchos.
+
 </br></br>
 
 <span style="color:#FF7F00"> **Nota**</span>

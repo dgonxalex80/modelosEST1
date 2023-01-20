@@ -338,6 +338,11 @@ del modelo de regresión</strong></span></h2>
 <div id="inferencias-sobre-el-intercepto-beta_0" class="section level3">
 <h3><span style="color:#034a94"><strong>Inferencias sobre el intercepto
 <span class="math inline">\(\beta_0\)</span></strong></span></h3>
+<p>El intercepto <span class="math inline">\(\beta_{0}\)</span>
+corresponde al valor que puede tomar la variable <span
+class="math inline">\(Y\)</span> cuando el valor de <span
+class="math inline">\(X=0\)</span> y corresponde al valor de corte en el
+eje <span class="math inline">\(y\)</span> en el plano carteciano.</p>
 <p></br></p>
 <div id="intervalos-de-confianza" class="section level4">
 <h4><span style="color:#034a94"><strong>Intervalos de
@@ -355,7 +360,8 @@ aleatoria <span class="math inline">\({t}\)</span>-Student con <span
 class="math inline">\({n-2}\)</span> grados de libertad.</p>
 <p>Por tanto un intervalo de confianza del <span
 class="math inline">\({(1-\alpha)\%}\)</span> para <span
-class="math inline">\({\beta_0}\)</span> es:</p>
+class="math inline">\({\beta_0}\)</span> para el intercepto está dado
+por:</p>
 <p><span class="math display">\[
 {\widehat\beta_0 \pm t_{\alpha/2, n-2}\times
 \sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
@@ -364,13 +370,16 @@ class="math inline">\({\beta_0}\)</span> es:</p>
 el percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
 distribución <span class="math inline">\({t}\)</span>-Student con <span
 class="math inline">\({n - 2}\)</span> grados de libertad.</p>
+<p></br></br></p>
 </div>
 <div id="prueba-de-hipótesis-sobre-la-significancia-del-intercepto"
 class="section level4">
 <h4><span style="color:#034a94"><strong>Prueba de Hipótesis sobre la
 significancia del intercepto</strong></span></h4>
 <p>Para probar si <span class="math inline">\({\beta_0}\)</span> es
-significativamente distinto de cero:</p>
+significativamente distinto de cero se realiza la siguiente prueba de
+hipótesis :</p>
+<p></br></p>
 <p><span class="math display">\[\begin{eqnarray}
 {H_0:\ \beta_0 = 0 }\nonumber\\
 {H_1:\ \beta_0 \neq 0} \nonumber
@@ -380,6 +389,10 @@ significativamente distinto de cero:</p>
 class="math inline">\({\beta_0}\)</span> por 0. Se rechaza <span
 class="math inline">\({H_0}\)</span> si <span
 class="math inline">\({|T_0| &gt; t_{\alpha/2, n - 2}}\)</span>.</p>
+<p><span class="math display">\[
+{T}={\frac{\widehat\beta_0-\beta_0}{\sigma_{\widehat{\beta}_{0}}} \sim
+t_{n-2}}
+\]</span></p>
 </div>
 </div>
 <div id="inferencias-sobre-la-pendiente-beta_1" class="section level3">

@@ -24,6 +24,8 @@ c4="#686868"
 </br>
   
 ### <span style="color:#034a94">**Inferencias sobre el intercepto $\beta_0$**</span>
+
+El intercepto $\beta_{0}$ corresponde al valor que puede tomar la variable $Y$ cuando el valor de $X=0$ y corresponde al valor de corte en el eje $y$ en el plano carteciano. 
   
 </br>
 
@@ -40,7 +42,7 @@ $$
 con ${t_{n-2}}$ la variable aleatoria ${t}$-Student con ${n-2}$ grados de libertad.
 
 
-Por tanto un intervalo de confianza del ${(1-\alpha)\%}$ para ${\beta_0}$ es:
+Por tanto un intervalo de confianza del ${(1-\alpha)\%}$ para ${\beta_0}$ para el intercepto está dado por:
 
 $$
 {\widehat\beta_0 \pm t_{\alpha/2, n-2}\times \sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
@@ -49,11 +51,14 @@ $$
 
 donde ${t_{\alpha/2, n - 2}}$ es el percentil ${1 - \alpha/2}$ de la distribución ${t}$-Student con ${n - 2}$ grados de libertad.
 
+</br></br>
 
 #### <span style="color:#034a94">**Prueba de Hipótesis sobre la significancia del intercepto**</span>
 
-Para probar si ${\beta_0}$ es significativamente distinto de cero:
+Para probar si ${\beta_0}$ es significativamente distinto de cero se realiza la siguiente prueba de hipótesis :
    
+</br>
+
 \begin{eqnarray}
 {H_0:\ \beta_0 = 0 }\nonumber\\
 {H_1:\ \beta_0 \neq 0} \nonumber
@@ -61,6 +66,9 @@ Para probar si ${\beta_0}$ es significativamente distinto de cero:
 
 El estadístico de prueba es la ecuación  y el valor observado de éste (${T_0}$) se halla reemplazando ${\beta_0}$ por 0. Se rechaza ${H_0}$ si ${|T_0| > t_{\alpha/2, n - 2}}$.
 
+$$
+{T}={\frac{\widehat\beta_0-\beta_0}{\sigma_{\widehat{\beta}_{0}}} \sim t_{n-2}}
+$$
 
 ### <span style="color:#034a94">**Inferencias sobre la pendiente $\beta_1$**</span>
 
