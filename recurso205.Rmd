@@ -20,13 +20,13 @@ c4="#686868"
 
 </br></br>
 
-## **Inferencias respecto a Y**
-
 En ocaciones interesa realizar inferencias sobre la respuesta, para un valor apropiado $X = x_0$, así:
 
 * Estimación puntual y por intervalo de la respuesta media $E[Y|x_0]$.
 
 * Predicción de valores futuros $y_0 = \beta_0 + \beta_1 x_0 + \varepsilon_0 = E[Y\vert x_0] + \varepsilon_0$.
+
+</br>
 
 En ambos casos el único medio para producir tales inferencias es la ecuación de regresión ajustada.
 
@@ -45,7 +45,7 @@ $$
 
 </br>
 
-con las constantes $m_i = \frac{1}{n} - \bar{x}\, c_i$ y $c_i = \frac{x_i - \bar{x}}{S_{xx}}$ como fueron especificadas previamente. Por lo tanto, bajo los supuestos del modelo ${\widehat{Y}_0}$ es una variable aleatoria normal.
+con las constantes $m_i = \frac{1}{n} - \bar{x}\, c_i \hspace{.4cm} \text{y} \hspace{.4cm} c_i = \frac{x_i - \bar{x}}{S_{xx}}$ como fueron especificadas previamente. Por lo tanto, bajo los supuestos del modelo ${\widehat{Y}_0}$ es una variable aleatoria normal.
 
 con esperanza:
 
@@ -66,26 +66,36 @@ $$
 
 </br></br>
 
-En resumen,
+**En resumen**,
+
 $$
 \widehat{Y}_0 \sim N\left(E[Y\vert x_0], \ \sigma^2\left[\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}}\right]\right)
 $$
+
+</br></br>
+
 
 Esto es, $\widehat{Y}_0$ es un estimador insesgado de la respuesta media.
 
 Note que, $\widehat{Y}_0$ también es un estimador para un valor futuro $y_0$, pero en este caso es un estimador sesgado. De ahí que la cantidad $y_0 - \widehat{Y}_0$ represente al error de predicción, el cual se sabe tiene media cero.
 
-
+</br>
 
 Tanto las estimaciones de valores de la respuesta media como las predicciones de valores futuro deben cumplir una condición sobre el valor fijo ${X = x_0}$ para que tal estimación/predicción sea válida.
 
+</br>
+
 * Sólo se podrán hacer inferencias sobre la respuesta cuando $X = x_0 \in \left[X_{\min}, X_{\max}\right]$, donde $X_{\min}$ y $X_{\max}$ son los valores mínimo y máximo de la variable predictora, que fueron fijados en la muestra.
+
+</br>
 
 * Cumplir con lo anterior indica que $x_0$ es un punto de interpolación.
 
+</br>
+
 * Esto evita que $x_0$ sea un punto de extrapolación, esto es, un punto por fuera del rango experimental donde el modelo fue ajustado y que no garantiza que el modelo se mantenga.
 
----
+
 
 ```{r, include = F}
 dfe <- NULL
@@ -95,81 +105,125 @@ dfe$y <- 250 + 0.5*(dfe$x - 150)^2 + 0.0053*(dfe$x - 150)^3 + rnorm(36, sd = 35)
 lm1 <- summary(lm(y ~ x, dfe))
 ```
 
-**Ilustración de puntos de interpolación y extrapolación**
+<center>
+
 
 ```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
 par(mar = c(4, 4, .1, .1))
 plot(0, 0, xlim = c(70, 170), ylim = c(0, 1250), xaxt = 'n', yaxt = 'n',
-      xlab = '', ylab = '')
-rect(0, -100, 200, 1350, col = 'lightgray', border = NA, density = -10)
-rect(100, -100, 140, 1350, col = 'lightblue', border = NA, density = -10)
+     xlab = '', ylab = '')
+rect(0, -100, 200, 1350, col = '#E8E8E8', border = NA, density = -10)
+rect(100, -100, 140, 1350, col = "#FFB062", border = NA, density = -10)
 box()
 par(new = T)
-with(dfe, {plot(x, y, pch = 19, cex = 1.2, xlim = c(70, 170), ylim = c(0, 1250), xaxt = 'n', yaxt = 'n', cex.lab = 2)
-   axis(1, at = seq(70, 170, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
-   axis(2, at = seq(0, 1200, 300), mgp = c(3, 1, 0), cex.axis = 2, cex.lab = 2)
-   abline(lm1$coefficients[,1], col = 'red', lwd = 2)})
+with(dfe, {plot(x, y, pch = 19, cex = 1.2, xlim = c(70, 170), ylim = c(0, 1250), xaxt = 'n', yaxt = 'n', cex.lab = 1)
+  axis(1, at = seq(70, 170, 20), mgp = c(3, 1.5, 0), cex.axis = 1, cex.lab = 1)
+  axis(2, at = seq(0, 1200, 300), mgp = c(3, 1, 0), cex.axis = 1, cex.lab = 1)
+  abline(lm1$coefficients[,1], col = 'red', lwd = 1)})
 par(new = T)
 curve(250 + 0.5*(x-150)^2 + 0.0053*(x-150)^3, 40, 200, xlim = c(70, 170), ylim = c(0, 1250), xaxt = 'n', yaxt = 'n',
-      xlab = '', ylab = '', col = 'blue', lwd = 2)
-mtext(c(expression(x['01'] == 80), expression(x['02'] == 122), expression(x['03'] == 160)), side = 1, at = c(80, 122, 160), line = 0.8, cex = 1.5)
+      xlab = '', ylab = '', col = 'blue', lwd = 1)
+mtext(c(expression(x['01'] == 80), expression(x['02'] == 122), expression(x['03'] == 160)), side = 1, at = c(80, 122, 160), line = 0.8, cex = 1)
 new <- data.frame(x = c(80, 122, 160))
 pr <- as.vector(predict(lm(y ~ x, dfe), newdata = new))
-segments(x0 = c(80, 122, 160), y0 = -100, x1 = c(80, 122, 160), y1 = pr, lwd = 1.5)
-text(120, 1200, "Rango experimental", col = 'darkblue', cex = 2)
-text(82.5, 600, "Zona de", col = 'red', cex = 1.5)
-text(82.5, 550, "extrapolación", col = 'red', cex = 1.5)
-text(157.5, 900, "Zona de", col = 'red', cex = 1.5)
-text(157.5, 850, "extrapolación", col = 'red', cex = 1.5)
-brackets(80, 882.1, 80, 1126.9, h = 3, col = 'brown', lwd = 2)
-brackets(160, 305.3, 160, -12.1, h = 2, col = 'brown', lwd = 2)
-text(72.5, mean(c(882.1, 1126.9)), "error", col = 'brown', cex = 1.5)
-text(167.5, mean(c(305.3, -12.1)), "error", col = 'brown', cex = 1.5)
+segments(x0 = c(80, 122, 160), y0 = -100, x1 = c(80, 122, 160), y1 = pr, lwd = 1)
+text(120, 1200, "Rango experimental", col = 'darkblue', cex = 1)
+text(82.5, 600, "Zona de", col = 'red', cex = 1)
+text(82.5, 550, "extrapolación", col = 'red', cex = 1)
+text(157.5, 900, "Zona de", col = 'red', cex = 1)
+text(157.5, 850, "extrapolación", col = 'red', cex = 1)
+brackets(80, 882.1, 80, 1126.9, h = 3, col = 'brown', lwd = 1)
+brackets(160, 305.3, 160, -12.1, h = 2, col = 'brown', lwd = 1)
+text(72.5, mean(c(882.1, 1126.9)), "error", col = 'brown', cex = 1)
+text(167.5, mean(c(305.3, -12.1)), "error", col = 'brown', cex = 1)
 ```
 
-## Intervalo de confianza para la respuesta media
+Figura : Ilustración de puntos de interpolación y extrapolación
+
+</center>
+
+</br></br>
+
+## **Intervalo de confianza para la respuesta media**
+
+</br>
 
 Se puede demostrar que bajo los supuestos del modelo:
+
+</br>
+
 $$
 {T = \frac{\widehat{y}_0 - E[Y\vert x_0]}{\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}}\right]}} \sim t_{n - 2}}
 $$
 
+</br>
+
 Por tanto un intervalo de confianza del ${(1-\alpha)\%}$ para ${\mu_{Y\vert x_0}}$ es:
+
+</br>
+
 $$
 {\widehat{y}_{0} \pm t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} + \frac{(x_{0}-\bar{x})^{2}}{S_{xx}}\right]}}
 $$
-  
+
+</br>
+
 con ${\widehat{y}_{0}=\widehat{\beta}_0+\widehat{\beta}_1x_0}$ y ${t_{\alpha/2, n - 2}}$ es el percentil ${1 - \alpha/2}$ de la distribución ${t}$-Student con ${n - 2}$ grados de libertad.
 
-## Intervalo de predicción para una observación futura de la respuesta $\boldsymbol{Y_0}$
+</br></br>
+
+## **Intervalo de predicción para una observación futura de la respuesta $Y_{0}$**
+
+</br>
 
 Dicho intervalo estima los posibles valores para un valor particular de la variable respuesta (no para su media) en un valor dado, ${X=x_0}$. Asumimos que este valor particular es un valor futuro de la variable aleatoria ${Y}$ y por tanto, no fue utilizado en la regresión.
 
+</br>
+
 Si ${Y_0}$ es un valor futuro y ${\widehat{y}_0 = \widehat{\beta}_0 + \widehat{\beta}_1x_0}$ es su estimador, entonces estas dos variables aleatorias son estadísticamente independientes, dado que ${Y_0}$ no es utilizado para hallar a ${\widehat{\beta}_0}$ y ${\widehat{\beta}_1}$.
 
----
+</br>
 
 Por tanto, el estadístico:
+
+</br>
+
 $$
 {T=\frac{\widehat{y}_0-Y_0}{\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_{0}-\bar{x})^2}{S_{xx}}\right]}} \sim t_{n-2}}
 $$
 
+</br>
+
 De ahí que, un intervalo de predicción del ${(1 - \alpha)\%}$ para ${Y_0}$ está dado por:
+
+</br>
+
 $$
 {\widehat{y}_0\pm t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}}\right]}}
 $$
 
+</br>
+
 Donde, ${t_{\alpha/2, n - 2}}$ es el percentil ${1 - \alpha/2}$ de la distribución ${t}$-Student con ${n - 2}$ grados de libertad.
 
-## Pruebas de hipótesis para la respuesta media
+</br></br>
+
+## **Pruebas de hipótesis para la respuesta media**
+
+</br>
 
 Para la respuesta media se pueden probar hipótesis a partir de la construcción y el análisis de los intervalos de confianza definidos anteriormente. Esto es, para probar a un nivel de significancia $\alpha$, el siguiente juego de hipótesis:
+
+</br>
+
 $$
 \begin{aligned}
 {H_0:\ E[Y\vert x_0] = c_0}\nonumber\\
 {H_1:\ E[Y\vert x_0] \neq c_0}\nonumber
 \end{aligned}
 $$
+
+</br>
 
 Donde $c_0 \in \mathbb{R}$, se calcula un intervalo de confianza del $(1 - \alpha)100$% para $E[Y\vert x_0]$ y si el valor $c_0$ está incluido en el intervalo, entonces no se rechaza $H_0$, o si el valor $c_0$ no está incluido en el intervalo, entonces se rechaza $H_0$.
 

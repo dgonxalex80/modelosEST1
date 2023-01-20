@@ -18,18 +18,16 @@ c4="#686868"
 
 </br></br>
 
- 
-## <span style="color:#034a94">**Inferencias sobre los parámetros del modelo de regresión**</span>
+
+## <span style="color:#034a94">**Inferencias sobre el intercepto $\beta_0$**</span>
 
 </br>
-  
-### <span style="color:#034a94">**Inferencias sobre el intercepto $\beta_0$**</span>
 
-El intercepto $\beta_{0}$ corresponde al valor que puede tomar la variable $Y$ cuando el valor de $X=0$ y corresponde al valor de corte en el eje $y$ en el plano carteciano. 
+El intercepto $\beta_{0}$ corresponde al valor que puede tomar la variable $Y$ cuando el valor de $X=0$ y se puede visualizar como el corte de la recta de regresión al eje $y$ en el plano carteciano. 
   
 </br>
 
-#### <span style="color:#034a94">**Intervalos de confianza**</span>
+### <span style="color:#034a94">**Intervalos de confianza**</span>
 
 </br>
 
@@ -53,26 +51,36 @@ donde ${t_{\alpha/2, n - 2}}$ es el percentil ${1 - \alpha/2}$ de la distribuci�
 
 </br></br>
 
-#### <span style="color:#034a94">**Prueba de Hipótesis sobre la significancia del intercepto**</span>
+### <span style="color:#034a94">**Prueba de Hipótesis sobre la significancia del intercepto**</span>
+
+</br>
 
 Para probar si ${\beta_0}$ es significativamente distinto de cero se realiza la siguiente prueba de hipótesis :
    
 </br>
 
-\begin{eqnarray}
-{H_0:\ \beta_0 = 0 }\nonumber\\
-{H_1:\ \beta_0 \neq 0} \nonumber
-\end{eqnarray}
+|      hipótesis                |     estadístico de prueba              |
+|:-----------------------------:|:--------------------------------------:|
+|$H_0: \beta_0 = 0 \hspace{1cm}H_1: \beta_0 \neq 0$ |  ${T}={\dfrac{\widehat\beta_0-0}{\sigma_{\widehat{\beta}_{0}}} \sim t_{n-2}}$|
+|                               |                                        |
+
 
 El estadístico de prueba es la ecuación  y el valor observado de éste (${T_0}$) se halla reemplazando ${\beta_0}$ por 0. Se rechaza ${H_0}$ si ${|T_0| > t_{\alpha/2, n - 2}}$.
 
-$$
-{T}={\frac{\widehat\beta_0-\beta_0}{\sigma_{\widehat{\beta}_{0}}} \sim t_{n-2}}
-$$
+</br></br>
 
-### <span style="color:#034a94">**Inferencias sobre la pendiente $\beta_1$**</span>
+## <span style="color:#034a94">**Inferencias sobre la pendiente $\beta_1$**</span>
 
-#### <span style="color:#034a94">Intervalos de confianza**</span>
+</br>
+
+La pendiente $\beta_{1}$ permite determinar la razón de cambio de la variable $Y$ cuando ocurren cambios en $X$, que en ocaciones es el cetro del problema de al estimar un modelo de regresión. Si este valor es igual a cero estadísticamente significa que no existe relación estadística entre las variables y por tanto no tiene sentido la construcción de un modelo que las vincule.
+
+
+</br></br>
+
+### <span style="color:#034a94">**Intervalos de confianza**</span>
+
+</br>
 
 Se puede demostrar que bajo los supuestos del modelo de regresión, se cumple que:
 
@@ -86,23 +94,31 @@ $$
 {\widehat\beta_1 \pm t_{\alpha/2,n-2}\times \sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
 $$
 
+</br></br>
 
 ### <span style="color:#034a94">**Prueba de Hipótesis sobre la significancia de la pendiente**</span>
 
-  
+</br>
+
 Para probar si ${\beta_1}$ es significativamente distinto de cero: 
 
-$$
-\begin{aligned}
-{H_0:\ \beta_1 = 0}\nonumber\\
-{H_1:\ \beta_1 \neq 0}\nonumber
-\end{aligned}
-$$
-  
+</br>
+
+|      hipótesis                |     estadístico de prueba              |
+|:-----------------------------:|:--------------------------------------:|
+| $H_0: \beta_1 = 0 \hspace{1cm}H_1: \beta_1 \neq 0$ |  ${T}={\dfrac{\widehat\beta_1-0}{\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}} \sim t_{n-2}}$                 |
+|                               |                                        | 
+
+</br>
+
 El estadístico de prueba es la  ecuación  y el valor observado de éste (${T_0}$) se halla reemplazando ${\beta_1}$ por 0. Se rechaza ${H_0}$ si ${|T_0|>t_{\alpha/2,n-2}}$.
 
 
+</br></br>
+
 <span style="color:#FF7F00">**Nota:**</span>
+
+</br>
 
 Observe que si la pendiente es significativa, entonces el modelo de RLS entre la predictora y la respuesta, también lo es.
 
