@@ -12,7 +12,7 @@
 <meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
 
 
-<title> Inferencia de parámetros</title>
+<title> Inferencia sobre los parámetros</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -244,20 +244,71 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="recurso201.html">Correlación</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso202.html">Modelo</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso203.html">Estimación</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso204.html">Inferencia</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso205.html">Software R</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -272,23 +323,107 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Inferencia de parámetros</strong></span></h1>
+<strong>Inferencia sobre los parámetros</strong></span></h1>
 <h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
 
 </div>
 
 
 <p></br></br></p>
-<p>Video 5 inferencia</p>
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/Ilv5KHYOx9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-</iframe>
-<p></br></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
-<p></br></br></br></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
-<p>Viedeo 6 . Supuestos</p>
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/gbco5SD9WJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-</iframe>
+<div id="inferencias-sobre-los-parámetros-del-modelo-de-regresión"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Inferencias sobre los parámetros
+del modelo de regresión</strong></span></h2>
+<p></br></p>
+<div id="inferencias-sobre-el-intercepto-beta_0" class="section level3">
+<h3><span style="color:#034a94"><strong>Inferencias sobre el intercepto
+<span class="math inline">\(\beta_0\)</span></strong></span></h3>
+<p></br></p>
+<div id="intervalos-de-confianza" class="section level4">
+<h4><span style="color:#034a94"><strong>Intervalos de
+confianza</strong></span></h4>
+<p></br></p>
+<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
+cumple que:</p>
+<p><span class="math display">\[
+{T} = {\frac{\widehat\beta_0 -
+\beta_0}{\sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
+\sim t_{n - 2}}
+\]</span></p>
+<p>con <span class="math inline">\({t_{n-2}}\)</span> la variable
+aleatoria <span class="math inline">\({t}\)</span>-Student con <span
+class="math inline">\({n-2}\)</span> grados de libertad.</p>
+<p>Por tanto un intervalo de confianza del <span
+class="math inline">\({(1-\alpha)\%}\)</span> para <span
+class="math inline">\({\beta_0}\)</span> es:</p>
+<p><span class="math display">\[
+{\widehat\beta_0 \pm t_{\alpha/2, n-2}\times
+\sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
+\]</span></p>
+<p>donde <span class="math inline">\({t_{\alpha/2, n - 2}}\)</span> es
+el percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
+distribución <span class="math inline">\({t}\)</span>-Student con <span
+class="math inline">\({n - 2}\)</span> grados de libertad.</p>
+</div>
+<div id="prueba-de-hipótesis-sobre-la-significancia-del-intercepto"
+class="section level4">
+<h4><span style="color:#034a94"><strong>Prueba de Hipótesis sobre la
+significancia del intercepto</strong></span></h4>
+<p>Para probar si <span class="math inline">\({\beta_0}\)</span> es
+significativamente distinto de cero:</p>
+<p><span class="math display">\[\begin{eqnarray}
+{H_0:\ \beta_0 = 0 }\nonumber\\
+{H_1:\ \beta_0 \neq 0} \nonumber
+\end{eqnarray}\]</span></p>
+<p>El estadístico de prueba es la ecuación y el valor observado de éste
+(<span class="math inline">\({T_0}\)</span>) se halla reemplazando <span
+class="math inline">\({\beta_0}\)</span> por 0. Se rechaza <span
+class="math inline">\({H_0}\)</span> si <span
+class="math inline">\({|T_0| &gt; t_{\alpha/2, n - 2}}\)</span>.</p>
+</div>
+</div>
+<div id="inferencias-sobre-la-pendiente-beta_1" class="section level3">
+<h3><span style="color:#034a94"><strong>Inferencias sobre la pendiente
+<span class="math inline">\(\beta_1\)</span></strong></span></h3>
+<div id="intervalos-de-confianza-1" class="section level4">
+<h4><span style="color:#034a94">Intervalos de confianza**</span></h4>
+<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
+cumple que:</p>
+<p><span class="math display">\[
+{T}={\frac{\widehat\beta_1-\beta_1}{\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
+\sim t_{n-2}}
+\]</span></p>
+<p>Por tanto un intervalo de confianza del <span
+class="math inline">\({(1-\alpha)\%}\)</span> para <span
+class="math inline">\({\beta_1}\)</span> es: <span
+class="math display">\[
+{\widehat\beta_1 \pm t_{\alpha/2,n-2}\times
+\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
+\]</span></p>
+</div>
+</div>
+<div id="prueba-de-hipótesis-sobre-la-significancia-de-la-pendiente"
+class="section level3">
+<h3><span style="color:#034a94"><strong>Prueba de Hipótesis sobre la
+significancia de la pendiente</strong></span></h3>
+<p>Para probar si <span class="math inline">\({\beta_1}\)</span> es
+significativamente distinto de cero:</p>
+<p><span class="math display">\[
+\begin{aligned}
+{H_0:\ \beta_1 = 0}\nonumber\\
+{H_1:\ \beta_1 \neq 0}\nonumber
+\end{aligned}
+\]</span></p>
+<p>El estadístico de prueba es la ecuación y el valor observado de éste
+(<span class="math inline">\({T_0}\)</span>) se halla reemplazando <span
+class="math inline">\({\beta_1}\)</span> por 0. Se rechaza <span
+class="math inline">\({H_0}\)</span> si <span
+class="math inline">\({|T_0|&gt;t_{\alpha/2,n-2}}\)</span>.</p>
+<p><span style="color:#FF7F00"><strong>Nota:</strong></span></p>
+<p>Observe que si la pendiente es significativa, entonces el modelo de
+RLS entre la predictora y la respuesta, también lo es.</p>
+</div>
+</div>
 
 
 

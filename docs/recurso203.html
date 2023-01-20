@@ -244,20 +244,71 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="recurso201.html">Correlación</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso202.html">Modelo</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso203.html">Estimación</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso204.html">Inferencia</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso205.html">Software R</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -279,28 +330,315 @@ $(document).ready(function () {
 
 
 <p><br/> <br/></p>
-<p>Gauss publica en 1805 un trabajo donde se plantea el método de
-mínimos cuadrados como solución a un problema relacionada con variables
-antoprométricas, donde la estatura de los hijos en función de la de sus
-padres. Solución que da origen al modelo de regresión lineal simple que
-plantea una parte matemática y otra estadística.</p>
-<pre class="r"><code>muestra1&lt;-gen.corr.data(0.8,200)
-muestra1&lt;-as.data.frame(muestra1)
-
-
-p1=ggplot(muestra1, aes(x, y)) + 
-         geom_point() + Theme1+
-         labs(title = &quot;&quot;, y= &quot;y&quot;, x= &quot; &quot;) +
-         annotate(&quot;text&quot;, x=-3.3, y=3,size=4, label= &quot;(a)&quot;)</code></pre>
+<div id="estimación-por-mínimos-cuadrados-ordinarios-mco"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Estimación por mínimos cuadrados
+ordinarios (MCO)</strong></span></h2>
 <p></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<p>Para una selección preliminar de la variable predictora en un modelo
+de regresión simple (o sea que considera una sola variable predictora)
+es conveniente realizar el diagrama de dispersión <span
+class="math inline">\({Y}\)</span> vs. <span
+class="math inline">\({X}\)</span> y mirar si existe una tendencia
+lineal en la nube de puntos.</p>
+<center>
+<img src="recurso203_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+</center>
+<p>Si la nube de puntos parece mejor ajustada por una curva hay que
+buscar una transformación apropiada en <span
+class="math inline">\({X}\)</span> y/o <span
+class="math inline">\({Y}\)</span> que lleve a un modelo lineal; en este
+caso el modelo de regresión lineal a ajustar será:</p>
+<p><span class="math display">\[{Y^{*}\vert X^{*}_{i}=\beta_0 + \beta_1
+X^{*}_{i} + \varepsilon_{i}, i=1,2,\ldots,n}\]</span></p>
+<p>Donde <span class="math inline">\({Y^*}\)</span> y <span
+class="math inline">\({X^*}\)</span> son las variables <span
+class="math inline">\({Y}\)</span> y <span
+class="math inline">\({X}\)</span> transformadas. Más adelante se
+ampliará el tema de transformaciones que llevan a un modelo lineal.</p>
+<p>Debe tenerse claro que el método de mínimos cuadrados es un método
+numérico, no estadístico. La estadística opera a partir de los supuestos
+distribucionales asignados en el modelo de regresión.</p>
+<p></br></br></p>
+</div>
+<div id="objetivo-del-método-mco" class="section level2">
+<h2><span style="color:#034a94"><strong>Objetivo del método
+MCO</strong></span></h2>
 <p></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<p>Obtener estimaciones de los parámetros de regresión, es decir hallar
+valores de <span class="math inline">\({\beta_0}\)</span> y <span
+class="math inline">\({\beta_1}\)</span> que minimicen la <strong>suma
+de los cuadrados de los errores</strong> <span
+class="math inline">\({S(\beta_0,\beta_1)}\)</span></p>
+<p><span class="math display">\[
+S(\beta_0,\beta_1) = \sum^n_{i=1} \varepsilon^2_i = \sum^n_{i=1}
+\Big[Y_i - (\beta_0 + \beta_1X_i)\Big]^2
+\]</span></p>
+<p>A los valores que minimizan esta expresión se les conoce como
+estimadores de mínimos cuadrados y se les denota <span
+class="math inline">\({\widehat{\beta}_0}\)</span> y <span
+class="math inline">\({\widehat{\beta}_1}\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="valor-de-los-estimadores-mco" class="section level2">
+<h2><span style="color:#034a94"><strong>Valor de los estimadores
+MCO</strong></spam></h2>
 <p></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
-<p>Video</p>
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/kI7ltEniMM8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-</iframe>
+<p>Dados los pares de observaciones <span class="math inline">\({(x_1,
+y_1),\ldots,(x_n, y_n)}\)</span>, hallar <span
+class="math inline">\({\beta_0}\)</span> y <span
+class="math inline">\({\beta_1}\)</span> que minimicen a <span
+class="math inline">\({S(\beta_0,\beta_1)}\)</span> implica resolver el
+siguiente sistema de ecuaciones:</p>
+<p><span class="math display">\[
+{\left.\frac{\partial S(\beta_0,\beta_1)}{\partial
+\beta_0}\right|_{\widehat{\beta}_0,\widehat{\beta}_1}=0}
+\]</span></p>
+<p><span class="math display">\[
+{\left.\frac{\partial S(\beta_0,\beta_1)}{\partial
+\beta_1}\right|_{\widehat{\beta}_0,\widehat{\beta}_1}=0}
+\]</span></p>
+<p>De lo cual surgen las denominadas ecuaciones normales:</p>
+<p><span class="math display">\[
+{\sum^{n}_{i=1}y_i=n\widehat{\beta}_0+\widehat{\beta}_1\sum^{n}_{i=1}x_i}
+\]</span></p>
+<p><span class="math display">\[
+{\sum^{n}_{i=1}{x_iy_i}=\widehat{\beta}_0\sum^{n}_{i=1}x_i+\widehat{\beta}_1\sum^{n}_{i=1}x^2_i}
+\]</span></p>
+<p>Y de éstas se obtiene que las estimaciones por mínimos cuadrados de
+los parámetros son:</p>
+<p><span class="math display">\[
+{\widehat{\beta}_0=\bar{y}-\widehat{\beta}_1\bar{x}}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+{\widehat{\beta}_1}&amp;=&amp;{\frac{\sum\limits^n_{i=1} x_i \, y_i -
+\frac{\sum\limits^n_{i=1} x_i \, \sum\limits^n_{i=1} y_i}{n}}
+{\sum\limits^n_{i=1} x^2_i - \frac{\left(\sum\limits^n_{i=1}
+x_i\right)^2}{n}} = \frac{\sum\limits^n_{i=1} x_i \, y_i - n\,\bar{x} \,
+\bar{y}}{\sum\limits^n_{i=1} x^2_i - n\,\bar{x}^2}} \nonumber\\[0.5cm]
+&amp;=&amp; {\frac{\sum\limits^n_{i=1} (x_i-\bar{x}) (y_i-\bar{y})}
+{\sum\limits^n_{i=1} (x_i-\bar{x})^2} = \frac{\sum\limits^n_{i=1} y_i\,
+(x_i-\bar{x})} {\sum\limits^n_{i=1} (x_i-\bar{x})^2}}
+\end{aligned}
+\]</span></p>
+<p></br></br></p>
+</div>
+<div id="sumas-de-cuadrados-y-de-productos-cruzados"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Sumas de cuadrados y de
+productos cruzados</strong></span></h2>
+<p></br></p>
+<ul>
+<li>Suma de cuadrados corregidos en <span
+class="math inline">\({x}\)</span>: <span class="math display">\[
+{S_{xx}=\sum^n_{i=1}(x_i-\bar{x})^2=\sum^n_{i=1}x^2_i-n\bar{x}^2}
+\]</span></li>
+</ul>
+<p></br></p>
+<ul>
+<li>Suma de cuadrados corregidos en <span
+class="math inline">\({y}\)</span>: <span class="math display">\[
+{S_{yy}=\sum^n_{i=1}(y_i-\bar{y})^2=\sum^n_{i=1}y^2_i-n\bar{y}^2}
+\]</span></li>
+</ul>
+<p></br></p>
+<ul>
+<li>Suma de productos cruzados corregidos: <span class="math display">\[
+{S_{xy}=\sum^n_{i=1}(x_i-\bar{x})(y_i-\bar{y})=
+\sum^n_{i=1}(x_i-\bar{x})y_i}
+\]</span></li>
+</ul>
+<p></br></br></p>
+<p><span style="color:#FF7F00"><strong>NOTA:</strong></span></p>
+<p></br></p>
+<p><span class="math inline">\({\widehat{\beta}_1}\)</span> puede ser
+expresado en función de <span class="math inline">\({S_{xy}}\)</span> y
+de <span class="math inline">\({S_{xx}}\)</span> así:</p>
+<p><span class="math display">\[
+{\widehat{\beta}_1=\frac{S_{xy}}{S_{xx}}}
+\]</span></p>
+<p></br></br></p>
+</div>
+<div id="ecuación-de-regresión-ajustada-y-residuales-del-modelo"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Ecuación de regresión ajustada y
+residuales del modelo </strong></span></h2>
+<p>Al tener estimados los parámetros del modelo de regresión lineal
+simple (por mínimos cuadrados o máxima verosimilitud), entonces se puede
+realizar una estimación de la respuesta media <span
+class="math inline">\(E\left[Y \vert X\right] = \mu_{Y\vert X}\)</span>,
+a través del modelo ajustado, así: <span class="math display">\[
+\widehat{\mu}_{Y\vert x_i} = \widehat{y}_i = \widehat{\beta}_0 +
+\widehat{\beta}_1\, x_i = \bar{y} + (x_i-\bar{x})\,\widehat{\beta}_1.
+\]</span></p>
+<p>A esta ecuación se le conoce como la ecuación de regresión ajustada,
+que en este caso corresponde a una recta ajustada.</p>
+<p>A las diferencias entre los valores observados de la respuesta <span
+class="math inline">\(y_i\)</span> y los valores ajustados por el modelo
+de regresión <span class="math inline">\(\widehat{y}_i\)</span>
+(obtenidos de la ecuación de regresión ajustada) se les conoce como los
+residuales del modelo. Esto es, <span
+class="math inline">\({e_i=y_i-\widehat{y}_i}\)</span> es el <span
+class="math inline">\(i\)</span>-ésimo residual del modelo, que es una
+estimación del <span class="math inline">\(i\)</span>-ésimo error
+aleatorio, <span class="math inline">\(\varepsilon_i\)</span>.</p>
+<p>Los residuales del modelo tienen gran importancia ya que ellos
+determinan que tan bueno fue el ajuste del modelo y permitirán más
+adelante realizar las validaciones de los supuestos realizados sobre los
+errores aleatorios.</p>
+<p></br></br></p>
+</div>
+<div id="propiedades-de-los-estimadores-de-mínimos-cuadrados"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Propiedades de los estimadores
+de mínimos cuadrados</strong></span></h2>
+<p></br></p>
+<p>Bajo los supuestos considerados respecto a los errores tenemos
+que:</p>
+<p><strong>P1</strong>. <span
+class="math inline">\({\widehat\beta_0}\)</span> y <span
+class="math inline">\({\widehat\beta_1}\)</span> son combinaciones
+lineales de las variables aleatorias <span class="math inline">\({Y_1,
+\ldots, Y_n}\)</span>, pues estos pueden escribirse como: <span
+class="math display">\[
+{\widehat\beta_0 = \sum^n_{i=1} m_i\, Y_i}
+\]</span></p>
+<p><span class="math display">\[
+{\widehat\beta_1 = \sum^n_{i=1} c_i\, Y_i}
+\]</span></p>
+<p>donde: <span class="math display">\[
+{m_i = \frac{1}{n} - \bar{x}\, c_i}
+\]</span></p>
+<p><span class="math display">\[
+{c_i = \frac{x_i - \bar{x}}{S_{xx}}}
+\]</span></p>
+<p>Se puede demostrar a través de cálculos directos que:</p>
+<p><span class="math display">\[{\sum^n_{i=1} c_i = 0,\quad \quad
+\sum^n_{i=1}c_i\, x_i=1,}\]</span> <span
+class="math display">\[{\sum^n_{i=1} m_i = 1,\quad \quad
+\sum^n_{i=1}m_i\, x_i=0,}\]</span></p>
+<p><span class="math display">\[{\sum^n_{i=1} c_i^2 =
+\frac{1}{S_{xx}},\quad \quad \sum^n_{i=1} m_i^2 =
+\frac{\sum\limits_{i=1}^n x_i^2}{nS_{xx}}.}\]</span></p>
+<p>Además, como <span class="math inline">\({Y_1, \ldots, Y_n}\)</span>
+son variables normales e incorrelacionadas, entonces <span
+class="math inline">\({\widehat\beta_0}\)</span> y <span
+class="math inline">\({\widehat\beta_1}\)</span> son .</p>
+<p></br></p>
+<p><strong>P2</strong>. El valor esperado de los estimadores, es: <span
+class="math display">\[
+\begin{aligned}
+{E\left[\widehat\beta_0\right]} &amp;= {E\left[\sum^n_{i=1} m_i\,
+Y_i\right] = \sum^n_{i=1} m_i\, E\left[Y_i\right]}\nonumber\\
+&amp;= {\sum^n_{i=1} m_i(\beta_0 + \beta_1x_i)}\nonumber\\
+&amp;= {\beta_0\sum^n_{i=1} m_i + \beta_1\sum^n_{i=1} m_i\, x_i=\beta_0}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+{E\left[{\widehat\beta_1}\right]} &amp;= {E\left[\sum^n_{i=1} c_i\,
+Y_i\right]= \sum^n_{i=1} c_i\, E\left[Y_i\right]}\nonumber \\
+&amp;= {\sum^n_{i=1} c_i(\beta_0 + \beta_1x_i)} = {\beta_0\sum^n_{i=1}
+c_i + \beta_1\sum^n_{i=1} c_i\, x_i = \beta_1}
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p><strong>P3</strong>. La varianza de los estimadores, es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+{V\left[\widehat\beta_0\right]} &amp;= {V\left[\sum^n_{i=1} m_{i}\,
+Y_i\right] =  \sum^n_{i=1} m^2_i\, V\left[Y_i\right]}\nonumber\\
+&amp;= {\sum^n_{i=1} m^2_i\, \sigma^2}\nonumber \\
+&amp;= {\frac{\sigma^2\sum_{i=1}^n x_i^2}{nS_{xx}}}\\[0.7cm]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+{V\left[\widehat\beta_1\right]} &amp;= {V\left[\sum^n_{i=1} c_{i}\,
+Y_{i}\right] =  \sum^n_{i=1} c^2_i\, V\left[Y_i\right]}\nonumber\\
+&amp;= {\sum^n_{i=1} c^2_i\sigma^2}\nonumber\\
+&amp;= {\frac{\sigma^2}{S_{xx}}}
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p><strong>P4</strong>. La varianza de la respuesta ajustada en un valor
+dado <span class="math inline">\({X=x_i}\)</span>, es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+{V\left[\widehat{Y}_i\right]} &amp;= {V\left[\widehat\beta_0 +
+\widehat\beta_1x_i\right]}\nonumber\\
+&amp;= {V\left[\sum^n_{j=1} (m_j + x_i\, c_j) Y_j\right]}\nonumber\\
+&amp;= {\sum^n_{j=1} (m_j + x_i\, c_j)^2 V(Y_j)}\nonumber\\
+&amp;= {\sigma^2\sum^n_{j=1} \left[\frac{1}{n} + (x_i-\bar{x})
+c_j\right]^2}\nonumber\\
+&amp;= {\sigma^2\left[\frac{1}{n} +
+\frac{(x_i-\bar{x})^2}{S_{xx}}\right]}
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p><strong>P5</strong>. La covarianza (cov) entre los estimadores de los
+parámetros es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+{\text{cov}\left[\widehat\beta_0,\widehat\beta_1\right]} &amp;=
+{\text{cov}\left[\sum^n_{i=1} m_i\, Y_i,\sum^n_{i=1} c_i\,
+Y_i\right]}\nonumber\\
+&amp;= {\sum^n_{i=1} m_i\, c_i\, \text{cov}\left[Y_i, Y_i\right] +
+\sum^n_{i=1}\sum^n_{j\neq i} m_i\, c_j\, \text{cov}\left[Y_i,
+Y_j\right]}\nonumber\\
+&amp;= {\sum^n_{i=1} m_i\, c_i V\left[Y_i\right]}\nonumber\\
+&amp;= {\sigma^2\sum^n_{i=1} m_i\, c_i}\nonumber\\
+&amp;= {-\frac{\sigma^2\bar{x}}{S_{xx}}}
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>**P6*. La covarianza entre la variable respuesta y su correspondiente
+estimador en un valor dado <span class="math inline">\({X=x_i}\)</span>
+es: <span class="math display">\[
+\begin{aligned}
+{\text{cov}\left[Y_{i}, \widehat{Y}_{i}\right]} &amp;=
+{\text{cov}\left[Y_{i}, \widehat\beta_0 +
+\widehat\beta_1x_i\right]}\nonumber\\
+&amp;= {\text{cov}\left[Y_i, \sum^n_{j=1} (m_j + x_i\, c_j)
+Y_j\right]}\nonumber\\
+&amp;= {(m_i + x_i\, c_i)\text{cov}\left[Y_i, Y_i\right] + \sum^n_{j\neq
+i}(m_j + x_i\, c_j)\text{cov}\left[Y_i, Y_j\right]}\nonumber\\
+&amp;= {\sigma^2(m_i + x_i\, c_i)}\nonumber\\[0.2cm]
+&amp;= {\sigma^2\left[\frac{1}{n} + \frac{(x_i -
+\bar{x})^2}{S_{xx}}\right]}
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p><strong>P7</strong>. La suma de los residuales del modelo de
+regresión con intercepto es siempre cero:</p>
+<p><span class="math display">\[
+{\sum^n_{i=1} e_i = 0}
+\]</span></p>
+<p></br></p>
+<p><strong>P8</strong>. La suma de los valores observados <span
+class="math inline">\({y_i}\)</span> es igual a la suma de los valores
+ajustados <span class="math inline">\({\widehat{y}_i}\)</span>: <span
+class="math display">\[
+{\sum^n_{i=1} y_i = \sum^n_{i=1} \widehat{y}_i}
+\]</span></p>
+<p></br></p>
+<p><strong>P9</strong>. La línea de regresión siempre pasa a través del
+centroide de los datos <span
+class="math inline">\({(\bar{x},\bar{y})}\)</span>.</p>
+<p></br></p>
+<p><strong>P10</strong>. La suma de los residuales ponderados por el
+correspondiente valor de la variable predictora es cero: <span
+class="math display">\[
+{\sum^n_{i=1} x_i\, e_i = 0}
+\]</span></p>
+<p></br></p>
+<p><strong>P11</strong>. La suma de los residuales ponderados por el
+correspondiente valor ajustado es siempre igual a cero:</p>
+<p><span class="math display">\[
+{\sum^n_{i=1}\widehat{y}_i\, e_i = 0}
+\]</span></p>
+</div>
 
 
 

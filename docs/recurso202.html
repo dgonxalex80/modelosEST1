@@ -244,20 +244,71 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="recurso201.html">Correlación</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso202.html">Modelo</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso203.html">Estimación</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso204.html">Inferencia</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso205.html">Software R</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -304,8 +355,8 @@ recta)</p>
 <p><span class="math display">\[Y= a + b X\]</span> Donde :</p>
 <ul>
 <li><span class="math inline">\(Y\)</span> variable dependiente,</li>
-<li><span class="math inline">\(X\)</span> variable independiente y dos
-constantes</li>
+<li><span class="math inline">\(X\)</span> variable independiente<br />
+</li>
 <li><span class="math inline">\(a\)</span> intercepto</li>
 <li><span class="math inline">\(b\)</span> pendiente de la recta</li>
 </ul>
@@ -327,27 +378,73 @@ class="math inline">\((x,y)\)</span></p>
 <p>Supongamos la siguiente muestra de valores simulados de dos variables
 <span class="math inline">\(X\)</span> y <span
 class="math inline">\(Y\)</span></p>
-<table>
+<table style="width:100%;">
 <colgroup>
 <col width="5%" />
-<col width="94%" />
+<col width="7%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="7%" />
+<col width="6%" />
+<col width="20%" />
+<col width="6%" />
+<col width="6%" />
 </colgroup>
+<thead>
+<tr class="header">
+<th align="left"><span class="math inline">\(i\)</span></th>
+<th align="right"><span class="math inline">\(1\)</span></th>
+<th align="right"><span class="math inline">\(2\)</span></th>
+<th align="right"><span class="math inline">\(3\)</span></th>
+<th align="right"><span class="math inline">\(4\)</span></th>
+<th align="right"><span class="math inline">\(5\)</span></th>
+<th align="right"><span class="math inline">\(6\)</span></th>
+<th align="right"><span class="math inline">\(7\)</span></th>
+<th align="right"><span class="math inline">\(8\)</span></th>
+<th align="right"><span class="math inline">\(9\)</span></th>
+<th align="right"><span class="math inline">\(10\)</span></th>
+<th align="right"></th>
+<th align="right"><span class="math inline">\(49\)</span></th>
+<th align="right"><span class="math inline">\(50\)</span></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td align="left"><span class="math inline">\(x\)</span></td>
-<td align="left">11.2, 11.3, 8.7, 11.6, 10.4, 9.5, 9.4, 10.9, 9.5, 9.9,
-10.6, 10.7, 8.6, 9.3, 9.3, 8.9, 8.5, 10.4, 11.1, 9.6, 9.0, 10.0, 11.2,
-9.8, 11.9, 10.5, 9.3, 10.4,9.4, 10.9, 9.2, 10.9, 10.2, 9.0, 8.6, 10.8,
-9.3, 11.4, 10.7, 10.3, 8.9, 10.8, 10.4, 8.4, 8.9, 10.1, 12.0, 10.4,
-11.0, 10.5</td>
+<td align="right">11.2,</td>
+<td align="right">11.3,</td>
+<td align="right">8.7,</td>
+<td align="right">11.6,</td>
+<td align="right">10.4,</td>
+<td align="right">9.5,</td>
+<td align="right">9.4,</td>
+<td align="right">10.9,</td>
+<td align="right">9.5,</td>
+<td align="right">9.9,</td>
+<td align="right"><span class="math inline">\(\ldots\ldots\)</span></td>
+<td align="right">11.0,</td>
+<td align="right">10.5</td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(y\)</span></td>
-<td align="left">20.8, 20.4, 19.0, 20.9, 20.0, 19.4, 20.1, 20.0, 18.5,
-19.3, 20.6, 20.8, 19.2, 19.3, 19.2, 20.4, 19.7, 20.1, 20.5, 19.6, 19.5,
-21.1, 21.0, 19.6, 21.1, 20.9, 19.7, 20.9, 20.7, 20.6, 20.1, 21.0, 20.4,
-20.4, 19.2, 21.7, 19.2, 21.4, 20.5, 20.2, 19.3, 20.8, 20.1, 18.9, 18.9,
-19.1, 21.7, 20.7, 21.1, 20.7</td>
+<td align="right">20.8,</td>
+<td align="right">20.4,</td>
+<td align="right">19.0,</td>
+<td align="right">20.9,</td>
+<td align="right">20.0,</td>
+<td align="right">19.4,</td>
+<td align="right">20.1,</td>
+<td align="right">20.0,</td>
+<td align="right">18.5,</td>
+<td align="right">19.3,</td>
+<td align="right"><span class="math inline">\(\ldots\ldots\)</span></td>
+<td align="right">21.1,</td>
+<td align="right">20.7</td>
 </tr>
 </tbody>
 </table>
@@ -363,6 +460,7 @@ class="math inline">\((10.5, 20.7)\)</span></p>
 Figura 2 : Diagrama de puntos variables <span
 class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>
 </center>
+<p></br></p>
 <p>El diagrama permite visualizar una tendencia de la relación no
 perfecta entre las dos variables. En este caso una fuerte correlación
 que garantice un buen nivel de relación entre las variables.</p>
@@ -375,6 +473,18 @@ supuestos estadísticos y de esta manera se conforma el <strong>modelo
 estadístico</strong> :</p>
 <p><span class="math display">\[Y= \beta_{0} + \beta_{1} X +
 \varepsilon\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><span class="math inline">\({Y}\)</span>: Variable respuesta o
+dependiente.</li>
+<li><span class="math inline">\({X}\)</span>: Variable predictora,
+independiente o regresora.</li>
+<li><span class="math inline">\({\varepsilon}\)</span>: Error
+aleatorio</li>
+<li><span class="math inline">\({\beta_0}\)</span> es el intercepto y
+<span class="math inline">\({\beta_1}\)</span> es la pendiente de la
+línea recta.</li>
+</ul>
 <p></br></br></p>
 <p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
 <p>Se tienen datos de un proceso de generación de papel apartir de
@@ -391,37 +501,135 @@ masa de biomasa contenida en el árbol. El modelo que se pueda originar
 de estos datos puede servir para estimar la biomasa dependiendo le la
 altura del árbol, sin necesidad de derrobarlo y ralizar la medición en
 efectos destructivos.</p>
+<p></br></br></p>
+<div id="significado-de-la-regresión" class="section level2">
+<h2><span style="color:#034a94"><strong>Significado de la
+regresión</strong></span></h2>
 <p></br></p>
-<div id="significado-de-la-regresión" class="section level3">
-<h3><strong>Significado de la regresión</strong></h3>
-<ol style="list-style-type: decimal">
-<li>Podemos verla a partir de la distribución conjunta de las variables
-<span class="math inline">\({X}\)</span> e <span
-class="math inline">\({Y}\)</span>, a partir de la definición la
+<p>Un primer significado puede ser verla a partir de la distribución
+conjunta de las variables <span class="math inline">\({X}\)</span> e
+<span class="math inline">\({Y}\)</span>, a partir de la definición la
 distribución condicional de <span class="math inline">\({Y\vert
 X}\)</span>, esto es <span class="math inline">\({f(Y\vert X)}\)</span>,
 y determinar <span class="math inline">\({E(Y\vert X)}\)</span>. En este
 caso la regresión pretende ajustar la curva correspondiente a <span
-class="math inline">\({E(Y\vert X)}\)</span>.</li>
-</ol>
+class="math inline">\({E(Y\vert X)}\)</span>.</p>
 <center>
 <p><img src="recurso202_files/figure-html/fig21-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </center>
-<ol start="2" style="list-style-type: decimal">
-<li>Dado un conjunto de pares de datos <span
-class="math inline">\({(X,Y)}\)</span>, puede asumirse una forma
-funcional para la curva de regresión y tratar de ajustarla minimizando
-el error de ajuste.</li>
-</ol>
+<p>Un segundo significado consiste en que dado un conjunto de pares de
+datos <span class="math inline">\({(X,Y)}\)</span>, puede asumirse una
+forma funcional para la curva de regresión y tratar de ajustarla
+minimizando el error de ajuste.</p>
 <center>
 <p><img src="recurso202_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </center>
 <p></br></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
-</br></br>
-<center>
-<img src="recurso202_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-</center>
+</div>
+<div id="supuestos-del-modelo" class="section level2">
+<h2><span style="color:#034a94"><strong>Supuestos del
+modelo</strong></span></h2>
+<p>En la construcción de un modelo de regresión lineal se deben tener en
+cuenta los siguientes supuestos:</p>
+<p><strong>S1</strong> : La variable respuesta <span
+class="math inline">\({Y}\)</span> es una variable aleatoria cuyos
+valores se observan mediante la selección de los valores de la variable
+predictora <span class="math inline">\({X}\)</span> en un intervalo de
+interés.</p>
+<p></br></p>
+<p><strong>S2</strong> : Por lo anterior, la variable predictora <span
+class="math inline">\({X}\)</span> no es considerada como variable
+aletatoria, sino como un conjunto de valores fijos que representan los
+puntos de observación, que se seleccionan con anticipación y se miden
+sin error.</p>
+<p>Sin embargo, si esto último no se cumple, el método de estimación de
+mínimos cuadrados ordinarios (<strong>MCO</strong>) para los parámetros
+del modelo de regresión puede seguir siendo válidos, si los errores en
+los valores de la variable predictora son pequeños en comparación con
+los errores aleatorios del modelo <span
+class="math inline">\({\varepsilon_i}\)</span>.</p>
+<p></br></p>
+<p><strong>S3</strong> : Los datos observados <span
+class="math inline">\({(x_i,y_i),\ i=1,\ldots,n}\)</span>, constituyen
+una muestra representativa de un medio acerca del cual se desea
+generalizar. Si no es así, no es apropiado realizar inferencias en un
+rango de los datos por fuera del considerado.</p>
+<p></br></p>
+<p><strong>S4</strong> : El modelo de regresión es lineal en los
+parámetros. Es decir, ningún parámetro de la regresión aparece como el
+exponente o es dividido o multiplicado por otro parámetro, o cualquier
+otra función.</p>
+<p>Sin embargo, la línea de ajuste puede tener una curvatura (no ser
+lineal en <span class="math inline">\({X}\)</span> y/o en <span
+class="math inline">\({Y}\)</span>), caso en el cual mediante una
+transformación conveniente de las variables (<span
+class="math inline">\({X}\)</span> y/o <span
+class="math inline">\({Y}\)</span>), es posible aplicar las técnicas de
+regresión lineal sobre estas nuevas variables.</p>
+<p></br></p>
+<p><strong>S5</strong> : Si la ecuación de regresión seleccionada es
+correcta, cualquier variabilidad en la variable respuesta que no puede
+ser explicada exactamente por dicha ecuación, es debida a un error
+aleatorio.</p>
+<p></br></p>
+<p><strong>S6</strong> : Los valores observados de la variable respuesta
+no se encuentran estadísticamente correlacionados. Se supone que cada
+valor observado de <span class="math inline">\({Y}\)</span> está
+constituído por un valor real y una componente aleatoria.</p>
+<p></br></p>
+<p><strong>S7</strong> : El modelo de regresión con una muestra de <span
+class="math inline">\({n}\)</span> pares de datos <span
+class="math inline">\({(X_i, Y_i)}\)</span> es:</p>
+<p><span class="math display">\[
+Y_i = Y\vert X_i = E\left[Y \vert X_i\right] + \varepsilon_i
+\hspace{.8cm} i=1,2,\ldots,n
+\]</span></p>
+<p>con <span class="math display">\[
+E\left[Y \vert X_i\right] = \beta_0 + \beta_1 X_i
+\]</span></p>
+<p></br></p>
+<p><strong>S8</strong> : Los errores aleatorios <span
+class="math inline">\(\large \varepsilon_{i}\sim N(0,\sigma^{2}),
+\hspace{0.8cm} i=1,2,\ldots,n\)</span>.</p>
+<p></br></p>
+<p><strong>S9</strong> : Los errores aleatorios <span
+class="math inline">\(\large \varepsilon_i\)</span> son estadísticamente
+independientes.</p>
+<p>Por tanto:</p>
+<p><span class="math display">\[
+COV(\varepsilon_{i},\varepsilon_{j})=0, \forall_{i\neq j}, \hspace{.8cm}
+COV(Y_{i},Y_{j})=0, \forall_{i\neq j}.
+\]</span></p>
+<p></br></p>
+<p><strong>S10</strong> : La varianza de los errores aleatorios es <span
+class="math inline">\({\sigma^{2}, \forall_{i=1,2,\ldots,n}}\)</span>
+(supuesto de varianza constante pero desconocida).</p>
+<p>Dado que los valores <span class="math inline">\({X_i}\)</span> de la
+variable predictora no son considerados aleatorios y que los errores son
+independientes, la varianza de los <span
+class="math inline">\({Y_i}\)</span> también es <span
+class="math inline">\({\sigma^{2}, \forall i}\)</span> y por tanto este
+parámetro es independiente del punto de observación (es decir, del valor
+de <span class="math inline">\({X}\)</span>).</p>
+<p>Pero en el caso que este último supuesto no pueda aplicarse, entonces
+el método de regresión empleado será el de mínimos cuadrados
+ponderados.</p>
+<p></br></p>
+<p>En resumen, para el caso del modelo de regresión lineal simple, los
+supuestos se pueden expresar como:</p>
+<p><span class="math display">\[
+\varepsilon_i\overset{\text{iid}}{\sim} N(0,\sigma^2),
+\hspace{.8cm}i=1,2,\ldots,n
+\]</span></p>
+<p>donde, <span class="math inline">\(iid\)</span> es la abreviación de
+independiente e idénticamente distribuido.</p>
+<p>Estos supuestos tienen como consecuencia directa en la respuesta
+que:</p>
+<p><span class="math display">\[
+Y\vert X_i\overset{\text{ind}}{\sim} N(\beta_0 + \beta_1 X_i,\sigma^2)
+\]</span></p>
+<p>donde, <span class="math inline">\(ind\)</span> es la abreviación de
+independiente distribuido.</p>
 </div>
 
 

@@ -4,15 +4,29 @@ navbar:
   title: "Modelos de Regresión"
   left:
     - text: "Correlación"
-      href: recurso201.html
+      menu: 
+        - text: "Análisis de correlación"
+          href: recurso201.html
     - text: "Modelo"
-      href: recurso202.html      
+      menu:
+        - text: "Modelo de regresión lineal simple"
+          href: recurso202.html
     - text: "Estimación"
-      href: recurso203.html
+      menu: 
+        - text: "Método de mínimos cuadrados ordinarios"
+          href: recurso203.html
+        - text: "Método de máxima verosimilitud"
+          href: recurso208.html
     - text: "Inferencia"
-      href: recurso204.html
+      menu: 
+        - text: "Sobre los parámetros"
+          href: recurso204.html
+        - text: "Respecto a la media de Y "
+          href: recurso205.html
     - text: "Software R"
-      href: recurso205.html      
+      menu:
+        - text: "Código R"
+          href: recurso207.html      
 output:
   html_document:
     css: style.css

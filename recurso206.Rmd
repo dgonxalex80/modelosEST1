@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94"> **Modelación**</span>
+title: <span style="color:#034a94"> **Análiss de varianza - ANOVA**</span>
 author: "Nivelatorio de Estadística"
 output: html_document
 css: style.css
@@ -7,6 +7,7 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
+library(tidyverse)
 # colores
 c0= "#b0394a"
 c1= "#ad6395"
@@ -15,190 +16,365 @@ c3= "#8acfe6"
 c4= "#646420"
 c5= "#db524f"
 paleta4=c("#0d3b66", "#faf0ca", "#f4d35e", "#ee964d")
-
+set.seed(1256)
+x <- rep(seq(50, 150, 20), 3)
+y <- 62 + 3.5*x + rnorm(18, sd = 50)
+df <- data.frame(y, x)
+df0 <- df
 ```
 
 
 <br/><br/>
 
-## <span style="color:#FF7F00">**Introducción**</span>
+## Análisis de varianza para probar la significancia de la regresión {#anova}
 
->Se denomina gráfico a una representación visual de una serie de datos, prepresentación que tiene como finalidad dar una rápida noción acerca de volúmenes, cantidades y porcentajes, estableciendo comparaciones 
-
-Fuente : enciclopedia.net
-
-<br/><br/>
-
-Elegir el gráfico adecuado es muy importante, pues existen diferentes alternativas  y se debe escoger el apropiado para representar los datos. El tipo de dato determina el tipo de gráfico así:
-
-|Tipo de variable  | Escala          | Gráfico                                   |
-|:-----------------|:----------------|:------------------------------------------|
-|Cualitativas      |                 |                                           |
-|                  |Nominal          | Torta                                     |
-|                  |Ordinal          | Barras                                    |
-|Cuantitativas     |Intervalo-razón  | Diagrama de tallos y hojas                |
-|                  |                 | Histograma                                |
-|                  |                 | Diagrama de cajas                         |
-|                  |                 | Diagrama de densidad                      |
-|                  |                 | Diagrama de puntos                        |
-|                  |                 | Diagrama de lineas                        |
-|                  |                 | Diagrama de radar                         |
-|                  |                 | Gráfico likert                            |
-|                  |                 | Mapa de calor                             |
-
-<br/><br/>
-
-## <span style="color:#FF7F00">**Gráficos variables cualitativas**</span>
-
-<br/>
-
-### <span style="color:#FF7F00">**Gráfico de tortas**</span>
-
-Este tipo de gráficos se utiliza para variables cualitativas medidas en escala nominal.
-
-```{r, fig.height=5, echo=FALSE}
-a=rep("Cultutal", 360145)
-b=rep("Pastoral", 61496)
-c=rep("Bienestar",49912)
-d=rep("Deportivo",11777)
-data=c(a,b,c,d)
-t=table(data)
-lbs=c("Cultural", "Pastoral", "Bienestar", "Deportivo")
-pct=round(t/sum(t)*100)
-labs=paste(lbs, pct)
-labs=paste(labs, "%", sep = " ") 
-pie(t, labels=labs, main=" Participación eventos Medio Universitario",
-col = paleta4)
+```{r, include = F}
+set.seed(1256)
+x <- rep(seq(50, 150, 20), 3)
+y <- 62 + 3.5*x + rnorm(18, sd = 50)
+df <- data.frame(y, x)
+with(df, {plot(x, y, pch = 19)
+   abline(h = mean(y), col = 'red', lwd = 2)
+   lines(c(50, 100, 150), c(400, 200, 400), type = 's')
+})
 ```
 
-<br/><br/>
+Se quiere probar:
+$$
+\begin{aligned}
+{H_0:\ \beta_1 = 0}\nonumber\\
+{H_1:\ \beta_1 \neq 0}\nonumber
+\end{aligned}
+$$
 
-### <span style="color:#FF7F00">**Diagrama de barras**</span>
+con base en una descomposición de la variabilidad total observada en la variable respuesta, representada por la suma de cuadrados corregidos en $Y$, $S_{yy}$ (también conocida como suma de cuadrados totales, abreviado SST), en la suma de dos componentes: una debida al modelo propuesto (recta ajustada) y otra debida al error aleatorio.
 
-El diagrama de barras se utiliza para representar variables cualitativas en escala ordinal.  Es necesario que los valores representados sigan el orden de la escala.
+---
 
-```{r, fig.height=5, echo=FALSE}
-ev=c(4,  8, 12, 43, 32)
-names(ev)=c("Muy regular", "Regular", "Bueno", "Muy bueno","Excelente")
-barplot(ev, col=c("#ff5b00","#dcf600","#7dbd00","#659cef","#2956b2"), main = "Evaluación proceso de inducción", las=1, ylim = c(0,50))
+Recuerde que el modelo de RLS plantea que la respuesta es igual a la suma de una componente real no aleatoria ${\beta_0+\beta_1X}$ y un error aleatorio ${\varepsilon}$. Se espera que la recta ajustada explique en forma significativa la variabilidad observada en $Y$.
+
+Para ilustrar el enfoque de análisis de varianza, recuerde que:
+$$\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2$$
+
+veamos lo que representa gráficamente cada una de las diferencias que componen a la SST.
+
+---
+
+**Variabilidad total en $\boldsymbol{Y}$**
+
+```{r, echo = F, fig.align = 'center', out.width = '80%'}
+df0 <- df
+df0$predicted <- mean(df0$y)
+ggplot(df0, aes(x = x, y = y)) +
+   geom_hline(yintercept = mean(y), color = 'orange', size = 2) +
+   geom_segment(aes(xend = x, yend = predicted), alpha = .5, size = 2) +
+   geom_point(size = 5) +
+   geom_point(aes(y = predicted), shape = 4, size = 3) +
+   annotate("text", x = df0[5, 2], y = df0[5, 1] + 25, label = "y[i]", parse = T, size = 7) +
+   annotate("text", x = df0[5, 2], y = mean(y) - 30, label = "bar(y)", parse = T, size = 7) +
+   annotate("text", x = df[5, 2] + 9, y = mean(c(df[5, 1], mean(y))) + 5, label = "y[i] - bar(y)", parse = T,
+            size = 7, color = 'blue') +
+   annotate("segment", x = df[5, 2] + 3, xend = df[5, 2] + 3, y = mean(y) + 5, yend = df[5, 1] - 5, colour = "blue",
+            size = 2) +
+   annotate("segment", x = df[5, 2], xend = df[5, 2] + 3, y = mean(y), yend = mean(y) + 5, colour = "blue",
+            size = 2) +
+   annotate("segment", x = df[5, 2], xend = df[5, 2] + 3, y = df[5, 1], yend = df[5, 1] - 5, colour = "blue",
+            size = 2) +
+   theme_bw(base_size = 20)
 ```
 
-<br/><br/>
+---
 
-### <span style="color:#FF7F00">**Diagrama de barras con dos variables**</span>
+**Variabilidad en $\boldsymbol{Y}$ al incluir el modelo de RLS**
 
-Este diagrama se emplea para representar dos variables cualitativas que pueden ser de escala nominal u ordinal.
-
-
-```{r, fig.height=5.5, echo=FALSE}
-counts <- table(mtcars$vs, mtcars$gear); rownames(counts)=c("Montor en linea", "Motor en V")
-barplot(counts, main="Numero de cambios adelante por Tipo de motor",  xlab="Número de cambios adelante ",col=c("#FFBF69","#034A94"),
-legend = rownames(counts))
+```{r, echo = F, fig.align = 'center', out.width = '80%'}
+df1 <- df
+fit1 <- lm(y ~ x, data = df1)
+betas <- summary(fit1)$coefficients
+df1$predicted <- predict(fit1)
+p5 <- df1$predicted[5]
+ggplot(df1, aes(x = x, y = y)) +
+   geom_abline(intercept = betas[1], slope = betas[2], color = 'gray', size = 2) +
+   geom_segment(aes(xend = x, yend = predicted), alpha = .5, size = 2) +
+   geom_point(size = 5) +
+   geom_point(aes(y = predicted), shape = 4, size = 3) +
+   annotate("text", x = df1[5, 2], y = df1[5, 1] + 20, label = "y[i]", parse = T, size = 7) +
+   annotate("text", x = df1[5, 2] - 9, y = p5 + 4, label = "widehat(y)[i]", parse = T, size = 7) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 7, y = p5, yend = p5, size = 1) +
+   annotate("text", x = df1[5, 2] - 7, y = mean(c(df1[5, 1], p5)) + 4, label = "y[i] - widehat(y)[i]", parse = T,
+            size = 7, color = 'red') +
+   annotate("segment", x = df1[5, 2] - 2, xend = df1[5, 2] - 2, y = p5 + 5, yend = df1[5, 1] - 5, colour = "red",
+            size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 2, y = p5, yend = p5 + 5, colour = "red", size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 2, y = df1[5, 1], yend = df1[5, 1] - 5, colour = "red",
+            size = 2) +
+   theme_bw(base_size = 20)
 ```
 
-<br/><br/><br/>
+---
 
-## <span style="color:#FF7F00">**Gráficas variables cualitativas**</span>
+**Ilustración del enfoque de varianza**
 
-<br/>
-
-### <span style="color:#FF7F00">**Diagrama de árbol**</span>
-
-
-```{r, echo=FALSE}
-nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
-stem(nf)
+```{r, echo = F, fig.align = 'center', out.width = '80%'}
+df1 <- df
+fit1 <- lm(y ~ x, data = df1)
+df1$predicted <- predict(fit1)
+betas <- summary(fit1)$coefficients
+p5 <- df1$predicted[5]
+ggplot(df1, aes(x = x, y = y)) +
+   geom_hline(yintercept = mean(y), color = 'orange', size = 2) +
+   geom_abline(intercept = betas[1], slope = betas[2], color = 'gray', size = 2) +
+   geom_segment(aes(xend = x, yend = mean(y)), alpha = .5, size = 2) +
+   geom_point(size = 5) +
+   geom_point(aes(y = predicted), shape = 4, size = 3) +
+   annotate("text", x = df1[5, 2], y = df1[5, 1] + 20, label = "y[i]", parse = T, size = 7) +
+   annotate("text", x = df1[5, 2], y = mean(y) - 22, label = "bar(y)", parse = T, size = 7) +
+   annotate("text", x = df1[5, 2] - 9, y = p5 + 4, label = "widehat(y)[i]", parse = T, size = 7) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 7, y = p5, yend = p5, size = 1) +
+   annotate("text", x = df1[5, 2] + 9, y = mean(c(df1[5, 1], mean(y))) + 5, label = "y[i] - bar(y)", parse = T,
+            size = 7, color = 'blue') +
+   annotate("segment", x = df1[5, 2] + 3, xend = df1[5, 2] + 3, y = mean(y) + 5, yend = df1[5, 1] - 5,
+            colour = "blue", size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] + 3, y = mean(y), yend = mean(y) + 5, colour = "blue",
+            size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] + 3, y = df1[5, 1], yend = df1[5, 1] - 5, colour = "blue",
+            size = 2) +
+   annotate("text", x = df1[5, 2] - 9, y = mean(c(df1[5, 1], p5)) + 4, label = "y[i] - widehat(y)[i]", parse = T,
+            size = 7, color = 'red') +
+   annotate("segment", x = df1[5, 2] - 3, xend = df1[5, 2] - 3, y = p5 + 5, yend = df1[5, 1] - 5, colour = "red",
+            size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = p5, yend = p5 + 5, colour = "red", size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = df1[5, 1], yend = df1[5, 1] - 5, colour = "red",
+            size = 2) +
+   annotate("text", x = df1[5, 2] - 9, y = mean(c(p5, mean(y))) - 4, label = "widehat(y)[i] - bar(y)", parse = T,
+            size = 7, color = 'darkgreen') +
+   annotate("segment", x = df1[5, 2] - 3, xend = df1[5, 2] - 3, y = p5 - 5, yend = mean(y) + 5, colour = "darkgreen",
+            size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = p5, yend = p5 - 5, colour = "darkgreen",
+            size = 2) +
+   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = mean(y), yend = mean(y) + 5, colour = "darkgreen",
+            size = 2) +
+   theme_bw(base_size = 20)
 ```
 
-Este diagrama ordena los datos de manera que se puede determinar tanto el mínimo (1.6) como el máximo (4.3) , además de visualizar donde están la mayor concentración de ellos.
+---
 
-<br/><br/>
+De ahí que podamos escribir cada diferencia $y_i - \bar{y}$ como:
+$$y_i - \bar{y} = (\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)$$
 
-### *<span style="color:#FF7F00">**Histograma**</span>
+y reemplazando en la SST, se obtiene:
+$$
+\begin{aligned}
+\text{SST} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
+&=\sum^n_{i=1} (\widehat{y}_i - \bar{y})^2 + \sum^n_{i=1} (y_i-\widehat{y}_i)^2
+\end{aligned}
+$$
 
-El histograma es uno de los gráficos más utilizados para representar variables cuantitativas y permite resumir por rangos los diferentes datos. Es una buena forma de visualizar la distribución de los datos y su forma.
+(**Tarea:** comprobar que $2\sum_{i = 1}^n (\widehat{y}_i - \bar{y}) (y_i - \widehat{y}_i) = 0$)
 
+---
 
-```{r, fig.height=5, echo=FALSE}
-h1=hist(nf, main = "Nota final Estadística", xlab = "nota", ylab="frecuencias absolutas", labels=TRUE, col="#034A94", ylim = c(0,30), las=1)
-abline(v=3,col="#f6b915", lwd=2)
+Así, la suma de cuadrados totales SST queda expresada mediante la suma de dos componentes, a saber:
+  
+* $\sum^n_{i=1}(\widehat{y}_i-\bar{y})^2$, que está relacionada con las diferencias entre los valores ajustados por el modelo de regresión y el promedio de las observaciones de la respuesta, al cual se le conoce como Suma de Cuadrados de la Regresión, abreviado SSR.
+
+  Se puede demostrar que:
+$$
+\text{SSR} = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
+$$
+
+---
+
+* $\sum^n_{i=1}(y_i-\widehat{y}_i)^2$, que está relacionada con las diferencias entre las observaciones de la respuesta y los valores ajustados por el modelo de regresión, esto es, los residuales del modelo (que son estimaciones de los errores del modelo), por lo que a esta componente se le conoce como Suma de Cuadrados del Error, abreviado SSE.
+
+  Se puede demostrar que:
+$$
+\text{SSE} = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2 =  S_{yy}-\widehat{\beta}_1 S_{xy}
+$$
+
+---
+
+De donde, se obtiene que:
+$$
+\text{SST} = \text{SSR} + \text{SSE},
+$$
+  
+la cual se conoce como Identidad de Suma de Cuadrados.
+
+Cada una de estas sumas de cuadrados tiene asociados unos grados de libertad (g.l), que representan la cantidad de información libre en la suma de cuadrados. Una forma de calcular los g.l es la diferencia entre el número de observaciones y el número de parámetros estimados en la suma de cuadrados.
+
+---
+
+* Se sabe que SST se construye con $n$ observaciones y se estima la media de la respuesta con el promedio, de manera que SST tiene $n - 1$ g.l.
+
+* Analizando la expresión para SSE, se tienen las mismas $n$ observaciones y se estiman los dos parámetros del modelo, y así SSE tiene $n - 2$ g.l.
+
+* Finalmente, SSR solo tiene dos observaciones (los estimadores de los parámetros) y se estima un parámetro, de donde SSR tiene sólo 1 g.l.
+
+---
+
+En virtud de lo anterior, los grados de libertad (g.l) de las sumas de cuadrados también forman una identidad, así:
+\begin{center}
+$\begin{array}{ccccc}
+\text{g.l(SST)} & = & \text{g.l(SSR)} & + & \text{g.l(SSE)}\\
+(n-1) & = & (1) & + & (n-2)
+\end{array}$
+\end{center}
+
+A continuación, se definen los cuadrados medios como la razón entre las sumas de cuadrados y sus respectivos grados de libertad. Esto es,
+
+* $\text{MSR} = \text{SSR}/\text{g.l(SSR)} = \text{SSR}$.
+
+* $\text{MSE} = \text{SSE}/\text{g.l(SSE)} = \text{SSE}/(n - 2)$.
+
+---
+
+Con el fin de establecer inferencias basadas en el enfoque del análisis de varianza se requiere conocer el valor esperado de cada una de los cuadrados medios, es decir, lo que se estima con cada suma de cuadrados.
+
+Se puede demostrar que:
+
+* $E\left[\text{MSE}\right] = \sigma^2$.
+
+* $E\left[\text{MSR}\right] = \sigma^2 + \beta_1^2S_{xx}$.
+
+El primer resultado se conocía de la estimación de $\sigma^2$ vista previamente.
+
+---
+
+Si todas las observaciones $Y_i$ provienen de la misma distribución normal con media $\mu = \beta_0$ (esto es, si $\beta_1 = 0$) y varianza $\sigma^2$, y además se tiene la identidad de sumas de cuadrados que establece que SST $=$ SSR + SSE, con la respectiva identidad de grados de libertad $(n-1) = 1 + (n-2)$, entonces:
+
+* $\text{SSR}/\sigma^2$ se distribuye como una variable aleatoria Chi-cuadrado con 1 grado de libertad.
+
+* $\text{SSE}/\sigma^2$ se distribuye como una variable aleatoria Chi-cuadrado con $n - 2$ grados de libertad.
+
+* Los términos $\text{SSR}/\sigma^2$ y $\text{SSE}/\sigma^2$ son estimaciones independientes de $\sigma^2$.
+
+---
+
+De lo anterior, se considera el siguiente estadístico:
+$$
+F_0=\frac{\text{SSR}/\sigma^2}{\text{SSE}/\left[\sigma^2(n-2)\right]}=\frac{\text{MSR}}{\text{MSE}}
+$$
+
+que bajo la hipótesis nula ${H_0:\ \beta_1 = 0}$, se distribuye como una $F$ con 1 y $n - 2$ grados de libertad:
+
+---
+
+En el caso de la regresión lineal simple, la prueba sobre la significancia de la regresión (es decir, si la pendiente de la recta es significativamente diferente de cero) puede realizarse mediante el análisis de varianza usando un valor crítico ${F_{\alpha, 1, n - 2}}$ de la distribución ${F}$.
+
+Esto es, a un nivel de significancia ${\alpha}$ se rechaza la hipótesis nula de que la variabilidad en la variable respuesta es debida sólo al error aleatorio (en favor de la hipótesis de que la regresión en ${X}$ es significativa) si ${F_0 > F_{\alpha, 1, n - 2}}$.
+
+---
+
+**Tabla de Análisis de Varianza para el modelo de RLS.**
+         
+| Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | F calculada |
+|----|----|----|-----|----|
+| Regresión o Modelo | SSR | 1 | $\small \text{MSR} = \text{SSR}$ | $F_0=\frac{\text{MSR}}{\text{MSE}}$ |
+| Error o Residual | SSE | $n-2$ | $\text{MSE} = \frac{\text{SSE}}{n-2}$ |
+| Total | SST | $n-1$| | |
+
+---
+
+También se puede evaluar el valor ${p}$ de la prueba (\emph{significancia más pequeña que conduce al rechazo de ${H_0}$}) que es igual a ${P(F_{1,n-2}>F_{0})}$ y determinar si es "pequeño" para rechazar la hipótesis nula: "el modelo lineal de ${Y}$ en ${X}$ no es significativo para explicar la variabilidad de ${Y}$".
+
+La conclusión obtenida por el análisis de varianza debe ser la misma que la obtenida cuando se prueba la significancia de la pendiente de la recta de regresión.
+         
+## $\boldsymbol{R^2}$ de una regresión: Coeficiente de determinación muestral
+
+Es una medida del ajuste del modelo que provee un indicador de que tan bien la predictora $X$ predice a la respuesta $Y$. Se calcula como:
+$$
+R^2 = \frac{\text{SSR}}{\text{SST}} = 1-\frac{\text{SSE}}{\text{SST}}.
+$$
+           
+El $R^2$ se puede interpretar como la proporción de la variabilidad total observada en la variable respuesta que es explicada por la relación lineal con la variable predictora considerada.
+
+---
+
+**Interpretaciones erróneas de $\boldsymbol{R^2}$.**
+
+* Un $R^2$ alto indica que el modelo puede hacer predicciones útiles.
+
+* Un $R^2$ alto indica que la recta de regresión tiene buen ajuste.
+
+* Un $R^2$ cercano a cero indica que $X$ y $Y$ no están relacionados.
+
+Las dos primeras indican que aunque un $R^2$ cercano a 1 indica una mayor asociación lineal, no necesariamente garantiza que los supuestos básicos del modelo lineal se estén cumpliendo y menos que el modelo lineal no pueda presentar falta de ajuste.
+
+---
+
+```{r, include = F}
+dfn <- df
+set.seed(1256)
+dfn$y <- 62 + 3.5*dfn$x + rnorm(18, sd = 35)
+dfn$y2 <- 0.025*dfn$x^2+90 + rnorm(18, sd = 35)
+dfn$y3 <- 0.2*(dfn$x-100)^2+250 + rnorm(18, sd = 35)
+set.seed(1298)
+dfn$y2 <- 0.025*dfn$x^2+90 + rnorm(18, sd = 35)
+lm1 <- summary(lm(y ~ x, dfn))
+lm2 <- summary(lm(y2 ~ x, dfn))
+lm3 <- summary(lm(y3 ~ x, dfn))
+with(dfn, plot(x, y, xlim = c(50, 150), ylim = c(150, 700)))
+with(dfn, plot(x, y2, xlim = c(50, 150), ylim = c(150, 700)))
+with(dfn, plot(x, y3, xlim = c(50, 150), ylim = c(150, 700)))
 ```
 
+**Ejemplo 1: valor alto de $\boldsymbol{R^2}$ - Modelo lineal.**
 
-<br/><br/>
-
-### <span style="color:#FF7F00">**Diagrama de densidad**</span>
-
-Este diagrama corresponde a un contorno suavizado del histograma que permite visualizar claramente la forma de los datos.
-
-
-```{r, fig.height=5, echo=FALSE}
-nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
-plot(density(nf), main="Distribucion de las notas de Estadística", col="#034A94", lwd=4, las=1,
-xlab="nota", ylab="densidad")
+```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
+par(mar = c(4, 4, .1, .1))
+with(dfn, {plot(x, y, pch = 19, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', cex = 2, cex.axis = 2, cex.lab = 2)
+   axis(1, at = seq(50, 150, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
+   abline(summary(lm(y ~ x))$coefficients[,1], col = 'blue', cex = 2, lwd = 2)
+   par(new = T)
+   curve(62 + 3.5*x, 40, 160, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', yaxt = 'n', xlab = '', ylab = '',
+         col = "gray", cex = 2, lwd = 2)
+   text(100, 750, substitute(paste(R^2, " ", "=", " ", r2), list(r2 = round(summary(lm(y ~ x, dfn))$r.squared, 6))),
+        col = 'brown', cex = 2)
+   arrows(100, mean(y), 105, 325, length = 0.1, cex = 2)
+   text(125, 300, substitute(paste(hat(y)[i], " = ", b0, " + ", b1 * X[i]),
+                             list(b0 = round(lm1$coefficients[1], 2), b1 = round(lm1$coefficients[2], 4))),
+        col = 'red', cex = 2)})
 ```
 
-<br/><br/>
+---
 
-### <span style="color:#FF7F00">**Diagrama de cajas**</span>
+**Ejemplo 2: valor alto de $\boldsymbol{R^2}$ - Modelo no lineal**
 
-Es uno de las representaciones gráficas más utilizadas, pues además de los elementos y características que permite visualizar de las variables, permite comparar los resultados de dos o más grupos.
-
-
-```{r, fig.height=4.5, echo=FALSE}
-nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
-cc=c(20, 10, 20, 20, 20, 20, 20, 20, 20, 30, 20, 20, 20, 10, 30, 20, 20, 30, 20, 30, 30, 20, 10, 30, 20, 20, 30, 30, 10, 20, 10, 20, 20, 20, 10, 20, 10, 20, 20, 30, 30, 30, 10, 30, 20, 20, 20, 20, 20, 20, 10, 20, 30, 30, 10, 10, 10, 20, 10, 20, 10, 30, 20, 10, 20, 30, 10, 30, 30, 30, 20, 30, 30, 30, 30, 30, 30, 20, 10, 30, 10, 20, 20, 10, 20, 20, 20, 20, 10, 20)
-labs=c("Grupo 1","Grupo 2","Grupo 3")
-boxplot((nf~cc),main="Nota final Estadística", 
-col=c("#2C5990","#5B84C4","#F98125"), names=labs, xlab = "grupo", ylab = "nota", 
-las=1)
-abline(h=3, col="#960200", lwd=1)
-abline(h=4, col="#447270", lwd=1)
+```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
+par(mar = c(4, 4, .1, .1))
+with(dfn, {plot(x, y2, pch = 19, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', ylab = 'y', cex = 2, cex.axis = 2,
+                cex.lab = 2)
+   axis(1, at = seq(50, 150, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
+   abline(summary(lm(y2 ~ x))$coefficients[,1], col = 'blue', cex = 2, lwd = 2)
+   par(new = T)
+   curve(90 + 0.025*x^2, 40, 160, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', yaxt = 'n', xlab = '', ylab = '',
+         col = "gray", cex = 2, lwd = 2)
+   text(100, 750, substitute(paste(R^2, " ", "=", " ", r2), list(r2 = round(summary(lm(y2 ~ x, dfn))$r.squared, 6))),
+        col = 'brown', cex = 2)
+   arrows(100, mean(y2), 95, 450, length = 0.1, cex = 2)
+   text(73, 475, substitute(paste(hat(y)[i], " = ", b0, " + ", b1 * X[i]),
+                            list(b0 = round(lm2$coefficients[1], 2), b1 = round(lm2$coefficients[2], 4))),
+        col = 'red', cex = 2)})
 ```
 
-<br/><br/>
+---
 
-### <span style="color:#FF7F00">**Diagrama de dispersión**</span>
+**Ejemplo 3: valor de $\boldsymbol{R^2}$ cercano a cero - Modelo no lineal**
 
-Este diagrma de puntos permite visualizar la relación lineal que puede existir entre dos variables cualitativas.
-
-```{r, fig.height=5, echo=FALSE}
-ed=round(rnorm(90,28,1),1)
-plot(ed,nf, main="Edad vs Nota final Estadística", ylim = c(0,5), xlab = "Edad (años)", ylab = "Nota final",col="#447270",pch=19,las=1)
-grid()
+```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
+par(mar = c(4, 4, .1, .1))
+with(dfn, {plot(x, y3, pch = 19, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', ylab = 'y', cex = 2, cex.axis = 2,
+                cex.lab = 2)
+   axis(1, at = seq(50, 150, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
+   abline(summary(lm(y3 ~ x))$coefficients[,1], col = 'blue', cex = 2, lwd = 2)
+   par(new = T)
+   curve(250 + 0.2*(x - 100)^2, 40, 160, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', yaxt = 'n', xlab = '',
+         ylab = '', col = "gray", cex = 2, lwd = 2)
+   text(100, 750, substitute(paste(R^2, " ", "=", " ", r2), list(r2 = round(summary(lm(y3 ~ x, dfn))$r.squared, 6))),
+        col = 'brown', cex = 2)
+   arrows(90, mean(y3), 95, 575, length = 0.1, cex = 2)
+   text(115, 600, substitute(paste(hat(y)[i], " = ", b0, " - ", b1 * X[i]),
+                             list(b0 = round(lm3$coefficients[1], 2), b1 = abs(round(lm3$coefficients[2], 4)))),
+        col = 'red', cex = 2)})
 ```
-
-
-<br/><br/>
-
-### <span style="color:#FF7F00">**GRÁFICA DE SERIES DE TIEMPO**</span>
-
-```{r, fig.height=5, echo=FALSE}
-plot(AirPassengers, main="Numero de pasajeros por mes", col="#034A94", lwd = 4, las=1, 
-ylab="número de pasajeros", xlab="año")
-```
-
-<br/><br/><br/>
-
-### <span style="color:#FF7F00">**Código R**</span>
-
-<pre>
-# sumulación de datos
-x=rnorm(100,100,20)   
-y=rnorm(100,100,25)   
-z=rbinom(100,4,0.30)
-t=1:100
-
-pie(table(z))        # gráfico de torta
-barplot(table(z))    # diagrama de barras
-stem(x)              # diagrama de tallos y hojas
-hist(x)              # histograma
-boxplot(x)           # diagrama de cajas
-plot(x,y)            # diagrama de dispersión 
-plot(t,y, type="l")  # linea de tiempo
-plot(density(x))     # diagrama de densidad
-</pre>
-
-<br/><br/>
-
-

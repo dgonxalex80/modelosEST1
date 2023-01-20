@@ -244,20 +244,71 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="recurso201.html">Correlación</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso202.html">Modelo</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso203.html">Estimación</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso204.html">Inferencia</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso205.html">Software R</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -328,6 +379,7 @@ fuerza de la relación lineal entre un par de variables”.</li>
 <div id="gráfico-de-dispersión" class="section level2">
 <h2><span style="color:#034a94"><strong>Gráfico de
 dispersión</strong></span></h2>
+<p></br></p>
 <p>Es un gráfico en el cual se representan las parejas (<span
 class="math inline">\(X,Y\)</span>) de las variables observadas. La
 forma que toman los puntos, ilustra acerca de la posible asociación
@@ -397,6 +449,7 @@ cual el indice decae.</p>
 <div id="coeficiente-de-correlación" class="section level2">
 <h2><span style="color:#034a94"> <strong>Coeficiente de
 correlación</strong></span></h2>
+<p></br></p>
 <p>Es una medida de la magnitud de la <strong>asociación lineal</strong>
 entre dos variables. Indica si los puntos tienen una tendencia a
 disponerse alineadamente y es útil para determinar si hay relación
@@ -525,17 +578,34 @@ delitos en los pueblos.</p>
 <div id="pruebas-de-hipótesis-sobre-rho" class="section level2">
 <h2><span style="color:#034a94"> <strong>Pruebas de hipótesis sobre
 <span class="math inline">\(\rho\)</span></strong></span></h2>
+<p></br></p>
 <p>Es importante verificar si de <span
 class="math inline">\(\rho\)</span> es igual a cero o se puede
 considerar diferente de cero, a partir de la muestra de estudio. Para
 ello se utiliza un estadístico de prueba con distribución t-Studen con
 <span class="math inline">\(v=n-2\)</span> grados de libertad</p>
-<p><span class="math inline">\(Ho: \rho =0\)</span> <span
-class="math inline">\(Ha: \rho \neq 0\)</span></p>
-<p>Estadístico de prueba</p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Hipótesis</th>
+<th align="center">Estadístico de prueba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(Ho: \rho =0 \hspace{1cm}
+Ha: \rho \neq 0\)</span></td>
+<td align="center"><span class="math inline">\(U = \dfrac{r
+\sqrt{n-2}}{\sqrt{1-r^{2}}} \sim t_{v:n-2}\)</span></td>
+</tr>
+</tbody>
+</table>
 <p></br></br></p>
-<span class="math display">\[U = \dfrac{r \sqrt{n-2}}{\sqrt{1-r^{2}}}
-\sim t_{v:n-2}\]</span>
 <pre>
 x=c(15,   17,   25,   27,   17,   12)
 y=c(17,   13,    5,    7,    7,   21)
@@ -570,7 +640,9 @@ correlación de Spearman</strong></p>
 <h2><span style="color:#034a94"> <strong>Otros indicadores de
 correlación</strong></span></h2>
 <p></br></p>
-<p><strong>Coeficiente de correlación de Spearman</strong></p>
+<div id="coeficiente-de-correlación-de-spearman" class="section level3">
+<h3><span style="color:#034a94"> <strong>Coeficiente de correlación de
+Spearman</strong></span></h3>
 <p>Se considera como un coeficiente no paramétrico ( no requiere
 verificación de supuestos), propuesto por Charles Spearman y se basa en
 los rangos obtenidos para las variables X y Y. Los rangos se optienen al
@@ -586,9 +658,10 @@ class="math inline">\(R_{i}(y)\)</span></p>
 \overline{R}(y)\Big)^{2} \Bigg]}}\]</span></p>
 <p></br></br></br></p>
 </div>
+</div>
 <div id="matriz-de-varianzas-covarianzas-y-matriz-de-correlaciones"
 class="section level2">
-<h2><span style="color:#034a94"> <strong>Matriz de varianzas covarianzas
+<h2><span style="color:#034a94"><strong>Matriz de varianzas covarianzas
 y matriz de correlaciones</strong></span></h2>
 <p></br></p>
 <p>En el caso de tener más de dos variables incluidas en un modelo es de
@@ -638,7 +711,8 @@ que indican el valor de la corelación y su aproximación a -1 (roja) o 1
 (azul)</p>
 <p></br></br></p>
 <div id="matriz-de-varianzas-covarianzas" class="section level3">
-<h3><strong>Matriz de varianzas-covarianzas</strong></h3>
+<h3><span style="color:#034a94"><strong>Matriz de
+varianzas-covarianzas</strong></span></h3>
 <p></br></p>
 <pre><code>            bio_aerea bio_sub bio_total area_foliar diametro altura
 bio_aerea      69.433  -1.497    67.936      84.435   11.058 12.913
@@ -650,7 +724,8 @@ altura         12.913  -0.317    12.597      12.049    2.444  3.238</code></pre>
 <p></br></br></p>
 </div>
 <div id="matriz-de-correlaciones" class="section level3">
-<h3><strong>Matriz de correlaciones</strong></h3>
+<h3><span style="color:#034a94"><strong>Matriz de
+correlaciones</strong></span></h3>
 <p></br></p>
 <pre><code>            bio_aerea bio_sub bio_total area_foliar diametro altura
 bio_aerea       1.000  -0.561     0.999       0.865    0.914  0.861
@@ -716,8 +791,8 @@ rechazarse Ho, se concluye que las variables son independientes, en caso
 contrario se asume que hay una relación entre ellas (dependencia).</p>
 <p></br></br></p>
 <p>En nuestro caso nos centraremos en el <strong>coeficiente de
-correlacion de Pearson</strong> (<span
-class="math inline">\(\rho_{_{XY}}\)</span>)</p>
+correlacion de Pearson</strong> <span
+class="math inline">\((\rho_{_{XY}})\)</span></p>
 </div>
 </div>
 

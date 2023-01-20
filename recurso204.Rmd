@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94"> **Inferencia de parámetros**</span>
+title: <span style="color:#034a94"> **Inferencia sobre los parámetros**</span>
 author: "Modelos Estadisticos para la toma de decisiones"
 output: html_document
 css: style.css
@@ -18,28 +18,83 @@ c4="#686868"
 
 </br></br>
 
- Video 5 inferencia
-
-<iframe width="100%" height="500"  src="https://www.youtube.com/embed/Ilv5KHYOx9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-
-
-
-
-</br></br>
-
-<span style="color:#FF7F00">**Ejemplo**</span>
-
-</br></br></br></br>
-
-
-
-<span style="color:#FF7F00">**Ejemplo**</span>
-
- Viedeo 6 . Supuestos
  
-<iframe width="100%" height="500"  src="https://www.youtube.com/embed/gbco5SD9WJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+## <span style="color:#034a94">**Inferencias sobre los parámetros del modelo de regresión**</span>
+
+</br>
+  
+### <span style="color:#034a94">**Inferencias sobre el intercepto $\beta_0$**</span>
+  
+</br>
+
+#### <span style="color:#034a94">**Intervalos de confianza**</span>
+
+</br>
+
+Se puede demostrar que bajo los supuestos del modelo de regresión, se cumple que:
+
+$$
+{T} = {\frac{\widehat\beta_0 - \beta_0}{\sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}} \sim t_{n - 2}}
+$$
+  
+con ${t_{n-2}}$ la variable aleatoria ${t}$-Student con ${n-2}$ grados de libertad.
 
 
+Por tanto un intervalo de confianza del ${(1-\alpha)\%}$ para ${\beta_0}$ es:
 
+$$
+{\widehat\beta_0 \pm t_{\alpha/2, n-2}\times \sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
+$$
+
+
+donde ${t_{\alpha/2, n - 2}}$ es el percentil ${1 - \alpha/2}$ de la distribución ${t}$-Student con ${n - 2}$ grados de libertad.
+
+
+#### <span style="color:#034a94">**Prueba de Hipótesis sobre la significancia del intercepto**</span>
+
+Para probar si ${\beta_0}$ es significativamente distinto de cero:
+   
+\begin{eqnarray}
+{H_0:\ \beta_0 = 0 }\nonumber\\
+{H_1:\ \beta_0 \neq 0} \nonumber
+\end{eqnarray}
+
+El estadístico de prueba es la ecuación  y el valor observado de éste (${T_0}$) se halla reemplazando ${\beta_0}$ por 0. Se rechaza ${H_0}$ si ${|T_0| > t_{\alpha/2, n - 2}}$.
+
+
+### <span style="color:#034a94">**Inferencias sobre la pendiente $\beta_1$**</span>
+
+#### <span style="color:#034a94">Intervalos de confianza**</span>
+
+Se puede demostrar que bajo los supuestos del modelo de regresión, se cumple que:
+
+$$
+{T}={\frac{\widehat\beta_1-\beta_1}{\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}} \sim t_{n-2}}
+$$
+
+  
+   Por tanto un intervalo de confianza del ${(1-\alpha)\%}$ para ${\beta_1}$ es:
+$$
+{\widehat\beta_1 \pm t_{\alpha/2,n-2}\times \sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
+$$
+
+
+### <span style="color:#034a94">**Prueba de Hipótesis sobre la significancia de la pendiente**</span>
+
+  
+Para probar si ${\beta_1}$ es significativamente distinto de cero: 
+
+$$
+\begin{aligned}
+{H_0:\ \beta_1 = 0}\nonumber\\
+{H_1:\ \beta_1 \neq 0}\nonumber
+\end{aligned}
+$$
+  
+El estadístico de prueba es la  ecuación  y el valor observado de éste (${T_0}$) se halla reemplazando ${\beta_1}$ por 0. Se rechaza ${H_0}$ si ${|T_0|>t_{\alpha/2,n-2}}$.
+
+
+<span style="color:#FF7F00">**Nota:**</span>
+
+Observe que si la pendiente es significativa, entonces el modelo de RLS entre la predictora y la respuesta, también lo es.
 

@@ -12,7 +12,7 @@
 <meta name="author" content="Nivelatorio de Estadística" />
 
 
-<title> Modelación</title>
+<title> Análiss de varianza - ANOVA</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -244,20 +244,71 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="recurso201.html">Correlación</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso202.html">Modelo</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso203.html">Estimación</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso204.html">Inferencia</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="recurso205.html">Software R</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -272,216 +323,305 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Modelación</strong></span></h1>
+<strong>Análiss de varianza - ANOVA</strong></span></h1>
 <h4 class="author">Nivelatorio de Estadística</h4>
 
 </div>
 
 
 <p><br/><br/></p>
-<div id="introducción" class="section level2">
-<h2><span
-style="color:#FF7F00"><strong>Introducción</strong></span></h2>
-<blockquote>
-<p>Se denomina gráfico a una representación visual de una serie de
-datos, prepresentación que tiene como finalidad dar una rápida noción
-acerca de volúmenes, cantidades y porcentajes, estableciendo
-comparaciones</p>
-</blockquote>
-<p>Fuente : enciclopedia.net</p>
-<p><br/><br/></p>
-<p>Elegir el gráfico adecuado es muy importante, pues existen diferentes
-alternativas y se debe escoger el apropiado para representar los datos.
-El tipo de dato determina el tipo de gráfico así:</p>
+<div id="anova" class="section level2">
+<h2>Análisis de varianza para probar la significancia de la
+regresión</h2>
+<p>Se quiere probar: <span class="math display">\[
+\begin{aligned}
+{H_0:\ \beta_1 = 0}\nonumber\\
+{H_1:\ \beta_1 \neq 0}\nonumber
+\end{aligned}
+\]</span></p>
+<p>con base en una descomposición de la variabilidad total observada en
+la variable respuesta, representada por la suma de cuadrados corregidos
+en <span class="math inline">\(Y\)</span>, <span
+class="math inline">\(S_{yy}\)</span> (también conocida como suma de
+cuadrados totales, abreviado SST), en la suma de dos componentes: una
+debida al modelo propuesto (recta ajustada) y otra debida al error
+aleatorio.</p>
+<hr />
+<p>Recuerde que el modelo de RLS plantea que la respuesta es igual a la
+suma de una componente real no aleatoria <span
+class="math inline">\({\beta_0+\beta_1X}\)</span> y un error aleatorio
+<span class="math inline">\({\varepsilon}\)</span>. Se espera que la
+recta ajustada explique en forma significativa la variabilidad observada
+en <span class="math inline">\(Y\)</span>.</p>
+<p>Para ilustrar el enfoque de análisis de varianza, recuerde que: <span
+class="math display">\[\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i -
+\bar{y}\right)^2\]</span></p>
+<p>veamos lo que representa gráficamente cada una de las diferencias que
+componen a la SST.</p>
+<hr />
+<p><strong>Variabilidad total en <span
+class="math inline">\(\boldsymbol{Y}\)</span></strong></p>
+<pre><code>Warning: Using `size` aesthetic for
+lines was deprecated in
+ggplot2 3.4.0.
+ℹ Please use `linewidth`
+  instead.</code></pre>
+<p><img src="recurso206_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><strong>Variabilidad en <span
+class="math inline">\(\boldsymbol{Y}\)</span> al incluir el modelo de
+RLS</strong></p>
+<p><img src="recurso206_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><strong>Ilustración del enfoque de varianza</strong></p>
+<p><img src="recurso206_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<hr />
+<p>De ahí que podamos escribir cada diferencia <span
+class="math inline">\(y_i - \bar{y}\)</span> como: <span
+class="math display">\[y_i - \bar{y} = (\widehat{y}_i - \bar{y}) + (y_i
+- \widehat{y}_i)\]</span></p>
+<p>y reemplazando en la SST, se obtiene: <span class="math display">\[
+\begin{aligned}
+\text{SST} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &amp;= \sum_{i
+= 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i -
+\widehat{y}_i)\right]^2\\
+&amp;=\sum^n_{i=1} (\widehat{y}_i - \bar{y})^2 + \sum^n_{i=1}
+(y_i-\widehat{y}_i)^2
+\end{aligned}
+\]</span></p>
+<p>(<strong>Tarea:</strong> comprobar que <span
+class="math inline">\(2\sum_{i = 1}^n (\widehat{y}_i - \bar{y}) (y_i -
+\widehat{y}_i) = 0\)</span>)</p>
+<hr />
+<p>Así, la suma de cuadrados totales SST queda expresada mediante la
+suma de dos componentes, a saber:</p>
+<ul>
+<li><p><span
+class="math inline">\(\sum^n_{i=1}(\widehat{y}_i-\bar{y})^2\)</span>,
+que está relacionada con las diferencias entre los valores ajustados por
+el modelo de regresión y el promedio de las observaciones de la
+respuesta, al cual se le conoce como Suma de Cuadrados de la Regresión,
+abreviado SSR.</p>
+<p>Se puede demostrar que: <span class="math display">\[
+\text{SSR} = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 =
+\widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
+\]</span></p></li>
+</ul>
+<hr />
+<ul>
+<li><p><span
+class="math inline">\(\sum^n_{i=1}(y_i-\widehat{y}_i)^2\)</span>, que
+está relacionada con las diferencias entre las observaciones de la
+respuesta y los valores ajustados por el modelo de regresión, esto es,
+los residuales del modelo (que son estimaciones de los errores del
+modelo), por lo que a esta componente se le conoce como Suma de
+Cuadrados del Error, abreviado SSE.</p>
+<p>Se puede demostrar que: <span class="math display">\[
+\text{SSE} = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2
+=  S_{yy}-\widehat{\beta}_1 S_{xy}
+\]</span></p></li>
+</ul>
+<hr />
+<p>De donde, se obtiene que: <span class="math display">\[
+\text{SST} = \text{SSR} + \text{SSE},
+\]</span></p>
+<p>la cual se conoce como Identidad de Suma de Cuadrados.</p>
+<p>Cada una de estas sumas de cuadrados tiene asociados unos grados de
+libertad (g.l), que representan la cantidad de información libre en la
+suma de cuadrados. Una forma de calcular los g.l es la diferencia entre
+el número de observaciones y el número de parámetros estimados en la
+suma de cuadrados.</p>
+<hr />
+<ul>
+<li><p>Se sabe que SST se construye con <span
+class="math inline">\(n\)</span> observaciones y se estima la media de
+la respuesta con el promedio, de manera que SST tiene <span
+class="math inline">\(n - 1\)</span> g.l.</p></li>
+<li><p>Analizando la expresión para SSE, se tienen las mismas <span
+class="math inline">\(n\)</span> observaciones y se estiman los dos
+parámetros del modelo, y así SSE tiene <span class="math inline">\(n -
+2\)</span> g.l.</p></li>
+<li><p>Finalmente, SSR solo tiene dos observaciones (los estimadores de
+los parámetros) y se estima un parámetro, de donde SSR tiene sólo 1
+g.l.</p></li>
+</ul>
+<hr />
+En virtud de lo anterior, los grados de libertad (g.l) de las sumas de
+cuadrados también forman una identidad, así:
+<p>A continuación, se definen los cuadrados medios como la razón entre
+las sumas de cuadrados y sus respectivos grados de libertad. Esto
+es,</p>
+<ul>
+<li><p><span class="math inline">\(\text{MSR} =
+\text{SSR}/\text{g.l(SSR)} = \text{SSR}\)</span>.</p></li>
+<li><p><span class="math inline">\(\text{MSE} =
+\text{SSE}/\text{g.l(SSE)} = \text{SSE}/(n - 2)\)</span>.</p></li>
+</ul>
+<hr />
+<p>Con el fin de establecer inferencias basadas en el enfoque del
+análisis de varianza se requiere conocer el valor esperado de cada una
+de los cuadrados medios, es decir, lo que se estima con cada suma de
+cuadrados.</p>
+<p>Se puede demostrar que:</p>
+<ul>
+<li><p><span class="math inline">\(E\left[\text{MSE}\right] =
+\sigma^2\)</span>.</p></li>
+<li><p><span class="math inline">\(E\left[\text{MSR}\right] = \sigma^2 +
+\beta_1^2S_{xx}\)</span>.</p></li>
+</ul>
+<p>El primer resultado se conocía de la estimación de <span
+class="math inline">\(\sigma^2\)</span> vista previamente.</p>
+<hr />
+<p>Si todas las observaciones <span class="math inline">\(Y_i\)</span>
+provienen de la misma distribución normal con media <span
+class="math inline">\(\mu = \beta_0\)</span> (esto es, si <span
+class="math inline">\(\beta_1 = 0\)</span>) y varianza <span
+class="math inline">\(\sigma^2\)</span>, y además se tiene la identidad
+de sumas de cuadrados que establece que SST <span
+class="math inline">\(=\)</span> SSR + SSE, con la respectiva identidad
+de grados de libertad <span class="math inline">\((n-1) = 1 +
+(n-2)\)</span>, entonces:</p>
+<ul>
+<li><p><span class="math inline">\(\text{SSR}/\sigma^2\)</span> se
+distribuye como una variable aleatoria Chi-cuadrado con 1 grado de
+libertad.</p></li>
+<li><p><span class="math inline">\(\text{SSE}/\sigma^2\)</span> se
+distribuye como una variable aleatoria Chi-cuadrado con <span
+class="math inline">\(n - 2\)</span> grados de libertad.</p></li>
+<li><p>Los términos <span
+class="math inline">\(\text{SSR}/\sigma^2\)</span> y <span
+class="math inline">\(\text{SSE}/\sigma^2\)</span> son estimaciones
+independientes de <span
+class="math inline">\(\sigma^2\)</span>.</p></li>
+</ul>
+<hr />
+<p>De lo anterior, se considera el siguiente estadístico: <span
+class="math display">\[
+F_0=\frac{\text{SSR}/\sigma^2}{\text{SSE}/\left[\sigma^2(n-2)\right]}=\frac{\text{MSR}}{\text{MSE}}
+\]</span></p>
+<p>que bajo la hipótesis nula <span class="math inline">\({H_0:\ \beta_1
+= 0}\)</span>, se distribuye como una <span
+class="math inline">\(F\)</span> con 1 y <span class="math inline">\(n -
+2\)</span> grados de libertad:</p>
+<hr />
+<p>En el caso de la regresión lineal simple, la prueba sobre la
+significancia de la regresión (es decir, si la pendiente de la recta es
+significativamente diferente de cero) puede realizarse mediante el
+análisis de varianza usando un valor crítico <span
+class="math inline">\({F_{\alpha, 1, n - 2}}\)</span> de la distribución
+<span class="math inline">\({F}\)</span>.</p>
+<p>Esto es, a un nivel de significancia <span
+class="math inline">\({\alpha}\)</span> se rechaza la hipótesis nula de
+que la variabilidad en la variable respuesta es debida sólo al error
+aleatorio (en favor de la hipótesis de que la regresión en <span
+class="math inline">\({X}\)</span> es significativa) si <span
+class="math inline">\({F_0 &gt; F_{\alpha, 1, n - 2}}\)</span>.</p>
+<hr />
+<p><strong>Tabla de Análisis de Varianza para el modelo de
+RLS.</strong></p>
 <table>
 <colgroup>
+<col width="19%" />
+<col width="19%" />
+<col width="19%" />
 <col width="23%" />
-<col width="21%" />
-<col width="55%" />
+<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">Tipo de variable</th>
-<th align="left">Escala</th>
-<th align="left">Gráfico</th>
+<th>Fuente de variación</th>
+<th>Suma de cuadrados</th>
+<th>Grados de libertad</th>
+<th>Cuadrado medio</th>
+<th>F calculada</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Cualitativas</td>
-<td align="left"></td>
-<td align="left"></td>
+<td>Regresión o Modelo</td>
+<td>SSR</td>
+<td>1</td>
+<td><span class="math inline">\(\small \text{MSR} =
+\text{SSR}\)</span></td>
+<td><span
+class="math inline">\(F_0=\frac{\text{MSR}}{\text{MSE}}\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"></td>
-<td align="left">Nominal</td>
-<td align="left">Torta</td>
+<td>Error o Residual</td>
+<td>SSE</td>
+<td><span class="math inline">\(n-2\)</span></td>
+<td><span class="math inline">\(\text{MSE} =
+\frac{\text{SSE}}{n-2}\)</span></td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left"></td>
-<td align="left">Ordinal</td>
-<td align="left">Barras</td>
-</tr>
-<tr class="even">
-<td align="left">Cuantitativas</td>
-<td align="left">Intervalo-razón</td>
-<td align="left">Diagrama de tallos y hojas</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Histograma</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Diagrama de cajas</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Diagrama de densidad</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Diagrama de puntos</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Diagrama de lineas</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Diagrama de radar</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Gráfico likert</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">Mapa de calor</td>
+<td>Total</td>
+<td>SST</td>
+<td><span class="math inline">\(n-1\)</span></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p><br/><br/></p>
+<hr />
+<p>También se puede evaluar el valor <span
+class="math inline">\({p}\)</span> de la prueba () que es igual a <span
+class="math inline">\({P(F_{1,n-2}&gt;F_{0})}\)</span> y determinar si
+es “pequeño” para rechazar la hipótesis nula: “el modelo lineal de <span
+class="math inline">\({Y}\)</span> en <span
+class="math inline">\({X}\)</span> no es significativo para explicar la
+variabilidad de <span class="math inline">\({Y}\)</span>”.</p>
+<p>La conclusión obtenida por el análisis de varianza debe ser la misma
+que la obtenida cuando se prueba la significancia de la pendiente de la
+recta de regresión.</p>
 </div>
-<div id="gráficos-variables-cualitativas" class="section level2">
-<h2><span style="color:#FF7F00"><strong>Gráficos variables
-cualitativas</strong></span></h2>
-<p><br/></p>
-<div id="gráfico-de-tortas" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Gráfico de
-tortas</strong></span></h3>
-<p>Este tipo de gráficos se utiliza para variables cualitativas medidas
-en escala nominal.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p><br/><br/></p>
-</div>
-<div id="diagrama-de-barras" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Diagrama de
-barras</strong></span></h3>
-<p>El diagrama de barras se utiliza para representar variables
-cualitativas en escala ordinal. Es necesario que los valores
-representados sigan el orden de la escala.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p><br/><br/></p>
-</div>
-<div id="diagrama-de-barras-con-dos-variables" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Diagrama de barras con dos
-variables</strong></span></h3>
-<p>Este diagrama se emplea para representar dos variables cualitativas
-que pueden ser de escala nominal u ordinal.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p><br/><br/><br/></p>
-</div>
-</div>
-<div id="gráficas-variables-cualitativas" class="section level2">
-<h2><span style="color:#FF7F00"><strong>Gráficas variables
-cualitativas</strong></span></h2>
-<p><br/></p>
-<div id="diagrama-de-árbol" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Diagrama de
-árbol</strong></span></h3>
-<pre><code>
-  The decimal point is at the |
-
-  1 | 67
-  2 | 00012244444
-  2 | 555677777778
-  3 | 0000000000000011111111222222223344
-  3 | 555555566677777777888999
-  4 | 0111123</code></pre>
-<p>Este diagrama ordena los datos de manera que se puede determinar
-tanto el mínimo (1.6) como el máximo (4.3) , además de visualizar donde
-están la mayor concentración de ellos.</p>
-<p><br/><br/></p>
-</div>
-<div id="histograma" class="section level3">
-<h3>*<span style="color:#FF7F00"><strong>Histograma</strong></span></h3>
-<p>El histograma es uno de los gráficos más utilizados para representar
-variables cuantitativas y permite resumir por rangos los diferentes
-datos. Es una buena forma de visualizar la distribución de los datos y
-su forma.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><br/><br/></p>
-</div>
-<div id="diagrama-de-densidad" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Diagrama de
-densidad</strong></span></h3>
-<p>Este diagrama corresponde a un contorno suavizado del histograma que
-permite visualizar claramente la forma de los datos.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p><br/><br/></p>
-</div>
-<div id="diagrama-de-cajas" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Diagrama de
-cajas</strong></span></h3>
-<p>Es uno de las representaciones gráficas más utilizadas, pues además
-de los elementos y características que permite visualizar de las
-variables, permite comparar los resultados de dos o más grupos.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p><br/><br/></p>
-</div>
-<div id="diagrama-de-dispersión" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Diagrama de
-dispersión</strong></span></h3>
-<p>Este diagrma de puntos permite visualizar la relación lineal que
-puede existir entre dos variables cualitativas.</p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><br/><br/></p>
-</div>
-<div id="gráfica-de-series-de-tiempo" class="section level3">
-<h3><span style="color:#FF7F00"><strong>GRÁFICA DE SERIES DE
-TIEMPO</strong></span></h3>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p><br/><br/><br/></p>
-</div>
-<div id="código-r" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Código R</strong></span></h3>
-<pre>
-# sumulación de datos
-x=rnorm(100,100,20)   
-y=rnorm(100,100,25)   
-z=rbinom(100,4,0.30)
-t=1:100
-
-pie(table(z))        # gráfico de torta
-barplot(table(z))    # diagrama de barras
-stem(x)              # diagrama de tallos y hojas
-hist(x)              # histograma
-boxplot(x)           # diagrama de cajas
-plot(x,y)            # diagrama de dispersión 
-plot(t,y, type="l")  # linea de tiempo
-plot(density(x))     # diagrama de densidad
-</pre>
-<p><br/><br/></p>
-</div>
+<div
+id="boldsymbolr2-de-una-regresión-coeficiente-de-determinación-muestral"
+class="section level2">
+<h2><span class="math inline">\(\boldsymbol{R^2}\)</span> de una
+regresión: Coeficiente de determinación muestral</h2>
+<p>Es una medida del ajuste del modelo que provee un indicador de que
+tan bien la predictora <span class="math inline">\(X\)</span> predice a
+la respuesta <span class="math inline">\(Y\)</span>. Se calcula como:
+<span class="math display">\[
+R^2 = \frac{\text{SSR}}{\text{SST}} = 1-\frac{\text{SSE}}{\text{SST}}.
+\]</span></p>
+<p>El <span class="math inline">\(R^2\)</span> se puede interpretar como
+la proporción de la variabilidad total observada en la variable
+respuesta que es explicada por la relación lineal con la variable
+predictora considerada.</p>
+<hr />
+<p><strong>Interpretaciones erróneas de <span
+class="math inline">\(\boldsymbol{R^2}\)</span>.</strong></p>
+<ul>
+<li><p>Un <span class="math inline">\(R^2\)</span> alto indica que el
+modelo puede hacer predicciones útiles.</p></li>
+<li><p>Un <span class="math inline">\(R^2\)</span> alto indica que la
+recta de regresión tiene buen ajuste.</p></li>
+<li><p>Un <span class="math inline">\(R^2\)</span> cercano a cero indica
+que <span class="math inline">\(X\)</span> y <span
+class="math inline">\(Y\)</span> no están relacionados.</p></li>
+</ul>
+<p>Las dos primeras indican que aunque un <span
+class="math inline">\(R^2\)</span> cercano a 1 indica una mayor
+asociación lineal, no necesariamente garantiza que los supuestos básicos
+del modelo lineal se estén cumpliendo y menos que el modelo lineal no
+pueda presentar falta de ajuste.</p>
+<hr />
+<p><strong>Ejemplo 1: valor alto de <span
+class="math inline">\(\boldsymbol{R^2}\)</span> - Modelo
+lineal.</strong></p>
+<p><img src="recurso206_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><strong>Ejemplo 2: valor alto de <span
+class="math inline">\(\boldsymbol{R^2}\)</span> - Modelo no
+lineal</strong></p>
+<p><img src="recurso206_files/figure-html/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><strong>Ejemplo 3: valor de <span
+class="math inline">\(\boldsymbol{R^2}\)</span> cercano a cero - Modelo
+no lineal</strong></p>
+<p><img src="recurso206_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 
 

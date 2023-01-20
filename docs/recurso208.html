@@ -12,7 +12,7 @@
 <meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
 
 
-<title> Inferencia sobre Y_o</title>
+<title> Estimación de parámetros</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -323,183 +323,176 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Inferencia sobre <span
-class="math inline">\(Y_o\)</span></strong></span></h1>
+<strong>Estimación de parámetros</strong></span></h1>
 <h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
 
 </div>
 
 
-<div
-id="inferencias-respecto-a-la-respuesta-media-boldsymboleyvert-x_0-y-valores-futuro-boldsymbolyvert-x_0-y_0"
-class="section level2">
-<h2>Inferencias respecto a la respuesta media <span
-class="math inline">\(\boldsymbol{E[Y\vert x_0]}\)</span> y valores
-futuro <span class="math inline">\(\boldsymbol{Y\vert x_0 =
-y_0}\)</span></h2>
-<p>Interesa realizar inferencias sobre la respuesta, para un valor
-apropiado <span class="math inline">\(X = x_0\)</span>, así:</p>
-<ul>
-<li><p>Estimación puntual y por intervalo de la respuesta media <span
-class="math inline">\(E[Y\vert x_0]\)</span>.</p></li>
-<li><p>Predicción de valores futuros <span class="math inline">\(y_0 =
-\beta_0 + \beta_1 x_0 + \varepsilon_0 = E[Y\vert x_0] +
-\varepsilon_0\)</span>.</p></li>
-</ul>
-<p>En ambos casos el único medio para producir tales inferencias es la
-ecuación de regresión ajustada.</p>
-<hr />
-<p>Recuerde que la ecuación de regresión ajustada, en un valor dado
-<span class="math inline">\({X = x_0}\)</span>, es: <span
-class="math display">\[\widehat{Y}_0 = \widehat\beta_0 +
-\widehat\beta_1x_0\]</span></p>
-<p>Note que <span class="math inline">\({\widehat{Y}_0}\)</span> también
-es una combinación lineal de las variables aleatorias <span
-class="math inline">\({Y_1,\ldots ,Y_n}\)</span>. En efecto, <span
+<p></br></br></p>
+<div id="estimación-por-máxima-verosimilitud-ml" class="section level2">
+<h2><span style="color:#034a94"><strong>Estimación por máxima
+verosimilitud (ML)</strong></br></h2>
+<p></br></p>
+<p>El método de mínimos cuadrados produce los mejores estimadores
+lineales insesgados para los parámetros de la recta y puede ser usado
+para la estimación de parámetros de un modelo de regresión lineal sin
+consideraciones distribucionales sobre los errores.</p>
+<p>Sin embargo, para poder aplicar pruebas de hipótesis y construir
+intervalos de confianza, es necesario realizar y validar tales
+supuestos. Considerando para el modelo de regresión lineal simple los
+supuestos de normalidad, independencia y varianza constante para los
+errores, podemos usar el método de estimación de máxima verosimilitud
+(MLE).</p>
+<p>Sean <span
+class="math inline">\({\left(x_1,y_1\right),\ldots,\left(x_n,y_n\right)}\)</span>
+los <span class="math inline">\({n}\)</span> pares de datos observados,
+entonces el modelo de regresión lineal simple es: <span
 class="math display">\[
-\widehat{Y}_0 = \widehat\beta_0 + \widehat\beta_1x_0 =
-\left(\sum^n_{i=1} m_iY_i\right) + \left(\sum^n_{i=1} c_iY_i\right)x_0 =
-\sum^n_{i=1} (m_i + x_0\, c_i) Y_i,
-\]</span> con las constantes <span class="math inline">\(m_i =
-\frac{1}{n} - \bar{x}\, c_i\)</span> y <span class="math inline">\(c_i =
-\frac{x_i - \bar{x}}{S_{xx}}\)</span> como fueron especificadas
-previamente. Por lo tanto, bajo los supuestos del modelo <span
-class="math inline">\({\widehat{Y}_0}\)</span> es una variable aleatoria
-normal.</p>
-<hr />
-<p>con esperanza: <span class="math display">\[
-E\left[\widehat{Y}_0\right] = E\left[\widehat\beta_0 +
-\widehat\beta_1x_0\right] = E\left[\widehat\beta_0\right] +
-E\left[\widehat\beta_1\right]x_0 = \beta_0 + \beta_1x_0 = E[Y\vert x_0]
-\]</span> y varianza: <span class="math display">\[
+{Y_i = Y\vert X_i=\beta_0+\beta_1X_i+\varepsilon_i,\ i=1,2,\ldots,n.}
+\]</span></p>
+<p>A la variable aleatoria <span
+class="math inline">\({\varepsilon_i}\)</span>, se le asignan los
+siguientes supuestos distribucionales: <span class="math display">\[
+{\varepsilon_i\overset{\text{iid}}{\sim} N\left(0,\sigma^2\right),\
+i=1,2,\ldots,n,}
+\]</span></p>
+<p>Con base en lo anterior y asumiendo que los niveles o valores en que
+<span class="math inline">\({X}\)</span> es observada son fijos, se
+obtiene que <span class="math display">\[{Y_i = Y\vert X_i
+\overset{\text{ind}}{\sim} N(E\left[Y\vert
+X_i\right],\sigma^2)}\]</span> con <span
+class="math display">\[{E\left[Y\vert
+X_i\right]=\beta_0+\beta_1X_i}.\]</span></p>
+<p>Sean <span
+class="math inline">\({\textbf{x}=(x_1,x_2,\ldots,x_n)}\)</span> y <span
+class="math inline">\({\textbf{y}=(y_1,y_2,\ldots,y_n)}\)</span>,
+entonces la función de verosimilitud <span
+class="math inline">\({L\left.(\beta _0,\beta_1,\sigma^2
+\right|\textbf{x,y})}\)</span> es hallada a partir de la densidad
+conjunta de las observaciones, <span
+class="math inline">\({f\left.(y_1,\dots,y_n\right|\beta_0,\beta_1,\sigma^2)}\)</span>,
+que por la condición de independencia es igual al producto de las
+densidades de probabilidad marginales, por tanto, podemos escribir,</p>
+<p><span class="math display">\[
 \begin{aligned}
-{V\left[\widehat{Y}_0\right]} &amp;= {V\left[\sum^n_{i=1} (m_i + x_0\,
-c_i) Y_i\right]} = {\sum^n_{i=1} (m_i + x_0\, c_i)^2\ V(Y_i)}\nonumber\\
-&amp;= {\sigma^2\sum^n_{i=1} \left[\left(\frac{1}{n} -
-\bar{x}c_i\right)+x_0c_i\right]^2} = {\sigma^2\sum^n_{i=1}
-\left[\frac{1}{n} + (x_0-\bar{x}) c_i\right]^2}\nonumber\\
-&amp;= {\sigma^2\left[\frac{1}{n} +
-\frac{(x_0-\bar{x})^2}{S_{xx}}\right]}
+{L(\beta_0,\beta_1,\sigma^2\vert
+\textbf{x,y})}&amp;{=f(y_1,\ldots,y_n\vert\beta_0,\beta_1,\sigma^2)}\nonumber\\
+&amp;{=\prod\limits_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{1}{2\sigma^2}(y_i-\beta_0-\beta_1x_i)^2\right]}\nonumber\\
+&amp;{=(2\pi\sigma^2)^{-n/2}\exp\left[-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right]}
 \end{aligned}
 \]</span></p>
-<hr />
-<p>En resumen, <span class="math display">\[
-\widehat{Y}_0 \sim N\left(E[Y\vert x_0], \ \sigma^2\left[\frac{1}{n} +
-\frac{(x_0 - \bar{x})^2}{S_{xx}}\right]\right)
-\]</span></p>
-<p>Esto es, <span class="math inline">\(\widehat{Y}_0\)</span> es un
-estimador insesgado de la respuesta media.</p>
-<p>Note que, <span class="math inline">\(\widehat{Y}_0\)</span> también
-es un estimador para un valor futuro <span
-class="math inline">\(y_0\)</span>, pero en este caso es un estimador
-sesgado. De ahí que la cantidad <span class="math inline">\(y_0 -
-\widehat{Y}_0\)</span> represente al error de predicción, el cual se
-sabe tiene media cero.</p>
-<hr />
-<p>Tanto las estimaciones de valores de la respuesta media como las
-predicciones de valores futuro deben cumplir una condición sobre el
-valor fijo <span class="math inline">\({X = x_0}\)</span> para que tal
-estimación/predicción sea válida.</p>
-<ul>
-<li><p>Sólo se podrán hacer inferencias sobre la respuesta cuando <span
-class="math inline">\(X = x_0 \in \left[X_{\min},
-X_{\max}\right]\)</span>, donde <span
-class="math inline">\(X_{\min}\)</span> y <span
-class="math inline">\(X_{\max}\)</span> son los valores mínimo y máximo
-de la variable predictora, que fueron fijados en la muestra.</p></li>
-<li><p>Cumplir con lo anterior indica que <span
-class="math inline">\(x_0\)</span> es un punto de
-interpolación.</p></li>
-<li><p>Esto evita que <span class="math inline">\(x_0\)</span> sea un
-punto de extrapolación, esto es, un punto por fuera del rango
-experimental donde el modelo fue ajustado y que no garantiza que el
-modelo se mantenga.</p></li>
-</ul>
-<hr />
-<p><strong>Ilustración de puntos de interpolación y
-extrapolación</strong></p>
-<p><img src="recurso205_files/figure-html/unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="intervalo-de-confianza-para-la-respuesta-media"
-class="section level2">
-<h2>Intervalo de confianza para la respuesta media</h2>
-<p>Se puede demostrar que bajo los supuestos del modelo: <span
+<p>El objetivo es hallar los parámetros desconocidos <span
+class="math inline">\({\beta_0,\beta_1,\sigma^2}\)</span>, que maximicen
+<span class="math inline">\({L}\)</span>, o equivalentemente, que
+maximicen <span class="math inline">\({\ln L}\)</span> (el logaritmo
+natural de <span class="math inline">\({L}\)</span>). <span
 class="math display">\[
-{T = \frac{\widehat{y}_0 - E[Y\vert
-x_0]}{\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} + \frac{(x_0 -
-\bar{x})^2}{S_{xx}}\right]}} \sim t_{n - 2}}
+{\ln
+L=-\frac{n}{2}\ln(2\pi)-\frac{n}{2}\ln(\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2}
 \]</span></p>
-<p>Por tanto un intervalo de confianza del <span
-class="math inline">\({(1-\alpha)\%}\)</span> para <span
-class="math inline">\({\mu_{Y\vert x_0}}\)</span> es: <span
-class="math display">\[
-{\widehat{y}_{0} \pm
-t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} +
-\frac{(x_{0}-\bar{x})^{2}}{S_{xx}}\right]}}
-\]</span></p>
-<p>con <span
-class="math inline">\({\widehat{y}_{0}=\widehat{\beta}_0+\widehat{\beta}_1x_0}\)</span>
-y <span class="math inline">\({t_{\alpha/2, n - 2}}\)</span> es el
-percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
-distribución <span class="math inline">\({t}\)</span>-Student con <span
-class="math inline">\({n - 2}\)</span> grados de libertad.</p>
-</div>
-<div
-id="intervalo-de-predicción-para-una-observación-futura-de-la-respuesta-boldsymboly_0"
-class="section level2">
-<h2>Intervalo de predicción para una observación futura de la respuesta
-<span class="math inline">\(\boldsymbol{Y_0}\)</span></h2>
-<p>Dicho intervalo estima los posibles valores para un valor particular
-de la variable respuesta (no para su media) en un valor dado, <span
-class="math inline">\({X=x_0}\)</span>. Asumimos que este valor
-particular es un valor futuro de la variable aleatoria <span
-class="math inline">\({Y}\)</span> y por tanto, no fue utilizado en la
-regresión.</p>
-<p>Si <span class="math inline">\({Y_0}\)</span> es un valor futuro y
-<span class="math inline">\({\widehat{y}_0 = \widehat{\beta}_0 +
-\widehat{\beta}_1x_0}\)</span> es su estimador, entonces estas dos
-variables aleatorias son estadísticamente independientes, dado que <span
-class="math inline">\({Y_0}\)</span> no es utilizado para hallar a <span
+<p>Observe que para cualquier valor de <span
+class="math inline">\({\sigma^2}\)</span> fijo, <span
+class="math inline">\({\ln L}\)</span> es maximizado como una función de
+<span class="math inline">\({\beta_0}\)</span> y <span
+class="math inline">\({\beta_1}\)</span> por aquellos valores <span
+class="math inline">\({\widetilde{\beta}_0}\)</span> y <span
+class="math inline">\({\widetilde{\beta}_1}\)</span> que minimizan <span
+class="math inline">\({S(\beta_0,\beta_1)=\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2}\)</span>
+y así, los estimadores MLE <span class="math inline">\(\
+{\widetilde{\beta}_0}\)</span> y <span
+class="math inline">\({\widetilde{\beta}_1}\)</span> son iguales a los
+respectivos estimadores de mínimos cuadrados, <span
 class="math inline">\({\widehat{\beta}_0}\)</span> y <span
 class="math inline">\({\widehat{\beta}_1}\)</span>.</p>
-<hr />
-<p>Por tanto, el estadístico: <span class="math display">\[
-{T=\frac{\widehat{y}_0-Y_0}{\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_{0}-\bar{x})^2}{S_{xx}}\right]}}
-\sim t_{n-2}}
-\]</span></p>
-<p>De ahí que, un intervalo de predicción del <span
-class="math inline">\({(1 - \alpha)\%}\)</span> para <span
-class="math inline">\({Y_0}\)</span> está dado por: <span
+<p>Para hallar el estimador MLE para <span
+class="math inline">\({\sigma^2}\)</span> substituimos <span
+class="math inline">\({\widehat{\beta}_0}\)</span> y <span
+class="math inline">\({\widehat{\beta}_1}\)</span> en <span
+class="math inline">\({\ln L}\)</span>, y hallamos <span
+class="math inline">\({\sigma^2}\)</span> que maximiza <span
 class="math display">\[
-{\widehat{y}_0\pm
-t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}}\right]}}
+{-\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) -
+\frac{1}{2\sigma^2}\sum\limits_{i=1}^n (y_i - \widehat{\beta}_0 -
+\widehat{\beta}_1x_i)^2}
 \]</span></p>
-<p>Donde, <span class="math inline">\({t_{\alpha/2, n - 2}}\)</span> es
-el percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
-distribución <span class="math inline">\({t}\)</span>-Student con <span
-class="math inline">\({n - 2}\)</span> grados de libertad.</p>
+<p>de donde obtenemos como estimador MLE de <span
+class="math inline">\({\sigma^2}\)</span> a <span
+class="math display">\[
+{\widetilde{\sigma}^2 = \frac{1}{n}\sum\limits_{i=1}^n (y_i -
+\widehat{\beta}_0 - \widehat{\beta}_1x_i)^2 =
+\frac{1}{n}\sum\limits_{i=1}^n (y_i - \widehat{y}_i)^2}
+\]</span></p>
+<p>Resumiendo, bajo el modelo de regresión lineal normal, es decir, con
+errores independientes e idénticamente distribuidos <span
+class="math inline">\({N\left(0, \sigma^2\right)}\)</span>, los
+estimadores de mínimos cuadrados para <span
+class="math inline">\({\beta_0}\)</span> y <span
+class="math inline">\({\beta_1}\)</span> son también estimadores de
+máxima verosimilitud y en tal caso, podemos construir intervalos de
+confianza y realizar pruebas de hipótesis basadas en las estimaciones
+obtenidas.</p>
+<p>También puede demostrarse que los estimadores MLE son de mínima
+varianza cuando son comparados con todos los posibles estimadores
+insesgados y son consistentes, es decir, a medida que aumenta el tamaño
+de muestra, la diferencia entre éstos y los respectivos parámetros se
+aproxima a cero.</p>
+<p></br></br></p>
 </div>
-<div id="pruebas-de-hipótesis-para-la-respuesta-media"
-class="section level2">
-<h2>Pruebas de hipótesis para la respuesta media</h2>
-<p>Para la respuesta media se pueden probar hipótesis a partir de la
-construcción y el análisis de los intervalos de confianza definidos
-anteriormente. Esto es, para probar a un nivel de significancia <span
-class="math inline">\(\alpha\)</span>, el siguiente juego de hipótesis:
-<span class="math display">\[
-\begin{aligned}
-{H_0:\ E[Y\vert x_0] = c_0}\nonumber\\
-{H_1:\ E[Y\vert x_0] \neq c_0}\nonumber
-\end{aligned}
+<div id="estimación-de-la-varianza-sigma2" class="section level2">
+<h2><span style="color:#034a94"><strong>Estimación de la varianza <span
+class="math inline">\(\sigma^2\)</span></strong></span></h2>
+<p></br></p>
+<p>Puede demostrarse que bajo los supuestos del modelo en relación a los
+errores, la esperanza del estimador de máxima verosimilitud de <span
+class="math inline">\(\sigma^2\)</span> es: <span
+class="math display">\[
+{E\left[\widetilde{\sigma}^2\right] = \left(\frac{n - 2}{n}\right)
+\sigma^2}
 \]</span></p>
-<p>Donde <span class="math inline">\(c_0 \in \mathbb{R}\)</span>, se
-calcula un intervalo de confianza del <span class="math inline">\((1 -
-\alpha)100\)</span>% para <span class="math inline">\(E[Y\vert
-x_0]\)</span> y si el valor <span class="math inline">\(c_0\)</span>
-está incluido en el intervalo, entonces no se rechaza <span
-class="math inline">\(H_0\)</span>, o si el valor <span
-class="math inline">\(c_0\)</span> no está incluido en el intervalo,
-entonces se rechaza <span class="math inline">\(H_0\)</span>.</p>
+<p>por tanto <span class="math inline">\(\widetilde{\sigma}^2\)</span>
+no es un estimador insesgado de <span
+class="math inline">\(\sigma^2\)</span>, aunque si es asintóticamente
+insesgado, esto es, <span
+class="math inline">\({\lim\limits_{n\to\infty}
+E\left[\widetilde\sigma^2\right] = \sigma^2}\)</span>. Sin embargo, a
+partir de <span class="math inline">\(\widetilde{\sigma}^2\)</span> se
+puede obtener un estimador insesgado de la varianza, así: <span
+class="math display">\[
+{\widehat{\sigma}^2 = \left(\frac{n}{n - 2}\right) \widetilde{\sigma}^2
+= \frac{\sum\limits_{i=1}^n (y_i - \widehat{y}_i)^2}{n-2}}
+\]</span></p>
+<p>que cumple <span
+class="math inline">\({E\left[\widehat\sigma^2\right]=\sigma^2}\)</span>.</p>
+</div>
+<div id="ecuación-de-regresión-ajustada-y-residuales-del-modelo"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Ecuación de regresión ajustada y
+residuales del modelo </strong></span></h2>
+<p>Al tener estimados los parámetros del modelo de regresión lineal
+simple (por mínimos cuadrados o máxima verosimilitud), entonces se puede
+realizar una estimación de la respuesta media <span
+class="math inline">\(E\left[Y \vert X\right] = \mu_{Y\vert X}\)</span>,
+a través del modelo ajustado, así: <span class="math display">\[
+\widehat{\mu}_{Y\vert x_i} = \widehat{y}_i = \widehat{\beta}_0 +
+\widehat{\beta}_1\, x_i = \bar{y} + (x_i-\bar{x})\,\widehat{\beta}_1.
+\]</span></p>
+<p>A esta ecuación se le conoce como la ecuación de regresión ajustada,
+que en este caso corresponde a una recta ajustada.</p>
+<p>A las diferencias entre los valores observados de la respuesta <span
+class="math inline">\(y_i\)</span> y los valores ajustados por el modelo
+de regresión <span class="math inline">\(\widehat{y}_i\)</span>
+(obtenidos de la ecuación de regresión ajustada) se les conoce como los
+residuales del modelo. Esto es, <span
+class="math inline">\({e_i=y_i-\widehat{y}_i}\)</span> es el <span
+class="math inline">\(i\)</span>-ésimo residual del modelo, que es una
+estimación del <span class="math inline">\(i\)</span>-ésimo error
+aleatorio, <span class="math inline">\(\varepsilon_i\)</span>.</p>
+<p>Los residuales del modelo tienen gran importancia ya que ellos
+determinan que tan bueno fue el ajuste del modelo y permitirán más
+adelante realizar las validaciones de los supuestos realizados sobre los
+errores aleatorios.</p>
+<p></br></br></p>
 </div>
 
 
