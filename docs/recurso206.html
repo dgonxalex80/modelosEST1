@@ -366,7 +366,22 @@ class="math display">\[\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i -
 \bar{y}\right)^2\]</span></p>
 <p>veamos lo que representa gráficamente cada una de las diferencias que
 componen a la SST.</p>
-<p></br></p>
+<p></br></br></br></p>
+<center>
+<img src="img/grafico1.png" width="90%" style="display: block; margin: auto;" />
+Figura 1: Variabilidd total SST
+</center>
+<p></br></br></br></p>
+<center>
+<img src="img/grafico2.png" width="90%" style="display: block; margin: auto;" />
+Figura 2: Variabilidad en Y al incluir el modelo de RLS
+</center>
+<p></br></br></br></p>
+<center>
+<img src="img/grafico3.png" width="90%" style="display: block; margin: auto;" />
+Figura 3: Enfoque de varianza SST = SSR + SSE
+</center>
+<p></br></br></p>
 <p>De ahí que podamos escribir cada diferencia <span
 class="math inline">\(y_i - \bar{y}\)</span> como:</p>
 <p><span class="math display">\[y_i - \bar{y} = (\widehat{y}_i -
@@ -374,9 +389,8 @@ class="math inline">\(y_i - \bar{y}\)</span> como:</p>
 <p>y reemplazando en la SST, se obtiene:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\text{SST} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &amp;= \sum_{i
-= 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i -
-\widehat{y}_i)\right]^2\\
+SST = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &amp;= \sum_{i = 1}^n
+\left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
 &amp;=\sum^n_{i=1} (\widehat{y}_i - \bar{y})^2 + \sum^n_{i=1}
 (y_i-\widehat{y}_i)^2
 \end{aligned}
@@ -400,8 +414,8 @@ abreviado SSR.</li>
 </ul>
 <p>Se puede demostrar que:</p>
 <p><span class="math display">\[
-\text{SSR} = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 =
-\widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
+SSR = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy}
+= \widehat{\beta}_1^2S_{xx}
 \]</span></p>
 <p></br></p>
 <ul>
@@ -415,11 +429,11 @@ Cuadrados del Error, abreviado SSE.</li>
 </ul>
 <p></br></p>
 <p>Se puede demostrar que: <span class="math display">\[
-\text{SSE} = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2
+SSE = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2
 =  S_{yy}-\widehat{\beta}_1 S_{xy}
 \]</span></p>
 <p>De donde, se obtiene que: <span class="math display">\[
-\text{SST} = \text{SSR} + \text{SSE},
+SST = SSR + SSE
 \]</span></p>
 <p></br></p>
 <p>la cual se conoce como Identidad de Suma de Cuadrados.</p>
@@ -448,11 +462,14 @@ de cuadrados también forman una identidad, así:</p>
 <p>A continuación, se definen los cuadrados medios como la razón entre
 las sumas de cuadrados y sus respectivos grados de libertad. Esto
 es,</p>
+<p></br></p>
 <ul>
-<li><p><span class="math inline">\(\text{MSR} =
-\text{SSR}/\text{g.l(SSR)} = \text{SSR}\)</span>.</p></li>
-<li><p><span class="math inline">\(\text{MSE} =
-\text{SSE}/\text{g.l(SSE)} = \text{SSE}/(n - 2)\)</span>.</p></li>
+<li><span class="math inline">\(MSR = SSR/g.l(SSR) = SSR\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(MSE = SSE/g.l(SSE) = SSE/(n -
+2)\)</span>.</li>
 </ul>
 <p></br></p>
 <p>Con el fin de establecer inferencias basadas en el enfoque del
@@ -460,12 +477,17 @@ análisis de varianza se requiere conocer el valor esperado de cada una
 de los cuadrados medios, es decir, lo que se estima con cada suma de
 cuadrados.</p>
 <p>Se puede demostrar que:</p>
+<p></br></p>
 <ul>
-<li><p><span class="math inline">\(E\left[\text{MSE}\right] =
-\sigma^2\)</span>.</p></li>
-<li><p><span class="math inline">\(E\left[\text{MSR}\right] = \sigma^2 +
-\beta_1^2S_{xx}\)</span>.</p></li>
+<li><span class="math inline">\(E\left[MSE\right] =
+\sigma^2\)</span>.</li>
 </ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(E\left[MSR\right] = \sigma^2 +
+\beta_1^2S_{xx}\)</span>.</li>
+</ul>
+<p></br></p>
 <p>El primer resultado se conocía de la estimación de <span
 class="math inline">\(\sigma^2\)</span> vista previamente.</p>
 <p>Si todas las observaciones <span class="math inline">\(Y_i\)</span>
@@ -477,33 +499,43 @@ de sumas de cuadrados que establece que SST <span
 class="math inline">\(=\)</span> SSR + SSE, con la respectiva identidad
 de grados de libertad <span class="math inline">\((n-1) = 1 +
 (n-2)\)</span>, entonces:</p>
+<p></br></p>
 <ul>
-<li><p><span class="math inline">\(\text{SSR}/\sigma^2\)</span> se
-distribuye como una variable aleatoria Chi-cuadrado con 1 grado de
-libertad.</p></li>
-<li><p><span class="math inline">\(\text{SSE}/\sigma^2\)</span> se
-distribuye como una variable aleatoria Chi-cuadrado con <span
-class="math inline">\(n - 2\)</span> grados de libertad.</p></li>
-<li><p>Los términos <span
-class="math inline">\(\text{SSR}/\sigma^2\)</span> y <span
-class="math inline">\(\text{SSE}/\sigma^2\)</span> son estimaciones
-independientes de <span
-class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><span class="math inline">\(SSR/\sigma^2\)</span> se distribuye como
+una variable aleatoria chi-cuadrado con <span
+class="math inline">\(1\)</span> grado de libertad.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(SSE/\sigma^2\)</span> se distribuye como
+una variable aleatoria chi-cuadrado con <span class="math inline">\(n -
+2\)</span> grados de libertad.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Los términos <span class="math inline">\(SSR/\sigma^2\)</span> y
+<span class="math inline">\(SSE/\sigma^2\)</span> son estimaciones
+independientes de <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
 <p>De lo anterior, se considera el siguiente estadístico:</p>
+<p></br></p>
 <p><span class="math display">\[
-F_0=\frac{\text{SSR}/\sigma^2}{\text{SSE}/\left[\sigma^2(n-2)\right]}=\frac{\text{MSR}}{\text{MSE}}
+F_0 =
+\dfrac{SSR/\sigma^2}{SSE/\left[\sigma^2(n-2)\right]}=\dfrac{MSR}{MSE}
 \]</span></p>
+<p></br></p>
 <p>que bajo la hipótesis nula <span class="math inline">\({H_0:\ \beta_1
 = 0}\)</span>, se distribuye como una <span
 class="math inline">\(F\)</span> con 1 y <span class="math inline">\(n -
 2\)</span> grados de libertad:</p>
+<p></br></p>
 <p>En el caso de la regresión lineal simple, la prueba sobre la
 significancia de la regresión (es decir, si la pendiente de la recta es
 significativamente diferente de cero) puede realizarse mediante el
 análisis de varianza usando un valor crítico <span
 class="math inline">\({F_{\alpha, 1, n - 2}}\)</span> de la distribución
 <span class="math inline">\({F}\)</span>.</p>
+<p></br></p>
 <p>Esto es, a un nivel de significancia <span
 class="math inline">\({\alpha}\)</span> se rechaza la hipótesis nula de
 que la variabilidad en la variable respuesta es debida sólo al error
@@ -584,7 +616,8 @@ medida del ajuste del modelo que provee un indicador de que tan bien la
 predictora <span class="math inline">\(X\)</span> predice a la respuesta
 <span class="math inline">\(Y\)</span>. Se calcula como:</p>
 <p><span class="math display">\[
-R^2 = \frac{\text{SSR}}{\text{SST}} = 1-\frac{\text{SSE}}{\text{SST}}.
+R^2 \hspace{.3cm} = \hspace{.3cm} \dfrac{SSR}{SST} \hspace{0.3cm}=
+\hspace{.3cm} 1-\frac{SSE}{SST}
 \]</span></p>
 <p>El <span class="math inline">\(R^2\)</span> se puede interpretar como
 la proporción de la variabilidad total observada en la variable

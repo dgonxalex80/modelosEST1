@@ -25,6 +25,7 @@ La **modelación** forma parte principal del proceso de análisis de datos y per
 ```{r, echo=FALSE, out.width="50%", fig.align = "center"}
 knitr::include_graphics("img/proceso_cd.png")
 ```
+
 <center>Tomado de : Ciencias de Datos para Gente Sociable</center>
 
 </br></br>

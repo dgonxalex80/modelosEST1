@@ -61,8 +61,35 @@ $$\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2$$
 
 veamos lo que representa gráficamente cada una de las diferencias que componen a la SST.
 
+</br></br></br>
 
-</br>
+<center>
+
+```{r,  echo = F, fig.align = 'center', out.width = '90%'}
+knitr::include_graphics("img/grafico1.png")
+```
+Figura 1: Variabilidd total SST
+</center>
+
+</br></br></br>
+
+<center>
+```{r, echo = F, fig.align = 'center', out.width = '90%'}
+knitr::include_graphics("img/grafico2.png")
+```
+Figura 2: Variabilidad en Y al incluir el modelo de RLS
+</center>
+
+</br></br></br>
+
+<center>
+```{r, echo = F, fig.align = 'center', out.width = '90%'}
+knitr::include_graphics("img/grafico3.png")
+```
+Figura 3: Enfoque de varianza SST = SSR + SSE
+</center>
+
+</br></br>
 
 De ahí que podamos escribir cada diferencia $y_i - \bar{y}$ como:
 
@@ -73,7 +100,7 @@ y reemplazando en la SST, se obtiene:
 
 $$
 \begin{aligned}
-\text{SST} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
+SST = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
 &=\sum^n_{i=1} (\widehat{y}_i - \bar{y})^2 + \sum^n_{i=1} (y_i-\widehat{y}_i)^2
 \end{aligned}
 $$
@@ -97,7 +124,7 @@ Así, la suma de cuadrados totales SST queda expresada mediante la suma de dos c
 Se puede demostrar que:
 
 $$
-\text{SSR} = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
+SSR = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
 $$
 
 </br>
@@ -108,12 +135,12 @@ $$
 
 Se puede demostrar que:
 $$
-\text{SSE} = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2 =  S_{yy}-\widehat{\beta}_1 S_{xy}
+SSE = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2 =  S_{yy}-\widehat{\beta}_1 S_{xy}
 $$
 
 De donde, se obtiene que:
 $$
-\text{SST} = \text{SSR} + \text{SSE},
+SST = SSR + SSE
 $$
 
 </br>
@@ -143,9 +170,13 @@ $\begin{array}{ccccc}
 
 A continuación, se definen los cuadrados medios como la razón entre las sumas de cuadrados y sus respectivos grados de libertad. Esto es,
 
-* $\text{MSR} = \text{SSR}/\text{g.l(SSR)} = \text{SSR}$.
+</br>
 
-* $\text{MSE} = \text{SSE}/\text{g.l(SSE)} = \text{SSE}/(n - 2)$.
+* $MSR = SSR/g.l(SSR) = SSR$.
+
+</br>
+
+* $MSE = SSE/g.l(SSE) = SSE/(n - 2)$.
 
 </br>
 
@@ -153,31 +184,50 @@ Con el fin de establecer inferencias basadas en el enfoque del análisis de vari
 
 Se puede demostrar que:
 
-* $E\left[\text{MSE}\right] = \sigma^2$.
+</br>
 
-* $E\left[\text{MSR}\right] = \sigma^2 + \beta_1^2S_{xx}$.
+* $E\left[MSE\right] = \sigma^2$.
+
+</br>
+
+* $E\left[MSR\right] = \sigma^2 + \beta_1^2S_{xx}$.
+
+</br>
 
 El primer resultado se conocía de la estimación de $\sigma^2$ vista previamente.
 
 Si todas las observaciones $Y_i$ provienen de la misma distribución normal con media $\mu = \beta_0$ (esto es, si $\beta_1 = 0$) y varianza $\sigma^2$, y además se tiene la identidad de sumas de cuadrados que establece que SST $=$ SSR + SSE, con la respectiva identidad de grados de libertad $(n-1) = 1 + (n-2)$, entonces:
 
-* $\text{SSR}/\sigma^2$ se distribuye como una variable aleatoria Chi-cuadrado con 1 grado de libertad.
+</br>
 
-* $\text{SSE}/\sigma^2$ se distribuye como una variable aleatoria Chi-cuadrado con $n - 2$ grados de libertad.
+* $SSR/\sigma^2$ se distribuye como una variable aleatoria chi-cuadrado con $1$ grado de libertad.
 
-* Los términos $\text{SSR}/\sigma^2$ y $\text{SSE}/\sigma^2$ son estimaciones independientes de $\sigma^2$.
+</br>
+
+* $SSE/\sigma^2$ se distribuye como una variable aleatoria chi-cuadrado con $n - 2$ grados de libertad.
+
+</br>
+
+* Los términos $SSR/\sigma^2$ y $SSE/\sigma^2$ son estimaciones independientes de $\sigma^2$.
 
 
 De lo anterior, se considera el siguiente estadístico:
 
+</br>
+
 $$
-F_0=\frac{\text{SSR}/\sigma^2}{\text{SSE}/\left[\sigma^2(n-2)\right]}=\frac{\text{MSR}}{\text{MSE}}
+F_0 = \dfrac{SSR/\sigma^2}{SSE/\left[\sigma^2(n-2)\right]}=\dfrac{MSR}{MSE}
 $$
+
+</br>
 
 que bajo la hipótesis nula ${H_0:\ \beta_1 = 0}$, se distribuye como una $F$ con 1 y $n - 2$ grados de libertad:
 
+</br>
 
 En el caso de la regresión lineal simple, la prueba sobre la significancia de la regresión (es decir, si la pendiente de la recta es significativamente diferente de cero) puede realizarse mediante el análisis de varianza usando un valor crítico ${F_{\alpha, 1, n - 2}}$ de la distribución ${F}$.
+
+</br>
 
 Esto es, a un nivel de significancia ${\alpha}$ se rechaza la hipótesis nula de que la variabilidad en la variable respuesta es debida sólo al error aleatorio (en favor de la hipótesis de que la regresión en ${X}$ es significativa) si ${F_0 > F_{\alpha, 1, n - 2}}$.
 
@@ -211,7 +261,7 @@ La conclusión obtenida por el análisis de varianza debe ser la misma que la ob
 Conocido como $R^{2}$, es una medida del ajuste del modelo que provee un indicador de que tan bien la predictora $X$ predice a la respuesta $Y$. Se calcula como:
 
 $$
-R^2 = \frac{\text{SSR}}{\text{SST}} = 1-\frac{\text{SSE}}{\text{SST}}.
+R^2 \hspace{.3cm} = \hspace{.3cm} \dfrac{SSR}{SST} \hspace{0.3cm}= \hspace{.3cm} 1-\frac{SSE}{SST}
 $$
            
 El $R^2$ se puede interpretar como la proporción de la variabilidad total observada en la variable respuesta que es explicada por la relación lineal con la variable predictora considerada.
