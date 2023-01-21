@@ -472,7 +472,9 @@ Se puede observar que las variables más relacionadas (con mayor correlación) s
 
 </br></br>
 
-<span style="color:#FF7F00"> **Nota**</span>
+<div class="content-box-blue">
+
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Para el caso de variables cualitativas existen varios indicadores para medir el grado de asociación entre ellas como son:
 
@@ -500,6 +502,8 @@ Para el caso de variables cualitativas existen varios indicadores para medir el 
 </br></br>
 
 **Prueba chi-cuadrado de Pearson** : Determina si las diferencias entre las frecuencias observadas en una tabla de contingencia y las frecuencias esperadas, suponiendo que las variables son independientes, son estadísticamente significativas. En caso de rechazarse Ho, se concluye que las variables son independientes, en caso contrario se asume que hay una relación entre ellas (dependencia).
+
+</div>
 
 </br></br>
 

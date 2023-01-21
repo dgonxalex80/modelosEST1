@@ -47,6 +47,8 @@ Donde $Y_{i}$, es la variable respuesta o dependiente y el conjunto de variables
 En esta unidad se presentan los conceptos básicos de la modelación estaística, particularmente del **modelo de regresión lineal simple**, los supuestos que lo riguen y el proceso de inferencia estadísticas relacionada con los parámetros. Previamente se discute el concepto de correlación.
 
 </br>
-
+<div class="content-box-blue">
 $$Y_i = \beta_0 + \beta_1X_{i} + \varepsilon_i,\hspace{1cm} i = 1, \ldots, n,$$
+</div>
+
 </br></br>

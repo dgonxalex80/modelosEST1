@@ -450,6 +450,7 @@ class="math inline">\({y}\)</span>: <span class="math display">\[
 \]</span></li>
 </ul>
 <p></br></br></p>
+<div class="content-box-blue">
 <p><span style="color:#FF7F00"><strong>NOTA:</strong></span></p>
 <p></br></p>
 <p><span class="math inline">\({\widehat{\beta}_1}\)</span> puede ser
@@ -458,6 +459,7 @@ de <span class="math inline">\({S_{xx}}\)</span> así:</p>
 <p><span class="math display">\[
 {\widehat{\beta}_1=\frac{S_{xy}}{S_{xx}}}
 \]</span></p>
+</div>
 <p></br></br></p>
 </div>
 <div id="ecuación-de-regresión-ajustada-y-residuales-del-modelo"
@@ -496,6 +498,7 @@ de mínimos cuadrados</strong></span></h2>
 <p></br></p>
 <p>Bajo los supuestos considerados respecto a los errores tenemos
 que:</p>
+<div class="content-box-blue">
 <p><strong>P1</strong>. <span
 class="math inline">\({\widehat\beta_0}\)</span> y <span
 class="math inline">\({\widehat\beta_1}\)</span> son combinaciones
@@ -521,11 +524,14 @@ class="math display">\[{\sum^n_{i=1} m_i = 1,\quad \quad
 <p><span class="math display">\[{\sum^n_{i=1} c_i^2 =
 \frac{1}{S_{xx}},\quad \quad \sum^n_{i=1} m_i^2 =
 \frac{\sum\limits_{i=1}^n x_i^2}{nS_{xx}}.}\]</span></p>
+</div>
 <p>Además, como <span class="math inline">\({Y_1, \ldots, Y_n}\)</span>
 son variables normales e incorrelacionadas, entonces <span
 class="math inline">\({\widehat\beta_0}\)</span> y <span
-class="math inline">\({\widehat\beta_1}\)</span> son .</p>
+class="math inline">\({\widehat\beta_1}\)</span> son variables
+aleatorias normales.</p>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P2</strong>. El valor esperado de los estimadores, es: <span
 class="math display">\[
 \begin{aligned}
@@ -543,7 +549,9 @@ Y_i\right]= \sum^n_{i=1} c_i\, E\left[Y_i\right]}\nonumber \\
 c_i + \beta_1\sum^n_{i=1} c_i\, x_i = \beta_1}
 \end{aligned}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P3</strong>. La varianza de los estimadores, es:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -561,7 +569,9 @@ Y_{i}\right] =  \sum^n_{i=1} c^2_i\, V\left[Y_i\right]}\nonumber\\
 &amp;= {\frac{\sigma^2}{S_{xx}}}
 \end{aligned}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P4</strong>. La varianza de la respuesta ajustada en un valor
 dado <span class="math inline">\({X=x_i}\)</span>, es:</p>
 <p><span class="math display">\[
@@ -576,7 +586,9 @@ c_j\right]^2}\nonumber\\
 \frac{(x_i-\bar{x})^2}{S_{xx}}\right]}
 \end{aligned}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P5</strong>. La covarianza (cov) entre los estimadores de los
 parámetros es:</p>
 <p><span class="math display">\[
@@ -592,7 +604,9 @@ Y_j\right]}\nonumber\\
 &amp;= {-\frac{\sigma^2\bar{x}}{S_{xx}}}
 \end{aligned}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p>**P6*. La covarianza entre la variable respuesta y su correspondiente
 estimador en un valor dado <span class="math inline">\({X=x_i}\)</span>
 es: <span class="math display">\[
@@ -609,35 +623,46 @@ i}(m_j + x_i\, c_j)\text{cov}\left[Y_i, Y_j\right]}\nonumber\\
 \bar{x})^2}{S_{xx}}\right]}
 \end{aligned}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P7</strong>. La suma de los residuales del modelo de
 regresión con intercepto es siempre cero:</p>
 <p><span class="math display">\[
 {\sum^n_{i=1} e_i = 0}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P8</strong>. La suma de los valores observados <span
 class="math inline">\({y_i}\)</span> es igual a la suma de los valores
 ajustados <span class="math inline">\({\widehat{y}_i}\)</span>: <span
 class="math display">\[
 {\sum^n_{i=1} y_i = \sum^n_{i=1} \widehat{y}_i}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P9</strong>. La línea de regresión siempre pasa a través del
 centroide de los datos <span
 class="math inline">\({(\bar{x},\bar{y})}\)</span>.</p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P10</strong>. La suma de los residuales ponderados por el
 correspondiente valor de la variable predictora es cero: <span
 class="math display">\[
 {\sum^n_{i=1} x_i\, e_i = 0}
 \]</span></p>
+</div>
 <p></br></p>
+<div class="content-box-blue">
 <p><strong>P11</strong>. La suma de los residuales ponderados por el
 correspondiente valor ajustado es siempre igual a cero:</p>
 <p><span class="math display">\[
 {\sum^n_{i=1}\widehat{y}_i\, e_i = 0}
 \]</span></p>
+</div>
 </div>
 
 

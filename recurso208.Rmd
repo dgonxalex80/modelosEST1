@@ -79,31 +79,38 @@ $$
 &{=(2\pi\sigma^2)^{-n/2}\exp\left[-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right]}
 \end{aligned}
 $$
-
+</br>
 
 El objetivo es hallar los parámetros desconocidos ${\beta_0,\beta_1,\sigma^2}$, que maximicen ${L}$, o equivalentemente, que maximicen ${\ln L}$ (el logaritmo natural de ${L}$). 
 $$
-{\ln L=-\frac{n}{2}\ln(2\pi)-\frac{n}{2}\ln(\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2}
+{\ln L=-\frac{n}{2}\ln(2\pi)-\frac{n}{2}\ln(\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n \big(y_i-\beta_0-\beta_1x_i\big)^2}
 $$
 
+ </br>
  
 Observe que para cualquier valor de ${\sigma^2}$ fijo, ${\ln L}$ es maximizado como una función de ${\beta_0}$ y ${\beta_1}$ por aquellos valores ${\widetilde{\beta}_0}$ y ${\widetilde{\beta}_1}$ que minimizan ${S(\beta_0,\beta_1)=\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2}$ y así, los estimadores MLE $\ {\widetilde{\beta}_0}$ y ${\widetilde{\beta}_1}$ son iguales a los respectivos estimadores de mínimos cuadrados, ${\widehat{\beta}_0}$ y ${\widehat{\beta}_1}$.
 
 
+</br>
 
 Para hallar el estimador MLE para ${\sigma^2}$ substituimos ${\widehat{\beta}_0}$ y ${\widehat{\beta}_1}$ en ${\ln L}$, y hallamos ${\sigma^2}$ que maximiza
+
 $$
 {-\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) - \frac{1}{2\sigma^2}\sum\limits_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1x_i)^2}
 $$
 
 
 de donde obtenemos como estimador MLE de ${\sigma^2}$ a
+
 $$
 {\widetilde{\sigma}^2 = \frac{1}{n}\sum\limits_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1x_i)^2 = \frac{1}{n}\sum\limits_{i=1}^n (y_i - \widehat{y}_i)^2}
 $$
 
+</br>
 
 Resumiendo, bajo el modelo de regresión lineal normal, es decir, con errores independientes e idénticamente distribuidos ${N\left(0, \sigma^2\right)}$, los estimadores de mínimos cuadrados para ${\beta_0}$ y ${\beta_1}$ son también estimadores de máxima verosimilitud y en tal caso, podemos construir intervalos de confianza y realizar pruebas de hipótesis basadas en las estimaciones obtenidas.
+
+</br>
 
 También puede demostrarse que los estimadores MLE son de mínima varianza cuando son comparados con todos los posibles estimadores insesgados y son consistentes, es decir, a medida que aumenta el tamaño de muestra, la diferencia entre éstos y los respectivos parámetros se aproxima a cero.
 
@@ -127,17 +134,26 @@ $$
  
 que cumple ${E\left[\widehat\sigma^2\right]=\sigma^2}$.
 
+</br></br>
+
 ## <span style="color:#034a94">**Ecuación de regresión ajustada y residuales del modelo **</span>
+
+</br>
 
 Al tener estimados los parámetros del modelo de regresión lineal simple (por mínimos cuadrados o máxima verosimilitud), entonces se puede realizar una estimación de la  respuesta media $E\left[Y \vert X\right] = \mu_{Y\vert X}$, a través del modelo ajustado, así:
 $$
 \widehat{\mu}_{Y\vert x_i} = \widehat{y}_i = \widehat{\beta}_0 + \widehat{\beta}_1\, x_i = \bar{y} + (x_i-\bar{x})\,\widehat{\beta}_1.
 $$
-  
+
+</br>
+
 A esta ecuación se le conoce como la ecuación de regresión ajustada, que en este caso corresponde a una recta ajustada.
 
+</br>
 
 A las diferencias entre los valores observados de la respuesta $y_i$ y los valores ajustados por el modelo de regresión $\widehat{y}_i$ (obtenidos de la ecuación de regresión ajustada) se les conoce como los residuales del modelo. Esto es, ${e_i=y_i-\widehat{y}_i}$ es el $i$-ésimo residual del modelo, que es una estimación del $i$-ésimo error aleatorio, $\varepsilon_i$.
+
+</br>
 
 Los residuales del modelo tienen gran importancia ya que ellos determinan que tan bueno fue el ajuste del modelo y permitirán más adelante realizar las validaciones de los supuestos realizados sobre los errores aleatorios.
 

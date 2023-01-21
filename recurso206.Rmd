@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94"> **Análiss de varianza - ANOVA**</span>
+title: <span style="color:#034a94"> **Análisis de varianza - ANOVA**</span>
 author: "Nivelatorio de Estadística"
 output: html_document
 css: style.css
@@ -26,8 +26,10 @@ df0 <- df
 
 <br/><br/>
 
-## Análisis de varianza para probar la significancia de la regresión {#anova}
+## <span style="color:#034a94">**Como prueba de significancia de la regresión**</span> 
 
+</br>
+<center>
 ```{r, include = F}
 set.seed(1256)
 x <- rep(seq(50, 150, 20), 3)
@@ -38,18 +40,19 @@ with(df, {plot(x, y, pch = 19)
    lines(c(50, 100, 150), c(400, 200, 400), type = 's')
 })
 ```
+</center>
+Para el modelo de regresión lineal simple $Y = \beta_{0}+\beta_{1}X + \varepsilon$ se quiere probar:
 
-Se quiere probar:
 $$
 \begin{aligned}
 {H_0:\ \beta_1 = 0}\nonumber\\
 {H_1:\ \beta_1 \neq 0}\nonumber
 \end{aligned}
 $$
+Con base en una descomposición de la variabilidad total observada en la variable respuesta, representada por la suma de cuadrados corregidos en $Y$, $S_{yy}$ (también conocida como suma de cuadrados totales, abreviado SST), en la suma de dos componentes: una debida al modelo propuesto (recta ajustada) y otra debida al error aleatorio.
 
-con base en una descomposición de la variabilidad total observada en la variable respuesta, representada por la suma de cuadrados corregidos en $Y$, $S_{yy}$ (también conocida como suma de cuadrados totales, abreviado SST), en la suma de dos componentes: una debida al modelo propuesto (recta ajustada) y otra debida al error aleatorio.
-
----
+$$SST =(n-1)\hspace{.2cm} \widehat{\sigma}^{2}_{y} =  \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2$$
+</br></br>
 
 Recuerde que el modelo de RLS plantea que la respuesta es igual a la suma de una componente real no aleatoria ${\beta_0+\beta_1X}$ y un error aleatorio ${\varepsilon}$. Se espera que la recta ajustada explique en forma significativa la variabilidad observada en $Y$.
 
@@ -58,111 +61,16 @@ $$\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2$$
 
 veamos lo que representa gráficamente cada una de las diferencias que componen a la SST.
 
----
 
-**Variabilidad total en $\boldsymbol{Y}$**
-
-```{r, echo = F, fig.align = 'center', out.width = '80%'}
-df0 <- df
-df0$predicted <- mean(df0$y)
-ggplot(df0, aes(x = x, y = y)) +
-   geom_hline(yintercept = mean(y), color = 'orange', size = 2) +
-   geom_segment(aes(xend = x, yend = predicted), alpha = .5, size = 2) +
-   geom_point(size = 5) +
-   geom_point(aes(y = predicted), shape = 4, size = 3) +
-   annotate("text", x = df0[5, 2], y = df0[5, 1] + 25, label = "y[i]", parse = T, size = 7) +
-   annotate("text", x = df0[5, 2], y = mean(y) - 30, label = "bar(y)", parse = T, size = 7) +
-   annotate("text", x = df[5, 2] + 9, y = mean(c(df[5, 1], mean(y))) + 5, label = "y[i] - bar(y)", parse = T,
-            size = 7, color = 'blue') +
-   annotate("segment", x = df[5, 2] + 3, xend = df[5, 2] + 3, y = mean(y) + 5, yend = df[5, 1] - 5, colour = "blue",
-            size = 2) +
-   annotate("segment", x = df[5, 2], xend = df[5, 2] + 3, y = mean(y), yend = mean(y) + 5, colour = "blue",
-            size = 2) +
-   annotate("segment", x = df[5, 2], xend = df[5, 2] + 3, y = df[5, 1], yend = df[5, 1] - 5, colour = "blue",
-            size = 2) +
-   theme_bw(base_size = 20)
-```
-
----
-
-**Variabilidad en $\boldsymbol{Y}$ al incluir el modelo de RLS**
-
-```{r, echo = F, fig.align = 'center', out.width = '80%'}
-df1 <- df
-fit1 <- lm(y ~ x, data = df1)
-betas <- summary(fit1)$coefficients
-df1$predicted <- predict(fit1)
-p5 <- df1$predicted[5]
-ggplot(df1, aes(x = x, y = y)) +
-   geom_abline(intercept = betas[1], slope = betas[2], color = 'gray', size = 2) +
-   geom_segment(aes(xend = x, yend = predicted), alpha = .5, size = 2) +
-   geom_point(size = 5) +
-   geom_point(aes(y = predicted), shape = 4, size = 3) +
-   annotate("text", x = df1[5, 2], y = df1[5, 1] + 20, label = "y[i]", parse = T, size = 7) +
-   annotate("text", x = df1[5, 2] - 9, y = p5 + 4, label = "widehat(y)[i]", parse = T, size = 7) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 7, y = p5, yend = p5, size = 1) +
-   annotate("text", x = df1[5, 2] - 7, y = mean(c(df1[5, 1], p5)) + 4, label = "y[i] - widehat(y)[i]", parse = T,
-            size = 7, color = 'red') +
-   annotate("segment", x = df1[5, 2] - 2, xend = df1[5, 2] - 2, y = p5 + 5, yend = df1[5, 1] - 5, colour = "red",
-            size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 2, y = p5, yend = p5 + 5, colour = "red", size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 2, y = df1[5, 1], yend = df1[5, 1] - 5, colour = "red",
-            size = 2) +
-   theme_bw(base_size = 20)
-```
-
----
-
-**Ilustración del enfoque de varianza**
-
-```{r, echo = F, fig.align = 'center', out.width = '80%'}
-df1 <- df
-fit1 <- lm(y ~ x, data = df1)
-df1$predicted <- predict(fit1)
-betas <- summary(fit1)$coefficients
-p5 <- df1$predicted[5]
-ggplot(df1, aes(x = x, y = y)) +
-   geom_hline(yintercept = mean(y), color = 'orange', size = 2) +
-   geom_abline(intercept = betas[1], slope = betas[2], color = 'gray', size = 2) +
-   geom_segment(aes(xend = x, yend = mean(y)), alpha = .5, size = 2) +
-   geom_point(size = 5) +
-   geom_point(aes(y = predicted), shape = 4, size = 3) +
-   annotate("text", x = df1[5, 2], y = df1[5, 1] + 20, label = "y[i]", parse = T, size = 7) +
-   annotate("text", x = df1[5, 2], y = mean(y) - 22, label = "bar(y)", parse = T, size = 7) +
-   annotate("text", x = df1[5, 2] - 9, y = p5 + 4, label = "widehat(y)[i]", parse = T, size = 7) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 7, y = p5, yend = p5, size = 1) +
-   annotate("text", x = df1[5, 2] + 9, y = mean(c(df1[5, 1], mean(y))) + 5, label = "y[i] - bar(y)", parse = T,
-            size = 7, color = 'blue') +
-   annotate("segment", x = df1[5, 2] + 3, xend = df1[5, 2] + 3, y = mean(y) + 5, yend = df1[5, 1] - 5,
-            colour = "blue", size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] + 3, y = mean(y), yend = mean(y) + 5, colour = "blue",
-            size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] + 3, y = df1[5, 1], yend = df1[5, 1] - 5, colour = "blue",
-            size = 2) +
-   annotate("text", x = df1[5, 2] - 9, y = mean(c(df1[5, 1], p5)) + 4, label = "y[i] - widehat(y)[i]", parse = T,
-            size = 7, color = 'red') +
-   annotate("segment", x = df1[5, 2] - 3, xend = df1[5, 2] - 3, y = p5 + 5, yend = df1[5, 1] - 5, colour = "red",
-            size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = p5, yend = p5 + 5, colour = "red", size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = df1[5, 1], yend = df1[5, 1] - 5, colour = "red",
-            size = 2) +
-   annotate("text", x = df1[5, 2] - 9, y = mean(c(p5, mean(y))) - 4, label = "widehat(y)[i] - bar(y)", parse = T,
-            size = 7, color = 'darkgreen') +
-   annotate("segment", x = df1[5, 2] - 3, xend = df1[5, 2] - 3, y = p5 - 5, yend = mean(y) + 5, colour = "darkgreen",
-            size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = p5, yend = p5 - 5, colour = "darkgreen",
-            size = 2) +
-   annotate("segment", x = df1[5, 2], xend = df1[5, 2] - 3, y = mean(y), yend = mean(y) + 5, colour = "darkgreen",
-            size = 2) +
-   theme_bw(base_size = 20)
-```
-
----
+</br>
 
 De ahí que podamos escribir cada diferencia $y_i - \bar{y}$ como:
+
 $$y_i - \bar{y} = (\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)$$
+</br>
 
 y reemplazando en la SST, se obtiene:
+
 $$
 \begin{aligned}
 \text{SST} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
@@ -170,40 +78,51 @@ $$
 \end{aligned}
 $$
 
-(**Tarea:** comprobar que $2\sum_{i = 1}^n (\widehat{y}_i - \bar{y}) (y_i - \widehat{y}_i) = 0$)
+</br></br>
 
----
+<div class="content-box-blue">
+
+### <span style="color:#FF7F00">**Reto:**</span> 
+
+Comprobar que $2\sum_{i = 1}^n (\widehat{y}_i - \bar{y}) (y_i - \widehat{y}_i) = 0$
+
+</div>
+
+</br></br>
 
 Así, la suma de cuadrados totales SST queda expresada mediante la suma de dos componentes, a saber:
   
 * $\sum^n_{i=1}(\widehat{y}_i-\bar{y})^2$, que está relacionada con las diferencias entre los valores ajustados por el modelo de regresión y el promedio de las observaciones de la respuesta, al cual se le conoce como Suma de Cuadrados de la Regresión, abreviado SSR.
 
-  Se puede demostrar que:
+Se puede demostrar que:
+
 $$
 \text{SSR} = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
 $$
 
----
+</br>
 
 * $\sum^n_{i=1}(y_i-\widehat{y}_i)^2$, que está relacionada con las diferencias entre las observaciones de la respuesta y los valores ajustados por el modelo de regresión, esto es, los residuales del modelo (que son estimaciones de los errores del modelo), por lo que a esta componente se le conoce como Suma de Cuadrados del Error, abreviado SSE.
 
-  Se puede demostrar que:
+</br>
+
+Se puede demostrar que:
 $$
 \text{SSE} = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2 =  S_{yy}-\widehat{\beta}_1 S_{xy}
 $$
-
----
 
 De donde, se obtiene que:
 $$
 \text{SST} = \text{SSR} + \text{SSE},
 $$
-  
+
+</br>
+
 la cual se conoce como Identidad de Suma de Cuadrados.
 
 Cada una de estas sumas de cuadrados tiene asociados unos grados de libertad (g.l), que representan la cantidad de información libre en la suma de cuadrados. Una forma de calcular los g.l es la diferencia entre el número de observaciones y el número de parámetros estimados en la suma de cuadrados.
 
----
+</br>
 
 * Se sabe que SST se construye con $n$ observaciones y se estima la media de la respuesta con el promedio, de manera que SST tiene $n - 1$ g.l.
 
@@ -211,9 +130,10 @@ Cada una de estas sumas de cuadrados tiene asociados unos grados de libertad (g.
 
 * Finalmente, SSR solo tiene dos observaciones (los estimadores de los parámetros) y se estima un parámetro, de donde SSR tiene sólo 1 g.l.
 
----
+</br>
 
 En virtud de lo anterior, los grados de libertad (g.l) de las sumas de cuadrados también forman una identidad, así:
+
 \begin{center}
 $\begin{array}{ccccc}
 \text{g.l(SST)} & = & \text{g.l(SSR)} & + & \text{g.l(SSE)}\\
@@ -227,7 +147,7 @@ A continuación, se definen los cuadrados medios como la razón entre las sumas 
 
 * $\text{MSE} = \text{SSE}/\text{g.l(SSE)} = \text{SSE}/(n - 2)$.
 
----
+</br>
 
 Con el fin de establecer inferencias basadas en el enfoque del análisis de varianza se requiere conocer el valor esperado de cada una de los cuadrados medios, es decir, lo que se estima con cada suma de cuadrados.
 
@@ -239,8 +159,6 @@ Se puede demostrar que:
 
 El primer resultado se conocía de la estimación de $\sigma^2$ vista previamente.
 
----
-
 Si todas las observaciones $Y_i$ provienen de la misma distribución normal con media $\mu = \beta_0$ (esto es, si $\beta_1 = 0$) y varianza $\sigma^2$, y además se tiene la identidad de sumas de cuadrados que establece que SST $=$ SSR + SSE, con la respectiva identidad de grados de libertad $(n-1) = 1 + (n-2)$, entonces:
 
 * $\text{SSR}/\sigma^2$ se distribuye como una variable aleatoria Chi-cuadrado con 1 grado de libertad.
@@ -249,132 +167,73 @@ Si todas las observaciones $Y_i$ provienen de la misma distribución normal con 
 
 * Los términos $\text{SSR}/\sigma^2$ y $\text{SSE}/\sigma^2$ son estimaciones independientes de $\sigma^2$.
 
----
 
 De lo anterior, se considera el siguiente estadístico:
+
 $$
 F_0=\frac{\text{SSR}/\sigma^2}{\text{SSE}/\left[\sigma^2(n-2)\right]}=\frac{\text{MSR}}{\text{MSE}}
 $$
 
 que bajo la hipótesis nula ${H_0:\ \beta_1 = 0}$, se distribuye como una $F$ con 1 y $n - 2$ grados de libertad:
 
----
 
 En el caso de la regresión lineal simple, la prueba sobre la significancia de la regresión (es decir, si la pendiente de la recta es significativamente diferente de cero) puede realizarse mediante el análisis de varianza usando un valor crítico ${F_{\alpha, 1, n - 2}}$ de la distribución ${F}$.
 
 Esto es, a un nivel de significancia ${\alpha}$ se rechaza la hipótesis nula de que la variabilidad en la variable respuesta es debida sólo al error aleatorio (en favor de la hipótesis de que la regresión en ${X}$ es significativa) si ${F_0 > F_{\alpha, 1, n - 2}}$.
 
----
+</br></br>
 
-**Tabla de Análisis de Varianza para el modelo de RLS.**
+## <span style="color:#034a94">**Tabla de Análisis de Varianza para el modelo de RLS.**</span>
          
+</br>
+
 | Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | F calculada |
 |----|----|----|-----|----|
-| Regresión o Modelo | SSR | 1 | $\small \text{MSR} = \text{SSR}$ | $F_0=\frac{\text{MSR}}{\text{MSE}}$ |
+| Regresión o Modelo | SSR | 1 | $\small \text{MSR} = \text{SSR}$ | $F_{_{0}}=\frac{\text{MSR}}{\text{MSE}}$ |
 | Error o Residual | SSE | $n-2$ | $\text{MSE} = \frac{\text{SSE}}{n-2}$ |
 | Total | SST | $n-1$| | |
 
----
+</br>
 
 También se puede evaluar el valor ${p}$ de la prueba (\emph{significancia más pequeña que conduce al rechazo de ${H_0}$}) que es igual a ${P(F_{1,n-2}>F_{0})}$ y determinar si es "pequeño" para rechazar la hipótesis nula: "el modelo lineal de ${Y}$ en ${X}$ no es significativo para explicar la variabilidad de ${Y}$".
 
-La conclusión obtenida por el análisis de varianza debe ser la misma que la obtenida cuando se prueba la significancia de la pendiente de la recta de regresión.
-         
-## $\boldsymbol{R^2}$ de una regresión: Coeficiente de determinación muestral
+</br>
 
-Es una medida del ajuste del modelo que provee un indicador de que tan bien la predictora $X$ predice a la respuesta $Y$. Se calcula como:
+La conclusión obtenida por el análisis de varianza debe ser la misma que la obtenida cuando se prueba la significancia de la pendiente de la recta de regresión.
+
+
+</br></br>
+
+## <span style="color:#034a94">**Coeficiente de determinación muestral**</span>
+
+</br>
+
+Conocido como $R^{2}$, es una medida del ajuste del modelo que provee un indicador de que tan bien la predictora $X$ predice a la respuesta $Y$. Se calcula como:
+
 $$
 R^2 = \frac{\text{SSR}}{\text{SST}} = 1-\frac{\text{SSE}}{\text{SST}}.
 $$
            
 El $R^2$ se puede interpretar como la proporción de la variabilidad total observada en la variable respuesta que es explicada por la relación lineal con la variable predictora considerada.
 
----
+</br></br>
 
-**Interpretaciones erróneas de $\boldsymbol{R^2}$.**
+<div class="content-box-blue">
 
-* Un $R^2$ alto indica que el modelo puede hacer predicciones útiles.
+### <span style="color:#FF7F00">**Interpretaciones erróneas**
 
-* Un $R^2$ alto indica que la recta de regresión tiene buen ajuste.
+* $R^2$ alto indica que el modelo puede hacer predicciones útiles.
 
-* Un $R^2$ cercano a cero indica que $X$ y $Y$ no están relacionados.
+* $R^2$ alto indica que la recta de regresión tiene buen ajuste.
+
+* $R^2$ cercano a cero indica que $X$ y $Y$ no están relacionados.
+
+</div>
 
 Las dos primeras indican que aunque un $R^2$ cercano a 1 indica una mayor asociación lineal, no necesariamente garantiza que los supuestos básicos del modelo lineal se estén cumpliendo y menos que el modelo lineal no pueda presentar falta de ajuste.
 
----
+</br>
 
-```{r, include = F}
-dfn <- df
-set.seed(1256)
-dfn$y <- 62 + 3.5*dfn$x + rnorm(18, sd = 35)
-dfn$y2 <- 0.025*dfn$x^2+90 + rnorm(18, sd = 35)
-dfn$y3 <- 0.2*(dfn$x-100)^2+250 + rnorm(18, sd = 35)
-set.seed(1298)
-dfn$y2 <- 0.025*dfn$x^2+90 + rnorm(18, sd = 35)
-lm1 <- summary(lm(y ~ x, dfn))
-lm2 <- summary(lm(y2 ~ x, dfn))
-lm3 <- summary(lm(y3 ~ x, dfn))
-with(dfn, plot(x, y, xlim = c(50, 150), ylim = c(150, 700)))
-with(dfn, plot(x, y2, xlim = c(50, 150), ylim = c(150, 700)))
-with(dfn, plot(x, y3, xlim = c(50, 150), ylim = c(150, 700)))
-```
 
-**Ejemplo 1: valor alto de $\boldsymbol{R^2}$ - Modelo lineal.**
 
-```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
-par(mar = c(4, 4, .1, .1))
-with(dfn, {plot(x, y, pch = 19, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', cex = 2, cex.axis = 2, cex.lab = 2)
-   axis(1, at = seq(50, 150, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
-   abline(summary(lm(y ~ x))$coefficients[,1], col = 'blue', cex = 2, lwd = 2)
-   par(new = T)
-   curve(62 + 3.5*x, 40, 160, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', yaxt = 'n', xlab = '', ylab = '',
-         col = "gray", cex = 2, lwd = 2)
-   text(100, 750, substitute(paste(R^2, " ", "=", " ", r2), list(r2 = round(summary(lm(y ~ x, dfn))$r.squared, 6))),
-        col = 'brown', cex = 2)
-   arrows(100, mean(y), 105, 325, length = 0.1, cex = 2)
-   text(125, 300, substitute(paste(hat(y)[i], " = ", b0, " + ", b1 * X[i]),
-                             list(b0 = round(lm1$coefficients[1], 2), b1 = round(lm1$coefficients[2], 4))),
-        col = 'red', cex = 2)})
-```
 
----
-
-**Ejemplo 2: valor alto de $\boldsymbol{R^2}$ - Modelo no lineal**
-
-```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
-par(mar = c(4, 4, .1, .1))
-with(dfn, {plot(x, y2, pch = 19, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', ylab = 'y', cex = 2, cex.axis = 2,
-                cex.lab = 2)
-   axis(1, at = seq(50, 150, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
-   abline(summary(lm(y2 ~ x))$coefficients[,1], col = 'blue', cex = 2, lwd = 2)
-   par(new = T)
-   curve(90 + 0.025*x^2, 40, 160, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', yaxt = 'n', xlab = '', ylab = '',
-         col = "gray", cex = 2, lwd = 2)
-   text(100, 750, substitute(paste(R^2, " ", "=", " ", r2), list(r2 = round(summary(lm(y2 ~ x, dfn))$r.squared, 6))),
-        col = 'brown', cex = 2)
-   arrows(100, mean(y2), 95, 450, length = 0.1, cex = 2)
-   text(73, 475, substitute(paste(hat(y)[i], " = ", b0, " + ", b1 * X[i]),
-                            list(b0 = round(lm2$coefficients[1], 2), b1 = round(lm2$coefficients[2], 4))),
-        col = 'red', cex = 2)})
-```
-
----
-
-**Ejemplo 3: valor de $\boldsymbol{R^2}$ cercano a cero - Modelo no lineal**
-
-```{r, echo = F, fig.align = 'center', fig.show = "hold", out.width = "90%"}
-par(mar = c(4, 4, .1, .1))
-with(dfn, {plot(x, y3, pch = 19, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', ylab = 'y', cex = 2, cex.axis = 2,
-                cex.lab = 2)
-   axis(1, at = seq(50, 150, 20), mgp = c(3, 1.5, 0), cex.axis = 2, cex.lab = 2)
-   abline(summary(lm(y3 ~ x))$coefficients[,1], col = 'blue', cex = 2, lwd = 2)
-   par(new = T)
-   curve(250 + 0.2*(x - 100)^2, 40, 160, xlim = c(50, 150), ylim = c(150, 800), xaxt = 'n', yaxt = 'n', xlab = '',
-         ylab = '', col = "gray", cex = 2, lwd = 2)
-   text(100, 750, substitute(paste(R^2, " ", "=", " ", r2), list(r2 = round(summary(lm(y3 ~ x, dfn))$r.squared, 6))),
-        col = 'brown', cex = 2)
-   arrows(90, mean(y3), 95, 575, length = 0.1, cex = 2)
-   text(115, 600, substitute(paste(hat(y)[i], " = ", b0, " - ", b1 * X[i]),
-                             list(b0 = round(lm3$coefficients[1], 2), b1 = abs(round(lm3$coefficients[2], 4)))),
-        col = 'red', cex = 2)})
-```

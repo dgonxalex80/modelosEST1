@@ -381,7 +381,7 @@ densidades de probabilidad marginales, por tanto, podemos escribir,</p>
 &amp;{=\prod\limits_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{1}{2\sigma^2}(y_i-\beta_0-\beta_1x_i)^2\right]}\nonumber\\
 &amp;{=(2\pi\sigma^2)^{-n/2}\exp\left[-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right]}
 \end{aligned}
-\]</span></p>
+\]</span> </br></p>
 <p>El objetivo es hallar los parámetros desconocidos <span
 class="math inline">\({\beta_0,\beta_1,\sigma^2}\)</span>, que maximicen
 <span class="math inline">\({L}\)</span>, o equivalentemente, que
@@ -389,8 +389,10 @@ maximicen <span class="math inline">\({\ln L}\)</span> (el logaritmo
 natural de <span class="math inline">\({L}\)</span>). <span
 class="math display">\[
 {\ln
-L=-\frac{n}{2}\ln(2\pi)-\frac{n}{2}\ln(\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2}
+L=-\frac{n}{2}\ln(2\pi)-\frac{n}{2}\ln(\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n
+\big(y_i-\beta_0-\beta_1x_i\big)^2}
 \]</span></p>
+<p></br></p>
 <p>Observe que para cualquier valor de <span
 class="math inline">\({\sigma^2}\)</span> fijo, <span
 class="math inline">\({\ln L}\)</span> es maximizado como una función de
@@ -405,24 +407,26 @@ class="math inline">\({\widetilde{\beta}_1}\)</span> son iguales a los
 respectivos estimadores de mínimos cuadrados, <span
 class="math inline">\({\widehat{\beta}_0}\)</span> y <span
 class="math inline">\({\widehat{\beta}_1}\)</span>.</p>
+<p></br></p>
 <p>Para hallar el estimador MLE para <span
 class="math inline">\({\sigma^2}\)</span> substituimos <span
 class="math inline">\({\widehat{\beta}_0}\)</span> y <span
 class="math inline">\({\widehat{\beta}_1}\)</span> en <span
 class="math inline">\({\ln L}\)</span>, y hallamos <span
-class="math inline">\({\sigma^2}\)</span> que maximiza <span
-class="math display">\[
+class="math inline">\({\sigma^2}\)</span> que maximiza</p>
+<p><span class="math display">\[
 {-\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) -
 \frac{1}{2\sigma^2}\sum\limits_{i=1}^n (y_i - \widehat{\beta}_0 -
 \widehat{\beta}_1x_i)^2}
 \]</span></p>
 <p>de donde obtenemos como estimador MLE de <span
-class="math inline">\({\sigma^2}\)</span> a <span
-class="math display">\[
+class="math inline">\({\sigma^2}\)</span> a</p>
+<p><span class="math display">\[
 {\widetilde{\sigma}^2 = \frac{1}{n}\sum\limits_{i=1}^n (y_i -
 \widehat{\beta}_0 - \widehat{\beta}_1x_i)^2 =
 \frac{1}{n}\sum\limits_{i=1}^n (y_i - \widehat{y}_i)^2}
 \]</span></p>
+<p></br></p>
 <p>Resumiendo, bajo el modelo de regresión lineal normal, es decir, con
 errores independientes e idénticamente distribuidos <span
 class="math inline">\({N\left(0, \sigma^2\right)}\)</span>, los
@@ -432,6 +436,7 @@ class="math inline">\({\beta_1}\)</span> son también estimadores de
 máxima verosimilitud y en tal caso, podemos construir intervalos de
 confianza y realizar pruebas de hipótesis basadas en las estimaciones
 obtenidas.</p>
+<p></br></p>
 <p>También puede demostrarse que los estimadores MLE son de mínima
 varianza cuando son comparados con todos los posibles estimadores
 insesgados y son consistentes, es decir, a medida que aumenta el tamaño
@@ -464,11 +469,13 @@ class="math display">\[
 \]</span></p>
 <p>que cumple <span
 class="math inline">\({E\left[\widehat\sigma^2\right]=\sigma^2}\)</span>.</p>
+<p></br></br></p>
 </div>
 <div id="ecuación-de-regresión-ajustada-y-residuales-del-modelo"
 class="section level2">
 <h2><span style="color:#034a94"><strong>Ecuación de regresión ajustada y
 residuales del modelo </strong></span></h2>
+<p></br></p>
 <p>Al tener estimados los parámetros del modelo de regresión lineal
 simple (por mínimos cuadrados o máxima verosimilitud), entonces se puede
 realizar una estimación de la respuesta media <span
@@ -477,8 +484,10 @@ a través del modelo ajustado, así: <span class="math display">\[
 \widehat{\mu}_{Y\vert x_i} = \widehat{y}_i = \widehat{\beta}_0 +
 \widehat{\beta}_1\, x_i = \bar{y} + (x_i-\bar{x})\,\widehat{\beta}_1.
 \]</span></p>
+<p></br></p>
 <p>A esta ecuación se le conoce como la ecuación de regresión ajustada,
 que en este caso corresponde a una recta ajustada.</p>
+<p></br></p>
 <p>A las diferencias entre los valores observados de la respuesta <span
 class="math inline">\(y_i\)</span> y los valores ajustados por el modelo
 de regresión <span class="math inline">\(\widehat{y}_i\)</span>
@@ -488,6 +497,7 @@ class="math inline">\({e_i=y_i-\widehat{y}_i}\)</span> es el <span
 class="math inline">\(i\)</span>-ésimo residual del modelo, que es una
 estimación del <span class="math inline">\(i\)</span>-ésimo error
 aleatorio, <span class="math inline">\(\varepsilon_i\)</span>.</p>
+<p></br></p>
 <p>Los residuales del modelo tienen gran importancia ya que ellos
 determinan que tan bueno fue el ajuste del modelo y permitirán más
 adelante realizar las validaciones de los supuestos realizados sobre los

@@ -155,6 +155,8 @@ $$
 
 </br></br>
 
+<div class="content-box-blue">
+
 <span style="color:#FF7F00">**NOTA:**</span> 
 
 </br>
@@ -164,7 +166,7 @@ ${\widehat{\beta}_1}$ puede ser expresado en función de ${S_{xy}}$ y de ${S_{xx
 $$
 {\widehat{\beta}_1=\frac{S_{xy}}{S_{xx}}}
 $$
-
+</div>
 
 </br></br>
 
@@ -189,7 +191,8 @@ Los residuales del modelo tienen gran importancia ya que ellos determinan que ta
 </br>
 
 Bajo los supuestos considerados respecto a los errores tenemos que:
-  
+
+<div class="content-box-blue">  
 **P1**. ${\widehat\beta_0}$ y ${\widehat\beta_1}$ son combinaciones lineales de las variables aleatorias ${Y_1, \ldots, Y_n}$, pues estos pueden escribirse como:
 $$
 {\widehat\beta_0 = \sum^n_{i=1} m_i\, Y_i}
@@ -215,12 +218,13 @@ $${\sum^n_{i=1} c_i = 0,\quad \quad \sum^n_{i=1}c_i\, x_i=1,}$$
 $${\sum^n_{i=1} m_i = 1,\quad \quad \sum^n_{i=1}m_i\, x_i=0,}$$
 
 $${\sum^n_{i=1} c_i^2 = \frac{1}{S_{xx}},\quad \quad \sum^n_{i=1} m_i^2 = \frac{\sum\limits_{i=1}^n x_i^2}{nS_{xx}}.}$$
+</div>
 
-
-Además, como ${Y_1, \ldots, Y_n}$ son variables normales e incorrelacionadas, entonces ${\widehat\beta_0}$ y ${\widehat\beta_1}$ son \underline{variables aleatorias normales}.
+Además, como ${Y_1, \ldots, Y_n}$ son variables normales e incorrelacionadas, entonces ${\widehat\beta_0}$ y ${\widehat\beta_1}$ son variables aleatorias normales.
 
 </br>
 
+<div class="content-box-blue">
 **P2**. El valor esperado de los estimadores, es:
 $$
 \begin{aligned}
@@ -236,9 +240,11 @@ $$
 &= {\sum^n_{i=1} c_i(\beta_0 + \beta_1x_i)} = {\beta_0\sum^n_{i=1} c_i + \beta_1\sum^n_{i=1} c_i\, x_i = \beta_1}
 \end{aligned}
 $$
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P3**. La varianza de los estimadores, es:
 
 $$
@@ -256,9 +262,11 @@ $$
 &= {\frac{\sigma^2}{S_{xx}}}
 \end{aligned}
 $$
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P4**. La varianza de la respuesta ajustada en un valor dado ${X=x_i}$, es:
 
 $$
@@ -270,9 +278,11 @@ $$
 &= {\sigma^2\left[\frac{1}{n} + \frac{(x_i-\bar{x})^2}{S_{xx}}\right]}
 \end{aligned}
 $$
-
+</div>
 
 </br>
+
+<div class="content-box-blue">
 
 **P5**. La covarianza (cov) entre los estimadores de los parámetros es:
 
@@ -285,9 +295,11 @@ $$
 &= {-\frac{\sigma^2\bar{x}}{S_{xx}}}
 \end{aligned}
 $$
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P6*. La covarianza entre la variable respuesta y su correspondiente estimador en un valor dado ${X=x_i}$ es:
 $$
 \begin{aligned}
@@ -299,40 +311,50 @@ $$
 \end{aligned}
 $$
 
+</div>
+
 </br>
 
+<div class="content-box-blue">
 **P7**. La suma de los residuales del modelo de regresión con intercepto es siempre cero:
 
 $$
 {\sum^n_{i=1} e_i = 0}
 $$
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P8**. La suma de los valores observados ${y_i}$ es igual a la suma de los valores ajustados ${\widehat{y}_i}$:
 $$
 {\sum^n_{i=1} y_i = \sum^n_{i=1} \widehat{y}_i}
 $$
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P9**. La línea de regresión siempre pasa a través del centroide de los datos ${(\bar{x},\bar{y})}$.
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P10**. La suma de los residuales ponderados por el correspondiente valor de la variable predictora es cero:
 $$
 {\sum^n_{i=1} x_i\, e_i = 0}
 $$
-
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **P11**. La suma de los residuales ponderados por el correspondiente valor ajustado es siempre igual a cero:
 
 $$
 {\sum^n_{i=1}\widehat{y}_i\, e_i = 0}
 $$
-
+</div>
 
 

@@ -66,11 +66,15 @@ $$
 
 </br></br>
 
-**En resumen**,
+<div class="content-box-blue">
+
+### <span style="color:#FF7F00">**Resumen**</span>
 
 $$
 \widehat{Y}_0 \sim N\left(E[Y\vert x_0], \ \sigma^2\left[\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}}\right]\right)
 $$
+
+</div>
 
 </br></br>
 
@@ -144,7 +148,7 @@ Figura : Ilustración de puntos de interpolación y extrapolación
 
 </br></br>
 
-## **Intervalo de confianza para la respuesta media**
+## <span style="color:#034a94">**Intervalo de confianza para la respuesta media**</span>
 
 </br>
 
@@ -162,9 +166,11 @@ Por tanto un intervalo de confianza del ${(1-\alpha)\%}$ para ${\mu_{Y\vert x_0}
 
 </br>
 
+<div class="content-box-blue">
 $$
 {\widehat{y}_{0} \pm t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} + \frac{(x_{0}-\bar{x})^{2}}{S_{xx}}\right]}}
 $$
+</div>
 
 </br>
 
@@ -172,7 +178,7 @@ con ${\widehat{y}_{0}=\widehat{\beta}_0+\widehat{\beta}_1x_0}$ y ${t_{\alpha/2, 
 
 </br></br>
 
-## **Intervalo de predicción para una observación futura de la respuesta $Y_{0}$**
+## <span style="color:#034a94">**Intervalo de predicción para una observación futura de la respuesta $Y_{0}$**</span>
 
 </br>
 
@@ -198,9 +204,11 @@ De ahí que, un intervalo de predicción del ${(1 - \alpha)\%}$ para ${Y_0}$ est
 
 </br>
 
+<div class="content-box-blue">
 $$
 {\widehat{y}_0\pm t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}}\right]}}
 $$
+</div>
 
 </br>
 
@@ -208,7 +216,7 @@ Donde, ${t_{\alpha/2, n - 2}}$ es el percentil ${1 - \alpha/2}$ de la distribuci
 
 </br></br>
 
-## **Pruebas de hipótesis para la respuesta media**
+## <span style="color:#034a94">**Pruebas de hipótesis para la respuesta media**</span>
 
 </br>
 

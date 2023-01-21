@@ -12,7 +12,7 @@
 <meta name="author" content="Nivelatorio de Estadística" />
 
 
-<title> Análiss de varianza - ANOVA</title>
+<title> Análisis de varianza - ANOVA</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -323,30 +323,38 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Análiss de varianza - ANOVA</strong></span></h1>
+<strong>Análisis de varianza - ANOVA</strong></span></h1>
 <h4 class="author">Nivelatorio de Estadística</h4>
 
 </div>
 
 
 <p><br/><br/></p>
-<div id="anova" class="section level2">
-<h2>Análisis de varianza para probar la significancia de la
-regresión</h2>
-<p>Se quiere probar: <span class="math display">\[
+<div id="como-prueba-de-significancia-de-la-regresión"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Como prueba de significancia de
+la regresión</strong></span></h2>
+</br>
+<center>
+</center>
+<p>Para el modelo de regresión lineal simple <span
+class="math inline">\(Y = \beta_{0}+\beta_{1}X + \varepsilon\)</span> se
+quiere probar:</p>
+<p><span class="math display">\[
 \begin{aligned}
 {H_0:\ \beta_1 = 0}\nonumber\\
 {H_1:\ \beta_1 \neq 0}\nonumber
 \end{aligned}
-\]</span></p>
-<p>con base en una descomposición de la variabilidad total observada en
-la variable respuesta, representada por la suma de cuadrados corregidos
-en <span class="math inline">\(Y\)</span>, <span
+\]</span> Con base en una descomposición de la variabilidad total
+observada en la variable respuesta, representada por la suma de
+cuadrados corregidos en <span class="math inline">\(Y\)</span>, <span
 class="math inline">\(S_{yy}\)</span> (también conocida como suma de
 cuadrados totales, abreviado SST), en la suma de dos componentes: una
 debida al modelo propuesto (recta ajustada) y otra debida al error
 aleatorio.</p>
-<hr />
+<p><span class="math display">\[SST =(n-1)\hspace{.2cm}
+\widehat{\sigma}^{2}_{y} =  \sum_{i = 1}^n \left(y_i -
+\bar{y}\right)^2\]</span> </br></br></p>
 <p>Recuerde que el modelo de RLS plantea que la respuesta es igual a la
 suma de una componente real no aleatoria <span
 class="math inline">\({\beta_0+\beta_1X}\)</span> y un error aleatorio
@@ -358,29 +366,13 @@ class="math display">\[\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i -
 \bar{y}\right)^2\]</span></p>
 <p>veamos lo que representa gráficamente cada una de las diferencias que
 componen a la SST.</p>
-<hr />
-<p><strong>Variabilidad total en <span
-class="math inline">\(\boldsymbol{Y}\)</span></strong></p>
-<pre><code>Warning: Using `size` aesthetic for
-lines was deprecated in
-ggplot2 3.4.0.
-ℹ Please use `linewidth`
-  instead.</code></pre>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<hr />
-<p><strong>Variabilidad en <span
-class="math inline">\(\boldsymbol{Y}\)</span> al incluir el modelo de
-RLS</strong></p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<hr />
-<p><strong>Ilustración del enfoque de varianza</strong></p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<hr />
+<p></br></p>
 <p>De ahí que podamos escribir cada diferencia <span
-class="math inline">\(y_i - \bar{y}\)</span> como: <span
-class="math display">\[y_i - \bar{y} = (\widehat{y}_i - \bar{y}) + (y_i
-- \widehat{y}_i)\]</span></p>
-<p>y reemplazando en la SST, se obtiene: <span class="math display">\[
+class="math inline">\(y_i - \bar{y}\)</span> como:</p>
+<p><span class="math display">\[y_i - \bar{y} = (\widehat{y}_i -
+\bar{y}) + (y_i - \widehat{y}_i)\]</span> </br></p>
+<p>y reemplazando en la SST, se obtiene:</p>
+<p><span class="math display">\[
 \begin{aligned}
 \text{SST} = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &amp;= \sum_{i
 = 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i -
@@ -389,49 +381,54 @@ class="math display">\[y_i - \bar{y} = (\widehat{y}_i - \bar{y}) + (y_i
 (y_i-\widehat{y}_i)^2
 \end{aligned}
 \]</span></p>
-<p>(<strong>Tarea:</strong> comprobar que <span
-class="math inline">\(2\sum_{i = 1}^n (\widehat{y}_i - \bar{y}) (y_i -
-\widehat{y}_i) = 0\)</span>)</p>
-<hr />
+<p></br></br></p>
+<div id="reto" class="section level3 content-box-blue">
+<h3><span style="color:#FF7F00"><strong>Reto:</strong></span></h3>
+<p>Comprobar que <span class="math inline">\(2\sum_{i = 1}^n
+(\widehat{y}_i - \bar{y}) (y_i - \widehat{y}_i) = 0\)</span></p>
+</div>
+<p></br></br></p>
 <p>Así, la suma de cuadrados totales SST queda expresada mediante la
 suma de dos componentes, a saber:</p>
 <ul>
-<li><p><span
+<li><span
 class="math inline">\(\sum^n_{i=1}(\widehat{y}_i-\bar{y})^2\)</span>,
 que está relacionada con las diferencias entre los valores ajustados por
 el modelo de regresión y el promedio de las observaciones de la
 respuesta, al cual se le conoce como Suma de Cuadrados de la Regresión,
-abreviado SSR.</p>
-<p>Se puede demostrar que: <span class="math display">\[
+abreviado SSR.</li>
+</ul>
+<p>Se puede demostrar que:</p>
+<p><span class="math display">\[
 \text{SSR} = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 =
 \widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
-\]</span></p></li>
-</ul>
-<hr />
+\]</span></p>
+<p></br></p>
 <ul>
-<li><p><span
+<li><span
 class="math inline">\(\sum^n_{i=1}(y_i-\widehat{y}_i)^2\)</span>, que
 está relacionada con las diferencias entre las observaciones de la
 respuesta y los valores ajustados por el modelo de regresión, esto es,
 los residuales del modelo (que son estimaciones de los errores del
 modelo), por lo que a esta componente se le conoce como Suma de
-Cuadrados del Error, abreviado SSE.</p>
+Cuadrados del Error, abreviado SSE.</li>
+</ul>
+<p></br></p>
 <p>Se puede demostrar que: <span class="math display">\[
 \text{SSE} = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2
 =  S_{yy}-\widehat{\beta}_1 S_{xy}
-\]</span></p></li>
-</ul>
-<hr />
+\]</span></p>
 <p>De donde, se obtiene que: <span class="math display">\[
 \text{SST} = \text{SSR} + \text{SSE},
 \]</span></p>
+<p></br></p>
 <p>la cual se conoce como Identidad de Suma de Cuadrados.</p>
 <p>Cada una de estas sumas de cuadrados tiene asociados unos grados de
 libertad (g.l), que representan la cantidad de información libre en la
 suma de cuadrados. Una forma de calcular los g.l es la diferencia entre
 el número de observaciones y el número de parámetros estimados en la
 suma de cuadrados.</p>
-<hr />
+<p></br></p>
 <ul>
 <li><p>Se sabe que SST se construye con <span
 class="math inline">\(n\)</span> observaciones y se estima la media de
@@ -445,9 +442,9 @@ parámetros del modelo, y así SSE tiene <span class="math inline">\(n -
 los parámetros) y se estima un parámetro, de donde SSR tiene sólo 1
 g.l.</p></li>
 </ul>
-<hr />
-En virtud de lo anterior, los grados de libertad (g.l) de las sumas de
-cuadrados también forman una identidad, así:
+<p></br></p>
+<p>En virtud de lo anterior, los grados de libertad (g.l) de las sumas
+de cuadrados también forman una identidad, así:</p>
 <p>A continuación, se definen los cuadrados medios como la razón entre
 las sumas de cuadrados y sus respectivos grados de libertad. Esto
 es,</p>
@@ -457,7 +454,7 @@ es,</p>
 <li><p><span class="math inline">\(\text{MSE} =
 \text{SSE}/\text{g.l(SSE)} = \text{SSE}/(n - 2)\)</span>.</p></li>
 </ul>
-<hr />
+<p></br></p>
 <p>Con el fin de establecer inferencias basadas en el enfoque del
 análisis de varianza se requiere conocer el valor esperado de cada una
 de los cuadrados medios, es decir, lo que se estima con cada suma de
@@ -471,7 +468,6 @@ cuadrados.</p>
 </ul>
 <p>El primer resultado se conocía de la estimación de <span
 class="math inline">\(\sigma^2\)</span> vista previamente.</p>
-<hr />
 <p>Si todas las observaciones <span class="math inline">\(Y_i\)</span>
 provienen de la misma distribución normal con media <span
 class="math inline">\(\mu = \beta_0\)</span> (esto es, si <span
@@ -494,16 +490,14 @@ class="math inline">\(\text{SSE}/\sigma^2\)</span> son estimaciones
 independientes de <span
 class="math inline">\(\sigma^2\)</span>.</p></li>
 </ul>
-<hr />
-<p>De lo anterior, se considera el siguiente estadístico: <span
-class="math display">\[
+<p>De lo anterior, se considera el siguiente estadístico:</p>
+<p><span class="math display">\[
 F_0=\frac{\text{SSR}/\sigma^2}{\text{SSE}/\left[\sigma^2(n-2)\right]}=\frac{\text{MSR}}{\text{MSE}}
 \]</span></p>
 <p>que bajo la hipótesis nula <span class="math inline">\({H_0:\ \beta_1
 = 0}\)</span>, se distribuye como una <span
 class="math inline">\(F\)</span> con 1 y <span class="math inline">\(n -
 2\)</span> grados de libertad:</p>
-<hr />
 <p>En el caso de la regresión lineal simple, la prueba sobre la
 significancia de la regresión (es decir, si la pendiente de la recta es
 significativamente diferente de cero) puede realizarse mediante el
@@ -516,9 +510,13 @@ que la variabilidad en la variable respuesta es debida sólo al error
 aleatorio (en favor de la hipótesis de que la regresión en <span
 class="math inline">\({X}\)</span> es significativa) si <span
 class="math inline">\({F_0 &gt; F_{\alpha, 1, n - 2}}\)</span>.</p>
-<hr />
-<p><strong>Tabla de Análisis de Varianza para el modelo de
-RLS.</strong></p>
+<p></br></br></p>
+</div>
+<div id="tabla-de-análisis-de-varianza-para-el-modelo-de-rls."
+class="section level2">
+<h2><span style="color:#034a94"><strong>Tabla de Análisis de Varianza
+para el modelo de RLS.</strong></span></h2>
+<p></br></p>
 <table>
 <colgroup>
 <col width="19%" />
@@ -544,7 +542,7 @@ RLS.</strong></p>
 <td><span class="math inline">\(\small \text{MSR} =
 \text{SSR}\)</span></td>
 <td><span
-class="math inline">\(F_0=\frac{\text{MSR}}{\text{MSE}}\)</span></td>
+class="math inline">\(F_{_{0}}=\frac{\text{MSR}}{\text{MSE}}\)</span></td>
 </tr>
 <tr class="even">
 <td>Error o Residual</td>
@@ -563,7 +561,7 @@ class="math inline">\(F_0=\frac{\text{MSR}}{\text{MSE}}\)</span></td>
 </tr>
 </tbody>
 </table>
-<hr />
+<p></br></p>
 <p>También se puede evaluar el valor <span
 class="math inline">\({p}\)</span> de la prueba () que es igual a <span
 class="math inline">\({P(F_{1,n-2}&gt;F_{0})}\)</span> y determinar si
@@ -571,57 +569,48 @@ es “pequeño” para rechazar la hipótesis nula: “el modelo lineal de <span
 class="math inline">\({Y}\)</span> en <span
 class="math inline">\({X}\)</span> no es significativo para explicar la
 variabilidad de <span class="math inline">\({Y}\)</span>”.</p>
+<p></br></p>
 <p>La conclusión obtenida por el análisis de varianza debe ser la misma
 que la obtenida cuando se prueba la significancia de la pendiente de la
 recta de regresión.</p>
+<p></br></br></p>
 </div>
-<div
-id="boldsymbolr2-de-una-regresión-coeficiente-de-determinación-muestral"
-class="section level2">
-<h2><span class="math inline">\(\boldsymbol{R^2}\)</span> de una
-regresión: Coeficiente de determinación muestral</h2>
-<p>Es una medida del ajuste del modelo que provee un indicador de que
-tan bien la predictora <span class="math inline">\(X\)</span> predice a
-la respuesta <span class="math inline">\(Y\)</span>. Se calcula como:
-<span class="math display">\[
+<div id="coeficiente-de-determinación-muestral" class="section level2">
+<h2><span style="color:#034a94"><strong>Coeficiente de determinación
+muestral</strong></span></h2>
+<p></br></p>
+<p>Conocido como <span class="math inline">\(R^{2}\)</span>, es una
+medida del ajuste del modelo que provee un indicador de que tan bien la
+predictora <span class="math inline">\(X\)</span> predice a la respuesta
+<span class="math inline">\(Y\)</span>. Se calcula como:</p>
+<p><span class="math display">\[
 R^2 = \frac{\text{SSR}}{\text{SST}} = 1-\frac{\text{SSE}}{\text{SST}}.
 \]</span></p>
 <p>El <span class="math inline">\(R^2\)</span> se puede interpretar como
 la proporción de la variabilidad total observada en la variable
 respuesta que es explicada por la relación lineal con la variable
 predictora considerada.</p>
-<hr />
-<p><strong>Interpretaciones erróneas de <span
-class="math inline">\(\boldsymbol{R^2}\)</span>.</strong></p>
+<p></br></br></p>
+<div id="interpretaciones-erróneas"
+class="section level3 content-box-blue">
+<h3><span style="color:#FF7F00"><strong>Interpretaciones
+erróneas</strong></h3>
 <ul>
-<li><p>Un <span class="math inline">\(R^2\)</span> alto indica que el
+<li><p><span class="math inline">\(R^2\)</span> alto indica que el
 modelo puede hacer predicciones útiles.</p></li>
-<li><p>Un <span class="math inline">\(R^2\)</span> alto indica que la
-recta de regresión tiene buen ajuste.</p></li>
-<li><p>Un <span class="math inline">\(R^2\)</span> cercano a cero indica
+<li><p><span class="math inline">\(R^2\)</span> alto indica que la recta
+de regresión tiene buen ajuste.</p></li>
+<li><p><span class="math inline">\(R^2\)</span> cercano a cero indica
 que <span class="math inline">\(X\)</span> y <span
 class="math inline">\(Y\)</span> no están relacionados.</p></li>
 </ul>
+</div>
 <p>Las dos primeras indican que aunque un <span
 class="math inline">\(R^2\)</span> cercano a 1 indica una mayor
 asociación lineal, no necesariamente garantiza que los supuestos básicos
 del modelo lineal se estén cumpliendo y menos que el modelo lineal no
 pueda presentar falta de ajuste.</p>
-<hr />
-<p><strong>Ejemplo 1: valor alto de <span
-class="math inline">\(\boldsymbol{R^2}\)</span> - Modelo
-lineal.</strong></p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<hr />
-<p><strong>Ejemplo 2: valor alto de <span
-class="math inline">\(\boldsymbol{R^2}\)</span> - Modelo no
-lineal</strong></p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<hr />
-<p><strong>Ejemplo 3: valor de <span
-class="math inline">\(\boldsymbol{R^2}\)</span> cercano a cero - Modelo
-no lineal</strong></p>
-<p><img src="recurso206_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p></br></p>
 </div>
 
 

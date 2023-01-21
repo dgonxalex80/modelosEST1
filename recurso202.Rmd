@@ -66,6 +66,7 @@ Donde :
 * $a$ intercepto
 * $b$ pendiente de la recta 
 
+<center>
 
 ```{r, echo=FALSE}
 fx=function(x){  
@@ -80,7 +81,7 @@ ggplot(data, aes(x = x1, y = y1)) +
     
 ```
 
-<center>Figura 1 : Recta $y = 13.7 + 0.64 x$</center>
+Figura 1 : Recta $y = 13.7 + 0.64 x$</center>
 
 </br>
 
@@ -114,9 +115,7 @@ p1=ggplot(muestra1, aes(x, y)) +
 p1
 ```
 
-</center>
-
-<center>Figura 2 : Diagrama de puntos variables $X$,$Y$</center>
+Figura 2 : Diagrama de puntos variables $X$,$Y$</center>
 
 </br>
 
@@ -240,34 +239,47 @@ ggplot(biomasa,aes(x=altura,y=bio_total))+
 
 En la construcción de un modelo de regresión lineal se deben tener en cuenta los siguientes supuestos:
 
+<div class="content-box-blue">
 **S1** : La variable respuesta ${Y}$ es una variable aleatoria cuyos valores se observan mediante la selección de los valores de la variable predictora ${X}$ en un intervalo de interés.
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **S2** : Por lo anterior, la variable predictora ${X}$ no es considerada como variable aletatoria, sino como un conjunto de valores fijos que representan los puntos de observación, que se seleccionan con anticipación y se miden sin error.  
+</div>
 
 Sin embargo, si esto último no se cumple, el método de estimación de mínimos cuadrados ordinarios (**MCO**) para los parámetros del modelo de regresión puede seguir siendo válidos, si los errores en los valores de la variable predictora son pequeños en comparación con los errores aleatorios del modelo ${\varepsilon_i}$.
 
 </br>
 
+<div class="content-box-blue">
 **S3** : Los datos observados ${(x_i,y_i),\ i=1,\ldots,n}$, constituyen una muestra representativa de un medio acerca del cual se desea generalizar. Si no es así, no es apropiado realizar inferencias en un rango de los datos por fuera del considerado.
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **S4** : El modelo de regresión es lineal en los parámetros. Es decir, ningún parámetro de la regresión aparece como el exponente o es dividido o multiplicado por otro parámetro, o cualquier otra función.
+</div>
 
 Sin embargo, la línea de ajuste puede tener una curvatura (no ser lineal en ${X}$ y/o en ${Y}$), caso en el cual mediante una transformación conveniente de las variables (${X}$ y/o ${Y}$), es posible aplicar las técnicas de regresión lineal sobre estas nuevas variables.
 
 </br>
 
+<div class="content-box-blue">
 **S5** : Si la ecuación de regresión seleccionada es correcta, cualquier variabilidad en la variable respuesta que no puede ser explicada exactamente por dicha ecuación, es debida a un error aleatorio.
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **S6** : Los valores observados de la variable respuesta no se encuentran estadísticamente correlacionados. Se supone que cada valor observado de ${Y}$ está constituído por un valor real y una componente aleatoria.
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **S7** : El modelo de regresión con una muestra de ${n}$ pares de datos ${(X_i, Y_i)}$ es:
 
 $$
@@ -279,14 +291,19 @@ con
 $$
 E\left[Y \vert X_i\right] = \beta_0 + \beta_1 X_i
 $$
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **S8** : Los errores aleatorios $\large \varepsilon_{i}\sim N(0,\sigma^{2}), \hspace{0.8cm} i=1,2,\ldots,n$.
+</div>
 
 </br>
 
+<div class="content-box-blue">
 **S9** : Los errores aleatorios $\large \varepsilon_i$ son estadísticamente independientes.
+</div>
 
 Por tanto:
 
@@ -296,9 +313,11 @@ $$
 
 </br>
 
+<div class="content-box-blue">
 **S10** : La varianza de los errores aleatorios es ${\sigma^{2}, \forall_{i=1,2,\ldots,n}}$ (supuesto de varianza constante pero desconocida).
+</div>
 
-  Dado que los valores ${X_i}$ de la variable predictora no son considerados aleatorios y que los errores son independientes, la varianza de los ${Y_i}$ también es ${\sigma^{2}, \forall i}$ y por tanto este parámetro es independiente del punto de observación (es decir, del valor de ${X}$).
+Dado que los valores ${X_i}$ de la variable predictora no son considerados aleatorios y que los errores son independientes, la varianza de los ${Y_i}$ también es ${\sigma^{2}, \forall i}$ y por tanto este parámetro es independiente del punto de observación (es decir, del valor de ${X}$).
 
 Pero en el caso que este último supuesto no pueda aplicarse, entonces el método de regresión empleado será el de mínimos cuadrados ponderados.
 
