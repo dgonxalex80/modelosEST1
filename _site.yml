@@ -23,6 +23,10 @@ navbar:
           href: recurso204.html
         - text: "Respecto a la media de Y "
           href: recurso205.html
+        - text: "ANOVA - Análisis de la varianza "
+          href: recurso206.html
+        - text: "Supuetos del modelo"
+          href: recurso209.html          
     - text: "Software R"
       menu:
         - text: "Código R"
