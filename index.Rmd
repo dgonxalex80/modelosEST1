@@ -41,7 +41,7 @@ La estructura general de los modelos es de la forma :
 $$Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots + \beta_kX_{ik} + \varepsilon_i,\hspace{1cm} i = 1, \ldots, n,$$
 </br>
 
-Donde $Y_{i}$, es la variable respuesta o dependiente y el conjunto de variables $X_{1},X_{2}, \ldots X_{k}$, conforman las varialbes independientes o regresoras. Adicionalmente el modelo contiene una variable $\varepsilon$, que debe poseer unas caracteristicas especiales.
+Donde $Y_{i}$, es la variable respuesta o dependiente y el conjunto de variables $X_{1},X_{2}, \ldots X_{k}$, conforman las variabies independientes o regresoras. Adicionalmente el modelo contiene una variable $\varepsilon$, que posee caracteristicas especiales.
 
 </br></br>
 

@@ -1,0 +1,90 @@
+---
+title: "Simulación MCO - Regresión Lineal"
+author: "David Arango </br> Daniel Gonzalez"
+date: ""
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    theme: flatly    
+---
+
+
+En este documento se presenta una simulación que pretende explicar el funcionamiento de uno de los métodos para estimar parametros en la regresión lineal conocido como Mínimos Cuadrados Ordinarios (MCO). Este se ilustra por medio de la regresión lineal simple, en el cual se deben estimar dos parametros $\beta_0$ y $\beta_1$, para el modelo simple $Y_i=\beta_0 + (\beta_1 * X_i) + \varepsilon_{i}, i=1,2,\ldots,n$.
+
+Recordemos que el objetivo de los MCO es minimizar la función conocida como Suma de Cuadrados del Error (SCE). Pero antes veamos un poco de definiciones:
+
+## Nomenclatura
+
+-   ${Y}$: Variable respuesta o dependiente.
+-   ${X}$: Variable predictora, independiente o regresora.
+-   ${\varepsilon}$: Error aleatorio
+-   ${\beta_0}$, ${\beta_1}$: Parámetros de la regresión. ${\beta_0}$ es el intercepto y ${\beta_1}$ es la pendiente de la línea recta.
+-   ${\widehat{\beta}_0}$: Estimador del parámetro ${\beta_0}$.
+-   ${\widehat{\beta}_1}$: Estimador del parámetro ${\beta_1}$.
+-   $e$: Residual, es una estimación del error aleatorio.
+-   $\widehat{Y}$: Es la estimación de $E(Y\vert X)$ ó ${\mu_{Y\vert X}}$.
+
+## Estimación por mínimos cuadrados ordinarios (MCO)
+
+Para una selección preliminar de la variable predictora en un modelo de regresión simple (o sea que considera una sola variable predictora) es conveniente realizar el diagrama de dispersión ${Y}$ vs. ${X}$ y mirar si existe una tendencia lineal en la nube de puntos.
+
+Si la nube de puntos parece mejor ajustada por una curva hay que buscar una transformación apropiada en ${X}$ y/o ${Y}$ que lleve a un modelo lineal; en este caso el modelo de regresión lineal a ajustar será: ${Y^{*}\vert X^{*}_{i}=\beta_0 + \beta_1 X^{*}_{i} + \varepsilon_{i}, i=1,2,\ldots,n}$, donde ${Y^*}$ y ${X^*}$ son las variables ${Y}$ y ${X}$ transformadas. Más adelante se ampliará el tema de transformaciones que llevan a un modelo lineal.
+
+Debe tenerse claro que el método de mínimos cuadrados es un método numérico, no estadístico. La estadística opera a partir de los supuestos distribucionales asignados en el modelo de regresión.
+
+## Objetivo del método MCO
+
+Obtener estimaciones de los parámetros de regresión, es decir hallar valores de ${\beta_0}$ y ${\beta_1}$ que minimicen la suma de los cuadrados de los errores (SCE) ${S(\beta_0,\beta_1)}$ definida a partir de: $$
+SCE = S(\beta_0,\beta_1) = \sum^n_{i=1} \varepsilon^2_i = \sum^n_{i=1} \left[Y_i - (\beta_0 + \beta_1X_i)\right]^2$$
+
+A los valores que minimizan esta expresión se les conoce como estimadores de mínimos cuadrados y se les denota ${\widehat{\beta}_0}$ y ${\widehat{\beta}_1}$.
+
+## Pasos de la Simulación
+
+-   Paso 1. Para la simulación vamos a generar un modelo con unos parametros previamente definidos: $Y_i= 5 + (3 * X_i) + \varepsilon_{i}$, en donde podemos notar que $\beta_0=5$, $\beta_1=3$ y $\varepsilon_{i}$ \~ $Normal (0,5)$.
+
+```{r}
+X=1:30  ##Valores iniciales arbitrarios para X
+Y = 5+(3*X) + rnorm(n = 30,mean = 0,sd = 5 ) ##Valores de Y de acuerdo al modelo
+plot(X,Y)
+datos=data.frame(X,Y)
+head(datos,3)
+```
+
+-   Paso 2. Ahora vamos a asumir valores para la estimación de $\beta_0=4$ y $\beta_1=3.5$, posteriormente graficamos la linea y obtenemos el valor de SCE.
+
+```{r}
+beta0_est=4
+beta1_est=2.5
+Y_est=beta0_est + (beta1_est*X)
+plot(X,Y)
+lines(X,Y_est,col="red")
+```
+- Paso 3: Se realiza el Paso 2 para otros posibles valores de los parametros y se guarda el valor de SCE (Suma de Cuadrados del Error)
+
+
+```{r message=FALSE, warning=FALSE}
+beta0_est=seq(0,5,0.2)
+beta1_est=seq(0,5,0.2)
+betas=expand.grid(beta0_est,beta1_est)
+names(betas)=c("beta0_est","beta1_est")
+SCE=array(NA,dim(betas)[1])
+plot(X,Y)
+for(i in 1:dim(betas)[1]){
+Y_est=betas$beta0_est[i] + (betas$beta1_est[i]*X)
+lines(X,Y_est,col="red")
+SCE[i]=(Y_est-Y)^2
+}
+resultados=data.frame(betas,SCE)
+```
+
+- Paso 4: Graficar e interpretar la relación entre los posibles Parametros (betas) y la SCE.
+
+```{r message=FALSE, warning=FALSE}
+require(plotly)
+plot_ly(x=resultados$beta0_est,y=resultados$beta1_est,z=resultados$SCE)
+```
+
+En la Grafica se puede observar que existe un punto mínimo en la SCE para una combinación de los valores beta_0 y beta_1, esto en general lo que nos indica es que el método de MCO busca justamente cuales son esos dos valores tal que nos garantizan una mínima suma de cuadrados del error.
