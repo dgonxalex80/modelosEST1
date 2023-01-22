@@ -83,7 +83,9 @@ knitr::include_graphics("img/correlacion1.png")
   
 * ¿Hay relación entre la cantidad de medidas preventivas de tránsito y el número de accidentes de tránsito?
   
-* ¿Son fuertes o débiles estas asociaciones? ¿Son directas o indirectas?
+</br>
+
+¿Son fuertes o débiles estas asociaciones? ¿Son directas o indirectas?
   
 </br></br>
   
@@ -104,7 +106,7 @@ knitr::include_graphics("img/correlacion1.png")
 
 </br>
   
-Es un gráfico en el cual se representan las parejas ($X,Y$) de las variables observadas. La forma que toman los puntos, ilustra acerca de la posible asociación existe entre las variables.
+Es un gráfico en el cual se representan las parejas ($x_{i},y_{i}$) de las variables observadas. La forma que toman los puntos, ilustra acerca de la posible asociación existe entre las variables.
 
 
 </br></br>
@@ -155,7 +157,7 @@ p5=ggplot(muestra5, aes(x, y)) +
 (p1+p2)/(p3+p5)
 ```
   
-Figura 1: Gráfico de dispersión y relaciones entre variables.
+Gráfico 1 : Dispersión y relaciones entre variables.
 
 </center>
 
@@ -179,7 +181,7 @@ Identificar la posible relación lineal observada entre las variables:
 
 ```{r, echo=FALSE}
 data7=data.frame(x = c( 72, 75, 77, 78 ,79, 80, 80, 82, 83, 84 ,85),
-                 y = c(310,305,320,300,302,300,310,300,315,320,307))
+                 y = c(301,305,315,312,312,310,315,316,315,320,317))
 
 ggplot(data7, aes(x, y)) + 
           geom_point(size=2, colour=c1 ) + Theme2 +
@@ -190,11 +192,11 @@ ggplot(data7, aes(x, y)) +
 
 </center>  
 
-Figura 2: Diagrama de dispersión entre las horas trabajadas y las unidades producidas en una empresa.
+Gáfico: Diagrama de dispersión entre las horas trabajadas y las unidades producidas en una empresa.
 
 </br></br>
 
-De acuerdo con el gráfico de dispersión de la figura 2, se observa una falta de relación lineal entre las variables cantidad de horas trabajadas en una empresa y la cantidad de unidades producidas en la empresa.
+De acuerdo con el gráfico de dispersión de la figura 2, se observa una relación lineal positiva entre las variables cantidad de horas trabajadas en una empresa y la cantidad de unidades producidas en la empresa.
 
 </br></br>
 
@@ -222,7 +224,7 @@ ggplot(data6, aes(x, y)) +
 
 </center>  
 
-Figura 3: Diagrama de dispersión entre el tiempo de duración de una conferencia y el índice de capacidad de atención en la misma.
+Gráfico 3: Diagrama de dispersión entre el tiempo de duración de una conferencia y el índice de capacidad de atención en la misma.
 
 </br></br>
 
@@ -282,7 +284,23 @@ Los valores obtenidos del coeficiente de correlación permiten clasificar la rel
   
 Tabla 1: Clasificación de la relación lineal entre variables por medio del coeficiente de correlación.
 
+
+
 </br></br>
+
+<div class="content-box-blue">
+
+### <span style="color:#FF7F00"> **Nota**</span>
+
+Que dos variables $X$ y $Y$ tengan un valor de $r$ alto, por tanto una fuerte asociación lineal entre ellas, **NO** implica que $X$ sea la causa de  $Y$,  **NI** que $Y$  sea la causa de $X$.
+
+</div>
+
+</br></br>
+
+
+
+
   
 
 <span style="color:#FF7F00"> **Ejemplo**</span>

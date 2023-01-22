@@ -81,7 +81,9 @@ ggplot(data, aes(x = x1, y = y1)) +
     
 ```
 
-Figura 1 : Recta $y = 13.7 + 0.64 x$</center>
+Gráfico 1: Recta $y = 13.7 + 0.64 x$</center>
+
+</center>
 
 </br>
 
@@ -218,7 +220,12 @@ text(x=10.7,y=20.85,label="y = a + b x", col=c1)
 grid()
 ```
 
+Gráfico 2: Línea de regresión lineal simple ajustada a ${E(Y\vert X)}$
+
 </center>
+
+</br></br>
+
 
 Un segundo significado consiste en que dado un conjunto de pares de datos ${(X,Y)}$, puede asumirse una forma funcional para la curva de regresión y tratar de ajustarla minimizando el error de ajuste.
 
@@ -231,6 +238,7 @@ ggplot(biomasa,aes(x=altura,y=bio_total))+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
 ```
 
+Gráfico 3 : Linea de ajuste minimizando el error 
 </center>
 
 </br></br>

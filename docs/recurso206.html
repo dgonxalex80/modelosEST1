@@ -649,7 +649,66 @@ class="math inline">\(R^2\)</span> cercano a 1 indica una mayor
 asociación lineal, no necesariamente garantiza que los supuestos básicos
 del modelo lineal se estén cumpliendo y menos que el modelo lineal no
 pueda presentar falta de ajuste.</p>
+<p></br></br></p>
+<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<p>Para el ejemplo trabajado verificamos los valores contenidos en la
+tabla ANOVA, utilizando las fórmilas descritas anteriormente</p>
 <p></br></p>
+<p>Tabla Anova</p>
+<pre class="r"><code># data(arboles)
+# y=as.numeric(arboles$peso)
+# x=as.numeric(arboles$altura)
+# modelo=lm(y~x)
+anova(modelo)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: y
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+x          1 4361.8  4361.8  245.98 &lt; 2.2e-16 ***
+Residuals 88 1560.5    17.7                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p></br></br></p>
+<p>Valores calculados</p>
+<pre>
+Sxx =  288.1632 
+Syy =  5922.211 
+Sxy =  99779.24 
+
+b1  =  3.890556 
+SSR =  4361.761 
+SSE =  1560.45 
+SST =  5922.211 
+
+MSR =  4361.761 
+MSE =  17.73239 
+MST =  66.54169 
+
+F       =  245.977 
+valor-p =  2.377174e-27
+
+R2      = 0.7365088
+</pre>
+<p></br></br></p>
+<p>Código de cálculos</p>
+<pre class="r"><code>Sxx = var(x)*89      
+Syy = var(y)*89     
+Sxy = cov(x,y)*89   
+#---------------------------------------
+b1  =  Sxy/Sxx       
+SSR =  b1^2*Sxx      
+SSE =  Syy - b1*Sxy    
+SST =  var(y)*89    
+#---------------------------------------
+MSR = SSR/1          
+MSE = SSE/88          
+MST = SST/(90-1)    
+#---------------------------------------
+F=MSR/MSE   
+valorp = pf(F, 1,89, lower.tail = FALSE)
+#---------------------------------------
+R2=SSR/SST
+1-SSE/SST</code></pre>
 </div>
 
 

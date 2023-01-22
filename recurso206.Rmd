@@ -21,6 +21,13 @@ x <- rep(seq(50, 150, 20), 3)
 y <- 62 + 3.5*x + rnorm(18, sd = 50)
 df <- data.frame(y, x)
 df0 <- df
+#----------------------------------------
+library(paqueteMOD)
+data(arboles)
+y=as.numeric(arboles$peso)
+x=as.numeric(arboles$altura)
+modelo=lm(y~x)
+
 ```
 
 
@@ -282,8 +289,73 @@ El $R^2$ se puede interpretar como la proporción de la variabilidad total obser
 
 Las dos primeras indican que aunque un $R^2$ cercano a 1 indica una mayor asociación lineal, no necesariamente garantiza que los supuestos básicos del modelo lineal se estén cumpliendo y menos que el modelo lineal no pueda presentar falta de ajuste.
 
+</br></br>
+
+<span style="color:#FF7F00">**Ejemplo**</span>
+
+Para el ejemplo trabajado verificamos los valores contenidos en la tabla ANOVA, utilizando las fórmilas descritas anteriormente
+
 </br>
 
+Tabla Anova
 
+```{r}
+# data(arboles)
+# y=as.numeric(arboles$peso)
+# x=as.numeric(arboles$altura)
+# modelo=lm(y~x)
+anova(modelo)
+```
+
+</br></br>
+
+Valores calculados
+
+<pre>
+Sxx =  288.1632 
+Syy =  5922.211 
+Sxy =  99779.24 
+
+b1  =  3.890556 
+SSR =  4361.761 
+SSE =  1560.45 
+SST =  5922.211 
+
+MSR =  4361.761 
+MSE =  17.73239 
+MST =  66.54169 
+
+F       =  245.977 
+valor-p =  2.377174e-27
+
+R2      = 0.7365088
+</pre>
+
+
+</br></br>
+
+Código de cálculos
+
+```{r, eval=FALSE}
+Sxx = var(x)*89      
+Syy = var(y)*89     
+Sxy = cov(x,y)*89   
+#---------------------------------------
+b1  =  Sxy/Sxx       
+SSR =  b1^2*Sxx      
+SSE =  Syy - b1*Sxy    
+SST =  var(y)*89    
+#---------------------------------------
+MSR = SSR/1          
+MSE = SSE/88          
+MST = SST/(90-1)    
+#---------------------------------------
+F=MSR/MSE   
+valorp = pf(F, 1,89, lower.tail = FALSE)
+#---------------------------------------
+R2=SSR/SST
+1-SSE/SST
+
+```
 
 

@@ -348,8 +348,10 @@ class="math inline">\({Y}\)</span> vs. <span
 class="math inline">\({X}\)</span> y mirar si existe una tendencia
 lineal en la nube de puntos.</p>
 <center>
-<img src="recurso203_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+<p><img src="recurso203_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /></p>
+Gráfico 1 : Diagrama de dispersión altura - biomasa
 </center>
+<p></br></br></p>
 <p>Si la nube de puntos parece mejor ajustada por una curva hay que
 buscar una transformación apropiada en <span
 class="math inline">\({X}\)</span> y/o <span
@@ -404,6 +406,7 @@ siguiente sistema de ecuaciones:</p>
 {\left.\frac{\partial S(\beta_0,\beta_1)}{\partial
 \beta_1}\right|_{\widehat{\beta}_0,\widehat{\beta}_1}=0}
 \]</span></p>
+<p></br></p>
 <p>De lo cual surgen las denominadas ecuaciones normales:</p>
 <p><span class="math display">\[
 {\sum^{n}_{i=1}y_i=n\widehat{\beta}_0+\widehat{\beta}_1\sum^{n}_{i=1}x_i}
@@ -466,6 +469,43 @@ de <span class="math inline">\({S_{xx}}\)</span> así:</p>
 {\widehat{\beta}_1=\frac{S_{xy}}{S_{xx}}}
 \]</span></p>
 </div>
+<p></br></br></p>
+<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<p>Usaremos la variable peso como una variable proxis de la variable
+biomasa para calcular los parámetros <span
+class="math inline">\(\beta_{0}\)</span> y <span
+class="math inline">\(\beta_{1}\)</span> de dos formas diferentes
+utilizando los valores encontrados y utilizando los conceptos de
+varianza y covarianza.</p>
+<pre class="r"><code>data(arboles)
+y=as.numeric(arboles$peso)
+x=as.numeric(arboles$altura)
+Sxy=sum((x-mean(x, na.rm = TRUE))*(y-mean(y, na.rm = TRUE)))
+Sxx=sum((x-mean(x))^2)
+
+(b1 = Sxy/Sxx)</code></pre>
+<pre><code>[1] 3.890556</code></pre>
+<pre class="r"><code>(b0 = mean(y) - b1*mean(x))</code></pre>
+<pre><code>[1] -7.045564</code></pre>
+<p></br></br></p>
+<pre class="r"><code>n=90
+Syy=var(y)*(n-1)       # Syy
+Sxx=var(x)*(n-1)       # Sxx
+Sxy=cov(x,y)*(n-1)     # Sxy
+
+(b1 = Sxy/Sxx)</code></pre>
+<pre><code>[1] 3.890556</code></pre>
+<pre class="r"><code>(b0 = mean(y) - b1*mean(x))</code></pre>
+<pre><code>[1] -7.045564</code></pre>
+<p></br></br></p>
+<pre class="r"><code>lm(y ~ x)</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ x)
+
+Coefficients:
+(Intercept)            x  
+     -7.046        3.891  </code></pre>
 <p></br></br></p>
 </div>
 <div id="ecuación-de-regresión-ajustada-y-residuales-del-modelo"
