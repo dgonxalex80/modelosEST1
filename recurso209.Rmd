@@ -512,9 +512,11 @@ Figura 4: Formas no lineales
 
 </center>
 
-Transformación Box-Cox 
+</br></br>
 
-La transformacion de la variable respuesta $Y$ es útil para dar solución a problemas tanto de validación de suspuesto como tambien de mejoras en el nivel de ajuste del modelo. Poder detectar cúal de las anteriores trasformaciones es la más apropiada podría se un trabajo de error ensayo, probando una a una las transformaciones, generando una de manda de tiempo.
+### <span style="color:#034a94">**Transformación Box-Cox**
+
+La transformación de la variable respuesta $Y$ es útil para dar solución a problemas tanto de validación de suspuesto como tambien de mejoras en el nivel de ajuste del modelo. Poder detectar cúal de las anteriores trasformaciones es la más apropiada podría se un trabajo de error ensayo, probando una a una las transformaciones, generando una de manda de tiempo.
 
 El método de box-cox permite encontrar el valor de $\lambda$ óptimo para la función :
 
@@ -533,7 +535,7 @@ La siguiente tabla nos ayuda a identificar la transformación apropiada
 |                         |           |           |             |           |           |           |            |
 |:------------------------|:----------|:----------|:------------|:----------|:----------|:----------|:-----------|
 | $\lambda \hspace{1.5cm}$|   -2      |  -1       |   -0.5      |      0    |  0.5      |    1      |  2         |
-| Transformación          | $1/x^{2}$ | $1/x$     | $1/\sqrt{x}$| $log(y)$  | $\sqrt{y}$|   $x$     | $x^{2}$    |
+| Transformación          | $1/y^{2}$ | $1/y$     | $1/\sqrt{y}$| $log(y)$  | $\sqrt{y}$|   $y$     | $y^{2}$    |
 
 </br></br>
 
