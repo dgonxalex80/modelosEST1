@@ -562,12 +562,13 @@ sucesivas por tanto el no rechazar <span class="math inline">\({\phi_1}
 <span class="math inline">\({k &gt; 1}\)</span> unidades (en el tiempo u
 orden de observación).</p>
 <p></br></br></p>
-<p><span style="color:#FF7F00"><strong>Nota:</strong></span></p>
-<p></br></p>
+<div id="nota" class="section level3 content-box-blue">
+<h3><span style="color:#FF7F00"><strong>Nota:</strong></span></h3>
 <p>Recuerde que incorrelación no implica independencia estadística, pero
 independencia estadística si implica incorrelación. Sin embargo, si el
 par de variables incorrelacionadas se distribuyen conjuntamente en forma
 normal, entonces son independientes!.</p>
+</div>
 <p>En general, mientras sea desconocido el orden de recolección u
 observación de los datos, asumimos como válido el supuesto de
 independencia.</p>
@@ -583,9 +584,6 @@ independencia de errores</strong></span1></h2>
 <li>Adicionar variables de tendencia, estacionalidad.</li>
 <li>Trabajar con primeras diferencias.</li>
 </ul>
-<p></br></p>
-<p>Esta temática se aborda en detalle en el curso de Estadística
-III.</p>
 <p></br></br></p>
 </div>
 <div id="linealidad-del-modelo" class="section level2">
@@ -884,18 +882,13 @@ ajuste en el modelo de RLS</strong></p>
 </tbody>
 </table>
 <p></br></br></p>
-<center>
-<img src="img/grafico10.png" width="90%" style="display: block; margin: auto;" />
-Figura 4: Formas no lineales
-</center>
-</br></br>
-<div id="nota" class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"><strong>NOTA</strong></span></h3>
+<div id="nota-1" class="section level3 content-box-blue">
+<h3><span style="color:#FF7F00"><strong>Nota</strong></span></h3>
 <p></br></p>
 <ul>
-<li>En general, en el cálculo de la SSPE sólo se utilizan aquellos
-niveles <span class="math inline">\(i\)</span> de <span
-class="math inline">\(X\)</span> en los cuales hay réplicas.</li>
+<li>En general, en el cálculo de la <strong>SSPE</strong> sólo se
+utilizan aquellos niveles <span class="math inline">\(i\)</span> de
+<span class="math inline">\(X\)</span> en los cuales hay réplicas.</li>
 </ul>
 <p></br></p>
 <ul>
@@ -960,6 +953,9 @@ class="math inline">\({X}\)</span>, originando un modelo de la forma
 \varepsilon}\)</span>, donde <span class="math inline">\({Y^*}\)</span>
 y <span class="math inline">\({X^*}\)</span> son las variables
 transformadas.</p>
+<p>En ocaciones realizar transformaciones en las variables permite
+superar los problemas que se presentan al verificar los supuestos del
+modelo y tambien mejorar el ajuste del modelo.</p>
 <p></br></br></p>
 <div id="casos-comunes-de-modelos-intrínsecamente-lineales"
 class="section level3">
@@ -1060,10 +1056,110 @@ X^* + \varepsilon^*\)</span></td>
 </tr>
 </tbody>
 </table>
+<center>
+<p></br></br></p>
+<p><img src="img/grafico10.png" width="90%" style="display: block; margin: auto;" />
+Figura 4: Formas no lineales</p>
+</center>
+<p>Transformación Box-Cox</p>
+<p>La transformacion de la variable respuesta <span
+class="math inline">\(Y\)</span> es útil para dar solución a problemas
+tanto de validación de suspuesto como tambien de mejoras en el nivel de
+ajuste del modelo. Poder detectar cúal de las anteriores trasformaciones
+es la más apropiada podría se un trabajo de error ensayo, probando una a
+una las transformaciones, generando una de manda de tiempo.</p>
+<p>El método de box-cox permite encontrar el valor de <span
+class="math inline">\(\lambda\)</span> óptimo para la función :</p>
+<p><span class="math display">\[g_{\lambda}(y) = \left \{ \begin{matrix}
+\dfrac{y^{\lambda}-1}{y} &amp; \mbox{ si } \lambda \neq 0\\
+                                     &amp;  \\
+                                     log(y)  &amp; \mbox{ si } \lambda
+=0 \end{matrix}\right.\]</span></p>
+<p>El valor <span
+class="math inline">\(\dfrac{y^{\lambda}-1}{y}\)</span> se puede
+simplificar por <span class="math inline">\(y^{\lambda}\)</span> cuando
+el modelo es predictivo. El valor máximo de este valor podrá orientar
+sobre la forma funcional de la variables respuesta.</p>
+<p>La función <code>boxcox()</code>, del paquete <code>MASS</code> nos
+ayuda a encontrar el valor óptimo de <span
+class="math inline">\(\lambda\)</span></p>
+<p>La siguiente tabla nos ayuda a identificar la transformación
+apropiada</p>
+<p></br></br></p>
+<table style="width:100%;">
+<colgroup>
+<col width="23%" />
+<col width="10%" />
+<col width="10%" />
+<col width="12%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="11%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\lambda
+\hspace{1.5cm}\)</span></td>
+<td align="left">-2</td>
+<td align="left">-1</td>
+<td align="left">-0.5</td>
+<td align="left">0</td>
+<td align="left">0.5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">Transformación</td>
+<td align="left"><span class="math inline">\(1/x^{2}\)</span></td>
+<td align="left"><span class="math inline">\(1/x\)</span></td>
+<td align="left"><span class="math inline">\(1/\sqrt{x}\)</span></td>
+<td align="left"><span class="math inline">\(log(y)\)</span></td>
+<td align="left"><span class="math inline">\(\sqrt{y}\)</span></td>
+<td align="left"><span class="math inline">\(x\)</span></td>
+<td align="left"><span class="math inline">\(x^{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p></br></br></p>
+<pre class="r"><code>library(paqueteMOD)
+data(ventas) 
+modelo1=lm(ventas ~ clientes, ventas)
+summary(modelo1)</code></pre>
+<pre><code>
+Call:
+lm(formula = ventas ~ clientes, data = ventas)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-11.873  -2.861   0.255   3.511  10.595 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  19.9800     4.3897   4.552 0.000544 ***
+clientes      0.2606     0.0420   6.205 3.19e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 6.72 on 13 degrees of freedom
+Multiple R-squared:  0.7476,    Adjusted R-squared:  0.7282 
+F-statistic:  38.5 on 1 and 13 DF,  p-value: 3.193e-05</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:3)
+#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+bc&lt;-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)</code></pre>
+<p><img src="recurso209_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>(lambda &lt;- bc$x[which.max(bc$y)])</code></pre>
+<pre><code>[1] 1.212121</code></pre>
+<p></br></br></p>
+<p><span class="math inline">\(\lambda = 1.212121\)</span> indica que la
+mejor trasformación para la variable <span
+class="math inline">\(Y\)</span> es la lineal (<span
+class="math inline">\(Y^{1}\)</span>)</p>
 <p></br></br></p>
 </div>
-<div id="nota-1" class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"><strong>NOTA</strong></span></h3>
+<div id="nota-2" class="section level3 content-box-blue">
+<h3><span style="color:#FF7F00"><strong>Nota</strong></span></h3>
 <p></br></p>
 <ul>
 <li>Los modelos exponenciales y de potencia aditivos: <span

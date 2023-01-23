@@ -11,6 +11,17 @@ output:
 ---
 
 
+|               |           |        |             |           |           |           |            |
+|:--------------|:----------|: ------|:------------|:----------|:----------|:----------|:-----------|
+
+
+
+| $\lambda$     |   -2      |  -1    |   -0.5      |      0    |  0.5      |    1      |  2         |
+| Transformación| $1/x^{2}$ | $1/x$  | $1/\sqrt{x}$| $log(y)$  | $\sqrt{y}$|   $x$     | $x^{2}$    |
+
+
+
+
 En este documento se presenta una simulación que pretende explicar el funcionamiento de uno de los métodos para estimar parametros en la regresión lineal conocido como Mínimos Cuadrados Ordinarios (MCO). Este se ilustra por medio de la regresión lineal simple, en el cual se deben estimar dos parametros $\beta_0$ y $\beta_1$, para el modelo simple $Y_i=\beta_0 + (\beta_1 * X_i) + \varepsilon_{i}, i=1,2,\ldots,n$.
 
 Recordemos que el objetivo de los MCO es minimizar la función conocida como Suma de Cuadrados del Error (SCE). Pero antes veamos un poco de definiciones:

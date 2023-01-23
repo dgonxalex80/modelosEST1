@@ -351,7 +351,7 @@ en el <code>paqueteMOD</code></p>
 datos</strong></span></h3>
 <pre class="r"><code>library(paqueteMOD)
 library(tidyverse)
-data(ventas) </code></pre>
+data(ventas)</code></pre>
 <p></br></br></p>
 </div>
 <div id="descripción-de-las-variables" class="section level3">
@@ -730,6 +730,48 @@ class="math inline">\(Y_{0}\)</span></strong></h3>
 <pre class="r"><code>predict(modelo1, data.frame(clientes=20), interval = &quot;prediction&quot;, level = 0.95)</code></pre>
 <pre><code>      fit      lwr      upr
 1 25.1925 8.688234 41.69677</code></pre>
+<p></br></br></p>
+</div>
+<div id="evaluación-de-la-linealidad-del-modelo" class="section level2">
+<h2><span style="color:#034a94"><strong>Evaluación de la linealidad del
+modelo</strong></span></h2>
+<p></br></p>
+<p>Para ello utilizamos la función <code>boxcox()</code> del paquete
+<code>MASS</code></p>
+<p></br></p>
+<pre class="r"><code>library(paqueteMOD)
+data(ventas) 
+modelo1=lm(ventas ~ clientes, ventas)
+summary(modelo1)</code></pre>
+<pre><code>
+Call:
+lm(formula = ventas ~ clientes, data = ventas)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-11.873  -2.861   0.255   3.511  10.595 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  19.9800     4.3897   4.552 0.000544 ***
+clientes      0.2606     0.0420   6.205 3.19e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 6.72 on 13 degrees of freedom
+Multiple R-squared:  0.7476,    Adjusted R-squared:  0.7282 
+F-statistic:  38.5 on 1 and 13 DF,  p-value: 3.193e-05</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:2)
+#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+bc&lt;-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)</code></pre>
+<p><img src="recurso207_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>(lambda &lt;- bc$x[which.max(bc$y)])</code></pre>
+<pre><code>[1] 1.212121</code></pre>
+<p></br></p>
+<p>El valor de $= 1.212121 $ indica que la variable dependiente debe
+continuar en la forma lineal <span
+class="math inline">\(Y^{1}\)</span></p>
 </div>
 
 

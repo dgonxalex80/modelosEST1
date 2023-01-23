@@ -9,6 +9,7 @@ css: style.css
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
 library(vembedr)
 library(tidyverse)
+library(MASS)
 c1="#FF7F00"
 c2="#=EB0C6"
 c3="#034A94"
@@ -184,11 +185,13 @@ Note que esta prueba sólo detecta correlación entre observaciones sucesivas po
 
 </br></br>
 
-<span style="color:#FF7F00">**Nota:**</span> 
+<div class="content-box-blue">
 
-</br>
+### <span style="color:#FF7F00">**Nota:**</span> 
 
 Recuerde que incorrelación no implica independencia estadística, pero independencia estadística si implica incorrelación. Sin embargo, si el par de variables incorrelacionadas se distribuyen conjuntamente en forma normal, entonces son independientes!.
+
+</div>
          
 En general, mientras sea desconocido el orden de recolección u observación de los datos, asumimos como válido el supuesto de independencia.
 
@@ -201,10 +204,6 @@ En general, mientras sea desconocido el orden de recolección u observación de 
 * Trabajar con modelos con errores correlacionados.
 * Adicionar variables de tendencia, estacionalidad. 
 * Trabajar con primeras diferencias.
-
-</br>
-
-Esta temática se aborda en detalle en el curso de Estadística III.
 
 
 </br></br>
@@ -416,20 +415,13 @@ En la tabla **ANOVA**, presentada en clases anteriores, se puede incluir la prue
 
 </br></br>
 
-<center>
-```{r, echo=FALSE, out.width="90%", fig.align = "center"}
-knitr::include_graphics("img/grafico10.png")
-```
-Figura 4: Formas no lineales
-</center>
-
-</br></br>
 <div class="content-box-blue">
-### <span style="color:#FF7F00">**NOTA**</span>
+
+### <span style="color:#FF7F00">**Nota**</span>
 
 </br>
 
-* En general, en el cálculo de la SSPE sólo se utilizan aquellos niveles $i$ de $X$ en los cuales hay réplicas.
+* En general, en el cálculo de la **SSPE** sólo se utilizan aquellos niveles $i$ de $X$ en los cuales hay réplicas.
 
 </br>
 
@@ -465,6 +457,8 @@ Figura 4: Formas no lineales
 </br>
 
 Un modelo de regresión se considera lineal cuando lo es en los parámetros, por ello las transformaciones en las variables no implican modelos no lineales. Modelos intrínsecamente lineales son aquellos que relacionan ${Y}$ con ${X}$ por medio de una transformación en ${Y}$ o en ${X}$, originando un modelo de la forma ${Y^* = \beta_0 + \beta_1X^* + \varepsilon}$, donde ${Y^*}$ y ${X^*}$ son las variables transformadas.
+
+En ocaciones realizar transformaciones en las variables permite superar los problemas que se presentan al verificar los supuestos del modelo y tambien mejorar el ajuste del modelo.
 
 </br></br>
 
@@ -507,15 +501,63 @@ Modelo recíproco
 |                            |                                              |                             |
 
 
-```{r, echo = F, fig.align = 'center', out.width = '90%'}
-#knitr::include_graphics('figures/transforma.png')
+<center>
+
+</br></br>
+
+```{r, echo=FALSE, out.width="90%", fig.align = "center"}
+knitr::include_graphics("img/grafico10.png")
 ```
+Figura 4: Formas no lineales
+
+</center>
+
+Transformación Box-Cox 
+
+La transformacion de la variable respuesta $Y$ es útil para dar solución a problemas tanto de validación de suspuesto como tambien de mejoras en el nivel de ajuste del modelo. Poder detectar cúal de las anteriores trasformaciones es la más apropiada podría se un trabajo de error ensayo, probando una a una las transformaciones, generando una de manda de tiempo.
+
+El método de box-cox permite encontrar el valor de $\lambda$ óptimo para la función :
+
+$$g_{\lambda}(y) = \left \{ \begin{matrix} \dfrac{y^{\lambda}-1}{y} & \mbox{ si } \lambda \neq 0\\ 
+                                     &  \\
+                                     log(y)  & \mbox{ si } \lambda =0 \end{matrix}\right.$$
+
+El valor $\dfrac{y^{\lambda}-1}{y}$ se puede simplificar por $y^{\lambda}$ cuando el modelo es predictivo. El valor máximo de este valor podrá orientar sobre la forma funcional de la variables respuesta.
+
+La función `boxcox()`, del paquete `MASS` nos ayuda a encontrar el valor óptimo de $\lambda$
+
+La siguiente tabla nos ayuda a identificar la transformación apropiada
+
+</br></br>
+
+|                         |           |           |             |           |           |           |            |
+|:------------------------|:----------|:----------|:------------|:----------|:----------|:----------|:-----------|
+| $\lambda \hspace{1.5cm}$|   -2      |  -1       |   -0.5      |      0    |  0.5      |    1      |  2         |
+| Transformación          | $1/x^{2}$ | $1/x$     | $1/\sqrt{x}$| $log(y)$  | $\sqrt{y}$|   $x$     | $x^{2}$    |
+
+</br></br>
+
+```{r}
+library(paqueteMOD)
+data(ventas) 
+modelo1=lm(ventas ~ clientes, ventas)
+summary(modelo1)
+par(mfrow = c(1,2))
+boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:3)
+#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+bc<-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)
+(lambda <- bc$x[which.max(bc$y)])
+```
+
+</br></br>
+
+$\lambda = 1.212121$ indica que la mejor trasformación para la variable $Y$ es la lineal ($Y^{1}$) 
 
 </br></br>
 
 <div class="content-box-blue">
 
-### <span style="color:#FF7F00">**NOTA**</span>
+### <span style="color:#FF7F00">**Nota**</span>
 
 </br>
                                           

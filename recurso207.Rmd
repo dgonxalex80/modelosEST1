@@ -18,6 +18,7 @@ c5= "#db524f"
 paleta4=c("#0d3b66", "#faf0ca", "#f4d35e", "#ee964d")
 library(paqueteMOD)
 library(tidyverse)
+library(MASS)
 data("apartamentos") # 54 x 10 (precio, area,cons) 
 
 ```
@@ -37,7 +38,7 @@ Con el propósito de revisar los códigos en R relacionados con los procesos des
 ```{r, eval=FALSE}
 library(paqueteMOD)
 library(tidyverse)
-data(ventas) 
+data(ventas)
 
 ```
 
@@ -291,5 +292,31 @@ predict(modelo1, data.frame(clientes=20), interval = "confidence", level = 0.95)
 ```{r}
 predict(modelo1, data.frame(clientes=20), interval = "prediction", level = 0.95)
 ```
+
+</br></br>
+
+## <span style="color:#034a94">**Evaluación de la linealidad del modelo**</span>
+
+</br>
+
+Para ello utilizamos la función `boxcox()` del paquete `MASS`
+
+</br>
+
+```{r}
+library(paqueteMOD)
+data(ventas) 
+modelo1=lm(ventas ~ clientes, ventas)
+summary(modelo1)
+par(mfrow = c(1,2))
+boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:2)
+#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+bc<-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)
+(lambda <- bc$x[which.max(bc$y)])
+```
+</br>
+
+El valor de $\lambda = 1.212121 $ indica que la variable dependiente debe continuar en la forma lineal $Y^{1}$
+
 
 
