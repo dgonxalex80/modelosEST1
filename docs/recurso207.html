@@ -763,7 +763,7 @@ Multiple R-squared:  0.7476,    Adjusted R-squared:  0.7282
 F-statistic:  38.5 on 1 and 13 DF,  p-value: 3.193e-05</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:2)
-#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+#Se repite el proceso pero esta vez estrechando el rango de valores de lambda 
 bc&lt;-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)</code></pre>
 <p><img src="recurso207_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>(lambda &lt;- bc$x[which.max(bc$y)])</code></pre>

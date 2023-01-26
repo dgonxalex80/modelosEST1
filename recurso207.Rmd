@@ -310,7 +310,7 @@ modelo1=lm(ventas ~ clientes, ventas)
 summary(modelo1)
 par(mfrow = c(1,2))
 boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:2)
-#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+#Se repite el proceso pero esta vez estrechando el rango de valores de lambda 
 bc<-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)
 (lambda <- bc$x[which.max(bc$y)])
 ```
