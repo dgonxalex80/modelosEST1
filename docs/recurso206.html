@@ -374,29 +374,33 @@ class="math display">\[\text{SST} = S_{yy} = \sum_{i = 1}^n \left(y_i -
 componen a la SST.</p>
 <p></br></br></br></p>
 <center>
-<img src="img/grafico1.png" width="90%" style="display: block; margin: auto;" />
+<img src="img/grafico1.png" width="70%" style="display: block; margin: auto;" />
 Figura 1: Variabilidd total SST
 </center>
 <p></br></br></br></p>
 <center>
-<img src="img/grafico2.png" width="90%" style="display: block; margin: auto;" />
+<img src="img/grafico2.png" width="70%" style="display: block; margin: auto;" />
 Figura 2: Variabilidad en Y al incluir el modelo de RLS
 </center>
 <p></br></br></br></p>
 <center>
-<img src="img/grafico3.png" width="90%" style="display: block; margin: auto;" />
+<img src="img/grafico3.png" width="70%" style="display: block; margin: auto;" />
 Figura 3: Enfoque de varianza SST = SSR + SSE
 </center>
 <p></br></br></p>
 <p>De ahí que podamos escribir cada diferencia <span
 class="math inline">\(y_i - \bar{y}\)</span> como:</p>
-<p><span class="math display">\[y_i - \bar{y} = (\widehat{y}_i -
-\bar{y}) + (y_i - \widehat{y}_i)\]</span> </br></p>
+<center>
+<img src="img/SST.png" width="50%" style="display: block; margin: auto;" />
+</center>
+<!-- $$y_i - \bar{y} \hspace{.3cm} = \hspace{.3cm} (\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)$$ -->
+<p></br></p>
 <p>y reemplazando en la SST, se obtiene:</p>
 <p><span class="math display">\[
 \begin{aligned}
-SST = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &amp;= \sum_{i = 1}^n
-\left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
+SST \hspace{.3cm} = \hspace{.3cm} \sum_{i = 1}^n \left(y_i -
+\bar{y}\right)^2 &amp;= \sum_{i = 1}^n \Big[(\widehat{y}_i - \bar{y}) +
+(y_i - \widehat{y}_i)\Big]^2\\
 &amp;=\sum^n_{i=1} (\widehat{y}_i - \bar{y})^2 + \sum^n_{i=1}
 (y_i-\widehat{y}_i)^2
 \end{aligned}
@@ -420,8 +424,9 @@ abreviado SSR.</li>
 </ul>
 <p>Se puede demostrar que:</p>
 <p><span class="math display">\[
-SSR = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy}
-= \widehat{\beta}_1^2S_{xx}
+SSR \hspace{.3cm} = \hspace{.3cm} \sum^n_{i=1}(\widehat{y}_i -
+\bar{y})^2 \hspace{.3cm}= \hspace{.3cm} \widehat{\beta}_1S_{xy}
+\hspace{.3cm}= \hspace{.3cm} \widehat{\beta}_1^2S_{xx}
 \]</span></p>
 <p></br></p>
 <ul>
@@ -435,12 +440,17 @@ Cuadrados del Error, abreviado SSE.</li>
 </ul>
 <p></br></p>
 <p>Se puede demostrar que: <span class="math display">\[
-SSE = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2
-=  S_{yy}-\widehat{\beta}_1 S_{xy}
+SSE = \sum^n_{i=1} e^2_i \hspace{.3cm} = \hspace{.3cm}
+\sum^n_{i=1}(y_i-\widehat{y}_i)^2 \hspace{.3cm}=
+\hspace{.3cm}  S_{yy}-\widehat{\beta}_1 S_{xy}
 \]</span></p>
-<p>De donde, se obtiene que: <span class="math display">\[
-SST = SSR + SSE
-\]</span></p>
+<p>De donde, se obtiene que:</p>
+<center>
+<img src="img/SST2.png" width="50%" style="display: block; margin: auto;" />
+</center>
+<!-- $$ -->
+<!-- SST = SSR + SSE -->
+<!-- $$ -->
 <p></br></p>
 <p>la cual se conoce como Identidad de Suma de Cuadrados.</p>
 <p>Cada una de estas sumas de cuadrados tiene asociados unos grados de
@@ -555,50 +565,14 @@ class="section level2">
 <h2><span style="color:#034a94"><strong>Tabla de Análisis de Varianza
 para el modelo de RLS.</strong></span></h2>
 <p></br></p>
-<table>
-<colgroup>
-<col width="19%" />
-<col width="19%" />
-<col width="19%" />
-<col width="23%" />
-<col width="19%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Fuente de variación</th>
-<th>Suma de cuadrados</th>
-<th>Grados de libertad</th>
-<th>Cuadrado medio</th>
-<th>F calculada</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Regresión o Modelo</td>
-<td>SSR</td>
-<td>1</td>
-<td><span class="math inline">\(\small \text{MSR} =
-\text{SSR}\)</span></td>
-<td><span
-class="math inline">\(F_{_{0}}=\frac{\text{MSR}}{\text{MSE}}\)</span></td>
-</tr>
-<tr class="even">
-<td>Error o Residual</td>
-<td>SSE</td>
-<td><span class="math inline">\(n-2\)</span></td>
-<td><span class="math inline">\(\text{MSE} =
-\frac{\text{SSE}}{n-2}\)</span></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td>SST</td>
-<td><span class="math inline">\(n-1\)</span></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<center>
+<img src="img/ANOVA.png" width="100%" style="display: block; margin: auto;" />
+</center>
+<!-- | Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | F calculada | -->
+<!-- |----|----|----|-----|----| -->
+<!-- | Regresión o Modelo | SSR | 1 | $\small \text{MSR} = \text{SSR}$ | $F_{_{0}}=\frac{\text{MSR}}{\text{MSE}}$ | -->
+<!-- | Error o Residual | SSE | $n-2$ | $\text{MSE} = \frac{\text{SSE}}{n-2}$ | -->
+<!-- | Total | SST | $n-1$| | | -->
 <p></br></p>
 <p>También se puede evaluar el valor <span
 class="math inline">\({p}\)</span> de la prueba () que es igual a <span
@@ -621,10 +595,13 @@ muestral</strong></span></h2>
 medida del ajuste del modelo que provee un indicador de que tan bien la
 predictora <span class="math inline">\(X\)</span> predice a la respuesta
 <span class="math inline">\(Y\)</span>. Se calcula como:</p>
-<p><span class="math display">\[
-R^2 \hspace{.3cm} = \hspace{.3cm} \dfrac{SSR}{SST} \hspace{0.3cm}=
-\hspace{.3cm} 1-\frac{SSE}{SST}
-\]</span></p>
+<p></br></p>
+<center>
+<img src="img/R2.png" width="50%" style="display: block; margin: auto;" />
+</center>
+<!-- $$ -->
+<!-- R^2 \hspace{.3cm} = \hspace{.3cm} \dfrac{SSR}{SST} \hspace{0.3cm}= \hspace{.3cm} 1-\frac{SSE}{SST} -->
+<!-- $$ -->
 <p>El <span class="math inline">\(R^2\)</span> se puede interpretar como
 la proporción de la variabilidad total observada en la variable
 respuesta que es explicada por la relación lineal con la variable
@@ -654,7 +631,7 @@ pueda presentar falta de ajuste.</p>
 <p>Para el ejemplo trabajado verificamos los valores contenidos en la
 tabla ANOVA, utilizando las fórmilas descritas anteriormente</p>
 <p></br></p>
-<p>Tabla Anova</p>
+<p><strong>Tabla Anova</strong></p>
 <pre class="r"><code># data(arboles)
 # y=as.numeric(arboles$peso)
 # x=as.numeric(arboles$altura)
@@ -669,7 +646,7 @@ Residuals 88 1560.5    17.7
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p></br></br></p>
-<p>Valores calculados</p>
+<p><strong>Valores calculados</strong></p>
 <pre>
 Sxx =  288.1632 
 Syy =  5922.211 
@@ -690,7 +667,7 @@ valor-p =  2.377174e-27
 R2      = 0.7365088
 </pre>
 <p></br></br></p>
-<p>Código de cálculos</p>
+<p><strong>Código de cálculos</strong></p>
 <pre class="r"><code>Sxx = var(x)*89      
 Syy = var(y)*89     
 Sxy = cov(x,y)*89   

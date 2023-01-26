@@ -72,7 +72,7 @@ veamos lo que representa gráficamente cada una de las diferencias que componen 
 
 <center>
 
-```{r,  echo = F, fig.align = 'center', out.width = '90%'}
+```{r,  echo = F, fig.align = 'center', out.width = '70%'}
 knitr::include_graphics("img/grafico1.png")
 ```
 Figura 1: Variabilidd total SST
@@ -81,7 +81,7 @@ Figura 1: Variabilidd total SST
 </br></br></br>
 
 <center>
-```{r, echo = F, fig.align = 'center', out.width = '90%'}
+```{r, echo = F, fig.align = 'center', out.width = '70%'}
 knitr::include_graphics("img/grafico2.png")
 ```
 Figura 2: Variabilidad en Y al incluir el modelo de RLS
@@ -90,7 +90,7 @@ Figura 2: Variabilidad en Y al incluir el modelo de RLS
 </br></br></br>
 
 <center>
-```{r, echo = F, fig.align = 'center', out.width = '90%'}
+```{r, echo = F, fig.align = 'center', out.width = '70%'}
 knitr::include_graphics("img/grafico3.png")
 ```
 Figura 3: Enfoque de varianza SST = SSR + SSE
@@ -100,14 +100,20 @@ Figura 3: Enfoque de varianza SST = SSR + SSE
 
 De ahí que podamos escribir cada diferencia $y_i - \bar{y}$ como:
 
-$$y_i - \bar{y} = (\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)$$
+<center>
+```{r, echo = F, fig.align = 'center', out.width = '50%'}
+knitr::include_graphics("img/SST.png")
+```
+</center>
+
+<!-- $$y_i - \bar{y} \hspace{.3cm} = \hspace{.3cm} (\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)$$ -->
 </br>
 
 y reemplazando en la SST, se obtiene:
 
 $$
 \begin{aligned}
-SST = \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \left[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\right]^2\\
+SST \hspace{.3cm} = \hspace{.3cm} \sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \Big[(\widehat{y}_i - \bar{y}) + (y_i - \widehat{y}_i)\Big]^2\\
 &=\sum^n_{i=1} (\widehat{y}_i - \bar{y})^2 + \sum^n_{i=1} (y_i-\widehat{y}_i)^2
 \end{aligned}
 $$
@@ -131,7 +137,7 @@ Así, la suma de cuadrados totales SST queda expresada mediante la suma de dos c
 Se puede demostrar que:
 
 $$
-SSR = \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 = \widehat{\beta}_1S_{xy} = \widehat{\beta}_1^2S_{xx}
+SSR \hspace{.3cm} = \hspace{.3cm} \sum^n_{i=1}(\widehat{y}_i - \bar{y})^2 \hspace{.3cm}= \hspace{.3cm} \widehat{\beta}_1S_{xy} \hspace{.3cm}= \hspace{.3cm} \widehat{\beta}_1^2S_{xx}
 $$
 
 </br>
@@ -142,13 +148,22 @@ $$
 
 Se puede demostrar que:
 $$
-SSE = \sum^n_{i=1} e^2_i = \sum^n_{i=1}(y_i-\widehat{y}_i)^2 =  S_{yy}-\widehat{\beta}_1 S_{xy}
+SSE = \sum^n_{i=1} e^2_i \hspace{.3cm} = \hspace{.3cm} \sum^n_{i=1}(y_i-\widehat{y}_i)^2 \hspace{.3cm}= \hspace{.3cm}  S_{yy}-\widehat{\beta}_1 S_{xy}
 $$
 
 De donde, se obtiene que:
-$$
-SST = SSR + SSE
-$$
+
+
+<center>
+```{r, echo = F, fig.align = 'center', out.width = '50%'}
+knitr::include_graphics("img/SST2.png")
+```
+</center>
+
+
+<!-- $$ -->
+<!-- SST = SSR + SSE -->
+<!-- $$ -->
 
 </br>
 
@@ -244,11 +259,17 @@ Esto es, a un nivel de significancia ${\alpha}$ se rechaza la hipótesis nula de
          
 </br>
 
-| Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | F calculada |
-|----|----|----|-----|----|
-| Regresión o Modelo | SSR | 1 | $\small \text{MSR} = \text{SSR}$ | $F_{_{0}}=\frac{\text{MSR}}{\text{MSE}}$ |
-| Error o Residual | SSE | $n-2$ | $\text{MSE} = \frac{\text{SSE}}{n-2}$ |
-| Total | SST | $n-1$| | |
+<center>
+```{r, echo = F, fig.align = 'center', out.width = '100%'}
+knitr::include_graphics("img/ANOVA.png")
+```
+</center>
+
+<!-- | Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | F calculada | -->
+<!-- |----|----|----|-----|----| -->
+<!-- | Regresión o Modelo | SSR | 1 | $\small \text{MSR} = \text{SSR}$ | $F_{_{0}}=\frac{\text{MSR}}{\text{MSE}}$ | -->
+<!-- | Error o Residual | SSE | $n-2$ | $\text{MSE} = \frac{\text{SSE}}{n-2}$ | -->
+<!-- | Total | SST | $n-1$| | | -->
 
 </br>
 
@@ -267,9 +288,18 @@ La conclusión obtenida por el análisis de varianza debe ser la misma que la ob
 
 Conocido como $R^{2}$, es una medida del ajuste del modelo que provee un indicador de que tan bien la predictora $X$ predice a la respuesta $Y$. Se calcula como:
 
-$$
-R^2 \hspace{.3cm} = \hspace{.3cm} \dfrac{SSR}{SST} \hspace{0.3cm}= \hspace{.3cm} 1-\frac{SSE}{SST}
-$$
+
+</br>
+
+<center>
+```{r, echo = F, fig.align = 'center', out.width = '50%'}
+knitr::include_graphics("img/R2.png")
+```
+</center>
+
+<!-- $$ -->
+<!-- R^2 \hspace{.3cm} = \hspace{.3cm} \dfrac{SSR}{SST} \hspace{0.3cm}= \hspace{.3cm} 1-\frac{SSE}{SST} -->
+<!-- $$ -->
            
 El $R^2$ se puede interpretar como la proporción de la variabilidad total observada en la variable respuesta que es explicada por la relación lineal con la variable predictora considerada.
 
@@ -297,7 +327,7 @@ Para el ejemplo trabajado verificamos los valores contenidos en la tabla ANOVA, 
 
 </br>
 
-Tabla Anova
+**Tabla Anova**
 
 ```{r}
 # data(arboles)
@@ -309,7 +339,7 @@ anova(modelo)
 
 </br></br>
 
-Valores calculados
+**Valores calculados**
 
 <pre>
 Sxx =  288.1632 
@@ -334,7 +364,7 @@ R2      = 0.7365088
 
 </br></br>
 
-Código de cálculos
+**Código de cálculos**
 
 ```{r, eval=FALSE}
 Sxx = var(x)*89      

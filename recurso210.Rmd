@@ -1,0 +1,28 @@
+---
+title: <span style="color:#034a94"> **Indicadores de bondad de ajuste**</span>
+author: "Modelos Estadisticos para la toma de decisiones"
+output: html_document
+css: style.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+# colores
+c0= "#b0394a"
+c1= "#ad6395"
+c2= "#a391c4"
+c3= "#8acfe6"
+c4= "#646420"
+c5= "#db524f"
+paleta4=c("#0d3b66", "#faf0ca", "#f4d35e", "#ee964d")
+library(paqueteMOD)
+library(tidyverse)
+library(MASS)
+data("apartamentos") # 54 x 10 (precio, area,cons) 
+
+```
+
+</br></br>
+
+

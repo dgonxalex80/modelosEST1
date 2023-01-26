@@ -1,6 +1,6 @@
 ---
 title: <span style="color:#034a94"> **Software R**</span>
-author: "Nivelatorio de Estadística"
+author: "Modelos Estadisticos para la toma de decisiones"
 output: html_document
 css: style.css
 ---
@@ -259,7 +259,7 @@ summary(modelo4)
 
 ### <span style="color:#FF7F00">**Comparación de modelos**</span>
 
-```{r, warning=FALSE, }
+```{r, warning=FALSE, message=FALSE}
 library(stargazer)
 #stargazer(modelo1, modelo2, modelo3, modelo4,type="html", title="Comparación de modelos")
 stargazer(modelo1, modelo2, modelo3, modelo4, type="text", df=FALSE)
