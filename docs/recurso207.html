@@ -14,7 +14,7 @@
 
 <title> Software R</title>
 
-<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -378,8 +378,14 @@ variables</strong></span></h3>
           N.Valid      15.00    15.00
         Pct.Valid     100.00   100.00</code></pre>
 <p></br></br></p>
-<pre class="r"><code>library(patchwork)
-p1 = ggplot(ventas, aes(x=clientes))+geom_boxplot()
+<pre class="r"><code>library(ggplot2)
+library(patchwork)</code></pre>
+<pre><code>
+Attaching package: &#39;patchwork&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:MASS&#39;:
+
+    area</code></pre>
+<pre class="r"><code>p1 = ggplot(ventas, aes(x=clientes))+geom_boxplot()
 p2 = ggplot(ventas, aes(x=ventas))+ geom_boxplot()
 p3 = ggplot(ventas, aes(x=clientes))+geom_density()
 p4 = ggplot(ventas, aes(x=ventas))+ geom_density()

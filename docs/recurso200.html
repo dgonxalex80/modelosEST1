@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
+<meta name="author" content="Modelos Estadísticos para la toma de decisiones" />
 
 
-<title> Inferencia sobre los parámetros</title>
+<title>Asociacines</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -328,178 +328,41 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Inferencia sobre los parámetros</strong></span></h1>
-<h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
+<h1 class="title toc-ignore">Asociacines</h1>
+<h4 class="author">Modelos Estadísticos para la toma de decisiones</h4>
 
 </div>
 
 
-<p></br></br></p>
-<div id="inferencias-sobre-el-intercepto-beta_0" class="section level2">
-<h2><span style="color:#034a94"><strong>Inferencias sobre el intercepto
-<span class="math inline">\(\beta_0\)</span></strong></span></h2>
+<div id="revisión-de-posibles-asociaciones" class="section level2">
+<h2>Revisión de posibles asociaciones</h2>
 <p></br></p>
-<p>El intercepto <span class="math inline">\(\beta_{0}\)</span>
-corresponde al valor que puede tomar la variable <span
-class="math inline">\(Y\)</span> cuando el valor de <span
-class="math inline">\(X=0\)</span> y se puede visualizar como el corte
-de la recta de regresión al eje <span class="math inline">\(y\)</span>
-en el plano carteciano.</p>
-<p></br></p>
-<div id="intervalos-de-confianza" class="section level3">
-<h3><span style="color:#034a94"><strong>Intervalos de
-confianza</strong></span></h3>
-<p></br></p>
-<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
-cumple que:</p>
-<p><span class="math display">\[
-{T} = {\frac{\widehat\beta_0 -
-\beta_0}{\sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
-\sim t_{n - 2}}
-\]</span></p>
-<p>con <span class="math inline">\({t_{n-2}}\)</span> la variable
-aleatoria <span class="math inline">\({t}\)</span>-Student con <span
-class="math inline">\({n-2}\)</span> grados de libertad.</p>
-<p>Por tanto un intervalo de confianza del <span
-class="math inline">\({(1-\alpha)\%}\)</span> para <span
-class="math inline">\({\beta_0}\)</span> para el intercepto está dado
-por:</p>
-<div class="content-box-blue">
-<p><span class="math display">\[
-{\widehat\beta_0 \pm t_{\alpha/2, n-2}\times
-\sqrt{\frac{\widehat{\sigma}^2\sum^n_{i=1} x^2_i}{nS_{xx}}}}
-\]</span></p>
-</div>
-<p>donde <span class="math inline">\({t_{\alpha/2, n - 2}}\)</span> es
-el percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
-distribución <span class="math inline">\({t}\)</span>-Student con <span
-class="math inline">\({n - 2}\)</span> grados de libertad.</p>
-<p></br></br></p>
-</div>
-<div id="prueba-de-hipótesis-sobre-la-significancia-del-intercepto"
-class="section level3">
-<h3><span style="color:#034a94"><strong>Prueba de Hipótesis sobre la
-significancia del intercepto</strong></span></h3>
-<p></br></p>
-<p>Para probar si <span class="math inline">\({\beta_0}\)</span> es
-significativamente distinto de cero se realiza la siguiente prueba de
-hipótesis :</p>
-<p></br></p>
-<table>
-<colgroup>
-<col width="43%" />
-<col width="56%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">hipótesis</th>
-<th align="center">estadístico de prueba</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><span class="math inline">\(H_0: \beta_0 = 0
-\hspace{1cm}H_1: \beta_0 \neq 0\)</span></td>
-<td align="center"><span
-class="math inline">\({T}={\dfrac{\widehat\beta_0-0}{\sigma_{\widehat{\beta}_{0}}}
-\sim t_{n-2}}\)</span></td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<p>El estadístico de prueba es la ecuación y el valor observado de éste
-(<span class="math inline">\({T_0}\)</span>) se halla reemplazando <span
-class="math inline">\({\beta_0}\)</span> por 0. Se rechaza <span
-class="math inline">\({H_0}\)</span> si <span
-class="math inline">\({|T_0| &gt; t_{\alpha/2, n - 2}}\)</span>.</p>
-<p></br></br></p>
-</div>
-</div>
-<div id="inferencias-sobre-la-pendiente-beta_1" class="section level2">
-<h2><span style="color:#034a94"><strong>Inferencias sobre la pendiente
-<span class="math inline">\(\beta_1\)</span></strong></span></h2>
-<p></br></p>
-<p>La pendiente <span class="math inline">\(\beta_{1}\)</span> permite
-determinar la razón de cambio de la variable <span
-class="math inline">\(Y\)</span> cuando ocurren cambios en <span
-class="math inline">\(X\)</span>, que en ocaciones es el cetro del
-problema de al estimar un modelo de regresión. Si este valor es igual a
-cero estadísticamente significa que no existe relación estadística entre
-las variables y por tanto no tiene sentido la construcción de un modelo
-que las vincule.</p>
-<p></br></br></p>
-<div id="intervalos-de-confianza-1" class="section level3">
-<h3><span style="color:#034a94"><strong>Intervalos de
-confianza</strong></span></h3>
-<p></br></p>
-<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
-cumple que:</p>
-<p><span class="math display">\[
-{T}={\frac{\widehat\beta_1-\beta_1}{\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
-\sim t_{n-2}}
-\]</span></p>
-<p>Por tanto un intervalo de confianza del <span
-class="math inline">\({(1-\alpha)\%}\)</span> para <span
-class="math inline">\({\beta_1}\)</span> es:</p>
-<div class="content-box-blue">
-<p><span class="math display">\[
-{\widehat\beta_1 \pm t_{\alpha/2,n-2}\times
-\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
-\]</span></p>
-</div>
-<p></br></br></p>
-</div>
-<div id="prueba-de-hipótesis-sobre-la-significancia-de-la-pendiente"
-class="section level3">
-<h3><span style="color:#034a94"><strong>Prueba de Hipótesis sobre la
-significancia de la pendiente</strong></span></h3>
-<p></br></p>
-<p>Para probar si <span class="math inline">\({\beta_1}\)</span> es
-significativamente distinto de cero:</p>
-<p></br></p>
-<table>
-<colgroup>
-<col width="43%" />
-<col width="56%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">hipótesis</th>
-<th align="center">estadístico de prueba</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><span class="math inline">\(H_0: \beta_1 = 0
-\hspace{1cm}H_1: \beta_1 \neq 0\)</span></td>
-<td align="center"><span
-class="math inline">\({T}={\dfrac{\widehat\beta_1-0}{\sqrt{\frac{\widehat{\sigma}^2}{S_{xx}}}}
-\sim t_{n-2}}\)</span></td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<p></br></p>
-<p>El estadístico de prueba es la ecuación y el valor observado de éste
-(<span class="math inline">\({T_0}\)</span>) se halla reemplazando <span
-class="math inline">\({\beta_1}\)</span> por 0. Se rechaza <span
-class="math inline">\({H_0}\)</span> si <span
-class="math inline">\({|T_0|&gt;t_{\alpha/2,n-2}}\)</span>.</p>
-<p></br></br></p>
-</div>
-<div id="nota" class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"><strong>Nota:</strong></span></h3>
-<p></br></p>
-<p>Observe que si la pendiente es significativa, entonces el modelo de
-RLS entre la predictora y la respuesta, también lo es.</p>
-</div>
+<p>Inicialmente, puede ser útil realizar chequeos gráficos de la
+naturaleza y la fuerza de las asociaciones entre las variables
+predictoras con la variable respuesta, y aún entre predictoras.</p>
+<p>Una matriz de gráficas de dispersión es la herramienta más útil para
+visualizar rápida y simultáneamente estas relaciones. Si las variables
+predictoras se asocian linealmente a la variable respuesta, los gráficos
+de dispersión respectivos deben presentar las nubes de puntos tendiendo
+a una línea recta. También se puede chequear si existen relaciones de
+tipo no lineal entre las distintas variables, y la presencia de
+observaciones atípicas.</p>
+<hr />
+<p>Por otra parte, se espera que entre las predictoras no existan
+relaciones lineales fuertes, pues de lo contrario, habría información
+que podría ser redundante en el modelo, y se tendría un , lo cuál se
+estudiará en mayor detalle más adelante en la asignatura.</p>
+<p>A veces es útil también acompañar este análisis gráfico con la matriz
+de correlaciones de las variables del modelo, la cual muestra los
+coeficientes de correlación entre la variable respuesta con cada una de
+las predictoras y también todas las correlaciones entre las
+predictoras.</p>
+<hr />
+<p>En la siguiente figura se presentan algunas matrices de gráficos de
+dispersión para un conjunto de datos sobre tres variables.</p>
+<p><strong>Matrices de gráficos de dispersión:</strong> Simple (arriba
+izq), Con histogramas (arriba cen), Con boxplots (arriba der) y Con
+correlaciones (abajo).</p>
 </div>
 
 

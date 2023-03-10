@@ -1,0 +1,37 @@
+---
+title: "Asociacines"
+author: "Modelos Estadísticos para la toma de decisiones"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Revisión de posibles asociaciones
+
+</br>
+
+Inicialmente, puede ser útil realizar chequeos gráficos de la naturaleza y la fuerza de las asociaciones entre las variables predictoras con la variable respuesta, y aún entre predictoras.
+
+Una matriz de gráficas de dispersión es la herramienta más útil para visualizar rápida y simultáneamente estas relaciones. Si las variables predictoras se asocian linealmente a la variable respuesta, los gráficos de dispersión respectivos deben presentar las nubes de puntos tendiendo a una línea recta. También se puede chequear si existen relaciones de tipo no lineal entre las distintas variables, y la presencia de observaciones atípicas.
+
+---
+
+Por otra parte, se espera que entre las predictoras no existan relaciones lineales fuertes, pues de lo contrario, habría información que podría ser redundante en el modelo, y se tendría un \textit{problema de multicolinealidad}, lo cuál se estudiará en mayor detalle más adelante en la asignatura.
+
+A veces es útil también acompañar este análisis gráfico con la matriz de correlaciones de las variables del modelo, la cual muestra los coeficientes de correlación entre la variable respuesta con cada una de las predictoras y también todas las correlaciones entre las predictoras.
+
+---
+
+En la siguiente figura se presentan algunas matrices de gráficos de dispersión para un conjunto de datos sobre tres variables.
+```{r fig35, echo = F, fig.cap = '', fig.show = "hold", out.width = "25%", fig.scap='e'}
+# knitr::include_graphics(c("figures/MGDS.png", "figures/MGDH.png"))
+
+#knitr::include_graphics(c("figures/MGDB.png", "figures/MGDC.png"))
+```
+
+**Matrices de gráficos de dispersión:** Simple (arriba izq), Con histogramas (arriba cen), Con boxplots (arriba der) y Con correlaciones (abajo).
+
+

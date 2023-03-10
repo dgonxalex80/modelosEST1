@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modelos Estadísticos para la toma de decisiones" />
+
+
+<title> Valores ajustados y residuales</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos de Regresión</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+    <li>
+      <a href="recurso206.html">ANOVA - Análisis de la varianza </a>
+    </li>
+    <li>
+      <a href="recurso209.html">Supuetos del modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Valores ajustados y residuales</strong></span></h1>
+<h4 class="author">Modelos Estadísticos para la toma de decisiones</h4>
+
+</div>
+
+
+<p></br></br></p>
+<p></br></br></p>
+<div id="valores-ajustados" class="section level2">
+<h2><strong>Valores ajustados</strong></h2>
+<p></br></p>
+<p>Con los valores ajustados <span
+class="math inline">\(\widehat{Y}_i\)</span> se construye el vector de
+valores ajustados dado por <span class="math display">\[
+\boldsymbol{\widehat{y}} = \boldsymbol{X\widehat\beta} =
+\left[\begin{array}{c} \widehat{Y}_1\\ \widehat{Y}_2\\ \vdots\\
+\widehat{Y}_n\end{array}\right]
+\]</span></p>
+<p></br></p>
+<p>El vector <span
+class="math inline">\(\boldsymbol{\widehat{y}}\)</span> se puede
+reescribir como:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+\boldsymbol{\widehat{y}} = \boldsymbol{X\widehat\beta} =
+\boldsymbol{X}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\
+\boldsymbol{X}&#39;\boldsymbol{y}
+\]</span></p>
+</div>
+<p></br></p>
+<p>Haciendo <span class="math inline">\(\boldsymbol{H} =
+\boldsymbol{X}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\
+\boldsymbol{X}&#39;\)</span>, se llega a que <span
+class="math inline">\(\boldsymbol{\widehat{y}} =
+\boldsymbol{H}\boldsymbol{y}\)</span>, donde a la matriz <span
+class="math inline">\(\boldsymbol{H}\)</span> se le conoce como la
+matriz “<strong>hat</strong>” debido a que su multiplicación por el
+vector de observaciones <span
+class="math inline">\(\boldsymbol{y}\)</span> lleva al vector de valores
+ajustados <span class="math inline">\(\boldsymbol{\widehat{y}}\)</span>
+(<span class="math inline">\(\boldsymbol{y}\)</span>
+“<strong>hat</strong>”).</p>
+<p></br></p>
+<p>Realmente, la matriz <span
+class="math inline">\(\boldsymbol{H}\)</span> es una matriz de
+proyección ortogonal (cuadrada, simétrica e idempotente) que proyecta a
+<span class="math inline">\(\boldsymbol{y}\)</span> en el plano
+ajustado. Esta matriz juega un papel muy importante en regresión tanto
+en la estimación como en la determinación de valores extremos, que será
+desarrollada más adelante.</p>
+<p></br></p>
+<p>Los residuales del modelo corresponden como en el caso de RLS a las
+diferencias entre los valores observados y los valores ajustados, esto
+es, <span class="math inline">\(e_i = Y_i - \widehat{Y}_i\)</span> y el
+vector de residuales es:</p>
+<p><span class="math display">\[
+\boldsymbol{e} = \boldsymbol{y} - \boldsymbol{\widehat{y}} =
+\left[\begin{array}{c} e_1\\ e_2\\ \vdots\\ e_n\end{array}\right]
+\]</span></p>
+<p>El vector de residuales también puede expresarse en términos de la
+matriz <span class="math inline">\(\boldsymbol{H}\)</span>, ya que <span
+class="math inline">\(\boldsymbol{e} = \boldsymbol{y} -
+\boldsymbol{\widehat{y}} = \boldsymbol{y} - \boldsymbol{Hy} =
+\left(\boldsymbol{I} - \boldsymbol{H}\right)
+\boldsymbol{y}\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="estimación-de-la-varianza" class="section level2">
+<h2><strong>Estimación de la varianza</strong></h2>
+<p></br></p>
+<p>Bajo los supuestos relativos a los errores del modelo <span
+class="math display">\[\varepsilon_i \overset{\text{iid}}{\sim}
+N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n,\]</span></p>
+<p></br></p>
+<p>el estimador insesgado de la varianza corresponde a:</p>
+<p></br></p>
+<p><span class="math display">\[
+\widehat{\sigma}^2 = \text{MSE} = \frac{\text{SSE}}{n - p},
+\]</span></p>
+<p></br></p>
+<p>donde <span class="math inline">\(p\)</span> es el número de
+parámetros y la suma de cuadrados del error SSE corresponde a:</p>
+<p></br></p>
+<p><span class="math display">\[
+\text{SSE} = \sum\limits_{i = 1}^n e_i^2 = \sum\limits_{i = 1}^n
+\left(y_i - \widehat{y}_i\right)^2 = \left(\boldsymbol{y} -
+\boldsymbol{\widehat{y}}\right)&#39;\left(\boldsymbol{y} -
+\boldsymbol{\widehat{y}}\right) =
+\boldsymbol{y}&#39;\left(\boldsymbol{I} - \boldsymbol{H}\right)
+\boldsymbol{y}.
+\]</span></p>
+<p></br></br></p>
+</div>
+<div id="análisis-de-varianza-anova" class="section level2">
+<h2><strong>Análisis de varianza ANOVA</strong></h2>
+<p></br></p>
+<p>Al igual que en RLS en RLM se tiene un procedimiento de prueba basado
+en el análisis de varianza para probar la significancia de la regresión,
+que establece el siguiente juego de hipótesis:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0:&amp;\ \beta_1 = \beta_2 = \cdots = \beta_K = 0\\
+H_1:&amp;\ \text{algún } \hspace{.3cm} \beta_j \neq 0,\hspace{2cm} j =
+1, \ldots, k.
+\end{aligned}
+\]</span></p>
+<p>En este enfoque todavía es válida la identidad de suma de cuadrados
+que establece que:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{SST}\quad\ &amp;= \quad\quad\text{SSR} \quad\, \; +
+\quad\quad\text{SSE}\\
+\sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &amp;= \sum_{i = 1}^n
+\left(\widehat{y}_i - \bar{y}\right)^2 + \sum_{i = 1}^n \left(y_i -
+\widehat{y}_i\right)^2
+\end{aligned}
+\]</span></p>
+<p></br></br></p>
+<p>En RLM, las sumas de cuadrados se pueden expresar en forma matricial,
+así:</p>
+<p></br></br></p>
+<div id="sumas-de-cuadrados-en-forma-matricial" class="section level3">
+<h3><strong>Sumas de cuadrados en forma matricial</strong></h3>
+<p>En las siguientes fórmulas <span
+class="math inline">\(\boldsymbol{J}\)</span> es una matriz de dimensión
+<span class="math inline">\(n\times n\)</span> cuyas entradas son todas
+iguales a 1, e <span class="math inline">\(\boldsymbol{I}\)</span> es la
+matriz identidad de orden <span class="math inline">\(n\)</span>:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fuente</th>
+<th>Suma de cuadrados</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Regresión</td>
+<td><span class="math inline">\(\text{SSR} =
+\boldsymbol{y}&#39;\left[\boldsymbol{H} - \left(\frac{1}{n}\right)
+\boldsymbol{J}\right] \boldsymbol{y}\)</span></td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\(\text{SSE} =
+\boldsymbol{y}&#39;\left(\boldsymbol{I} - \boldsymbol{H}\right)
+\boldsymbol{y}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(\text{SST} =
+\boldsymbol{y}&#39;\left[\boldsymbol{I} - \left(\frac{1}{n}\right)
+\boldsymbol{J}\right] \boldsymbol{y}\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>El procedimiento de prueba se resume en la siguiente tabla.</p>
+<p><strong>Tabla de análisis de varianza para el modelo de
+RLM</strong></p>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="22%" />
+<col width="23%" />
+<col width="18%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Fuente de variación</th>
+<th align="center">Suma de cuadrados</th>
+<th align="center">Grados de libertad</th>
+<th align="center">Cuadrado medio</th>
+<th align="center">Valor F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Regresión</td>
+<td align="center"><span
+class="math inline">\(\text{SSR}=\boldsymbol{y}&#39;\left(\boldsymbol{I}
+- \boldsymbol{H}\right) \boldsymbol{y}\)</span></td>
+<td align="center"><span class="math inline">\(k\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSR} =
+\frac{\text{SSR}}{k}\)</span></td>
+<td align="center"><span class="math inline">\(F_0 =
+\frac{\text{MSR}}{\text{MSE}},\)</span> <span
+class="math inline">\(\color{blue}{\text{con}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="center"><span
+class="math inline">\(\text{SSE}=\boldsymbol{y}&#39;\left(\boldsymbol{I}
+- \boldsymbol{H}\right) \boldsymbol{y}\)</span></td>
+<td align="center"><span class="math inline">\(n - p\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSE} =
+\frac{\text{SSE}}{n - p}\)</span></td>
+<td align="center"><span class="math inline">\(\color{blue}{F_0
+\overset{\text{bajo } H_0}{\sim} f_{k, n - p}}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="center"><span
+class="math inline">\(\text{SST}=\boldsymbol{y}&#39;\left[\boldsymbol{I}
+- \left(\frac{1}{n}\right) \boldsymbol{J}\right]
+\boldsymbol{y}\)</span></td>
+<td align="center"><span class="math inline">\(n - 1\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Se rechaza <span class="math inline">\(H_0\)</span> a una
+significancia dada <span class="math inline">\(\alpha\)</span> si <span
+class="math inline">\(F_0 &gt; f_{\alpha, k, n - p}\)</span>, o si se
+define el valor-P para la prueba como <span
+class="math inline">\(\text{vp} = P(f_{k,n - p}&gt;F_0)\)</span>, se
+rechaza <span class="math inline">\(H_0\)</span> si <span
+class="math inline">\(\text{vp} &lt; \alpha\)</span>. Al rechazar, se
+prueba que existe una relación de regresión, sin embargo, esto no
+garantiza que el modelo resulte útil para hacer predicciones.</p>
+<p></br></br></p>
+</div>
+</div>
+<div id="coeficiente-de-determinación-múltiple" class="section level2">
+<h2><strong>Coeficiente de determinación múltiple</strong></h2>
+<p></br></p>
+<p>Denotado por <span class="math inline">\(R^2\)</span> y definido
+como: <span class="math display">\[
+R^2 = \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\text{SSE}}{\text{SST}},
+\]</span></p>
+<p></br></p>
+<p>mide la proporción de la variabilidad total observada en la respuesta
+que es explicada por el modelo propuesto (esto es, la asociación lineal
+con el conjunto de variables <span class="math inline">\(X_1, X_2,
+\ldots, X_k\)</span>).</p>
+<p></br></p>
+<p>Por ser una proporción, esta cantidad varía entre 0 y 1:</p>
+<p></br></p>
+<ul>
+<li>Siendo igual a 0, si todos los coeficientes de regresión ajustados
+son iguales a cero, y</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Siendo igual a 1, si todas las observaciones caen sobre la
+superficie de regresión ajustada.</li>
+</ul>
+<p></br></br></p>
+<p>Aunque es usado como una medida de bondad del ajuste de la función de
+regresión, es necesario tener presente que:</p>
+<p></br></p>
+<ul>
+<li>Valores grandes de <span class="math inline">\(R^2\)</span> no
+implican necesariamente que la superficie ajustada sea útil. Puede
+suceder que se hayan observado pocos niveles de las variables
+predictoras y por tanto la superficie ajustada no sería útil para hacer
+extrapolaciones por fuera de tales rangos. Incluso, si esta cantidad es
+muy cercana a 1, todavía el MSE podría ser muy grande y por tanto las
+inferencias tendrían poca precisión.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Cuando se agregan más variables predictoras al modelo, el <span
+class="math inline">\(R^2\)</span> tiende a no decrecer, aún cuando
+existan dentro del grupo de variables, un subconjunto de ellas que no
+aportan significativamente.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Como <strong>medida de bondad de ajuste</strong> se prefiere usar
+otros estadísticos que penalicen al modelo por el número de variables
+incluidas, entre ellos se tienen el MSE, y el <span
+class="math inline">\(R^2\)</span> ajustado, estas dos medidas son
+equivalentes, dado que éste último se define como:</li>
+</ul>
+<p><span class="math display">\[
+R_{\text{adj}}^2 = 1 - \frac{\left(n - 1\right)\text{MSE}}{\text{SST}}
+\]</span> </br></p>
+<p>El <span class="math inline">\(R^2\)</span> ajustado disminuye cuando
+en el modelo se ingresan variables predictoras sin lograr reducir al
+SSE, y causando la pérdida de grados de libertad para este último.</p>
+<p>Entre dos modelos ajustados se considera mejor el de menor MSE o
+equivalentemente el de mayor <span class="math inline">\(R^2\)</span>
+ajustado.</p>
+<p></br></br></p>
+</div>
+<div id="pspi" class="section level2">
+<h2>Inferencias sobre los parámetros del modelo de regresión</h2>
+<p></br></p>
+<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
+cumple que:</p>
+<p><span class="math display">\[
+{T_j} = {\frac{\widehat\beta_j -
+\beta_j}{\text{se}\left(\widehat\beta_j\right)} \sim t_{n - p}}, \ j =
+0, 1, \ldots, k, \quad\quad(\star)
+\]</span></p>
+<p>con <span class="math inline">\(\text{se}\left(\widehat\beta_j\right)
+= \sqrt{\widehat{V}\left(\widehat\beta_j\right)}\)</span> y <span
+class="math inline">\({t_{n - p}}\)</span> una variable aleatoria <span
+class="math inline">\(t\)</span>-Student con <span
+class="math inline">\(n - p\)</span> grados de libertad.</p>
+<p></br></p>
+<p>Basados en este resultado se pueden construir pruebas de hipótesis e
+intervalos de confianza para los parámetros del modelo de RLM como se
+describe a continuación.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

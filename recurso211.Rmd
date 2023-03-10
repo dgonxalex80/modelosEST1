@@ -1,0 +1,201 @@
+---
+title: <span style="color:#034a94"> **Valores ajustados y residuales**</span>
+author: "Modelos Estadísticos para la toma de decisiones"
+output: html_document
+css: style.css
+---
+
+</br></br>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+if(!require(pacman)){install.packages("pacman"); library(pacman)}
+pacman::p_load("tidyverse", "ggplot2", "pBrackets", "knitr", "HH", "car", "perturb", "rgl", "sampling")
+#source("functions.R", local = knitr::knit_global())
+```
+
+</br></br>
+
+## **Valores ajustados**
+
+</br>
+
+Con los valores ajustados $\widehat{Y}_i$ se construye el vector de valores ajustados dado por
+$$
+\boldsymbol{\widehat{y}} = \boldsymbol{X\widehat\beta} = \left[\begin{array}{c} \widehat{Y}_1\\ \widehat{Y}_2\\ \vdots\\ \widehat{Y}_n\end{array}\right]
+$$
+
+</br>
+
+El vector $\boldsymbol{\widehat{y}}$ se puede reescribir como:
+
+</br>
+
+<div class="content-box-blue">
+$$
+\boldsymbol{\widehat{y}} = \boldsymbol{X\widehat\beta} = \boldsymbol{X}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\ \boldsymbol{X}'\boldsymbol{y} 
+$$
+</div>
+
+</br>
+
+Haciendo $\boldsymbol{H} = \boldsymbol{X}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\ \boldsymbol{X}'$, se llega a que $\boldsymbol{\widehat{y}} = \boldsymbol{H}\boldsymbol{y}$, donde a la matriz $\boldsymbol{H}$ se le conoce como la matriz "**hat**" debido a que su multiplicación por el vector de observaciones $\boldsymbol{y}$ lleva al vector de valores ajustados $\boldsymbol{\widehat{y}}$ ($\boldsymbol{y}$ "**hat**").
+
+</br>
+
+Realmente, la matriz $\boldsymbol{H}$ es una matriz de proyección ortogonal (cuadrada, simétrica e idempotente) que proyecta a $\boldsymbol{y}$ en el plano ajustado. Esta matriz juega un papel muy importante en regresión tanto en la estimación como en la determinación de valores extremos, que será desarrollada más adelante.
+
+</br>
+
+Los residuales del modelo corresponden como en el caso de RLS a las diferencias entre los valores observados y los valores ajustados, esto es, $e_i = Y_i - \widehat{Y}_i$ y el vector de residuales es:
+
+$$
+\boldsymbol{e} = \boldsymbol{y} - \boldsymbol{\widehat{y}} = \left[\begin{array}{c} e_1\\ e_2\\ \vdots\\ e_n\end{array}\right]
+$$
+
+El vector de residuales también puede expresarse en términos de la matriz $\boldsymbol{H}$, ya que $\boldsymbol{e} = \boldsymbol{y} - \boldsymbol{\widehat{y}} = \boldsymbol{y} - \boldsymbol{Hy} = \left(\boldsymbol{I} - \boldsymbol{H}\right) \boldsymbol{y}$.
+
+</br></br>
+
+## **Estimación de la varianza**
+
+</br>
+
+Bajo los supuestos relativos a los errores del modelo
+$$\varepsilon_i \overset{\text{iid}}{\sim} N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n,$$
+
+</br>
+
+el estimador insesgado de la varianza corresponde a:
+
+</br>
+
+$$
+\widehat{\sigma}^2 = \text{MSE} = \frac{\text{SSE}}{n - p},
+$$
+
+</br>
+
+donde $p$ es el número de parámetros y la suma de cuadrados del error SSE corresponde a:
+
+</br>
+
+$$
+\text{SSE} = \sum\limits_{i = 1}^n e_i^2 = \sum\limits_{i = 1}^n \left(y_i - \widehat{y}_i\right)^2 = \left(\boldsymbol{y} - \boldsymbol{\widehat{y}}\right)'\left(\boldsymbol{y} - \boldsymbol{\widehat{y}}\right) = \boldsymbol{y}'\left(\boldsymbol{I} - \boldsymbol{H}\right) \boldsymbol{y}.
+$$
+
+</br></br>
+
+## **Análisis de varianza ANOVA**
+
+</br>
+
+Al igual que en RLS en RLM se tiene un procedimiento de prueba basado en el análisis de varianza para probar la significancia de la regresión, que establece el siguiente juego de hipótesis:
+
+$$
+\begin{aligned}
+H_0:&\ \beta_1 = \beta_2 = \cdots = \beta_K = 0\\
+H_1:&\ \text{algún } \hspace{.3cm} \beta_j \neq 0,\hspace{2cm} j = 1, \ldots, k.
+\end{aligned}
+$$
+
+En este enfoque todavía es válida la identidad de suma de cuadrados que establece que:
+
+$$
+\begin{aligned}
+\text{SST}\quad\ &= \quad\quad\text{SSR} \quad\, \; + \quad\quad\text{SSE}\\
+\sum_{i = 1}^n \left(y_i - \bar{y}\right)^2 &= \sum_{i = 1}^n \left(\widehat{y}_i - \bar{y}\right)^2 + \sum_{i = 1}^n \left(y_i - \widehat{y}_i\right)^2
+\end{aligned}
+$$
+
+</br></br>
+
+En RLM, las sumas de cuadrados se pueden expresar en forma matricial, así:
+
+</br></br>
+
+### **Sumas de cuadrados en forma matricial**
+
+En las siguientes fórmulas $\boldsymbol{J}$ es una matriz de dimensión $n\times n$ cuyas entradas son todas iguales a 1, e $\boldsymbol{I}$ es la matriz identidad de orden $n$:
+
+| Fuente | Suma de cuadrados |
+|-|--|
+| Regresión | $\text{SSR} = \boldsymbol{y}'\left[\boldsymbol{H} - \left(\frac{1}{n}\right) \boldsymbol{J}\right] \boldsymbol{y}$ |
+| Error | $\text{SSE} = \boldsymbol{y}'\left(\boldsymbol{I} - \boldsymbol{H}\right) \boldsymbol{y}$ |
+| Total | $\text{SST} = \boldsymbol{y}'\left[\boldsymbol{I} - \left(\frac{1}{n}\right) \boldsymbol{J}\right] \boldsymbol{y}$ |
+
+---
+
+El procedimiento de prueba se resume en la siguiente tabla.
+
+**Tabla de análisis de varianza para el modelo de RLM**
+
+| Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | Valor F |
+|:--------------------|:-----------------:|:------------------:|:--------------:|:--------:|
+| Regresión | $\text{SSR}=\boldsymbol{y}'\left(\boldsymbol{I} - \boldsymbol{H}\right) \boldsymbol{y}$ | $k$ | $\text{MSR} = \frac{\text{SSR}}{k}$ | $F_0 = \frac{\text{MSR}}{\text{MSE}},$ $\color{blue}{\text{con}}$ |
+| Error | $\text{SSE}=\boldsymbol{y}'\left(\boldsymbol{I} - \boldsymbol{H}\right) \boldsymbol{y}$ | $n - p$ | $\text{MSE} = \frac{\text{SSE}}{n - p}$ | $\color{blue}{F_0 \overset{\text{bajo } H_0}{\sim} f_{k, n - p}}$ |
+| Total | $\text{SST}=\boldsymbol{y}'\left[\boldsymbol{I} - \left(\frac{1}{n}\right) \boldsymbol{J}\right] \boldsymbol{y}$ | $n - 1$ | | |
+
+Se rechaza $H_0$ a una significancia dada $\alpha$ si $F_0 > f_{\alpha, k, n - p}$, o si se define el valor-P para la prueba como $\text{vp} = P(f_{k,n - p}>F_0)$, se rechaza $H_0$ si $\text{vp} < \alpha$. Al rechazar, se prueba que existe una relación de regresión, sin embargo, esto no garantiza que el modelo resulte útil para hacer predicciones.
+
+</br></br>
+
+## **Coeficiente de determinación múltiple**
+
+</br>
+
+Denotado por $R^2$ y definido como:
+$$
+R^2 = \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\text{SSE}}{\text{SST}},
+$$
+
+</br>
+
+mide la proporción de la variabilidad total observada en la respuesta que es explicada por el modelo propuesto (esto es, la asociación lineal con el conjunto de variables $X_1, X_2, \ldots, X_k$).
+
+</br>
+
+Por ser una proporción, esta cantidad varía entre 0 y 1:
+
+</br>
+
+* Siendo igual a 0, si todos los coeficientes de regresión ajustados son iguales a cero, y
+
+</br>
+
+* Siendo igual a 1, si todas las observaciones caen sobre la superficie de regresión ajustada.
+
+</br></br>
+
+Aunque es usado como una medida de bondad del ajuste de la función de regresión, es necesario tener presente que:
+
+</br>
+
+* Valores grandes de $R^2$ no implican necesariamente que la superficie ajustada sea útil. Puede suceder que se hayan observado pocos niveles de las variables predictoras y por tanto la superficie ajustada no sería útil para hacer extrapolaciones por fuera de tales rangos. Incluso, si esta cantidad es muy cercana a 1, todavía el MSE podría ser muy grande y por tanto las inferencias tendrían poca precisión.
+
+</br>
+
+* Cuando se agregan más variables predictoras al modelo, el $R^2$ tiende a no decrecer, aún cuando existan dentro del grupo de variables, un subconjunto de ellas que no aportan significativamente.
+
+</br>
+
+* Como **medida de bondad de ajuste** se prefiere usar otros estadísticos que penalicen al modelo por el número de variables incluidas, entre ellos se tienen el MSE, y el $R^2$ ajustado, estas dos medidas son equivalentes, dado que éste último se define como:
+
+$$
+R_{\text{adj}}^2 = 1 - \frac{\left(n - 1\right)\text{MSE}}{\text{SST}}
+$$ 
+</br>
+
+El $R^2$ ajustado disminuye cuando en el modelo se ingresan variables predictoras sin lograr reducir al SSE, y causando la pérdida de grados de libertad para este último.
+
+Entre dos modelos ajustados se considera mejor el de menor MSE o equivalentemente el de mayor $R^2$ ajustado.
+
+</br></br>
+

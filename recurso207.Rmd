@@ -54,6 +54,7 @@ summarytools::descr(ventas[,2:3])
 
 
 ```{r}
+library(ggplot2)
 library(patchwork)
 p1 = ggplot(ventas, aes(x=clientes))+geom_boxplot()
 p2 = ggplot(ventas, aes(x=ventas))+ geom_boxplot()
@@ -165,7 +166,7 @@ F-statistic:  38.5 on 1 and 13 DF,  p-value: 3.193e-05
 
 </br>
 
-Inicialmente se revisanlos gráficos generados con el objeto `modelo1`
+Inicialmente se revisar los gráficos generados con el objeto `modelo1`
 
 ```{r}
 par(mfrow = c(2, 2))
