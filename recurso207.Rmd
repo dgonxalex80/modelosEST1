@@ -115,10 +115,10 @@ modelo1=lm(ventas ~ clientes, ventas)
 summary(modelo1)
 ```
 
-La anterior salida se divide en cuatro parates:
+La anterior salida se divide en cuatro partes:
 </br></br>
 
-#### <span style="color:#FF7F00">**Forma funcional del modelo**</span>
+#### <span style="color:#034a94">**Forma funcional del modelo**</span>
 
 <pre>
 
@@ -128,7 +128,7 @@ lm(formula = ventas ~ clientes, data = ventas)
 
 </br>
 
-#### <span style="color:#FF7F00">**Resumen de los residuales**</span>
+#### <span style="color:#034a94">**Resumen de los residuales**</span>
 
 <pre>
 Residuals:
@@ -138,7 +138,7 @@ Residuals:
 
 </br></br>
 
-#### <span style="color:#FF7F00">**Estimación MCO de los coeficientes $\beta_{0}$ y $\beta_{1}$**</span>
+#### <span style="color:#034a94">**Estimación MCO de los coeficientes $\beta_{0}$ y $\beta_{1}$**</span>
 
 <pre>
 Coefficients:
@@ -151,7 +151,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 </br></br>
 
-#### <span style="color:#FF7F00">**Indicadores de significancia del modelo** </span>
+#### <span style="color:#034a94">**Indicadores de significancia del modelo** </span>
 
 <pre>
 Residual standard error: 6.72 on 13 degrees of freedom
@@ -177,7 +177,7 @@ plot(modelo1)
 
 Ahora utilizando pruebas de hipótesis 
 
-### <span style="color:#FF7F00">**Supuesto de normalidad de los errores**</span>
+### <span style="color:#034a94">**Supuesto de normalidad de los errores**</span>
 
 ```{r, message=FALSE, warning=FALSE}
 e= modelo1$residuals
@@ -189,7 +189,7 @@ shapiro.test(e)
 </br></br>
 
 
-### <span style="color:#FF7F00">**Supuesto de independencia de errores**</span>
+### <span style="color:#034a94">**Supuesto de independencia de errores**</span>
 
 ```{r, message=FALSE, warning=FALSE}
 library(lmtest)
@@ -200,7 +200,7 @@ dwtest(modelo1)
 </br></br>
 
 
-### <span style="color:#FF7F00">**Supuesto de varianza constante**</span>
+### <span style="color:#034a94">**Supuesto de varianza constante**</span>
 
 ```{r, message=FALSE, warning=FALSE}
 # Ho: la varianza de los erroes es constante
@@ -209,7 +209,7 @@ gqtest(modelo1)
 
 </br></br>
 
-### <span style="color:#FF7F00">**Supuesto de linealidad del modelo**</span>
+### <span style="color:#034a94">**Supuesto de linealidad del modelo**</span>
 
 </br></br>
 
@@ -231,7 +231,7 @@ En caso de requerir transfomaciones a las variables del modelo planteado con el 
 
 </br></br>
 
-##### <span style="color:#FF7F00">**Modelo log-lin**</span>
+##### <span style="color:#034a94">**Modelo log-lin**</span>
 
 ```{r, message=FALSE, warning=FALSE}
 modelo2=lm(log(ventas) ~ clientes, ventas)
@@ -240,7 +240,7 @@ summary(modelo2)
 
 </br></br>
 
-##### <span style="color:#FF7F00">**Modelo lin-log**</span>
+##### <span style="color:#034a94">**Modelo lin-log**</span>
 
 ```{r, message=FALSE, warning=FALSE}
 modelo3=lm(ventas ~ log(clientes), ventas)
@@ -249,7 +249,7 @@ summary(modelo3)
 
 </br></br>
 
-##### <span style="color:#FF7F00">**Modelo log-log**</span>
+##### <span style="color:#034a94">**Modelo log-log**</span>
 
 ```{r, message=FALSE, warning=FALSE}
 modelo4=lm(log(ventas) ~ log(clientes), ventas)
@@ -258,7 +258,7 @@ summary(modelo4)
 
 </br></br>
 
-### <span style="color:#FF7F00">**Comparación de modelos**</span>
+### <span style="color:#034a94">**Comparación de modelos**</span>
 
 ```{r, warning=FALSE, message=FALSE}
 library(stargazer)
@@ -271,7 +271,7 @@ Al comparar los valores de $R^{2}$, el **modelo1** presenta el mayor porcentaje 
 
 </br></br>
 
-### **Indicador AIC** 
+### <span style="color:#034a94">**Indicador AIC**</span> 
 
 ```{r}
 AIC(modelo1, modelo2, modelo3, modelo4)
@@ -279,7 +279,7 @@ AIC(modelo1, modelo2, modelo3, modelo4)
 
 </br></br>
 
-### **Predicción de $E[Y|x_{o}]$**
+### <span style="color:#034a94">**Predicción de $E[Y|x_{o}]$**</span>
 
 ```{r}
 predict(modelo1, data.frame(clientes=20), interval = "confidence", level = 0.95)
@@ -287,7 +287,7 @@ predict(modelo1, data.frame(clientes=20), interval = "confidence", level = 0.95)
 
 </br></br>
 
-### **Predicción de  $Y_{0}$**
+### <span style="color:#034a94">**Predicción de  $Y_{0}$**</span>
 
 
 ```{r}

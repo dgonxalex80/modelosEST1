@@ -120,8 +120,8 @@ El estadístico de prueba es la  ecuación  y el valor observado de éste (${T_0
 
 </br></br>
 
-<div class="content-box-blue">
-### <span style="color:#FF7F00">**Nota:**</span>
+<div class="content-box-gray">
+### <span style="color:#686868">**Nota:**</span>
 
 </br>
 

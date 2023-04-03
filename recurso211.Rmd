@@ -23,7 +23,7 @@ pacman::p_load("tidyverse", "ggplot2", "pBrackets", "knitr", "HH", "car", "pertu
 
 </br></br>
 
-## **Valores ajustados**
+## <span style="color:#034a94">**Valores ajustados**</span>
 
 </br>
 
@@ -64,7 +64,7 @@ El vector de residuales también puede expresarse en términos de la matriz $\bo
 
 </br></br>
 
-## **Estimación de la varianza**
+## <span style="color:#034a94">**Estimación de la varianza**</span>
 
 </br>
 
@@ -93,7 +93,7 @@ $$
 
 </br></br>
 
-## **Análisis de varianza ANOVA**
+## <span style="color:#034a94">**Análisis de varianza ANOVA**</span>
 
 </br>
 
@@ -121,7 +121,7 @@ En RLM, las sumas de cuadrados se pueden expresar en forma matricial, así:
 
 </br></br>
 
-### **Sumas de cuadrados en forma matricial**
+### <span style="color:#034a94">**Sumas de cuadrados en forma matricial**</span>
 
 En las siguientes fórmulas $\boldsymbol{J}$ es una matriz de dimensión $n\times n$ cuyas entradas son todas iguales a 1, e $\boldsymbol{I}$ es la matriz identidad de orden $n$:
 
@@ -147,7 +147,7 @@ Se rechaza $H_0$ a una significancia dada $\alpha$ si $F_0 > f_{\alpha, k, n - p
 
 </br></br>
 
-## **Coeficiente de determinación múltiple**
+## <span style="color:#034a94">**Coeficiente de determinación múltiple**</span>
 
 </br>
 

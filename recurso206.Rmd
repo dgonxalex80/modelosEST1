@@ -120,9 +120,9 @@ $$
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00">**Reto:**</span> 
+### <span style="color:#686868">**Reto:**</span> 
 
 Comprobar que $2\sum_{i = 1}^n (\widehat{y}_i - \bar{y}) (y_i - \widehat{y}_i) = 0$
 
@@ -305,9 +305,9 @@ El $R^2$ se puede interpretar como la proporción de la variabilidad total obser
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00">**Interpretaciones erróneas**
+### <span style="color:#686868">**Interpretaciones erróneas**
 
 * $R^2$ alto indica que el modelo puede hacer predicciones útiles.
 
@@ -321,7 +321,7 @@ Las dos primeras indican que aunque un $R^2$ cercano a 1 indica una mayor asocia
 
 </br></br>
 
-<span style="color:#FF7F00">**Ejemplo**</span>
+### <span style="color:#FF7F00">**Ejemplo**</span>
 
 Para el ejemplo trabajado verificamos los valores contenidos en la tabla ANOVA, utilizando las fórmilas descritas anteriormente
 

@@ -158,9 +158,9 @@ $$
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-<span style="color:#FF7F00">**NOTA:**</span> 
+<span style="color:#686868">**NOTA:**</span> 
 
 </br>
 
@@ -173,7 +173,7 @@ $$
 
 </br></br>
 
-<span style="color:#FF7F00">**Ejemplo**</span> 
+### <span style="color:#FF7F00">**Ejemplo**</span> 
 
 Usaremos la variable peso como una variable proxis de la variable biomasa para calcular los parámetros $\beta_{0}$ y $\beta_{1}$ de dos formas diferentes utilizando los valores encontrados y utilizando los conceptos de varianza y covarianza. 
 

@@ -66,7 +66,7 @@ knitr::include_graphics("img/correlacion1.png")
 
 </br></br>
 
-<span style="color:#FF7F00"> **Ejemplos**</span>
+### <span style="color:#FF7F00"> **Ejemplos**</span>
   
 
 * ¿Existe relación entre la inversión en publicidad de una empresa y sus ventas mensuales?
@@ -170,7 +170,7 @@ Gráfico 1 : Dispersión y relaciones entre variables.
 
 </br></br>
 
-<span style="color:#FF7F00"> **Ejemplo**</span>
+### <span style="color:#FF7F00"> **Ejemplo**</span>
   
 Identificar la posible relación lineal observada entre las variables:
 
@@ -200,7 +200,7 @@ De acuerdo con el gráfico de dispersión de la figura 2, se observa una relaci�
 
 </br></br>
 
-<span style="color:#FF7F00"> **Ejemplo**</span>
+### <span style="color:#FF7F00"> **Ejemplo**</span>
   
 Identificar la posible relación lineal observada entre las variables:
   
@@ -288,9 +288,9 @@ Tabla 1: Clasificación de la relación lineal entre variables por medio del coe
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 Que dos variables $X$ y $Y$ tengan un valor de $r$ alto, por tanto una fuerte asociación lineal entre ellas, **NO** implica que $X$ sea la causa de  $Y$,  **NI** que $Y$  sea la causa de $X$.
 
@@ -303,7 +303,7 @@ Que dos variables $X$ y $Y$ tengan un valor de $r$ alto, por tanto una fuerte as
 
   
 
-<span style="color:#FF7F00"> **Ejemplo**</span>
+### <span style="color:#FF7F00"> **Ejemplo**</span>
   
 Se cuenta con la información de una muestra aleatoria de 6 pueblos del departamento, donde se observaron las variables número de policías y número de delitos
 registrados durante el mes pasado, la información obtenida se presenta a continuación:
@@ -445,7 +445,7 @@ $$
 
 </br></br>
 
-<span style="color:#FF7F00"> **Ejemplo**</span>
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 Para la data biomasa almacenada en paqueteMOD  (puede ser cargada con la función paquete::data(biomasa)), se pueden examinar los valores calculados en la matriz de varianzas-covarianzas y en la matriz de correlaciones que se representa tambien utilizando una gama de colores que indican el valor de la corelación y su aproximación a -1 (roja) o 1 (azul)
 
@@ -490,9 +490,9 @@ Se puede observar que las variables más relacionadas (con mayor correlación) s
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 Para el caso de variables cualitativas existen varios indicadores para medir el grado de asociación entre ellas como son:
 

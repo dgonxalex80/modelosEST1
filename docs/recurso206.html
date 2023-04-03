@@ -14,7 +14,7 @@
 
 <title> Análisis de varianza - ANOVA</title>
 
-<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -406,8 +406,8 @@ SST \hspace{.3cm} = \hspace{.3cm} \sum_{i = 1}^n \left(y_i -
 \end{aligned}
 \]</span></p>
 <p></br></br></p>
-<div id="reto" class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"><strong>Reto:</strong></span></h3>
+<div id="reto" class="section level3 content-box-gray">
+<h3><span style="color:#686868"><strong>Reto:</strong></span></h3>
 <p>Comprobar que <span class="math inline">\(2\sum_{i = 1}^n
 (\widehat{y}_i - \bar{y}) (y_i - \widehat{y}_i) = 0\)</span></p>
 </div>
@@ -608,8 +608,8 @@ respuesta que es explicada por la relación lineal con la variable
 predictora considerada.</p>
 <p></br></br></p>
 <div id="interpretaciones-erróneas"
-class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"><strong>Interpretaciones
+class="section level3 content-box-gray">
+<h3><span style="color:#686868"><strong>Interpretaciones
 erróneas</strong></h3>
 <ul>
 <li><p><span class="math inline">\(R^2\)</span> alto indica que el
@@ -627,7 +627,8 @@ asociación lineal, no necesariamente garantiza que los supuestos básicos
 del modelo lineal se estén cumpliendo y menos que el modelo lineal no
 pueda presentar falta de ajuste.</p>
 <p></br></br></p>
-<p><span style="color:#FF7F00"><strong>Ejemplo</strong></span></p>
+<div id="ejemplo" class="section level3">
+<h3><span style="color:#FF7F00"><strong>Ejemplo</strong></span></h3>
 <p>Para el ejemplo trabajado verificamos los valores contenidos en la
 tabla ANOVA, utilizando las fórmilas descritas anteriormente</p>
 <p></br></p>
@@ -686,6 +687,7 @@ valorp = pf(F, 1,89, lower.tail = FALSE)
 #---------------------------------------
 R2=SSR/SST
 1-SSE/SST</code></pre>
+</div>
 </div>
 
 

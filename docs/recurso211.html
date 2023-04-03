@@ -14,7 +14,7 @@
 
 <title> Valores ajustados y residuales</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -338,7 +338,8 @@ $(document).ready(function () {
 <p></br></br></p>
 <p></br></br></p>
 <div id="valores-ajustados" class="section level2">
-<h2><strong>Valores ajustados</strong></h2>
+<h2><span style="color:#034a94"><strong>Valores
+ajustados</strong></span></h2>
 <p></br></p>
 <p>Con los valores ajustados <span
 class="math inline">\(\widehat{Y}_i\)</span> se construye el vector de
@@ -398,7 +399,8 @@ class="math inline">\(\boldsymbol{e} = \boldsymbol{y} -
 <p></br></br></p>
 </div>
 <div id="estimación-de-la-varianza" class="section level2">
-<h2><strong>Estimación de la varianza</strong></h2>
+<h2><span style="color:#034a94"><strong>Estimación de la
+varianza</strong></span></h2>
 <p></br></p>
 <p>Bajo los supuestos relativos a los errores del modelo <span
 class="math display">\[\varepsilon_i \overset{\text{iid}}{\sim}
@@ -424,7 +426,8 @@ parámetros y la suma de cuadrados del error SSE corresponde a:</p>
 <p></br></br></p>
 </div>
 <div id="análisis-de-varianza-anova" class="section level2">
-<h2><strong>Análisis de varianza ANOVA</strong></h2>
+<h2><span style="color:#034a94"><strong>Análisis de varianza
+ANOVA</strong></span></h2>
 <p></br></p>
 <p>Al igual que en RLS en RLM se tiene un procedimiento de prueba basado
 en el análisis de varianza para probar la significancia de la regresión,
@@ -452,7 +455,8 @@ que establece que:</p>
 así:</p>
 <p></br></br></p>
 <div id="sumas-de-cuadrados-en-forma-matricial" class="section level3">
-<h3><strong>Sumas de cuadrados en forma matricial</strong></h3>
+<h3><span style="color:#034a94"><strong>Sumas de cuadrados en forma
+matricial</strong></span></h3>
 <p>En las siguientes fórmulas <span
 class="math inline">\(\boldsymbol{J}\)</span> es una matriz de dimensión
 <span class="math inline">\(n\times n\)</span> cuyas entradas son todas
@@ -560,7 +564,8 @@ garantiza que el modelo resulte útil para hacer predicciones.</p>
 </div>
 </div>
 <div id="coeficiente-de-determinación-múltiple" class="section level2">
-<h2><strong>Coeficiente de determinación múltiple</strong></h2>
+<h2><span style="color:#034a94"><strong>Coeficiente de determinación
+múltiple</strong></span></h2>
 <p></br></p>
 <p>Denotado por <span class="math inline">\(R^2\)</span> y definido
 como: <span class="math display">\[
@@ -621,26 +626,6 @@ SSE, y causando la pérdida de grados de libertad para este último.</p>
 equivalentemente el de mayor <span class="math inline">\(R^2\)</span>
 ajustado.</p>
 <p></br></br></p>
-</div>
-<div id="pspi" class="section level2">
-<h2>Inferencias sobre los parámetros del modelo de regresión</h2>
-<p></br></p>
-<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
-cumple que:</p>
-<p><span class="math display">\[
-{T_j} = {\frac{\widehat\beta_j -
-\beta_j}{\text{se}\left(\widehat\beta_j\right)} \sim t_{n - p}}, \ j =
-0, 1, \ldots, k, \quad\quad(\star)
-\]</span></p>
-<p>con <span class="math inline">\(\text{se}\left(\widehat\beta_j\right)
-= \sqrt{\widehat{V}\left(\widehat\beta_j\right)}\)</span> y <span
-class="math inline">\({t_{n - p}}\)</span> una variable aleatoria <span
-class="math inline">\(t\)</span>-Student con <span
-class="math inline">\(n - p\)</span> grados de libertad.</p>
-<p></br></p>
-<p>Basados en este resultado se pueden construir pruebas de hipótesis e
-intervalos de confianza para los parámetros del modelo de RLM como se
-describe a continuación.</p>
 </div>
 
 

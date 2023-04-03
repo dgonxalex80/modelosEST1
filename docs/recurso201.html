@@ -14,7 +14,7 @@
 
 <title> Análisis de correlación</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -349,7 +349,8 @@ observaciones, calcular un indicador que mida la relación.</p>
 <p><img src="img/correlacion1.png" width="100%" style="display: block; margin: auto;" /></p>
 </center>
 <p></br></br></p>
-<p><span style="color:#FF7F00"> <strong>Ejemplos</strong></span></p>
+<div id="ejemplos" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplos</strong></span></h3>
 <ul>
 <li><p>¿Existe relación entre la inversión en publicidad de una empresa
 y sus ventas mensuales?</p></li>
@@ -383,6 +384,7 @@ simultanea del par de variables estudiadas”.</li>
 fuerza de la relación lineal entre un par de variables”.</li>
 </ul>
 <p></br></br></p>
+</div>
 <div id="gráfico-de-dispersión" class="section level2">
 <h2><span style="color:#034a94"><strong>Gráfico de
 dispersión</strong></span></h2>
@@ -412,7 +414,8 @@ existe entre las variables.</p>
 </ol></li>
 </ul>
 <p></br></br></p>
-<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<div id="ejemplo" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p>Identificar la posible relación lineal observada entre las
 variables:</p>
 <ul>
@@ -432,7 +435,9 @@ una relación lineal positiva entre las variables cantidad de horas
 trabajadas en una empresa y la cantidad de unidades producidas en la
 empresa.</p>
 <p></br></br></p>
-<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+</div>
+<div id="ejemplo-1" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p>Identificar la posible relación lineal observada entre las
 variables:</p>
 <ul>
@@ -452,6 +457,7 @@ conferencia y el índice de capacidad de atención en la misma.</p>
 claramente un valor máximo del indice de atención (80 min), despues del
 cual el indice decae.</p>
 <p></br></br></p>
+</div>
 </div>
 <div id="coeficiente-de-correlación" class="section level2">
 <h2><span style="color:#034a94"> <strong>Coeficiente de
@@ -540,8 +546,8 @@ forma:</p>
 <p>Tabla 1: Clasificación de la relación lineal entre variables por
 medio del coeficiente de correlación.</p>
 <p></br></br></p>
-<div id="nota" class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
+<div id="nota" class="section level3 content-box-gray">
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <p>Que dos variables <span class="math inline">\(X\)</span> y <span
 class="math inline">\(Y\)</span> tengan un valor de <span
 class="math inline">\(r\)</span> alto, por tanto una fuerte asociación
@@ -552,7 +558,8 @@ class="math inline">\(Y\)</span> sea la causa de <span
 class="math inline">\(X\)</span>.</p>
 </div>
 <p></br></br></p>
-<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<div id="ejemplo-2" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p>Se cuenta con la información de una muestra aleatoria de 6 pueblos
 del departamento, donde se observaron las variables número de policías y
 número de delitos registrados durante el mes pasado, la información
@@ -593,6 +600,7 @@ fuerte</strong> entre el número de policías y el número de delitos, es
 decir que entre más policías en un pueblo menor será el número de
 delitos en los pueblos.</p>
 <p></br></br></p>
+</div>
 </div>
 <div id="pruebas-de-hipótesis-sobre-rho" class="section level2">
 <h2><span style="color:#034a94"> <strong>Pruebas de hipótesis sobre
@@ -721,7 +729,8 @@ Cor(x_{3},x_{1}) &amp; Cor(x_{3},x_{2}) &amp; Cor(x_{3},x_{3})
 \end{equation}
 \]</span></p>
 <p></br></br></p>
-<p><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></p>
+<div id="ejemplo-3" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p>Para la data biomasa almacenada en paqueteMOD (puede ser cargada con
 la función paquete::data(biomasa)), se pueden examinar los valores
 calculados en la matriz de varianzas-covarianzas y en la matriz de
@@ -729,6 +738,7 @@ correlaciones que se representa tambien utilizando una gama de colores
 que indican el valor de la corelación y su aproximación a -1 (roja) o 1
 (azul)</p>
 <p></br></br></p>
+</div>
 <div id="matriz-de-varianzas-covarianzas" class="section level3">
 <h3><span style="color:#034a94"><strong>Matriz de
 varianzas-covarianzas</strong></span></h3>
@@ -773,8 +783,8 @@ decur que árboles áltos tendrán diámetros de tronco más anchos.</li>
 </ul>
 <p></br></br></p>
 </div>
-<div id="nota-1" class="section level3 content-box-blue">
-<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
+<div id="nota-1" class="section level3 content-box-gray">
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <p>Para el caso de variables cualitativas existen varios indicadores
 para medir el grado de asociación entre ellas como son:</p>
 <!-- **Asociación lineal de Mantel-Haenszel** : Coeficiente empleado en variables de intervalo, mide el grado de asociación lineal entre dos variables y se define como el cuadrado del coeficiente de correlación de Pearson multiplicado por (n-1).  -->

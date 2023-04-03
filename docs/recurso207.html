@@ -14,7 +14,7 @@
 
 <title> Software R</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -379,13 +379,8 @@ variables</strong></span></h3>
         Pct.Valid     100.00   100.00</code></pre>
 <p></br></br></p>
 <pre class="r"><code>library(ggplot2)
-library(patchwork)</code></pre>
-<pre><code>
-Attaching package: &#39;patchwork&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:MASS&#39;:
-
-    area</code></pre>
-<pre class="r"><code>p1 = ggplot(ventas, aes(x=clientes))+geom_boxplot()
+library(patchwork)
+p1 = ggplot(ventas, aes(x=clientes))+geom_boxplot()
 p2 = ggplot(ventas, aes(x=ventas))+ geom_boxplot()
 p3 = ggplot(ventas, aes(x=clientes))+geom_density()
 p4 = ggplot(ventas, aes(x=ventas))+ geom_density()
@@ -474,9 +469,9 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 6.72 on 13 degrees of freedom
 Multiple R-squared:  0.7476,    Adjusted R-squared:  0.7282 
 F-statistic:  38.5 on 1 and 13 DF,  p-value: 3.193e-05</code></pre>
-<p>La anterior salida se divide en cuatro parates: </br></br></p>
+<p>La anterior salida se divide en cuatro partes: </br></br></p>
 <div id="forma-funcional-del-modelo" class="section level4">
-<h4><span style="color:#FF7F00"><strong>Forma funcional del
+<h4><span style="color:#034a94"><strong>Forma funcional del
 modelo</strong></span></h4>
 <pre>
 
@@ -486,7 +481,7 @@ lm(formula = ventas ~ clientes, data = ventas)
 <p></br></p>
 </div>
 <div id="resumen-de-los-residuales" class="section level4">
-<h4><span style="color:#FF7F00"><strong>Resumen de los
+<h4><span style="color:#034a94"><strong>Resumen de los
 residuales</strong></span></h4>
 <pre>
 Residuals:
@@ -497,7 +492,7 @@ Residuals:
 </div>
 <div id="estimación-mco-de-los-coeficientes-beta_0-y-beta_1"
 class="section level4">
-<h4><span style="color:#FF7F00"><strong>Estimación MCO de los
+<h4><span style="color:#034a94"><strong>Estimación MCO de los
 coeficientes <span class="math inline">\(\beta_{0}\)</span> y <span
 class="math inline">\(\beta_{1}\)</span></strong></span></h4>
 <pre>
@@ -512,7 +507,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 </div>
 <div id="indicadores-de-significancia-del-modelo"
 class="section level4">
-<h4><span style="color:#FF7F00"><strong>Indicadores de significancia del
+<h4><span style="color:#034a94"><strong>Indicadores de significancia del
 modelo</strong> </span></h4>
 <pre>
 Residual standard error: 6.72 on 13 degrees of freedom
@@ -527,7 +522,7 @@ class="section level3">
 <h3><span style="color:#034a94"><strong>Validación de los supuestos
 sobre los errores</strong></span></h3>
 <p></br></p>
-<p>Inicialmente se revisanlos gráficos generados con el objeto
+<p>Inicialmente se revisar los gráficos generados con el objeto
 <code>modelo1</code></p>
 <pre class="r"><code>par(mfrow = c(2, 2))
 plot(modelo1)</code></pre>
@@ -536,7 +531,7 @@ plot(modelo1)</code></pre>
 <p>Ahora utilizando pruebas de hipótesis</p>
 </div>
 <div id="supuesto-de-normalidad-de-los-errores" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Supuesto de normalidad de los
+<h3><span style="color:#034a94"><strong>Supuesto de normalidad de los
 errores</strong></span></h3>
 <pre class="r"><code>e= modelo1$residuals
 
@@ -550,7 +545,7 @@ W = 0.96985, p-value = 0.8559</code></pre>
 <p></br></br></p>
 </div>
 <div id="supuesto-de-independencia-de-errores" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Supuesto de independencia de
+<h3><span style="color:#034a94"><strong>Supuesto de independencia de
 errores</strong></span></h3>
 <pre class="r"><code>library(lmtest)
 # Ho: los errores sin independientes ( no estan relacionados)
@@ -564,7 +559,7 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p></br></br></p>
 </div>
 <div id="supuesto-de-varianza-constante" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Supuesto de varianza
+<h3><span style="color:#034a94"><strong>Supuesto de varianza
 constante</strong></span></h3>
 <pre class="r"><code># Ho: la varianza de los erroes es constante
 gqtest(modelo1)</code></pre>
@@ -577,7 +572,7 @@ alternative hypothesis: variance increases from segment 1 to 2</code></pre>
 <p></br></br></p>
 </div>
 <div id="supuesto-de-linealidad-del-modelo" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Supuesto de linealidad del
+<h3><span style="color:#034a94"><strong>Supuesto de linealidad del
 modelo</strong></span></h3>
 <p></br></br></p>
 </div>
@@ -597,7 +592,7 @@ planteado con el fin demejorar sus indicadores y el cumplimiento loa
 supuestos.</p>
 <p></br></br></p>
 <div id="modelo-log-lin" class="section level5">
-<h5><span style="color:#FF7F00"><strong>Modelo
+<h5><span style="color:#034a94"><strong>Modelo
 log-lin</strong></span></h5>
 <pre class="r"><code>modelo2=lm(log(ventas) ~ clientes, ventas)
 summary(modelo2)</code></pre>
@@ -622,7 +617,7 @@ F-statistic: 29.31 on 1 and 13 DF,  p-value: 0.0001183</code></pre>
 <p></br></br></p>
 </div>
 <div id="modelo-lin-log" class="section level5">
-<h5><span style="color:#FF7F00"><strong>Modelo
+<h5><span style="color:#034a94"><strong>Modelo
 lin-log</strong></span></h5>
 <pre class="r"><code>modelo3=lm(ventas ~ log(clientes), ventas)
 summary(modelo3)</code></pre>
@@ -647,7 +642,7 @@ F-statistic: 23.71 on 1 and 13 DF,  p-value: 0.0003066</code></pre>
 <p></br></br></p>
 </div>
 <div id="modelo-log-log" class="section level5">
-<h5><span style="color:#FF7F00"><strong>Modelo
+<h5><span style="color:#034a94"><strong>Modelo
 log-log</strong></span></h5>
 <pre class="r"><code>modelo4=lm(log(ventas) ~ log(clientes), ventas)
 summary(modelo4)</code></pre>
@@ -673,7 +668,7 @@ F-statistic: 21.76 on 1 and 13 DF,  p-value: 0.0004428</code></pre>
 </div>
 </div>
 <div id="comparación-de-modelos" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Comparación de
+<h3><span style="color:#034a94"><strong>Comparación de
 modelos</strong></span></h3>
 <pre class="r"><code>library(stargazer)
 #stargazer(modelo1, modelo2, modelo3, modelo4,type=&quot;html&quot;, title=&quot;Comparación de modelos&quot;)
@@ -709,7 +704,8 @@ class="math inline">\(Y\)</span></p>
 <p></br></br></p>
 </div>
 <div id="indicador-aic" class="section level3">
-<h3><strong>Indicador AIC</strong></h3>
+<h3><span style="color:#034a94"><strong>Indicador
+AIC</strong></span></h3>
 <pre class="r"><code>AIC(modelo1, modelo2, modelo3, modelo4)</code></pre>
 <pre><code>        df        AIC
 modelo1  3 103.575586
@@ -719,16 +715,16 @@ modelo4  3  -4.273938</code></pre>
 <p></br></br></p>
 </div>
 <div id="predicción-de-eyx_o" class="section level3">
-<h3><strong>Predicción de <span
-class="math inline">\(E[Y|x_{o}]\)</span></strong></h3>
+<h3><span style="color:#034a94"><strong>Predicción de <span
+class="math inline">\(E[Y|x_{o}]\)</span></strong></span></h3>
 <pre class="r"><code>predict(modelo1, data.frame(clientes=20), interval = &quot;confidence&quot;, level = 0.95)</code></pre>
 <pre><code>      fit      lwr      upr
 1 25.1925 17.34332 33.04168</code></pre>
 <p></br></br></p>
 </div>
 <div id="predicción-de-y_0" class="section level3">
-<h3><strong>Predicción de <span
-class="math inline">\(Y_{0}\)</span></strong></h3>
+<h3><span style="color:#034a94"><strong>Predicción de <span
+class="math inline">\(Y_{0}\)</span></strong></span></h3>
 <pre class="r"><code>predict(modelo1, data.frame(clientes=20), interval = &quot;prediction&quot;, level = 0.95)</code></pre>
 <pre><code>      fit      lwr      upr
 1 25.1925 8.688234 41.69677</code></pre>

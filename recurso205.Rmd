@@ -66,9 +66,9 @@ $$
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00">**Resumen**</span>
+### <span style="color:#686868">**Resumen**</span>
 
 $$
 \widehat{Y}_0 \sim N\left(E[Y\vert x_0], \ \sigma^2\left[\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}}\right]\right)
