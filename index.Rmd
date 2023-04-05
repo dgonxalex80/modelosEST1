@@ -22,11 +22,13 @@ knitr::include_graphics("img/banner_presentacion.png")
 La **modelación** forma parte principal del proceso de análisis de datos y permite avanzar hacia la toma de decisiones infomadas 
 
 
-```{r, echo=FALSE, out.width="50%", fig.align = "center"}
+```{r, echo=FALSE, out.width="80%", fig.align = "center"}
 knitr::include_graphics("img/proceso_cd.png")
 ```
 
 <center>
+Proceso de Datos
+</br>
 <sub>
 Tomado de : Ciencias de Datos para Gente Sociable
 </sub>
