@@ -72,7 +72,7 @@ veamos lo que representa gráficamente cada una de las diferencias que componen 
 
 <center>
 
-```{r,  echo = F, fig.align = 'center', out.width = '70%'}
+```{r,  echo = F, fig.align = 'center', out.width = '80%'}
 knitr::include_graphics("img/grafico1.png")
 ```
 Figura 1: Variabilidd total SST
@@ -81,7 +81,7 @@ Figura 1: Variabilidd total SST
 </br></br></br>
 
 <center>
-```{r, echo = F, fig.align = 'center', out.width = '70%'}
+```{r, echo = F, fig.align = 'center', out.width = '80%'}
 knitr::include_graphics("img/grafico2.png")
 ```
 Figura 2: Variabilidad en Y al incluir el modelo de RLS
@@ -90,7 +90,7 @@ Figura 2: Variabilidad en Y al incluir el modelo de RLS
 </br></br></br>
 
 <center>
-```{r, echo = F, fig.align = 'center', out.width = '70%'}
+```{r, echo = F, fig.align = 'center', out.width = '80%'}
 knitr::include_graphics("img/grafico3.png")
 ```
 Figura 3: Enfoque de varianza SST = SSR + SSE

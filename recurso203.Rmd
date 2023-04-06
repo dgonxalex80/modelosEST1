@@ -56,7 +56,7 @@ Para una selección preliminar de la variable predictora en un modelo de regresi
 ```{r, echo = F, message = F, fig.align = 'center', out.width = '100%'}
 data(biomasa) 
 ggplot(biomasa, aes(x=altura , y=bio_total))+
-  geom_point(size=2, colour=c3)+
+  geom_point(size=2, colour=c1)+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
   
 ```

@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
+
+
+<title> Supuestos del modelo</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos de Regresión</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+    <li>
+      <a href="recurso206.html">ANOVA - Análisis de la varianza </a>
+    </li>
+    <li>
+      <a href="recurso209.html">Supuetos del modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Supuestos del modelo</strong></span></h1>
+<h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
+
+</div>
+
+
+<p></br></br></p>
+<div id="validación-de-supuestos" class="section level2">
+<h2><span style="color:#034a94"> <strong>Validación de
+supuestos</strong></h2>
+<p>Los supuestos sobre los errores asumidos en el modelo de
+<strong>RLS</strong> se pueden resumir como:</p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+{\varepsilon_i\overset{\text{iid}}{\sim} N(0,\sigma^2), \hspace{1cm}
+i=1,\ldots,n}
+\]</span></p>
+</div>
+<p>donde, <strong>iid</strong> es la abreviación de independiente e
+idénticamente distribuido.</p>
+<p></br></p>
+<p>Luego, para la validación del modelo se deben probar los
+supuestos:</p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="53%" />
+<col width="46%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">Los errores del modelo tienen media cero</td>
+<td align="left"><span class="math inline">\(E[\varepsilon] =
+0\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Los errores del modelo tienen varianza constante</td>
+<td align="left"><span class="math inline">\(V[\varepsilon] =
+\sigma^{2}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Los errores del modelo se distribuyen normal</td>
+<td align="left"><span class="math inline">\(\varepsilon \sim N(0,
+\sigma^{2})\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Los errores del modelo son independientes</td>
+<td align="left"><span class="math inline">\(E[\varepsilon_{i},
+\varepsilon_{j}] = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>Como no es posible conocer los valores de los errores (<span
+class="math inline">\(\varepsilon\)</span>), se toma una muestra y de
+ellos se calculan los residuales del modelo (<span
+class="math inline">\(e\)</span>)</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[e_i =(y_i - \widehat y_i) \hspace{1cm}
+i=1,\ldots,n,\]</span></p>
+</div>
+<p>que son “seudo” estimaciones de los errores del modelo <span
+class="math inline">\(\varepsilon_i\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="errores-con-media-cero" class="section level2">
+<h2><span style="color:#034a94"><strong>Errores con media
+cero</strong></span></h2>
+<p></br></p>
+<p>Usando los residuales del modelo podemos probar que:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^n e_i &amp;= \sum_{i=1}^n (Y_i - \widehat Y_i) = \sum_{i=1}^n
+(Y_i - \widehat\beta_0 - \widehat\beta_1 X_i)\\
+&amp;= \sum_{i=1}^n \left[Y_i - \left(\bar{Y} - \widehat\beta_1
+\bar{X}\right) - \widehat\beta_1 X_i\right]\\
+&amp;= \sum_{i=1}^n \left[\left(Y_i - \bar{Y}\right) - \widehat\beta_1
+\left(X_i - \bar{X}\right)\right]\\
+&amp;= \sum_{i=1}^n \left(Y_i - \bar{Y}\right) - \widehat\beta_1
+\sum_{i=1}^n \left(X_i - \bar{X}\right) = 0,
+\end{aligned}
+\]</span></p>
+<p>por lo tanto, el supuesto de media cero de los errores siempre se
+cumple.</p>
+<p></br></br></p>
+</div>
+<div id="varianza-de-errores-constante" class="section level2">
+<h2><span style="color:#034a94"><strong>Varianza de errores
+constante</strong></span></h2>
+<p></br></p>
+<p>El supuesto de varianza constante (homogeneidad de varianza) se puede
+validar a través de un gráfico de residuales vs. valores ajustados o
+predichos o mediante una prueba de hipótesis, donde se quiere
+probar:</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;H_0: V\left[\varepsilon_i\right] = \sigma^2\\
+&amp;H_1: V\left[\varepsilon_i\right] \neq \sigma^2\\
+\end{aligned}
+\]</span> </br></p>
+<p>La siguiente Figura muestra algunos patrones comunes de la nube de
+puntos en los gráficos de residuales, que sirven para detectar si este
+supuesto se cumple, incluso en algunas ocasiones sirven para detectar un
+mal ajuste del modelo lineal.</p>
+<p></br></br></p>
+<p><strong>Patrones comunes en residuales:</strong> (a) y (b) Modelo no
+lineal. (c), (d), (e) y (f) Varianza no constante del error. (g) Modelo
+lineal y varianza constante.</p>
+<center>
+<img src="img/grafico7.png" width="90%" style="display: block; margin: auto;" />
+Figura 1 : Patrones comunes en los residuos
+</center>
+<p></br></p>
+<p>La pruebas analíticas de homogeneidad de varianza, permiten validar
+este supuesto. La prueba de Levene modificada es aplicable cuando la
+varianza se incrementa o disminuye con <span
+class="math inline">\({X}\)</span> y los tamaños de muestra necesitan
+ser suficientemente grandes para que la dependencia entre los residuales
+pueda ser ignorada.</p>
+<p>En este curso usaremos solo la prueba gráfica basada en el gráfico de
+residuales vs. valores predichos.</p>
+<p></br></br></p>
+</div>
+<div id="solución-del-problema-de-varianza-no-homogénea"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Solución del problema de
+varianza no homogénea</strong></span></h2>
+<p></br></p>
+<ul>
+<li>Mínimos cuadrados ponderados cuando la varianza del error varía de
+forma sistemática.</li>
+</ul>
+<p>En la función objetivo de mínimos cuadrados, las diferencias entre
+los valores observados y esperados de <span
+class="math inline">\({y_i}\)</span> se multiplican por pesos o factores
+de ponderación <span class="math inline">\({\omega_i}\)</span>, tomados
+en forma inversamente proporcional a la varianza de <span
+class="math inline">\({y_i}\)</span>, esto es, la función de mínimos
+cuadrados considerada es <span
+class="math display">\[{S(\beta_0,\beta_1) = \sum^n_{i=1} \omega_i(Y_i -
+\beta_0 + \beta_1X_i)^2}.\]</span></p>
+<p></br></p>
+<ul>
+<li>Usar transformaciones en <span class="math inline">\({Y}\)</span>
+que estabilicen la varianza. En algunos tipos de relaciones la asimetría
+y la varianza del error se incrementan con la respuesta media. A veces
+es necesario sumar una constante a los valores de <span
+class="math inline">\({Y}\)</span> cuando la transformación es
+logarítmica, específicamente cuando existen valores negativos.</li>
+</ul>
+<p></br></p>
+<p>Se debe tener en cuenta también que cuando la varianza no es
+constante pero la relación de regresión es lineal, no es suficiente
+transformar a <span class="math inline">\({Y}\)</span>, pues en ese caso
+aunque se estabilice la varianza, también cambiará la relación lineal a
+una curvilínea y por ende, se requerirá también una transformación en
+<span class="math inline">\({X}\)</span>; sin embargo, este caso puede
+manejarse también usando mínimos cuadrados ponderados.</p>
+<p></br></br></p>
+</div>
+<div id="errores-con-distribución-normal" class="section level2">
+<h2><span style="color:#034a94"><strong>Errores con distribución
+normal</strong></span></h2>
+<p></br></p>
+<p>En la validación del supuesto de normalidad se evalúa:</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0: \varepsilon_i \sim \text{ Normal}\\
+H_1: \varepsilon_i \not\sim \text{ Normal}\\
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>Esto se puede realizar bien sea examinando los valores p arrojados
+por una prueba específica de normalidad, como la prueba de Shapiro-Wilk,
+o mediante un gráfico de normalidad, en el cual se evalúa si la nube de
+puntos en la escala normal se puede ajustar por una línea recta.</p>
+<p></br></br></p>
+</div>
+<div id="solución-al-problema-de-no-normalidad" class="section level2">
+<h2><span style="color:#034a94"><strong>Solución al problema de no
+normalidad</strong></span></h2>
+<p></br></p>
+<p>La desviación del supuesto de normalidad frecuentemente va de la mano
+con la no homogeneidad de la varianza, por ello, a menudo una misma
+transformación de los valores de <span
+class="math inline">\({Y}\)</span>, logra estabilizar la varianza y una
+aproximación a la normalidad. En estos casos se debe usar primero una
+transformación que estabilice la varianza y evaluar si el supuesto de
+normalidad se cumple para los datos transformados.</p>
+<p></br></p>
+<p>Entre las transformaciones que logran corregir la no normalidad se
+tienen las transformaciones de potencia Box-Cox <span
+class="math inline">\({Y^{\lambda}}\)</span>, que incluye la
+transformación de logaritmo natural (caso <span
+class="math inline">\(\lambda = 0\)</span>). Otra solución es trabajar
+con métodos no paramétricos de regresión.</p>
+<p></br></br></p>
+</div>
+<div id="independencia-de-errores" class="section level2">
+<h2><span style="color:#034a94"><strong>Independencia de
+errores</strong></span></h2>
+<p></br></p>
+<p>Para probar el supuesto de independencia <em>es necesario conocer el
+orden de las observaciones en el tiempo</em>. En tal caso, podemos
+analizar el supuesto a través del gráfico de residuales vs. el tiempo u
+orden de recolección de los datos.</p>
+<p>Buscamos patrones sistemáticos como ciclos, rachas, y cualquier otro
+comportamiento que indique correlación entre los valores de la serie o
+secuencia de los residuales.</p>
+<p></br></p>
+<p>También existen pruebas para incorrelación como la prueba de Durbin
+Watson para autocorrelación de orden 1, en donde se define el modelo
+autorregresivo de orden 1 para los errores del modelo <span
+class="math inline">\({\varepsilon_t = \phi_1\varepsilon_{t - 1} +
+a_t}\)</span> con <span class="math inline">\({a_t
+\overset{\text{iid}}{\sim} N(0,\sigma^2)}\)</span> y <span
+class="math inline">\(\vert\phi_1\vert \le 1\)</span>; y básicamente se
+prueba si la constante de autocorrelación <span
+class="math inline">\({\phi_1}\)</span> es igual a cero.</p>
+<p></br></p>
+<p>Note que esta prueba sólo detecta correlación entre observaciones
+sucesivas por tanto el no rechazar <span class="math inline">\({\phi_1}
+= 0\)</span> no implica incorrelación entre observaciones separadas
+<span class="math inline">\({k &gt; 1}\)</span> unidades (en el tiempo u
+orden de observación).</p>
+<p></br></br></p>
+<div id="nota" class="section level3 content-box-blue">
+<h3><span style="color:#FF7F00"><strong>Nota:</strong></span></h3>
+<p>Recuerde que incorrelación no implica independencia estadística, pero
+independencia estadística si implica incorrelación. Sin embargo, si el
+par de variables incorrelacionadas se distribuyen conjuntamente en forma
+normal, entonces son independientes!.</p>
+</div>
+<p>En general, mientras sea desconocido el orden de recolección u
+observación de los datos, asumimos como válido el supuesto de
+independencia.</p>
+<p></br></br></p>
+</div>
+<div id="soluciones-al-problema-no-independencia-de-errores"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Soluciones al problema no
+independencia de errores</strong></span1></h2>
+<p></br></p>
+<ul>
+<li>Trabajar con modelos con errores correlacionados.</li>
+<li>Adicionar variables de tendencia, estacionalidad.</li>
+<li>Trabajar con primeras diferencias.</li>
+</ul>
+<p></br></br></p>
+</div>
+<div id="linealidad-del-modelo" class="section level2">
+<h2><span style="color:#034a94"><strong>Linealidad del
+modelo</strong></span></h2>
+<p></br></p>
+<p>Además de los supuestos sobre los errores el modelo de RLS se asume
+implícitamente que el modelo real de regresión entre la variable
+respuesta y la variable predictora es lineal en los parámetros del
+modelo.</p>
+<p></br></p>
+<p>La violación de este supuesto puede identificarse gráficamente a
+través del gráfico de residuales vs. valores predichos o versus valores
+de la variable predictora, de manera que cuando ocurre esta violación,
+el gráfico exhibe un patrón en el cual los residuales se desvían de cero
+en forma sistemática, por ejemplo, cuando la nube de puntos de estos
+gráficos presentan una forma de U o una forma de U invertida, como se
+observó en la Figura de los patrones de gráficos de residuales, partes
+(a) y (b).</p>
+<p></br></p>
+<p>Otra forma de probar la no linealidad del modelo, es mediante la
+prueba de falta o carencia de ajuste, la cual prueba que un tipo
+específico de función de regresión ajusta adecuadamente a los datos.</p>
+<p></br></p>
+<p>Para el caso de la RLS, se quiere probar:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0:\ E(Y_i) = E(Y\vert X_i) = \beta_0 + \beta_1 X_i\\
+H_1:\ E(Y_i) = E(Y\vert X_i) \neq \beta_0 + \beta_1 X_i
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>La prueba asume que los valores de <span
+class="math inline">\({Y}\)</span> dado <span
+class="math inline">\({X}\)</span> son:</p>
+<ul>
+<li>Independientes.</li>
+<li>Se distribuyen en forma normal.</li>
+<li>Tienen varianza constante.</li>
+</ul>
+<p></br></p>
+<p>Para esta prueba se requiere que en al menos un valor de <span
+class="math inline">\({X}\)</span> se haya tomado más de una observación
+de <span class="math inline">\({Y}\)</span>, esto es, que se tengan
+réplicas.</p>
+<p></br></p>
+<p>Para explicar en qué consiste esta prueba, es necesario establecer
+una nueva notación, así:</p>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(m\)</span>: El número de valores
+distintos de <span class="math inline">\(X\)</span>, denominados .</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(n_i\)</span>: El número de observaciones
+de <span class="math inline">\(Y\)</span> tomadas en el <span
+class="math inline">\(i\)</span>-ésimo nivel de <span
+class="math inline">\(X\)</span>. Por tanto, el número total de
+observaciones <span class="math inline">\(n\)</span> tomadas cumple que
+<span class="math inline">\(n = \sum_{i=1}^m n_i\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(Y_{ij}\)</span>: La <span
+class="math inline">\(j\)</span>-ésima observación de la respuesta <span
+class="math inline">\(Y\)</span> en el <span
+class="math inline">\(i\)</span>-ésimo nivel de <span
+class="math inline">\(X\)</span>, <span
+class="math inline">\(i=1,\ldots,m\)</span>, <span
+class="math inline">\(j = 1, \ldots, n_i\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(X_i\)</span>: El <span
+class="math inline">\(i\)</span>-ésimo nivel de <span
+class="math inline">\(X\)</span>, <span class="math inline">\(i = 1,
+\ldots, m\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(\bar{Y}_i = \frac{1}{n_i}\sum_{j =
+1}^{n_i} Y_{ij}\)</span>: promedio muestral de las <span
+class="math inline">\(n_i\)</span> observaciones de Y tomadas en en el
+<span class="math inline">\(i\)</span>-ésimo nivel de <span
+class="math inline">\(X\)</span>, <span
+class="math inline">\(i=1,\ldots,m\)</span>.</li>
+</ul>
+<p></br></p>
+<p>Para entender el significado de esta prueba, considere en la tabla
+ANOVA una nueva partición de la variabilidad, esta vez, del término del
+error, representada por la suma de cuadrados del error</p>
+<p><span class="math display">\[SSE = \sum^n_{i = 1} \left(y_i -
+\widehat{y}_i\right)^2 = \sum^m_{i = 1}\sum^{n_i}_{j = 1} \left(y_{ij} -
+\widehat{y}_i\right)^2,\]</span></p>
+<p>en dos componentes: una debida a la falta de ajuste (LOF) y otra
+debida a lo que denominará un error puro (PE).</p>
+<p></br></p>
+<p>Veamos gráficamente como se da esta nueva partición de la
+variabilidad, para ello en la nueva notación consideremos las
+desviaciones <span class="math inline">\(y_{ij} -
+\widehat{y}_i\)</span>.</p>
+<p></br></p>
+<center>
+<img src="img/grafico8.png" width="90%" style="display: block; margin: auto;" />
+Figura 2: Variabilidad en Y al incluir el modelo de RLS
+</center>
+<img src="img/grafico9.png" width="90%" style="display: block; margin: auto;" />
+Figura 3: Ilustración de la nueva descomposición de la variabilidad
+</center>
+<p></br></br></p>
+<p>De ahí que podamos escribir cada diferencia <span
+class="math inline">\(y_{ij} - \widehat{y}_i\)</span> como: <span
+class="math display">\[y_{ij} - \widehat{y}_i = (\bar{y}_i -
+\widehat{y}_i) + (y_{ij} - \bar{y}_i)\]</span></p>
+<p>y reemplazando en la SSE, se obtiene: <span class="math display">\[
+\begin{aligned}
+SSE = \sum_{i = 1}^m \sum_{j = 1}^{n_i} \left(y_{ij} -
+\widehat{y}_i\right)^2 &amp;= \sum_{i = 1}^m\sum_{j = 1}^{n_i}
+\left[\left(\bar{y}_i - \widehat{y}_i\right) + \left(y_{ij} -
+\bar{y}_i\right)\right]^2\\
+&amp;= \sum_{i = 1}^m \sum_{j = 1}^{n_i} \left(\bar{y}_i -
+\widehat{y}_i\right)^2 + \sum_{i = 1}^m \sum_{j = 1}^{n_i} \left(y_{ij}
+- \bar{y}_i\right)^2\\
+&amp;= \sum_{i = 1}^m n_i\left(\bar{y}_i - \widehat{y}_i\right)^2 +
+\sum_{i = 1}^m \sum_{j = 1}^{n_i} \left(y_{ij} - \bar{y}_i\right)^2
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>Así, la suma de cuadrados del error <span
+class="math inline">\(SSE\)</span> queda expresada mediante la suma de
+dos componentes, a saber:</p>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(\sum_{i = 1}^m n_i\left(\bar{y}_i -
+\widehat{y}_i\right)^2\)</span>, que está relacionada con las
+diferencias entre los promedios de <span
+class="math inline">\(Y\)</span> en cada nivel de la predictora <span
+class="math inline">\(X\)</span> y los valores ajustados por el modelo
+de regresión, y que representan el desajuste del modelo lineal, al cual
+se le conoce como Suma de Cuadrados de la Falta de Ajuste, abreviado
+<span class="math inline">\(SSLOF\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(\sum_{i = 1}^m \sum_{j = 1}^{n_i}
+\left(y_{ij} - \bar{y}_i\right)^2\)</span>, que está relacionada con las
+diferencias entre las observaciones de la respuesta y los promedios de
+<span class="math inline">\(Y\)</span> en cada nivel de la predictora
+<span class="math inline">\(X\)</span>, por lo que a esta componente se
+le conoce como Suma de Cuadrados del Error Puro, abreviado <span
+class="math inline">\(SSPE\)</span>.</li>
+</ul>
+<p></br></p>
+<p>De donde, se obtiene que: <span class="math inline">\(SSE = SSLOF +
+SSPE\)</span>.</p>
+<p></br></p>
+<p>Cada una de estas sumas de cuadrados tiene asociados unos grados de
+libertad (g.l):</p>
+<p></br></p>
+<ul>
+<li>Se sabe que <span class="math inline">\(SSE\)</span> tiene <span
+class="math inline">\(n - 2\)</span> g.l.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Analizando la expresión para <span
+class="math inline">\(SSPE\)</span>, se tienen las mismas <span
+class="math inline">\(n\)</span> observaciones y se estiman <span
+class="math inline">\(m\)</span> medias de <span
+class="math inline">\(Y\)</span> (una en cada nivel de la predictora
+<span class="math inline">\(X\)</span>, y así <span
+class="math inline">\(SSPE\)</span> tiene <span class="math inline">\(n
+- m\)</span> g.l.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Finalmente, <span class="math inline">\(SSLOF\)</span> tiene <span
+class="math inline">\(m\)</span> observaciones (los promedios estimados)
+y se estiman los dos parámetros del modelo, de donde SSLOF tiene <span
+class="math inline">\(m - 2\)</span> g.l.</li>
+</ul>
+<p></br></p>
+<p>Acá los grados de libertad (g.l) de las sumas de cuadrados también
+forman una identidad, así:</p>
+<p></br></p>
+<p>A continuación, se definen los cuadrados medios como la razón entre
+las sumas de cuadrados y sus respectivos grados de libertad. Esto
+es,</p>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(MSLOF = SSLOF / g.l(SSLOF) = SSLOF/(m -
+2)\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(MSPE = SSPE/ g.l(SSPE) = SSPE/(n -
+m)\)</span>.</li>
+</ul>
+<p></br></p>
+<p>Se puede demostrar que:</p>
+<ul>
+<li><p><span class="math inline">\(E\left[MSPE\right] =
+\sigma^2\)</span>.</p></li>
+<li><p><span class="math inline">\(E\left[MSLOF\right] = \sigma^2 +
+\dfrac{\sum^m_{i = 1} n_i\left[E(Y_i) - \beta_0 - \beta_1x_i\right]^2}{m
+- 2}\)</span>.</p></li>
+</ul>
+<p></br></p>
+<p>Note que, bajo <span class="math inline">\(H_0\)</span> tanto MSLOF
+como MSPE son estimaciones independientes de <span
+class="math inline">\(\sigma^2\)</span>.</p>
+<p>De lo anterior, se considera el siguiente estadístico de prueba:
+<span class="math display">\[
+F_o = \frac{MSLOF}{MSPE} = \dfrac{SSLOF/(m - 2)}{SSPE/(n - m)}
+\]</span></p>
+<p>que bajo la hipótesis nula <span class="math inline">\({H_0:\ E(Y_i)
+= \beta_0 + \beta_1x_i}\)</span>, se distribuye como una <span
+class="math inline">\(F\)</span> con <span class="math inline">\(m -
+2\)</span> y <span class="math inline">\(n - m\)</span> grados de
+libertad.</p>
+<p>Así, a un nivel de significancia <span
+class="math inline">\({\alpha}\)</span> se rechaza la hipótesis nula de
+que el modelo lineal es adecuado (en favor de la hipótesis de que el
+modelo lineal tiene falta de ajuste) si <span class="math inline">\({F_0
+&gt; F_{\alpha, m - 2, n - m}}\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="anova" class="section level2">
+<h2><span style="color:#034a94"><strong>ANOVA</strong></span></h2>
+<p></br></p>
+<p>En la tabla <strong>ANOVA</strong>, presentada en clases anteriores,
+se puede incluir la prueba de falta de ajuste que descompone el SSE del
+modelo, así:</p>
+<p><strong>Análisis de varianza que incorpora la prueba de falta de
+ajuste en el modelo de RLS</strong></p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="20%" />
+<col width="21%" />
+<col width="17%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fuente de variación</th>
+<th>Suma de cuadrados</th>
+<th align="center">Grados de libertad</th>
+<th align="center">Cuadrado medio</th>
+<th align="center"><span class="math inline">\(F\)</span> calculada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(Regresión\)</span></td>
+<td><span class="math inline">\(SSR\)</span></td>
+<td align="center">1</td>
+<td align="center"><span class="math inline">\(MSR = SSR\)</span></td>
+<td align="center"><span class="math inline">\(F_o =
+\dfrac{MSR}{MSE}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Error\)</span></td>
+<td><span class="math inline">\(SSE\)</span></td>
+<td align="center"><span class="math inline">\(n-2\)</span></td>
+<td align="center"><span class="math inline">\(MSE =
+\dfrac{SSE}{(n-2)}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>Falta de ajuste</td>
+<td><span class="math inline">\(SSLOF\)</span></td>
+<td align="center"><span class="math inline">\(m-2\)</span></td>
+<td align="center"><span class="math inline">\(MSLOF =
+\dfrac{SSLOF}{m-2}\)</span></td>
+<td align="center"><span class="math inline">\(F_o =
+\dfrac{MSLOF}{MSPE}\)</span></td>
+</tr>
+<tr class="even">
+<td>Error puro</td>
+<td><span class="math inline">\(SSPE\)</span></td>
+<td align="center"><span class="math inline">\(n-m\)</span></td>
+<td align="center"><span class="math inline">\(MSPE =
+\dfrac{SSPE}{n-m}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Total\)</span></td>
+<td><span class="math inline">\(SST\)</span></td>
+<td align="center"><span class="math inline">\(n - 1\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p></br></br></p>
+<div id="nota-1" class="section level3 content-box-gray">
+<h3><span style="color:#686868"><strong>Nota</strong></span></h3>
+<p></br></p>
+<ul>
+<li>En general, en el cálculo de la <strong>SSPE</strong> sólo se
+utilizan aquellos niveles <span class="math inline">\(i\)</span> de
+<span class="math inline">\(X\)</span> en los cuales hay réplicas.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>En general, la prueba de falta de ajuste puede aplicarse a otras
+funciones de regresión, sólo se requiere modificar los grados de
+libertad del SSLOF, que en general corresponden a <span
+class="math inline">\({m - p}\)</span>, donde <span
+class="math inline">\({p}\)</span> es el número de parámetros en la
+función de regresión. Para el caso específico de la regresión lineal
+simple, <span class="math inline">\({p = 2}\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Cuando se concluye que el modelo de regresión en <span
+class="math inline">\({H_0}\)</span> es apropiado, la práctica usual es
+usar el MSE y no el MSPE como un estimador de la varianza, debido a que
+el primero tiene más grados de libertad.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Cualquier inferencia sobre los parámetros del modelo lineal, por
+ejemplo la prueba de significancia de la regresión, solo debe llevarse a
+cabo luego de haber probado que el modelo lineal es apropiado.</li>
+</ul>
+</div>
+<p></br></br></p>
+</div>
+<div
+id="algunas-soluciones-al-problema-el-modelo-de-regresión-lineal-no-es-apropiado"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Algunas soluciones al problema
+“el modelo de regresión lineal no es apropiado”</strong></br></h2>
+<p></br></p>
+<ul>
+<li><p>Abandonar el modelo de regresión lineal y desarrollar un modelo
+más apropiado.</p></li>
+<li><p>Emplear alguna transformación en los datos de manera que el
+modelo de regresión lineal sea apropiado a los datos transformados
+(modelos intrínsecamente lineales).</p></li>
+<li><p>Se pueden usar curvas de regresión no paramétricas también
+llamadas curvas suavizadas, para explorar y/o confirmar la forma de la
+función de regresión, por ejemplo el método LOESS. En este caso la curva
+suavizada se grafica junto con las bandas de confianza del modelo de
+regresión; si la primera cae entre las segundas, entonces se tiene
+evidencia de que el modelo ajustado es apropiado.</p></li>
+</ul>
+<p></br></br></p>
+</div>
+<div id="transformaciones-modelos-intrínsecamente-lineales"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Transformaciones: Modelos
+intrínsecamente lineales</strong></br></h2>
+<p></br></p>
+<p>Un modelo de regresión se considera lineal cuando lo es en los
+parámetros, por ello las transformaciones en las variables no implican
+modelos no lineales. Modelos intrínsecamente lineales son aquellos que
+relacionan <span class="math inline">\({Y}\)</span> con <span
+class="math inline">\({X}\)</span> por medio de una transformación en
+<span class="math inline">\({Y}\)</span> o en <span
+class="math inline">\({X}\)</span>, originando un modelo de la forma
+<span class="math inline">\({Y^* = \beta_0 + \beta_1X^* +
+\varepsilon}\)</span>, donde <span class="math inline">\({Y^*}\)</span>
+y <span class="math inline">\({X^*}\)</span> son las variables
+transformadas.</p>
+<p>En ocaciones realizar transformaciones en las variables permite
+superar los problemas que se presentan al verificar los supuestos del
+modelo y tambien mejorar el ajuste del modelo.</p>
+<p></br></br></p>
+<div id="casos-comunes-de-modelos-intrínsecamente-lineales"
+class="section level3">
+<h3><span style="color:#034a94"><strong>Casos comunes de modelos
+intrínsecamente lineales</strong></span></h3>
+<p></br></p>
+<p>Modelo exponencial multiplicativo</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="42%" />
+<col width="31%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(Y = \beta_0
+e^{\beta_1X}\varepsilon\)</span></td>
+<td align="left"><span class="math inline">\(Y^* = \beta_0^* + \beta_1X
++ \varepsilon^*\)</span></td>
+<td align="left"><span class="math inline">\(\text{ con } Y^* =
+\ln(Y)\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>Modelo potencial multiplicativo</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="42%" />
+<col width="31%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(Y = \beta_0
+X^{\beta_1}\varepsilon\)</span></td>
+<td align="left"><span class="math inline">\(Y^* = \beta_0^* + \beta_1
+X^* + \varepsilon^*\)</span></td>
+<td align="left"><span class="math inline">\(\text{ con } Y^* = \ln(Y)
+\text{ y } X^* = \ln(X)\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>Modelo logarítmico</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="42%" />
+<col width="31%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(Y = \beta_0 + \beta_1\ln(X)
++ \varepsilon\)</span></td>
+<td align="left"><span class="math inline">\(Y = \beta_0 + \beta_1X^* +
+\varepsilon\)</span></td>
+<td align="left"><span class="math inline">\(\text{ con } X^* =
+\ln(X)\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>Modelo recíproco</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="42%" />
+<col width="31%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(Y = \beta_0 + \beta_1(1/X)
++ \varepsilon\)</span></td>
+<td align="left"></td>
+<td align="left"><span class="math inline">\(Y = \beta_0 + \beta_1X^* +
+\varepsilon\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<center>
+<p></br></br></p>
+<p><img src="img/grafico10.png" width="90%" style="display: block; margin: auto;" />
+Figura 4: Formas no lineales</p>
+</center>
+<p></br></br></p>
+</div>
+<div id="transformación-box-cox" class="section level3">
+<h3><span style="color:#034a94"><strong>Transformación
+Box-Cox</strong></h3>
+<p>La transformación de la variable respuesta <span
+class="math inline">\(Y\)</span> es útil para dar solución a problemas
+tanto de validación de suspuesto como también de mejoras en el nivel de
+ajuste del modelo. Poder detectar cuál de las anteriores trasformaciones
+es la más apropiada podría se un trabajo de error ensayo, probando una a
+una las transformaciones, generando una de manda de tiempo.</p>
+<p>El método de box-cox permite encontrar el valor de <span
+class="math inline">\(\lambda\)</span> óptimo para la función :</p>
+<p><span class="math display">\[g_{\lambda}(y) = \left \{ \begin{matrix}
+\dfrac{y^{\lambda}-1}{y} &amp; \mbox{ si } \lambda \neq 0\\
+                                     &amp;  \\
+                                     log(y)  &amp; \mbox{ si } \lambda
+=0 \end{matrix}\right.\]</span></p>
+<p>El valor <span
+class="math inline">\(\dfrac{y^{\lambda}-1}{y}\)</span> se puede
+simplificar por <span class="math inline">\(y^{\lambda}\)</span> cuando
+el modelo es predictivo. El valor máximo de este valor podrá orientar
+sobre la forma funcional de la variables respuesta.</p>
+<p>La función <code>boxcox()</code>, del paquete <code>MASS</code> nos
+ayuda a encontrar el valor óptimo de <span
+class="math inline">\(\lambda\)</span></p>
+<p>La siguiente tabla nos ayuda a identificar la transformación
+apropiada</p>
+<p></br></br></p>
+<table style="width:100%;">
+<colgroup>
+<col width="23%" />
+<col width="10%" />
+<col width="10%" />
+<col width="12%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="11%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\lambda
+\hspace{1.5cm}\)</span></td>
+<td align="left">-2</td>
+<td align="left">-1</td>
+<td align="left">-0.5</td>
+<td align="left">0</td>
+<td align="left">0.5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">Transformación</td>
+<td align="left"><span class="math inline">\(1/y^{2}\)</span></td>
+<td align="left"><span class="math inline">\(1/y\)</span></td>
+<td align="left"><span class="math inline">\(1/\sqrt{y}\)</span></td>
+<td align="left"><span class="math inline">\(log(y)\)</span></td>
+<td align="left"><span class="math inline">\(\sqrt{y}\)</span></td>
+<td align="left"><span class="math inline">\(y\)</span></td>
+<td align="left"><span class="math inline">\(y^{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p></br></br></p>
+<pre class="r"><code>library(paqueteMOD)
+data(ventas) 
+modelo1=lm(ventas ~ clientes, ventas)
+summary(modelo1)</code></pre>
+<pre><code>
+Call:
+lm(formula = ventas ~ clientes, data = ventas)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-11.873  -2.861   0.255   3.511  10.595 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  19.9800     4.3897   4.552 0.000544 ***
+clientes      0.2606     0.0420   6.205 3.19e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 6.72 on 13 degrees of freedom
+Multiple R-squared:  0.7476,    Adjusted R-squared:  0.7282 
+F-statistic:  38.5 on 1 and 13 DF,  p-value: 3.193e-05</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = -2:3)
+#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+bc&lt;-boxcox(lm(ventas$ventas ~ ventas$clientes), lambda = 0:2)</code></pre>
+<p><img src="recurso209_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>(lambda &lt;- bc$x[which.max(bc$y)])</code></pre>
+<pre><code>[1] 1.212121</code></pre>
+<p></br></br></p>
+<p><span class="math inline">\(\lambda = 1.212121\)</span> indica que la
+mejor trasformación para la variable <span
+class="math inline">\(Y\)</span> es la lineal (<span
+class="math inline">\(Y^{1}\)</span>)</p>
+<p></br></br></p>
+</div>
+<div id="nota-2" class="section level3 content-box-gray">
+<h3><span style="color:#686868"><strong>Nota</strong></span></h3>
+<p></br></p>
+<ul>
+<li>Los modelos exponenciales y de potencia aditivos: <span
+class="math inline">\(Y = \beta_0 e^{\beta_1 X} + \varepsilon\)</span>,
+<span class="math inline">\(Y = \beta_0 X^{\beta_1 } +
+\varepsilon\)</span> no son intrínsecamente lineales.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>El supuesto necesario es que cuando el término de error <span
+class="math inline">\({\varepsilon}\)</span> es transformado, esta
+variable transformada deberá ser <span class="math inline">\(iid \sim
+N(0,\sigma ^{2})\)</span>, por ello deben examinarse los residuales del
+modelo transformado.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>En los casos con modelos exponenciales y potenciales
+multiplicativos, si <span class="math inline">\({\sigma}\)</span> es
+pequeño se puede obtener un intervalo de confianza aproximado para la
+respuesta media tomando antilogaritmos sobre los límites del intervalo
+hallado para la respuesta media <span
+class="math inline">\({Y^*}\)</span>. Sin embargo, cuando hacemos esto,
+en términos generales, estamos hallando un intervalo de confianza para
+la mediana de <span class="math inline">\({Y}\)</span> (recordar la
+distribución lognormal).</li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

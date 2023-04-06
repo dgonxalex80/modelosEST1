@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
+
+
+<title> Inferencia sobre Y_o</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos de Regresión</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+    <li>
+      <a href="recurso206.html">ANOVA - Análisis de la varianza </a>
+    </li>
+    <li>
+      <a href="recurso209.html">Supuetos del modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Inferencia sobre <span
+class="math inline">\(Y_o\)</span></strong></span></h1>
+<h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
+
+</div>
+
+
+<p></br></br></p>
+<p>En ocaciones interesa realizar inferencias sobre la respuesta, para
+un valor apropiado <span class="math inline">\(X = x_0\)</span>,
+así:</p>
+<ul>
+<li><p>Estimación puntual y por intervalo de la respuesta media <span
+class="math inline">\(E[Y|x_0]\)</span>.</p></li>
+<li><p>Predicción de valores futuros <span class="math inline">\(y_0 =
+\beta_0 + \beta_1 x_0 + \varepsilon_0 = E[Y\vert x_0] +
+\varepsilon_0\)</span>.</p></li>
+</ul>
+<p></br></p>
+<p>En ambos casos el único medio para producir tales inferencias es la
+ecuación de regresión ajustada.</p>
+<p></br></p>
+<p>Conociendo que la ecuación de regresión ajustada, en un valor dado
+<span class="math inline">\({X = x_0}\)</span>, es:</p>
+<p><span class="math display">\[\widehat{Y}_0 = \widehat\beta_0 +
+\widehat\beta_1x_0\]</span> </br></p>
+<p>Note que <span class="math inline">\({\widehat{Y}_0}\)</span> también
+es una combinación lineal de las variables aleatorias <span
+class="math inline">\({Y_1,\ldots ,Y_n}\)</span>. En efecto,</p>
+<p><span class="math display">\[
+\widehat{Y}_0 = \widehat\beta_0 + \widehat\beta_1x_0 =
+\left(\sum^n_{i=1} m_iY_i\right) + \left(\sum^n_{i=1} c_iY_i\right)x_0 =
+\sum^n_{i=1} (m_i + x_0\, c_i) Y_i,
+\]</span></p>
+<p></br></p>
+<p>con las constantes <span class="math inline">\(m_i = \frac{1}{n} -
+\bar{x}\, c_i \hspace{.4cm} \text{y} \hspace{.4cm} c_i = \frac{x_i -
+\bar{x}}{S_{xx}}\)</span> como fueron especificadas previamente. Por lo
+tanto, bajo los supuestos del modelo <span
+class="math inline">\({\widehat{Y}_0}\)</span> es una variable aleatoria
+normal.</p>
+<p>con esperanza:</p>
+<p><span class="math display">\[
+E\left[\widehat{Y}_0\right] = E\left[\widehat\beta_0 +
+\widehat\beta_1x_0\right] = E\left[\widehat\beta_0\right] +
+E\left[\widehat\beta_1\right]x_0 = \beta_0 + \beta_1x_0 = E[Y\vert x_0]
+\]</span> </br></p>
+<p>y su varianza:</p>
+<p><span class="math display">\[
+\begin{aligned}
+{V\left[\widehat{Y}_0\right]} &amp;= {V\left[\sum^n_{i=1} (m_i + x_0\,
+c_i) Y_i\right]} = {\sum^n_{i=1} (m_i + x_0\, c_i)^2\ V(Y_i)}\nonumber\\
+&amp;= {\sigma^2\sum^n_{i=1} \left[\left(\frac{1}{n} -
+\bar{x}c_i\right)+x_0c_i\right]^2} = {\sigma^2\sum^n_{i=1}
+\left[\frac{1}{n} + (x_0-\bar{x}) c_i\right]^2}\nonumber\\
+&amp;= {\sigma^2\left[\frac{1}{n} +
+\frac{(x_0-\bar{x})^2}{S_{xx}}\right]}
+\end{aligned}
+\]</span></p>
+<p></br></br></p>
+<div id="resumen" class="section level3 content-box-gray">
+<h3><span style="color:#686868"><strong>Resumen</strong></span></h3>
+<p><span class="math display">\[
+\widehat{Y}_0 \sim N\left(E[Y\vert x_0], \ \sigma^2\left[\frac{1}{n} +
+\frac{(x_0 - \bar{x})^2}{S_{xx}}\right]\right)
+\]</span></p>
+</div>
+<p></br></br></p>
+<p>Esto es, <span class="math inline">\(\widehat{Y}_0\)</span> es un
+estimador insesgado de la respuesta media.</p>
+<p>Note que, <span class="math inline">\(\widehat{Y}_0\)</span> también
+es un estimador para un valor futuro <span
+class="math inline">\(y_0\)</span>, pero en este caso es un estimador
+sesgado. De ahí que la cantidad <span class="math inline">\(y_0 -
+\widehat{Y}_0\)</span> represente al error de predicción, el cual se
+sabe tiene media cero.</p>
+<p></br></p>
+<p>Tanto las estimaciones de valores de la respuesta media como las
+predicciones de valores futuro deben cumplir una condición sobre el
+valor fijo <span class="math inline">\({X = x_0}\)</span> para que tal
+estimación/predicción sea válida.</p>
+<p></br></p>
+<ul>
+<li>Sólo se podrán hacer inferencias sobre la respuesta cuando <span
+class="math inline">\(X = x_0 \in \left[X_{\min},
+X_{\max}\right]\)</span>, donde <span
+class="math inline">\(X_{\min}\)</span> y <span
+class="math inline">\(X_{\max}\)</span> son los valores mínimo y máximo
+de la variable predictora, que fueron fijados en la muestra.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Cumplir con lo anterior indica que <span
+class="math inline">\(x_0\)</span> es un punto de interpolación.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Esto evita que <span class="math inline">\(x_0\)</span> sea un punto
+de extrapolación, esto es, un punto por fuera del rango experimental
+donde el modelo fue ajustado y que no garantiza que el modelo se
+mantenga.</li>
+</ul>
+<center>
+<p><img src="recurso205_files/figure-html/unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Figura : Ilustración de puntos de interpolación y extrapolación</p>
+</center>
+<p></br></br></p>
+<div id="intervalo-de-confianza-para-la-respuesta-media"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Intervalo de confianza para la
+respuesta media</strong></span></h2>
+<p></br></p>
+<p>Se puede demostrar que bajo los supuestos del modelo:</p>
+<p></br></p>
+<p><span class="math display">\[
+{T = \frac{\widehat{y}_0 - E[Y\vert
+x_0]}{\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} + \frac{(x_0 -
+\bar{x})^2}{S_{xx}}\right]}} \sim t_{n - 2}}
+\]</span></p>
+<p></br></p>
+<p>Por tanto un intervalo de confianza del <span
+class="math inline">\({(1-\alpha)\%}\)</span> para <span
+class="math inline">\({\mu_{Y\vert x_0}}\)</span> es:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+{\widehat{y}_{0} \pm
+t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[\frac{1}{n} +
+\frac{(x_{0}-\bar{x})^{2}}{S_{xx}}\right]}}
+\]</span></p>
+</div>
+<p></br></p>
+<p>con <span
+class="math inline">\({\widehat{y}_{0}=\widehat{\beta}_0+\widehat{\beta}_1x_0}\)</span>
+y <span class="math inline">\({t_{\alpha/2, n - 2}}\)</span> es el
+percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
+distribución <span class="math inline">\({t}\)</span>-Student con <span
+class="math inline">\({n - 2}\)</span> grados de libertad.</p>
+<p></br></br></p>
+</div>
+<div
+id="intervalo-de-predicción-para-una-observación-futura-de-la-respuesta-y_0"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Intervalo de predicción para una
+observación futura de la respuesta <span
+class="math inline">\(Y_{0}\)</span></strong></span></h2>
+<p></br></p>
+<p>Dicho intervalo estima los posibles valores para un valor particular
+de la variable respuesta (no para su media) en un valor dado, <span
+class="math inline">\({X=x_0}\)</span>. Asumimos que este valor
+particular es un valor futuro de la variable aleatoria <span
+class="math inline">\({Y}\)</span> y por tanto, no fue utilizado en la
+regresión.</p>
+<p></br></p>
+<p>Si <span class="math inline">\({Y_0}\)</span> es un valor futuro y
+<span class="math inline">\({\widehat{y}_0 = \widehat{\beta}_0 +
+\widehat{\beta}_1x_0}\)</span> es su estimador, entonces estas dos
+variables aleatorias son estadísticamente independientes, dado que <span
+class="math inline">\({Y_0}\)</span> no es utilizado para hallar a <span
+class="math inline">\({\widehat{\beta}_0}\)</span> y <span
+class="math inline">\({\widehat{\beta}_1}\)</span>.</p>
+<p></br></p>
+<p>Por tanto, el estadístico:</p>
+<p></br></p>
+<p><span class="math display">\[
+{T=\frac{\widehat{y}_0-Y_0}{\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_{0}-\bar{x})^2}{S_{xx}}\right]}}
+\sim t_{n-2}}
+\]</span></p>
+<p></br></p>
+<p>De ahí que, un intervalo de predicción del <span
+class="math inline">\({(1 - \alpha)\%}\)</span> para <span
+class="math inline">\({Y_0}\)</span> está dado por:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+{\widehat{y}_0\pm
+t_{\alpha/2,n-2}\times\sqrt{\widehat{\sigma}^2\left[1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}}\right]}}
+\]</span></p>
+</div>
+<p></br></p>
+<p>Donde, <span class="math inline">\({t_{\alpha/2, n - 2}}\)</span> es
+el percentil <span class="math inline">\({1 - \alpha/2}\)</span> de la
+distribución <span class="math inline">\({t}\)</span>-Student con <span
+class="math inline">\({n - 2}\)</span> grados de libertad.</p>
+<p></br></br></p>
+</div>
+<div id="pruebas-de-hipótesis-para-la-respuesta-media"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Pruebas de hipótesis para la
+respuesta media</strong></span></h2>
+<p></br></p>
+<p>Para la respuesta media se pueden probar hipótesis a partir de la
+construcción y el análisis de los intervalos de confianza definidos
+anteriormente. Esto es, para probar a un nivel de significancia <span
+class="math inline">\(\alpha\)</span>, el siguiente juego de
+hipótesis:</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{aligned}
+{H_0:\ E[Y\vert x_0] = c_0}\nonumber\\
+{H_1:\ E[Y\vert x_0] \neq c_0}\nonumber
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>Donde <span class="math inline">\(c_0 \in \mathbb{R}\)</span>, se
+calcula un intervalo de confianza del <span class="math inline">\((1 -
+\alpha)100\)</span>% para <span class="math inline">\(E[Y\vert
+x_0]\)</span> y si el valor <span class="math inline">\(c_0\)</span>
+está incluido en el intervalo, entonces no se rechaza <span
+class="math inline">\(H_0\)</span>, o si el valor <span
+class="math inline">\(c_0\)</span> no está incluido en el intervalo,
+entonces se rechaza <span class="math inline">\(H_0\)</span>.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

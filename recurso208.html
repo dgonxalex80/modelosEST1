@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modelos Estadisticos para la toma de decisiones" />
+
+
+<title> Estimación de parámetros</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos de Regresión</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso201.html">Análisis de correlación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso202.html">Modelo de regresión lineal simple</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso203.html">Método de mínimos cuadrados ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso208.html">Método de máxima verosimilitud</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso204.html">Sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso205.html">Respecto a la media de Y </a>
+    </li>
+    <li>
+      <a href="recurso206.html">ANOVA - Análisis de la varianza </a>
+    </li>
+    <li>
+      <a href="recurso209.html">Supuetos del modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso207.html">Código R</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Estimación de parámetros</strong></span></h1>
+<h4 class="author">Modelos Estadisticos para la toma de decisiones</h4>
+
+</div>
+
+
+<p></br></br></p>
+<div id="estimación-por-máxima-verosimilitud-ml" class="section level2">
+<h2><span style="color:#034a94"><strong>Estimación por máxima
+verosimilitud (ML)</strong></br></h2>
+<p></br></p>
+<p>El método de mínimos cuadrados produce los mejores estimadores
+lineales insesgados para los parámetros de la recta y puede ser usado
+para la estimación de parámetros de un modelo de regresión lineal sin
+consideraciones distribucionales sobre los errores.</p>
+<p>Sin embargo, para poder aplicar pruebas de hipótesis y construir
+intervalos de confianza, es necesario realizar y validar tales
+supuestos. Considerando para el modelo de regresión lineal simple los
+supuestos de normalidad, independencia y varianza constante para los
+errores, podemos usar el método de estimación de máxima verosimilitud
+(MLE).</p>
+<p>Sean <span
+class="math inline">\({\left(x_1,y_1\right),\ldots,\left(x_n,y_n\right)}\)</span>
+los <span class="math inline">\({n}\)</span> pares de datos observados,
+entonces el modelo de regresión lineal simple es: <span
+class="math display">\[
+{Y_i = Y\vert X_i=\beta_0+\beta_1X_i+\varepsilon_i,\ i=1,2,\ldots,n.}
+\]</span></p>
+<p>A la variable aleatoria <span
+class="math inline">\({\varepsilon_i}\)</span>, se le asignan los
+siguientes supuestos distribucionales: <span class="math display">\[
+{\varepsilon_i\overset{\text{iid}}{\sim} N\left(0,\sigma^2\right),\
+i=1,2,\ldots,n,}
+\]</span></p>
+<p>Con base en lo anterior y asumiendo que los niveles o valores en que
+<span class="math inline">\({X}\)</span> es observada son fijos, se
+obtiene que <span class="math display">\[{Y_i = Y\vert X_i
+\overset{\text{ind}}{\sim} N(E\left[Y\vert
+X_i\right],\sigma^2)}\]</span> con <span
+class="math display">\[{E\left[Y\vert
+X_i\right]=\beta_0+\beta_1X_i}.\]</span></p>
+<p>Sean <span
+class="math inline">\({\textbf{x}=(x_1,x_2,\ldots,x_n)}\)</span> y <span
+class="math inline">\({\textbf{y}=(y_1,y_2,\ldots,y_n)}\)</span>,
+entonces la función de verosimilitud <span
+class="math inline">\({L\left.(\beta _0,\beta_1,\sigma^2
+\right|\textbf{x,y})}\)</span> es hallada a partir de la densidad
+conjunta de las observaciones, <span
+class="math inline">\({f\left.(y_1,\dots,y_n\right|\beta_0,\beta_1,\sigma^2)}\)</span>,
+que por la condición de independencia es igual al producto de las
+densidades de probabilidad marginales, por tanto, podemos escribir,</p>
+<p><span class="math display">\[
+\begin{aligned}
+{L(\beta_0,\beta_1,\sigma^2\vert
+\textbf{x,y})}&amp;{=f(y_1,\ldots,y_n\vert\beta_0,\beta_1,\sigma^2)}\nonumber\\
+&amp;{=\prod\limits_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{1}{2\sigma^2}(y_i-\beta_0-\beta_1x_i)^2\right]}\nonumber\\
+&amp;{=(2\pi\sigma^2)^{-n/2}\exp\left[-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right]}
+\end{aligned}
+\]</span> </br></p>
+<p>El objetivo es hallar los parámetros desconocidos <span
+class="math inline">\({\beta_0,\beta_1,\sigma^2}\)</span>, que maximicen
+<span class="math inline">\({L}\)</span>, o equivalentemente, que
+maximicen <span class="math inline">\({\ln L}\)</span> (el logaritmo
+natural de <span class="math inline">\({L}\)</span>). <span
+class="math display">\[
+{\ln
+L=-\frac{n}{2}\ln(2\pi)-\frac{n}{2}\ln(\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n
+\big(y_i-\beta_0-\beta_1x_i\big)^2}
+\]</span></p>
+<p></br></p>
+<p>Observe que para cualquier valor de <span
+class="math inline">\({\sigma^2}\)</span> fijo, <span
+class="math inline">\({\ln L}\)</span> es maximizado como una función de
+<span class="math inline">\({\beta_0}\)</span> y <span
+class="math inline">\({\beta_1}\)</span> por aquellos valores <span
+class="math inline">\({\widetilde{\beta}_0}\)</span> y <span
+class="math inline">\({\widetilde{\beta}_1}\)</span> que minimizan <span
+class="math inline">\({S(\beta_0,\beta_1)=\sum\limits_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2}\)</span>
+y así, los estimadores MLE <span class="math inline">\(\
+{\widetilde{\beta}_0}\)</span> y <span
+class="math inline">\({\widetilde{\beta}_1}\)</span> son iguales a los
+respectivos estimadores de mínimos cuadrados, <span
+class="math inline">\({\widehat{\beta}_0}\)</span> y <span
+class="math inline">\({\widehat{\beta}_1}\)</span>.</p>
+<p></br></p>
+<p>Para hallar el estimador MLE para <span
+class="math inline">\({\sigma^2}\)</span> substituimos <span
+class="math inline">\({\widehat{\beta}_0}\)</span> y <span
+class="math inline">\({\widehat{\beta}_1}\)</span> en <span
+class="math inline">\({\ln L}\)</span>, y hallamos <span
+class="math inline">\({\sigma^2}\)</span> que maximiza</p>
+<p><span class="math display">\[
+{-\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) -
+\frac{1}{2\sigma^2}\sum\limits_{i=1}^n (y_i - \widehat{\beta}_0 -
+\widehat{\beta}_1x_i)^2}
+\]</span></p>
+<p>de donde obtenemos como estimador MLE de <span
+class="math inline">\({\sigma^2}\)</span> a</p>
+<p><span class="math display">\[
+{\widetilde{\sigma}^2 = \frac{1}{n}\sum\limits_{i=1}^n (y_i -
+\widehat{\beta}_0 - \widehat{\beta}_1x_i)^2 =
+\frac{1}{n}\sum\limits_{i=1}^n (y_i - \widehat{y}_i)^2}
+\]</span></p>
+<p></br></p>
+<p>Resumiendo, bajo el modelo de regresión lineal normal, es decir, con
+errores independientes e idénticamente distribuidos <span
+class="math inline">\({N\left(0, \sigma^2\right)}\)</span>, los
+estimadores de mínimos cuadrados para <span
+class="math inline">\({\beta_0}\)</span> y <span
+class="math inline">\({\beta_1}\)</span> son también estimadores de
+máxima verosimilitud y en tal caso, podemos construir intervalos de
+confianza y realizar pruebas de hipótesis basadas en las estimaciones
+obtenidas.</p>
+<p></br></p>
+<p>También puede demostrarse que los estimadores MLE son de mínima
+varianza cuando son comparados con todos los posibles estimadores
+insesgados y son consistentes, es decir, a medida que aumenta el tamaño
+de muestra, la diferencia entre éstos y los respectivos parámetros se
+aproxima a cero.</p>
+<p></br></br></p>
+</div>
+<div id="estimación-de-la-varianza-sigma2" class="section level2">
+<h2><span style="color:#034a94"><strong>Estimación de la varianza <span
+class="math inline">\(\sigma^2\)</span></strong></span></h2>
+<p></br></p>
+<p>Puede demostrarse que bajo los supuestos del modelo en relación a los
+errores, la esperanza del estimador de máxima verosimilitud de <span
+class="math inline">\(\sigma^2\)</span> es: <span
+class="math display">\[
+{E\left[\widetilde{\sigma}^2\right] = \left(\frac{n - 2}{n}\right)
+\sigma^2}
+\]</span></p>
+<p>por tanto <span class="math inline">\(\widetilde{\sigma}^2\)</span>
+no es un estimador insesgado de <span
+class="math inline">\(\sigma^2\)</span>, aunque si es asintóticamente
+insesgado, esto es, <span
+class="math inline">\({\lim\limits_{n\to\infty}
+E\left[\widetilde\sigma^2\right] = \sigma^2}\)</span>. Sin embargo, a
+partir de <span class="math inline">\(\widetilde{\sigma}^2\)</span> se
+puede obtener un estimador insesgado de la varianza, así: <span
+class="math display">\[
+{\widehat{\sigma}^2 = \left(\frac{n}{n - 2}\right) \widetilde{\sigma}^2
+= \frac{\sum\limits_{i=1}^n (y_i - \widehat{y}_i)^2}{n-2}}
+\]</span></p>
+<p>que cumple <span
+class="math inline">\({E\left[\widehat\sigma^2\right]=\sigma^2}\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="ecuación-de-regresión-ajustada-y-residuales-del-modelo"
+class="section level2">
+<h2><span style="color:#034a94"><strong>Ecuación de regresión ajustada y
+residuales del modelo </strong></span></h2>
+<p></br></p>
+<p>Al tener estimados los parámetros del modelo de regresión lineal
+simple (por mínimos cuadrados o máxima verosimilitud), entonces se puede
+realizar una estimación de la respuesta media <span
+class="math inline">\(E\left[Y \vert X\right] = \mu_{Y\vert X}\)</span>,
+a través del modelo ajustado, así: <span class="math display">\[
+\widehat{\mu}_{Y\vert x_i} = \widehat{y}_i = \widehat{\beta}_0 +
+\widehat{\beta}_1\, x_i = \bar{y} + (x_i-\bar{x})\,\widehat{\beta}_1.
+\]</span></p>
+<p></br></p>
+<p>A esta ecuación se le conoce como la ecuación de regresión ajustada,
+que en este caso corresponde a una recta ajustada.</p>
+<p></br></p>
+<p>A las diferencias entre los valores observados de la respuesta <span
+class="math inline">\(y_i\)</span> y los valores ajustados por el modelo
+de regresión <span class="math inline">\(\widehat{y}_i\)</span>
+(obtenidos de la ecuación de regresión ajustada) se les conoce como los
+residuales del modelo. Esto es, <span
+class="math inline">\({e_i=y_i-\widehat{y}_i}\)</span> es el <span
+class="math inline">\(i\)</span>-ésimo residual del modelo, que es una
+estimación del <span class="math inline">\(i\)</span>-ésimo error
+aleatorio, <span class="math inline">\(\varepsilon_i\)</span>.</p>
+<p></br></p>
+<p>Los residuales del modelo tienen gran importancia ya que ellos
+determinan que tan bueno fue el ajuste del modelo y permitirán más
+adelante realizar las validaciones de los supuestos realizados sobre los
+errores aleatorios.</p>
+<p></br></br></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

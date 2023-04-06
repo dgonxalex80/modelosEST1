@@ -232,7 +232,7 @@ Un segundo significado consiste en que dado un conjunto de pares de datos ${(X,Y
 <center>
 ```{r, echo = F, message = F, fig.align = 'center', out.width = '80%'}
 ggplot(biomasa,aes(x=altura,y=bio_total))+
-  geom_point()+
+  geom_point(colour ="#FF7F00", size=2)+
   geom_smooth(method = "loess",se = F)+
   theme_bw()+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
