@@ -131,7 +131,7 @@ mtext(c(expression(x['1'] == 80), expression(x['2'] == 122), expression(x['3'] =
 new <- data.frame(x = c(80, 122, 160))
 pr <- as.vector(predict(lm(y ~ x, dfe), newdata = new))
 segments(x0 = c(80, 122, 160), y0 = -100, x1 = c(80, 122, 160), y1 = pr, lwd = 1, col="#686868",lty = 2)
-text(120, 1200, "Rango experimental", col = 'darkblue', cex = 2)
+text(120, 1200, "Rango experimental", col = 'darkblue', cex = 1.5)
 text(89, 600, "Zona de", col = 'red', cex = 1)
 text(89, 540, "extrapolación", col = 'red', cex = 1)
 text(157.5, 900, "Zona de", col = 'red', cex = 1)

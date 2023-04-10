@@ -185,9 +185,9 @@ Note que esta prueba sólo detecta correlación entre observaciones sucesivas po
 
 </br></br>
 
-<div class="content-box-blue">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00">**Nota:**</span> 
+### <span style="color:#686868">**Nota:**</span> 
 
 Recuerde que incorrelación no implica independencia estadística, pero independencia estadística si implica incorrelación. Sin embargo, si el par de variables incorrelacionadas se distribuyen conjuntamente en forma normal, entonces son independientes!.
 
